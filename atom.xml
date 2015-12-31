@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[啊神的博客]]></title>
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2015-12-31T15:27:28+08:00</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
+  <link href="http://ashen-zhao.github.io/"/>
+  <updated>2015-12-31T15:32:51+08:00</updated>
+  <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[A-shen]]></name>
     
@@ -15,11 +15,11 @@
   
   <entry>
     <title type="html"><![CDATA[iOS 只需几步实现生日选择器]]></title>
-    <link href="http://yoursite.com/blog/2015/12/29/two/"/>
+    <link href="http://ashen-zhao.github.io/blog/2015/12/29/two/"/>
     <updated>2015-12-29T15:19:49+08:00</updated>
-    <id>http://yoursite.com/blog/2015/12/29/two</id>
+    <id>http://ashen-zhao.github.io/blog/2015/12/29/two</id>
     <content type="html"><![CDATA[<p>  项目开发中难免会遇到让用户填写出生年月的时候，本章来介绍一下我自己写的生日选择器的<a href="https://github.com/Ashen-Zhao/ASBirthSheet">ASBirthSheet</a>;
-大致就是这个样子<img src="https://github.com/Ashen-Zhao/ashen-zhao.github.io/tree/master/images/birthsrceenshot.png" alt="示例图" />
+大致就是这个样子<img src="https://github.com/Ashen-Zhao/ashen-zhao.github.io/blob/master/images/birthsrceenshot.png" alt="示例图" />
   我对生日选择器页面进行了简单的封装，算上.h文件只有两个文件，使用起来很简单；</p>
 
 <h4>以下是对.h文件中的说明</h4>
@@ -58,9 +58,9 @@
   
   <entry>
     <title type="html"><![CDATA[iOS 上传图片方法总结]]></title>
-    <link href="http://yoursite.com/blog/2015/12/28/ios/"/>
+    <link href="http://ashen-zhao.github.io/blog/2015/12/28/ios/"/>
     <updated>2015-12-28T17:51:57+08:00</updated>
-    <id>http://yoursite.com/blog/2015/12/28/ios</id>
+    <id>http://ashen-zhao.github.io/blog/2015/12/28/ios</id>
     <content type="html"><![CDATA[<h3>开题：</h3>
 
 <p>iOS 开发中难免会遇到上传图片，一般情况下有两种方式：</p>
@@ -138,7 +138,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#122;&#x68;&#97;&#111;&#97;&#115;&#x68;&#101;&#x6e;&#64;&#x67;&#109;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;">&#x7a;&#x68;&#x61;&#111;&#x61;&#115;&#104;&#101;&#110;&#64;&#x67;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#x6d;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#122;&#104;&#97;&#111;&#97;&#115;&#104;&#101;&#x6e;&#64;&#103;&#109;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#109;">&#122;&#x68;&#97;&#111;&#97;&#x73;&#104;&#x65;&#110;&#x40;&#103;&#109;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;</a>；</p>
 ]]></content>
   </entry>
   
