@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>啊神的博客</title>
+  <title>iOS 上传图片方法总结 - 啊神的博客</title>
   <meta name="author" content="A-shen">
 
   
-  <meta name="description" content="  项目开发中难免会遇到让用户填写出生年月的时候，本章来介绍一下我自己写的生日选择器的ASBirthSheet;
-大致就是这个样子
-  我对生日选择器页面进行了简单的封装，算上.h文件只有两个文件，使用起来很简单； 以下是对.h文件中的说明 @property (nonatomic, copy) &hellip;">
+  <meta name="description" content="开题： iOS 开发中难免会遇到上传图片，一般情况下有两种方式： 1.自己动手写（利用NSURLMutableRequest等系统类） 2.使用第三方（如AFNetworking) 据我所经历的，如果你不是大神，还是用第三方吧，自己写的话会很麻烦，需要拼接一些请求头，请求体等， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/blog/2015/12/28/ios/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="啊神的博客" type="application/atom+xml">
@@ -66,78 +64,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/12/29/two/">iOS 只需几步实现生日选择器</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-12-29T15:19:49+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:19 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>  项目开发中难免会遇到让用户填写出生年月的时候，本章来介绍一下我自己写的生日选择器的<a href="https://github.com/Ashen-Zhao/ASBirthSheet">ASBirthSheet</a>;
-大致就是这个样子<img src="https://github.com/Ashen-Zhao/ashen-zhao.github.io/tree/master/images/birthsrceenshot.png" alt="示例图" />
-  我对生日选择器页面进行了简单的封装，算上.h文件只有两个文件，使用起来很简单；</p>
-
-<h4>以下是对.h文件中的说明</h4>
-
-<pre><code>
-@property (nonatomic, copy) void(^GetSelectDate)(NSString *dateStr);
-
-@property (nonatomic, strong) NSString * selectDate;
-</code></pre>
-
-
-<p><code>GetSelectDate</code>是一个Block回调，是在选择完日期后确认后，就会触发，它返回一个日期格式为<code>2015-12-08</code>的字符串；
-<code>selectDate</code>是设置选中时的日期格式也需要是<code>2015-12-08</code>才能匹配；</p>
-
-<h4>以下是使用方法：</h4>
-
-<pre><code>
--(void)chooseBirthdayAction{
-
-    ASBirthSelectSheet *datesheet = [[ASBirthSelectSheet alloc] initWithFrame:self.view.bounds];
-    datesheet.selectDate = @"2015-12-08";
-    datesheet.GetSelectDate = ^(NSString *dateStr) {
-        NSLog(@"ok Date:%@", dateStr);
-    };
-    [self.view addSubview:datesheet];
-}
-</code></pre>
-
-
-<p>使用起来很容易就这么几步，就可以实现一个简单的生日选择器；
-由于只是使用，并没有对其进行很好地封装，如果你感兴趣，可以封装的更好点，来共同交流下；
-附：
-<a href="https://github.com/Ashen-Zhao/ASBirthSheet">Demo下载地址</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/12/28/ios/">iOS 上传图片方法总结</a></h1>
+      <h1 class="entry-title">iOS 上传图片方法总结</h1>
     
     
       <p class="meta">
@@ -153,7 +85,7 @@
   </header>
 
 
-  <div class="entry-content"><h3>开题：</h3>
+<div class="entry-content"><h3>开题：</h3>
 
 <p>iOS 开发中难免会遇到上传图片，一般情况下有两种方式：</p>
 
@@ -232,18 +164,46 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 
 <p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#122;&#x68;&#97;&#111;&#97;&#115;&#x68;&#101;&#x6e;&#64;&#x67;&#109;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;">&#x7a;&#x68;&#x61;&#111;&#x61;&#115;&#104;&#101;&#110;&#64;&#x67;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#x6d;</a>；</p>
 </div>
-  
-  
 
 
-    </article>
+  <footer>
+    <p class="meta">
+      
   
-  <div class="pagination">
+
+<span class="byline author vcard">Posted by <span class="fn">A-shen</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-12-28T17:51:57+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:51 pm</span></time>
+      
+
+
+    </p>
     
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://yoursite.com/blog/2015/12/28/ios/" data-via="" data-counturl="http://yoursite.com/blog/2015/12/28/ios/" >Tweet</a>
+  
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/12/29/two/" title="Next Post: iOS 只需几步实现生日选择器">iOS 只需几步实现生日选择器 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -267,6 +227,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 
   
 </aside>
+
 
     </div>
   </div>
