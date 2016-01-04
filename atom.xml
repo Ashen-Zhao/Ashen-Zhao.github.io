@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-04T17:54:08+08:00</updated>
+  <updated>2016-01-04T18:03:04+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[A-shen]]></name>
@@ -20,6 +20,9 @@
     <id>http://ashen-zhao.github.io/blog/2016/01/04/colorfullabel</id>
     <content type="html"><![CDATA[<p> 有时候产品经理说，能把一句话显示多种颜色、多种字体吗？ 灵光一闪，弄多个UILabel来显示不就行了，我只能说可以，也只能说这法有点笨。于是我坚决不用这种方法，苦思冥想，终于有了眉目。先配张图来显摆显摆，其实很容易实现，我也就不啰嗦了，看招：
 <img src="http://upload-images.jianshu.io/upload_images/1168293-0ce90e359fcc8c76.png" alt="多样式UILabel" /></p>
+
+<!--more-->
+
 
 <h5>由于很简单，不喜请喷我。</h5>
 
@@ -112,6 +115,9 @@ NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样�
 
 <p>接下来<strong>很重要，很重要，很重要</strong>：</p>
 
+<!--more-->
+
+
 <p>如何想从 D pop 到 C, 看数组[A，B，D] 中压根就没有C 该如何pop 到C呢？</p>
 
 <p>这时就需要对这个数组进行修改，将C 加入进去</p>
@@ -185,6 +191,9 @@ NSMutableArray*tempMarr =[NSMutableArrayarrayWithArray:self.navigationController
 大致就是这个样子<img src="http://ashen-zhao.github.io/images/birthsrceenshot.png" alt="示例图" />
   我对生日选择器页面进行了简单的封装，算上.h文件只有两个文件，使用起来很简单；</p>
 
+<!--more-->
+
+
 <h4>以下是对.h文件中的说明</h4>
 
 <pre><code>
@@ -235,6 +244,9 @@ NSMutableArray*tempMarr =[NSMutableArrayarrayWithArray:self.navigationController
 <p>据我所经历的，如果你不是大神，还是用第三方吧，自己写的话会很麻烦，需要拼接一些请求头，请求体等，就算弄好了也是废了很多时间了；当然，费时间并不是我不推荐自己动手写，因为在我现在接手的项目中，就是使用的自己写的，上传中会出现丢图等各种问题，特别在网络不好的情况下；</p>
 
 <p>面对这样的上传图片，我的Boss 交给我了一个课题，就是改善上传图片的网络底层库；看在我不是大神的份上，我就选择了AFNetwoking；</p>
+
+<!--more-->
+
 
 <p>  So,对于自己动手实现的方法，在这里我就不多写了；接下来主要是AFNetwoking实现方法：至于如何导入第三方，我不多说，你是直接拉进也行，使用cocoapods也行；</p>
 
@@ -301,7 +313,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#122;&#104;&#x61;&#x6f;&#x61;&#x73;&#104;&#101;&#110;&#64;&#x67;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#122;&#x68;&#97;&#111;&#x61;&#x73;&#104;&#101;&#x6e;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#109;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#122;&#x68;&#x61;&#111;&#x61;&#115;&#x68;&#x65;&#110;&#64;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#111;&#109;">&#122;&#104;&#97;&#x6f;&#97;&#115;&#x68;&#x65;&#x6e;&#64;&#x67;&#x6d;&#97;&#105;&#108;&#x2e;&#x63;&#111;&#109;</a>；</p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,7 @@
   <meta name="author" content="A-shen">
 
   
-  <meta name="description" content=" 有时候产品经理说，能把一句话显示多种颜色、多种字体吗？ 灵光一闪，弄多个UILabel来显示不就行了，我只能说可以，也只能说这法有点笨。于是我坚决不用这种方法，苦思冥想，终于有了眉目。先配张图来显摆显摆，其实很容易实现，我也就不啰嗦了，看招： 由于很简单，不喜请喷我。 ok, 上代码， &hellip;">
+  <meta name="description" content=" 有时候产品经理说，能把一句话显示多种颜色、多种字体吗？ 灵光一闪，弄多个UILabel来显示不就行了，我只能说可以，也只能说这法有点笨。于是我坚决不用这种方法，苦思冥想，终于有了眉目。先配张图来显摆显摆，其实很容易实现，我也就不啰嗦了，看招： ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,59 +94,12 @@
   <div class="entry-content"><p> 有时候产品经理说，能把一句话显示多种颜色、多种字体吗？ 灵光一闪，弄多个UILabel来显示不就行了，我只能说可以，也只能说这法有点笨。于是我坚决不用这种方法，苦思冥想，终于有了眉目。先配张图来显摆显摆，其实很容易实现，我也就不啰嗦了，看招：
 <img src="http://upload-images.jianshu.io/upload_images/1168293-0ce90e359fcc8c76.png" alt="多样式UILabel" /></p>
 
-<h5>由于很简单，不喜请喷我。</h5>
-
-<p>ok, 上代码，一看也就是一个方法：</p>
-
-<pre><code>
--(void)txtArr:(NSArray *)txtArr colorArr:(NSArray *)colorArr fontArr:(NSArray *)fontArr {
-
-    NSInteger okCount = 0;
-    okCount = txtArr.count < colorArr.count ? txtArr.count : colorArr.count;
-    okCount = okCount < fontArr.count ? okCount : fontArr.count;
-
-    NSMutableString *txt = [NSMutableString string];
-    for (NSString *str in txtArr) {
-        [txt appendString:str];
-    }
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:txt];
-    NSInteger startLoc = 0;
-    for (int i = 0; i < okCount; i++) {
-        [str addAttributes:@{NSForegroundColorAttributeName:colorArr[i], NSFontAttributeName:[UIFont systemFontOfSize:[fontArr[i] integerValue]]} range:NSMakeRange(startLoc, [txtArr[i] length])];
-        startLoc += [txtArr[i] length];
-    }
-    self.attributedText = str;
-}
-</code></pre>
-
-
-<h5>参数说明基本都是见明知意（大人，请允许我自恋吧）</h5>
-
-<ol>
-<li>txtArr: 传入的文本数组（对象是字符串）</li>
-<li>colorArr: 颜色数组  （对象是UIColor）</li>
-<li>fontArr: 字体数组  (对象是字符串如：@&ldquo;18&rdquo; 号字体)</li>
-</ol>
-
-
-<h5>使用方法，写给新手哦，老手请过滤吧，不然你又该喷我了</h5>
-
-<p>我还是以代码使用为主</p>
-
-<pre><code>
-NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样式label么，哈哈", nil];
-
-    NSArray *b = [NSArray arrayWithObjects:[UIColor redColor], [UIColor blackColor], [UIColor blueColor], nil];
-    NSArray *c = [NSArray arrayWithObjects:@"19", @"13", @"17", nil];
-    [self.multiLabel txtArr:a colorArr:b fontArr:c];
-</code></pre>
-
-
-<p>哎，对了，我将此方法写成了UILabel的分类了，所以这么使用没什么不妥；至于分类，不懂得，去google吧，没翻墙的还是百度吧；</p>
-
-<p><a href="https://github.com/Ashen-Zhao/multiLabel">Demo下载地址</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/04/colorfullabel/">阅读全文 →</a>
+    </footer>
   
 
 
@@ -208,69 +161,12 @@ NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样�
 
 <p>接下来<strong>很重要，很重要，很重要</strong>：</p>
 
-<p>如何想从 D pop 到 C, 看数组[A，B，D] 中压根就没有C 该如何pop 到C呢？</p>
-
-<p>这时就需要对这个数组进行修改，将C 加入进去</p>
-
-<p><strong>于是 你会如下写：</strong></p>
-
-<pre><code>[self.navigationController.viewControllers addObject:C]; 
-</code></pre>
-
-<p>发现报错，这是因为<code>self.navigationController.viewControllers</code> 是不可变数组，没办法了，我们只好转换一下了：</p>
-
-<pre><code>NSMutableArray*tempMarr =[NSMutableArrayarrayWithArray:self.navigationController.viewControllers];
-</code></pre>
-
-<p>此时再加入C 就容易多了，咦，聪明的你会发现从 D pop C 不能直接将 C直接 addObject;</p>
-
-<p><strong>当然，我会这样做：</strong></p>
-
-<pre><code>[tempMarr insertObject:C atIndex:tempMarr.count- 2];
-</code></pre>
-
-<p>这时候 <code>tempMarr</code> 是这样的 [A，B，C，D],  可是 要想 从 C pop 到 A ,数组中就不能有 B</p>
-
-<p>就需要 将<code>tempMarr</code> 变成 [A，C，D] ，至于怎么变，你比我懂得多，</p>
-
-<p>懂得思考的同学会发现 这时的<code>self.navigationController.viewControllers</code> 依然是 [A，B，D]， 不用急，不用怕<code>navigationController</code> 有这样一个方法, 可以搞定，如下：</p>
-
-<pre><code>[self.navigationController setViewControllers:tempMarr animated:YES];
-</code></pre>
-
-<p>有的同学会说，这不是直接把 B 替换 成 C 吗</p>
-
-<p>看上去是这样，可是跳转的时机，时机，时机重要的事情说三遍，还有视图的切换，切换，切换</p>
-
-<p>此时还在 B 控制器中，这些处理过程都是在 B 中处理的 ， 也必须是 B 执行了 push 到 D 方法后，也就是说</p>
-
-<pre><code>[self.navigationController pushViewController:D animated:YES];
-</code></pre>
-
-<p> 之后 进行的 数组处理；</p>
-
-<h4>附加代码：</h4>
-
-<p>在B 控制器中处理：</p>
-
-<pre><code>-(void)pushTest {
-
-    [self.navigationController pushViewController:D animated:YES];
-
-NSMutableArray*tempMarr =[NSMutableArrayarrayWithArray:self.navigationController.viewControllers];
-
-[tempMarr insertObject:C atIndex:tempMarr.count- 2];
-
-[tempMarr removeObject:self]; //此时 的self 就是指 B ,因为在 B 中呢
-
-[self.navigationController setViewControllers:tempMarr animated:YES];
-
-}
-</code></pre>
-
-<p><a href="https://github.com/Ashen-Zhao/anypushpop">Demo下载地址</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/04/any-push-pop/">阅读全文 →</a>
+    </footer>
   
 
 
@@ -304,39 +200,12 @@ NSMutableArray*tempMarr =[NSMutableArrayarrayWithArray:self.navigationController
 大致就是这个样子<img src="http://ashen-zhao.github.io/images/birthsrceenshot.png" alt="示例图" />
   我对生日选择器页面进行了简单的封装，算上.h文件只有两个文件，使用起来很简单；</p>
 
-<h4>以下是对.h文件中的说明</h4>
-
-<pre><code>
-@property (nonatomic, copy) void(^GetSelectDate)(NSString *dateStr);
-
-@property (nonatomic, strong) NSString * selectDate;
-</code></pre>
-
-
-<p><code>GetSelectDate</code>是一个Block回调，是在选择完日期后确认后，就会触发，它返回一个日期格式为<code>2015-12-08</code>的字符串；
-<code>selectDate</code>是设置选中时的日期格式也需要是<code>2015-12-08</code>才能匹配；</p>
-
-<h4>以下是使用方法：</h4>
-
-<pre><code>
--(void)chooseBirthdayAction{
-
-    ASBirthSelectSheet *datesheet = [[ASBirthSelectSheet alloc] initWithFrame:self.view.bounds];
-    datesheet.selectDate = @"2015-12-08";
-    datesheet.GetSelectDate = ^(NSString *dateStr) {
-        NSLog(@"ok Date:%@", dateStr);
-    };
-    [self.view addSubview:datesheet];
-}
-</code></pre>
-
-
-<p>使用起来很容易就这么几步，就可以实现一个简单的生日选择器；
-由于只是使用，并没有对其进行很好地封装，如果你感兴趣，可以封装的更好点，来共同交流下；
-附：
-<a href="https://github.com/Ashen-Zhao/ASBirthSheet">Demo下载地址</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/12/29/two/">阅读全文 →</a>
+    </footer>
   
 
 
@@ -378,74 +247,12 @@ NSMutableArray*tempMarr =[NSMutableArrayarrayWithArray:self.navigationController
 
 <p>面对这样的上传图片，我的Boss 交给我了一个课题，就是改善上传图片的网络底层库；看在我不是大神的份上，我就选择了AFNetwoking；</p>
 
-<p>  So,对于自己动手实现的方法，在这里我就不多写了；接下来主要是AFNetwoking实现方法：至于如何导入第三方，我不多说，你是直接拉进也行，使用cocoapods也行；</p>
-
-<h3>进入正题：</h3>
-
-<p>以下是上传图片的方法：</p>
-
-<pre>
-<code>
-+(void)uploadImageWithUrl:(NSString *)strUrl dataParams:(NSMutableDictionary *)dataParams imageParams:(NSMutableDictionary *) imageParams Success:(void(^)(NSDictionary* resultDic)) success Failed:(void(^)(NSError *error))fail {
-
- NSArray *keys = [imageParams allKeys];
-
- UIImage * image = [imageParams objectForKey:[keys firstObject]];
-
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//对SSL做处理，防止上传失败
-AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
-    securityPolicy.allowInvalidCertificates = YES;
-    securityPolicy.validatesDomainName = NO;
-    manager.securityPolicy = securityPolicy;
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = 120;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    [manager POST:strUrl parameters:dataParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.5) name:[keys firstObject] fileName:[NSString stringWithFormat:@"%@.jpeg",[keys firstObject]] mimeType:@"image/jpeg"];
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (success) {
-            success(responseObject);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (fail) {
-            fail(error);
-        }
-    }];
-}
-</code></pre>
-
-
-<p>
-接下来是如何调用：</p>
-
-<pre><code>
--(void)uploadImageAction {
-
-NSString *url = @"https://github.com/Ashen-Zhao";
-    NSMutableDictionary *dpp =[@{@"token":@"zhaoshenshenazhao"} mutableCopy];
-    NSMutableDictionary *pimgs= [@{@"file":[UIImage imageNamed:@"a.jpg"]} mutableCopy];
- [NetworkEngine uploadImageWithUrl:url dataParams:dpp imageParams:pimgs Success:^(NSDictionary* resultDic) {
-        NSLog(@"%@", resultDic);
-    } Failed:^(NSError *error) {
-     }];
-}
-</code></pre>
-
-
-<p>参数说明：</p>
-
-<ul>
-<li>strUrl：上传图片的服务器地- - dataParams：数据参数（如token等）</li>
-<li>imageParams：图片参数（字典中的object一定要是UIImage类型；当然我写的是这样，你也可以修改为其他）</li>
-<li>Success：上传成功后的Block回调（resultDic是服务器返回的结果）</li>
-<li>Failed：上传失败后的Block回调（error是错误结果）</li>
-</ul>
-
-
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#122;&#104;&#x61;&#x6f;&#x61;&#x73;&#104;&#101;&#110;&#64;&#x67;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#122;&#x68;&#97;&#111;&#x61;&#x73;&#104;&#101;&#x6e;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#109;</a>；</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/12/28/ios/">阅读全文 →</a>
+    </footer>
   
 
 
@@ -543,7 +350,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
   </div>
   <footer role="contentinfo"><p>
   Copyright &copy; 2016 - A-shen -
-  <span class="credit"> TODO <a href="https://github.com/Ashen-Zhao">My GitHub</a> &nbsp;<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257110149'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257110149%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></span>
+  <span class="credit"> TODO <a href="https://github.com/Ashen-Zhao">My GitHub</a> &nbsp;&nbsp;&nbsp;&nbsp;<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257110149'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257110149%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></span>
 </p>
 
 </footer>
