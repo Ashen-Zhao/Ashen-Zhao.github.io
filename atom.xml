@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-04T10:33:45+08:00</updated>
+  <updated>2016-01-04T11:19:51+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[A-shen]]></name>
@@ -12,6 +12,107 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS 如何随意的push来pop去]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/01/04/any-push-pop/"/>
+    <updated>2016-01-04T11:08:00+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/01/04/any-push-pop</id>
+    <content type="html"><![CDATA[<h2>iOS 导航控制器如何随意push和pop</h2>
+
+<hr />
+
+<p>第一次开始写技术文章，请同学们多多关照，有错的地方请给我指出，大家学习一起成长，好了，我就废话不多少了；</p>
+
+<hr />
+
+<h4>主题思想：如A、B、C、D 四个视图控制器</h4>
+
+<p>想要在 A push B 后， B 在push 到 D ，然后从 D pop 到 C ,在从 C pop 的A</p>
+
+<hr />
+
+<h4>解决方法如下：</h4>
+
+<p>1.假如此时在 A 控制器下，想要到 push 到 B， 可以这样写</p>
+
+<pre><code> [self.navigationController pushViewController: B :YES];
+</code></pre>
+
+<p>这时 <code>self.navigationController.viewControllers</code> 中按顺序含有 [A，B]</p>
+
+<p>2.此时已经到 B 控制器下了， 接下来是 push 到 D, 可以这样写</p>
+
+<pre><code> [self.navigationController pushViewController: D :YES];
+</code></pre>
+
+<p>这时 <code>self.navigationController.viewControllers</code> 中按顺序含有 [A，B，D]</p>
+
+<p>接下来<strong>很重要，很重要，很重要</strong>：</p>
+
+<p>如何想从 D pop 到 C, 看数组[A，B，D] 中压根就没有C 该如何pop 到C呢？</p>
+
+<p>这时就需要对这个数组进行修改，将C 加入进去</p>
+
+<p><strong>于是 你会如下写：</strong></p>
+
+<pre><code>[self.navigationController.viewControllers addObject:C]; 
+</code></pre>
+
+<p>发现报错，这是因为<code>self.navigationController.viewControllers</code> 是不可变数组，没办法了，我们只好转换一下了：</p>
+
+<pre><code>NSMutableArray*tempMarr =[NSMutableArrayarrayWithArray:self.navigationController.viewControllers];
+</code></pre>
+
+<p>此时再加入C 就容易多了，咦，聪明的你会发现从 D pop C 不能直接将 C直接 addObject;</p>
+
+<p><strong>当然，我会这样做：</strong></p>
+
+<pre><code>[tempMarr insertObject:C atIndex:tempMarr.count- 2];
+</code></pre>
+
+<p>这时候 <code>tempMarr</code> 是这样的 [A，B，C，D],  可是 要想 从 C pop 到 A ,数组中就不能有 B</p>
+
+<p>就需要 将<code>tempMarr</code> 变成 [A，C，D] ，至于怎么变，你比我懂得多，</p>
+
+<p>懂得思考的同学会发现 这时的<code>self.navigationController.viewControllers</code> 依然是 [A，B，D]， 不用急，不用怕<code>navigationController</code> 有这样一个方法, 可以搞定，如下：</p>
+
+<pre><code>[self.navigationController setViewControllers:tempMarr animated:YES];
+</code></pre>
+
+<p>有的同学会说，这不是直接把 B 替换 成 C 吗</p>
+
+<p>看上去是这样，可是跳转的时机，时机，时机重要的事情说三遍，还有视图的切换，切换，切换</p>
+
+<p>此时还在 B 控制器中，这些处理过程都是在 B 中处理的 ， 也必须是 B 执行了 push 到 D 方法后，也就是说</p>
+
+<pre><code>[self.navigationController pushViewController:D animated:YES];
+</code></pre>
+
+<p> 之后 进行的 数组处理；</p>
+
+<h4>附加代码：</h4>
+
+<p>在B 控制器中处理：</p>
+
+<pre><code>-(void)pushTest {
+
+    [self.navigationController pushViewController:D animated:YES];
+
+NSMutableArray*tempMarr =[NSMutableArrayarrayWithArray:self.navigationController.viewControllers];
+
+[tempMarr insertObject:C atIndex:tempMarr.count- 2];
+
+[tempMarr removeObject:self]; //此时 的self 就是指 B ,因为在 B 中呢
+
+[self.navigationController setViewControllers:tempMarr animated:YES];
+
+}
+</code></pre>
+
+<p><a href="https://github.com/Ashen-Zhao/anypushpop">Demo下载地址</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS 只需几步实现生日选择器]]></title>
@@ -138,7 +239,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#58;&#122;&#104;&#97;&#111;&#97;&#115;&#104;&#101;&#x6e;&#64;&#x67;&#109;&#97;&#x69;&#108;&#46;&#x63;&#111;&#x6d;">&#x7a;&#104;&#x61;&#111;&#x61;&#x73;&#x68;&#101;&#110;&#x40;&#x67;&#109;&#x61;&#105;&#108;&#46;&#99;&#111;&#109;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#122;&#x68;&#x61;&#111;&#97;&#x73;&#x68;&#101;&#110;&#x40;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#122;&#104;&#97;&#x6f;&#97;&#x73;&#x68;&#101;&#110;&#64;&#103;&#109;&#97;&#x69;&#x6c;&#46;&#x63;&#111;&#109;</a>；</p>
 ]]></content>
   </entry>
   
