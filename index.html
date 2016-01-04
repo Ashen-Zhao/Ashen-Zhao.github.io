@@ -9,7 +9,7 @@
   <meta name="author" content="A-shen">
 
   
-  <meta name="description" content="iOS 导航控制器如何随意push和pop 第一次开始写技术文章，请同学们多多关照，有错的地方请给我指出，大家学习一起成长，好了，我就废话不多少了； 主题思想：如A、B、C、D 四个视图控制器 想要在 A push B 后， B 在push 到 D ，然后从 D pop 到 C ,在从 C pop &hellip;">
+  <meta name="description" content=" 有时候产品经理说，能把一句话显示多种颜色、多种字体吗？ 灵光一闪，弄多个UILabel来显示不就行了，我只能说可以，也只能说这法有点笨。于是我坚决不用这种方法，苦思冥想，终于有了眉目。先配张图来显摆显摆，其实很容易实现，我也就不啰嗦了，看招： 由于很简单，不喜请喷我。 ok, 上代码， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,91 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/04/colorfullabel/">colorfulLabel</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-04T16:22:19+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:22 pm</span></time>
+        
+             
+      | <a href="/blog/2016/01/04/colorfullabel/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p> 有时候产品经理说，能把一句话显示多种颜色、多种字体吗？ 灵光一闪，弄多个UILabel来显示不就行了，我只能说可以，也只能说这法有点笨。于是我坚决不用这种方法，苦思冥想，终于有了眉目。先配张图来显摆显摆，其实很容易实现，我也就不啰嗦了，看招：
+<img src="http://upload-images.jianshu.io/upload_images/1168293-0ce90e359fcc8c76.png" alt="多样式UILabel" /></p>
+
+<h5>由于很简单，不喜请喷我。</h5>
+
+<p>ok, 上代码，一看也就是一个方法：</p>
+
+<pre><code>
+-(void)txtArr:(NSArray *)txtArr colorArr:(NSArray *)colorArr fontArr:(NSArray *)fontArr {
+
+    NSInteger okCount = 0;
+    okCount = txtArr.count < colorArr.count ? txtArr.count : colorArr.count;
+    okCount = okCount < fontArr.count ? okCount : fontArr.count;
+
+    NSMutableString *txt = [NSMutableString string];
+    for (NSString *str in txtArr) {
+        [txt appendString:str];
+    }
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:txt];
+    NSInteger startLoc = 0;
+    for (int i = 0; i < okCount; i++) {
+        [str addAttributes:@{NSForegroundColorAttributeName:colorArr[i], NSFontAttributeName:[UIFont systemFontOfSize:[fontArr[i] integerValue]]} range:NSMakeRange(startLoc, [txtArr[i] length])];
+        startLoc += [txtArr[i] length];
+    }
+    self.attributedText = str;
+}
+</code></pre>
+
+
+<h5>参数说明基本都是见明知意（大人，请允许我自恋吧）</h5>
+
+<ol>
+<li>txtArr: 传入的文本数组（对象是字符串）</li>
+<li>colorArr: 颜色数组  （对象是UIColor）</li>
+<li>fontArr: 字体数组  (对象是字符串如：@&ldquo;18&rdquo; 号字体)</li>
+</ol>
+
+
+<h5>使用方法，写给新手哦，老手请过滤吧，不然你又该喷我了</h5>
+
+<p>我还是以代码使用为主</p>
+
+<pre><code>
+NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样式label么，哈哈", nil];
+
+    NSArray *b = [NSArray arrayWithObjects:[UIColor redColor], [UIColor blackColor], [UIColor blueColor], nil];
+    NSArray *c = [NSArray arrayWithObjects:@"19", @"13", @"17", nil];
+    [self.multiLabel txtArr:a colorArr:b fontArr:c];
+</code></pre>
+
+
+<p>哎，对了，我将此方法写成了UILabel的分类了，所以这么使用没什么不妥；至于分类，不懂得，去google吧，没翻墙的还是百度吧；</p>
+
+<p><a href="https://github.com/Ashen-Zhao/multiLabel">Demo下载地址</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -358,7 +443,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#x7a;&#x68;&#x61;&#x6f;&#97;&#115;&#x68;&#x65;&#110;&#x40;&#x67;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#122;&#x68;&#97;&#111;&#x61;&#115;&#104;&#101;&#110;&#64;&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#109;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#x7a;&#x68;&#x61;&#111;&#x61;&#x73;&#x68;&#101;&#x6e;&#x40;&#103;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#109;">&#122;&#104;&#x61;&#x6f;&#x61;&#115;&#104;&#101;&#110;&#x40;&#x67;&#x6d;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;</a>；</p>
 </div>
   
   
@@ -423,6 +508,10 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/04/colorfullabel/">colorfulLabel</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/01/04/any-push-pop/">iOS 如何随意的push来pop去</a>
