@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>iOS 上传图片方法总结 - 啊神的技术博客</title>
+  <title>iOS 只需几步实现生日选择器 - 啊神的技术博客</title>
   <meta name="author" content="A-shen">
 
   
-  <meta name="description" content="iOS如何上传图片">
-  <meta name="keywords" content="上传图片, iOS上传, 上传图片iOS, iOS如何上传图片">
+  <meta name="description" content="iOS 实现生日选择器">
+  <meta name="keywords" content="日历, iOS生日选择器, 日历选择">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2015/12/28/ios/">
+  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2015/12/29/birthSelector/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="啊神的技术博客" type="application/atom+xml">
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">iOS 上传图片方法总结</h1>
+      <h1 class="entry-title">iOS 只需几步实现生日选择器</h1>
     
     
       <p class="meta">
@@ -90,7 +90,7 @@
 
 
 
-<time class='entry-date' datetime='2015-12-28T17:51:57+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:51 pm</span></time>
+<time class='entry-date' datetime='2015-12-29T15:19:49+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:19 pm</span></time>
         
              
       | <a href="#comments">评论</a>
@@ -100,87 +100,44 @@
   </header>
 
 
-<div class="entry-content"><h3>开题：</h3>
-
-<p>iOS 开发中难免会遇到上传图片，一般情况下有两种方式：</p>
-
-<p>1.自己动手写（利用NSURLMutableRequest等系统类）</p>
-
-<p>2.使用第三方（如AFNetworking)</p>
-
-<p>据我所经历的，如果你不是大神，还是用第三方吧，自己写的话会很麻烦，需要拼接一些请求头，请求体等，就算弄好了也是废了很多时间了；当然，费时间并不是我不推荐自己动手写，因为在我现在接手的项目中，就是使用的自己写的，上传中会出现丢图等各种问题，特别在网络不好的情况下；</p>
-
-<p>面对这样的上传图片，我的Boss 交给我了一个课题，就是改善上传图片的网络底层库；看在我不是大神的份上，我就选择了AFNetwoking；</p>
+<div class="entry-content"><p>  项目开发中难免会遇到让用户填写出生年月的时候，本章来介绍一下我自己写的生日选择器的<a href="https://github.com/Ashen-Zhao/ASBirthSheet">ASBirthSheet</a>;
+大致就是这个样子<img src="http://ashen-zhao.github.io/images/birthsrceenshot.png" alt="示例图" />
+  我对生日选择器页面进行了简单的封装，算上.h文件只有两个文件，使用起来很简单；</p>
 
 <!--more-->
 
 
-<p>  So,对于自己动手实现的方法，在这里我就不多写了；接下来主要是AFNetwoking实现方法：至于如何导入第三方，我不多说，你是直接拉进也行，使用cocoapods也行；</p>
-
-<h3>进入正题：</h3>
-
-<p>以下是上传图片的方法：</p>
-
-<pre>
-<code>
-+(void)uploadImageWithUrl:(NSString *)strUrl dataParams:(NSMutableDictionary *)dataParams imageParams:(NSMutableDictionary *) imageParams Success:(void(^)(NSDictionary* resultDic)) success Failed:(void(^)(NSError *error))fail {
-
- NSArray *keys = [imageParams allKeys];
-
- UIImage * image = [imageParams objectForKey:[keys firstObject]];
-
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//对SSL做处理，防止上传失败
-AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
-    securityPolicy.allowInvalidCertificates = YES;
-    securityPolicy.validatesDomainName = NO;
-    manager.securityPolicy = securityPolicy;
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = 120;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    [manager POST:strUrl parameters:dataParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.5) name:[keys firstObject] fileName:[NSString stringWithFormat:@"%@.jpeg",[keys firstObject]] mimeType:@"image/jpeg"];
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (success) {
-            success(responseObject);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (fail) {
-            fail(error);
-        }
-    }];
-}
-</code></pre>
-
-
-<p>
-接下来是如何调用：</p>
+<h4>以下是对.h文件中的说明</h4>
 
 <pre><code>
--(void)uploadImageAction {
+@property (nonatomic, copy) void(^GetSelectDate)(NSString *dateStr);
 
-NSString *url = @"https://github.com/Ashen-Zhao";
-    NSMutableDictionary *dpp =[@{@"token":@"zhaoshenshenazhao"} mutableCopy];
-    NSMutableDictionary *pimgs= [@{@"file":[UIImage imageNamed:@"a.jpg"]} mutableCopy];
- [NetworkEngine uploadImageWithUrl:url dataParams:dpp imageParams:pimgs Success:^(NSDictionary* resultDic) {
-        NSLog(@"%@", resultDic);
-    } Failed:^(NSError *error) {
-     }];
+@property (nonatomic, strong) NSString * selectDate;
+</code></pre>
+
+
+<p><code>GetSelectDate</code>是一个Block回调，是在选择完日期后确认后，就会触发，它返回一个日期格式为<code>2015-12-08</code>的字符串；
+<code>selectDate</code>是设置选中时的日期格式也需要是<code>2015-12-08</code>才能匹配；</p>
+
+<h4>以下是使用方法：</h4>
+
+<pre><code>
+-(void)chooseBirthdayAction{
+
+    ASBirthSelectSheet *datesheet = [[ASBirthSelectSheet alloc] initWithFrame:self.view.bounds];
+    datesheet.selectDate = @"2015-12-08";
+    datesheet.GetSelectDate = ^(NSString *dateStr) {
+        NSLog(@"ok Date:%@", dateStr);
+    };
+    [self.view addSubview:datesheet];
 }
 </code></pre>
 
 
-<p>参数说明：</p>
-
-<ul>
-<li>strUrl：上传图片的服务器地- - dataParams：数据参数（如token等）</li>
-<li>imageParams：图片参数（字典中的object一定要是UIImage类型；当然我写的是这样，你也可以修改为其他）</li>
-<li>Success：上传成功后的Block回调（resultDic是服务器返回的结果）</li>
-<li>Failed：上传失败后的Block回调（error是错误结果）</li>
-</ul>
-
-
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#58;&#122;&#104;&#x61;&#111;&#x61;&#115;&#x68;&#101;&#x6e;&#x40;&#103;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#111;&#x6d;">&#122;&#104;&#x61;&#x6f;&#97;&#115;&#x68;&#x65;&#110;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#111;&#x6d;</a>；</p>
+<p>使用起来很容易就这么几步，就可以实现一个简单的生日选择器；
+由于只是使用，并没有对其进行很好地封装，如果你感兴趣，可以封装的更好点，来共同交流下；
+附：
+<a href="https://github.com/Ashen-Zhao/ASBirthSheet">Demo下载地址</a></p>
 </div>
 
 
@@ -196,7 +153,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 
 
 
-<time class='entry-date' datetime='2015-12-28T17:51:57+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:51 pm</span></time>
+<time class='entry-date' datetime='2015-12-29T15:19:49+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:19 pm</span></time>
       
 
 <span class="categories">
@@ -233,10 +190,10 @@ NSString *url = @"https://github.com/Ashen-Zhao";
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/12/28/startblog/" title="Previous Post: 开始我的Octopress博客">&laquo; 开始我的Octopress博客</a>
+        <a class="basic-alignment left" href="/blog/2015/12/28/uploadimg/" title="Previous Post: iOS 上传图片方法总结">&laquo; iOS 上传图片方法总结</a>
       
       
-        <a class="basic-alignment right" href="/blog/2015/12/29/two/" title="Next Post: iOS 只需几步实现生日选择器">iOS 只需几步实现生日选择器 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2016/01/04/any-push-pop/" title="Next Post: iOS 如何随意的push来pop去">iOS 如何随意的push来pop去 &raquo;</a>
       
     </p>
   </footer>
@@ -246,7 +203,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
   <section>
     <h1>评论</h1>
     <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
-<div class="ds-thread" data-title="iOS 上传图片方法总结"></div>
+<div class="ds-thread" data-title="iOS 只需几步实现生日选择器"></div>
 <script type="text/javascript">
   var duoshuoQuery = {short_name:"zhaoashen"};
   (function() {
@@ -294,11 +251,11 @@ NSString *url = @"https://github.com/Ashen-Zhao";
       </li>
     
       <li class="post">
-        <a href="/blog/2015/12/29/two/">iOS 只需几步实现生日选择器</a>
+        <a href="/blog/2015/12/29/birthSelector/">iOS 只需几步实现生日选择器</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2015/12/28/ios/">iOS 上传图片方法总结</a>
+        <a href="/blog/2015/12/28/uploadimg/">iOS 上传图片方法总结</a>
       </li>
     
   </ul>
