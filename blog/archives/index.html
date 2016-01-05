@@ -10,10 +10,9 @@
 
   
   <meta name="description" content="Blog Archive 2016 多样式UILabel
-Jan 04 2016 iOS 如何随意的push来pop去
-Jan 04 2016 2015 iOS 只需几步实现生日选择器
-Dec 29 2015 iOS 上传图片方法总结
-Dec 28 2015 开始我的Octopress博客 &hellip;">
+Jan 04 2016 posted in ios iOS 如何随意的push来pop去
+Jan 04 2016 posted in ios 2015 iOS 只需几步实现生日选择器
+Dec 29 2015 posted in ios &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -33,7 +32,17 @@ Dec 28 2015 开始我的Octopress博客 &hellip;">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
+<script type="text/javascript">
+ function addBlankTargetForLinks () {
+   $('a[href^="http"]').each(function(){
+       $(this).attr('target', '_blank');
+   });
+ }
+ 
+ $(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+ });
+ </script>
   
 
 </head>
@@ -88,6 +97,10 @@ Dec 28 2015 开始我的Octopress博客 &hellip;">
 <h1><a href="/blog/2016/01/04/colorfullabel/">多样式UILabel</a></h1>
 <time datetime="2016-01-04T16:22:19+08:00" pubdate><span class='month'>Jan</span> <span class='day'>04</span> <span class='year'>2016</span></time>
 
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>ios</a></span>
+</footer>
+
 
 </article>
 
@@ -97,6 +110,10 @@ Dec 28 2015 开始我的Octopress博客 &hellip;">
   
 <h1><a href="/blog/2016/01/04/any-push-pop/">iOS 如何随意的push来pop去</a></h1>
 <time datetime="2016-01-04T11:08:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>04</span> <span class='year'>2016</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>ios</a></span>
+</footer>
 
 
 </article>
@@ -111,6 +128,10 @@ Dec 28 2015 开始我的Octopress博客 &hellip;">
 <h1><a href="/blog/2015/12/29/two/">iOS 只需几步实现生日选择器</a></h1>
 <time datetime="2015-12-29T15:19:49+08:00" pubdate><span class='month'>Dec</span> <span class='day'>29</span> <span class='year'>2015</span></time>
 
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>ios</a></span>
+</footer>
+
 
 </article>
 
@@ -121,6 +142,10 @@ Dec 28 2015 开始我的Octopress博客 &hellip;">
 <h1><a href="/blog/2015/12/28/ios/">iOS 上传图片方法总结</a></h1>
 <time datetime="2015-12-28T17:51:57+08:00" pubdate><span class='month'>Dec</span> <span class='day'>28</span> <span class='year'>2015</span></time>
 
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>ios</a></span>
+</footer>
+
 
 </article>
 
@@ -130,6 +155,10 @@ Dec 28 2015 开始我的Octopress博客 &hellip;">
   
 <h1><a href="/blog/2015/12/28/startblog/">开始我的Octopress博客</a></h1>
 <time datetime="2015-12-28T11:21:39+08:00" pubdate><span class='month'>Dec</span> <span class='day'>28</span> <span class='year'>2015</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/nothing/'>nothing</a></span>
+</footer>
 
 
 </article>
@@ -149,10 +178,12 @@ Dec 28 2015 开始我的Octopress博客 &hellip;">
 </section>
 <section>
    <h1>新浪微博</h1>
-   <p>
+   <ul id="sinaweibo">
+   	<li>
 		<iframe width="100%" height="130" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=130&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2424982293&verifier=7834bdd6&dpc=1">
 		</iframe>
-	</p>
+   	</li>
+   </ul>
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
@@ -179,7 +210,14 @@ Dec 28 2015 开始我的Octopress博客 &hellip;">
     
   </ul>
 </section>
+<section>
+ <h1>分类</h1>
+ <ul id="categories">
+  <li class='category'><a href='/blog/categories/ios/'>ios (4)</a></li>
+<li class='category'><a href='/blog/categories/nothing/'>nothing (1)</a></li>
 
+ </ul>
+</section>
 
 
 
@@ -192,7 +230,8 @@ Dec 28 2015 开始我的Octopress博客 &hellip;">
   </div>
   <footer role="contentinfo"><p>
   Copyright &copy; 2016 - A-shen -
-  <span class="credit"> TODO <a href="https://github.com/Ashen-Zhao">My GitHub</a> &nbsp;&nbsp;&nbsp;&nbsp;<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257110149'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257110149%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></span>
+  <span class="credit"> TODO <a href="https://github.com/Ashen-Zhao">My GitHub</a> - <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257110149'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257110149%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+  </span>
 </p>
 
 </footer>

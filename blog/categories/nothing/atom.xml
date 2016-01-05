@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Nothing | 啊神的技术博客]]></title>
+  <link href="http://ashen-zhao.github.io/blog/categories/nothing/atom.xml" rel="self"/>
+  <link href="http://ashen-zhao.github.io/"/>
+  <updated>2016-01-05T11:06:54+08:00</updated>
+  <id>http://ashen-zhao.github.io/</id>
+  <author>
+    <name><![CDATA[A-shen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[开始我的Octopress博客]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2015/12/28/startblog/"/>
+    <updated>2015-12-28T11:21:39+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2015/12/28/startblog</id>
+    <content type="html"><![CDATA[<h3>&emsp;今天研究了下Octopress 与 github的pages 建立个人博客，感觉还可以，于是就搭建起了自己的个人博客；</h3>
+
+<h3>&emsp;后续我会慢慢将我其他地方的技术文章，一点点的挪过来，我来了，我的个人博客;</h3>
+
+<h3>&emsp;初来乍到，还请各位多多关注;</h3>
+]]></content>
+  </entry>
+  
+</feed>
