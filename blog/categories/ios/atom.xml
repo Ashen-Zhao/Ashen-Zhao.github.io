@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ios | 啊神的技术博客]]></title>
+  <title><![CDATA[Category: ios | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-05T13:32:09+08:00</updated>
+  <updated>2016-01-05T16:21:56+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[A-shen]]></name>
-    
+    <email><![CDATA[zhaoashen@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
@@ -313,7 +313,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#x3a;&#x7a;&#x68;&#97;&#x6f;&#97;&#x73;&#x68;&#101;&#110;&#x40;&#x67;&#109;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#109;">&#x7a;&#x68;&#97;&#x6f;&#97;&#x73;&#x68;&#x65;&#x6e;&#64;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#111;&#x6d;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x7a;&#x68;&#x61;&#x6f;&#x61;&#x73;&#104;&#x65;&#x6e;&#x40;&#103;&#109;&#97;&#105;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#x7a;&#x68;&#97;&#111;&#x61;&#x73;&#x68;&#101;&#110;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;</a>；</p>
 ]]></content>
   </entry>
   
