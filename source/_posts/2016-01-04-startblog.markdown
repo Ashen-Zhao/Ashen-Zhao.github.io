@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "开始我的Octopress博客"
-date: 2015-12-28 11:21:39 +0800
+date: 2015-12-28 07:08:39 +0800
 comments: true
 tags: [博客, octopress]
 keywords: 啊神, 啊神的技术博客
