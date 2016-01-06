@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-05T21:16:08+08:00</updated>
+  <updated>2016-01-06T10:57:05+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[A-shen]]></name>
@@ -345,14 +345,198 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#122;&#104;&#97;&#111;&#97;&#115;&#x68;&#101;&#x6e;&#64;&#103;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#109;">&#x7a;&#104;&#x61;&#111;&#97;&#x73;&#x68;&#101;&#x6e;&#64;&#x67;&#x6d;&#97;&#105;&#x6c;&#46;&#99;&#111;&#x6d;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#x7a;&#x68;&#97;&#x6f;&#x61;&#115;&#x68;&#101;&#110;&#x40;&#x67;&#109;&#97;&#105;&#108;&#x2e;&#99;&#111;&#x6d;">&#x7a;&#104;&#x61;&#x6f;&#x61;&#x73;&#x68;&#x65;&#110;&#64;&#103;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;</a>；</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[百度天气预报API的使用（java版本）]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2015/12/28/weather/"/>
+    <updated>2015-12-28T07:32:35+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2015/12/28/weather</id>
+    <content type="html"><![CDATA[<p>&emsp;开发微信公众平台时，想要实现查询天气功能，找啊找，就找到了百度地图api；
+使用方法进行简单总结：</p>
+
+<p>此文章内容，转自我之前写的一篇文章： <a href="http://blog.csdn.net/ashenyy/article/details/25072857">http://blog.csdn.net/ashenyy/article/details/25072857</a></p>
+
+<p>要使用百度天气预报api，首先要有密钥ak,申请地址<a href="http://developer.baidu.com/map/lbs-cloud.htm">http://developer.baidu.com/map/lbs-cloud.htm</a></p>
+
+<p>然后向<a href="http://api.map.baidu.com/telematics/v3/weather?location=%E9%83%91%E5%B7%9E&amp;output=xml&amp;ak=A72e372de05e63c8740b2622d0ed8ab1">http://api.map.baidu.com/telematics/v3/weather?location=%E9%83%91%E5%B7%9E&amp;output=xml&amp;ak=A72e372de05e63c8740b2622d0ed8ab1</a>
+请求，然后会返还给你一个xml文档格式的天气预报如下：</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;CityWeatherResponse&gt;
+&lt;status&gt;success&lt;/status&gt;
+ &lt;date&gt;2014-04-29&lt;/date&gt;
+&lt;results&gt;
+&lt;currentCity&gt;郑州&lt;/currentCity&gt;
+&lt;weather_data&gt;
+      &lt;date&gt;周二(今天, 实时：20℃)&lt;/date&gt;
+  &lt;dayPictureUrl&gt;http://api.map.baidu.com/images/weather/day/qing.png&lt;;/dayPictureUrl&gt;
+  &lt;nightPictureUrl&gt;http://api.map.baidu.com/images/weather/night/qing.png&lt;;/nightPictureUrl&gt;
+  &lt;weather&gt;晴&lt;/weather&gt;
+  &lt;wind&gt;微风&lt;/wind&gt;
+  &lt;temperature&gt;13℃&lt;/temperature&gt;
+      &lt;date&gt;周三&lt;/date&gt;
+  &lt;dayPictureUrl&gt;http://api.map.baidu.com/images/weather/day/qing.png&lt;;/dayPictureUrl&gt;
+  &lt;nightPictureUrl&gt;http://api.map.baidu.com/images/weather/night/qing.png&lt;;/nightPictureUrl&gt;
+  &lt;weather&gt;晴&lt;/weather&gt;
+  &lt;wind&gt;微风&lt;/wind&gt;
+  &lt;temperature&gt;28 ~ 15℃&lt;/temperature&gt;
+      &lt;date&gt;周四&lt;/date&gt;
+  &lt;dayPictureUrl&gt;http://api.map.baidu.com/images/weather/day/duoyun.png&lt;;/dayPictureUrl&gt;
+  &lt;nightPictureUrl&gt;http://api.map.baidu.com/images/weather/night/yin.png&lt;;/nightPictureUrl&gt;
+  &lt;weather&gt;多云转阴&lt;/weather&gt;
+  &lt;wind&gt;微风&lt;/wind&gt;
+  &lt;temperature&gt;30 ~ 15℃&lt;/temperature&gt;
+      &lt;date&gt;周五&lt;/date&gt;
+  &lt;dayPictureUrl&gt;http://api.map.baidu.com/images/weather/day/yin.png&lt;;/dayPictureUrl&gt;
+  &lt;nightPictureUrl&gt;http://api.map.baidu.com/images/weather/night/duoyun.png&lt;;/nightPictureUrl&gt;
+  &lt;weather&gt;阴转多云&lt;/weather&gt;
+  &lt;wind&gt;微风&lt;/wind&gt;
+  &lt;temperature&gt;25 ~ 15℃&lt;/temperature&gt;
+    &lt;/weather_data&gt;
+&lt;/results&gt;
+&lt;/CityWeatherResponse&gt;
+</code></pre>
+
+<p>接下 来只需要对此xml文档解析取出数据即可
+具体代码如下：</p>
+
+<pre><code>
+    package com.ashen.testapi;
+    import java.io.BufferedReader;
+    import java.io.InputStream;
+    import java.io.InputStreamReader;
+    import java.io.UnsupportedEncodingException;
+    import java.net.HttpURLConnection;
+    import java.net.URL;
+    import java.net.URLEncoder;
+    import java.util.Iterator;
+    import java.util.List;
+    import org.dom4j.Document;
+    import org.dom4j.DocumentException;
+    import org.dom4j.DocumentHelper;
+    import org.dom4j.Element;
+    public class BaiduWeather {
+    //获取天气信息
+  public static String GetWeater(String city) {
+    BaiduWeather wu=new BaiduWeather();
+    String buffstr=null;
+    try {
+        String xml= wu.GetXmlCode(URLEncoder.encode(city, "utf-8"));  //设置输入城市的编码，以满足百度天气api需要
+        buffstr=wu.readStringXml(xml,city);//调用xml解析函数
+    } catch (Exception e) {
+    e.printStackTrace();
+    }
+    return  buffstr;
+    }
+    public String GetXmlCode(String city) throws UnsupportedEncodingException{
+    String requestUrl = "http://api.map.baidu.com/telematics/v3/weather?location="+city+"&output=xml&ak=A72e372de05e63c8740b2622d0ed8ab1";  
+    StringBuffer buffer = null;  
+    try {  
+    // 建立连接  
+    URL url = new URL(requestUrl);
+    HttpURLConnection httpUrlConn = (HttpURLConnection) url.openConnection();  
+    httpUrlConn.setDoInput(true);  
+    httpUrlConn.setRequestMethod("GET");  
+    // 获取输入流  
+    InputStream inputStream = httpUrlConn.getInputStream();  
+    InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");  
+    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);  
+    // 读取返回结果  
+    buffer = new StringBuffer();  
+    String str = null;  
+    while ((str = bufferedReader.readLine()) != null) {  
+      buffer.append(str);  
+    }  
+  
+   // 释放资源  
+   bufferedReader.close();  
+    inputStreamReader.close();  
+    inputStream.close();  
+    httpUrlConn.disconnect();  
+    } catch (Exception e) {  
+    e.printStackTrace();  
+    }  
+    return buffer.toString();  //返回获取的xml字符串
+}
+public String readStringXml(String xml,String ifcity) {
+  StringBuffer buff=new StringBuffer();  //用来拼接天气信息的
+  Document doc = null;
+  List listdate=null;  //用来存放日期
+  List listday=null;  //用来存放白天图片路径信息
+  List listweather=null;
+  List listwind=null;
+  List listtem=null;
+  try {
+    // 读取并解析XML文档
+    //下面的是通过解析xml字符串的
+    doc = DocumentHelper.parseText(xml); // 将字符串转为XML  
+    Element rootElt = doc.getRootElement(); // 获取根节点    
+    Iterator iter = rootElt.elementIterator("results"); // 获取根节点下的子节点results
+    String status=rootElt.elementText("status"); //获取状态，如果等于success,表示有数据
+    if(!status.equals("success"))
+      return "暂无数据";  //如果不存在数据，直接返回
+    String date= rootElt.elementText("date");  //获取根节点下的，当天日期
+    buff.append(date+"\n");
+    //遍历results节点
+      while (iter.hasNext()) {
+      Element recordEle = (Element) iter.next();
+      Iterator iters = recordEle.elementIterator("weather_data"); //
+    //遍历results节点下的weather_data节点
+      while (iters.hasNext()) {
+        Element itemEle = (Element) iters.next();  
+        listdate=itemEle.elements("date");
+      //将date集合放到listdate中
+        listday=itemEle.elements("dayPictureUrl");
+        listweather=itemEle.elements("weather");
+        listwind=itemEle.elements("wind");
+        listtem=itemEle.elements("temperature");
+    }    
+    for(int i=0; i < listdate.size();i++){     //由于每一个list.size都相等，这里统一处理
+      Element eledate=(Element)listdate.get(i); //依次取出date
+      Element eleday=(Element)listday.get(i);//..
+      Element eleweather=(Element)listweather.get(i);
+      Element elewind=(Element)listwind.get(i);
+      Element eletem=(Element)listtem.get(i);            
+      buff.append(eledate.getText()+"==="+eleweather.getText()+"==="+elewind.getText()+"==="+eletem.getText()+"\n");  //拼接信息
+        //*****************如果想用到微信公众号上，还请自己继续写代码，我只能帮到这了，数据已经分离开了。
+      //微信天气处理  省略
+    }  
+    }
+    } catch (DocumentException e) {
+    e.printStackTrace();
+    } catch (Exception e) {
+    e.printStackTrace();
+    }
+    return buff.toString();  
+}
+    public static void main(String[] args){
+    //测试
+    System.out.println(GetWeater("郑州").toString());
+    }
+}
+</code></pre>
+
+
+<p>测试结果：
+2014-04-29</p>
+
+<p>周二(今天, 实时：20℃)===晴===微风===13℃</p>
+
+<p>周三===晴===微风===28 ~ 15℃</p>
+
+<p>周四===多云转阴===微风===30 ~ 15℃</p>
+
+<p>周五===阴转多云===微风===25 ~ 15℃</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[开始我的Octopress博客]]></title>
     <link href="http://ashen-zhao.github.io/blog/2015/12/28/startblog/"/>
-    <updated>2015-12-28T11:21:39+08:00</updated>
+    <updated>2015-12-28T07:08:39+08:00</updated>
     <id>http://ashen-zhao.github.io/blog/2015/12/28/startblog</id>
     <content type="html"><![CDATA[<h3>&emsp;今天研究了下Octopress 与 github的pages 建立个人博客，感觉还可以，于是就搭建起了自己的个人博客；</h3>
 
