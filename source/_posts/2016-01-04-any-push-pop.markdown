@@ -25,7 +25,7 @@ categories: iOS
 1.假如此时在 A 控制器下，想要到 push 到 B， 可以这样写
 
  	 [self.navigationController pushViewController: B :YES];
-  
+ <!--more-->
 这时 `self.navigationController.viewControllers` 中按顺序含有 [A，B]
 
 2.此时已经到 B 控制器下了， 接下来是 push 到 D, 可以这样写
@@ -34,7 +34,7 @@ categories: iOS
 这时 `self.navigationController.viewControllers` 中按顺序含有 [A，B，D]
 
 接下来**很重要，很重要，很重要**：
-<!--more-->
+
 如何想从 D pop 到 C, 看数组[A，B，D] 中压根就没有C 该如何pop 到C呢？
 
 这时就需要对这个数组进行修改，将C 加入进去

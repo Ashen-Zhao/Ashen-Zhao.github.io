@@ -9,8 +9,9 @@ description:  iOS 如何实现多样式Label
 categories: iOS
 ---
  有时候产品经理说，能把一句话显示多种颜色、多种字体吗？ 灵光一闪，弄多个UILabel来显示不就行了，我只能说可以，也只能说这法有点笨。于是我坚决不用这种方法，苦思冥想，终于有了眉目。先配张图来显摆显摆，其实很容易实现，我也就不啰嗦了，看招：
+ <!--more-->
 ![多样式UILabel](http://upload-images.jianshu.io/upload_images/1168293-0ce90e359fcc8c76.png)
-<!--more-->
+
 #####由于很简单，不喜请喷我。
 ok, 上代码，一看也就是一个方法：
 <pre><code>

@@ -9,9 +9,11 @@ description:  iOS 实现生日选择器
 categories: iOS
 ---
   项目开发中难免会遇到让用户填写出生年月的时候，本章来介绍一下我自己写的生日选择器的[ASBirthSheet](https://github.com/Ashen-Zhao/ASBirthSheet); 
+  <!--more-->
+  </br>
 大致就是这个样子![示例图](http://ashen-zhao.github.io/images/birthsrceenshot.png)
   我对生日选择器页面进行了简单的封装，算上.h文件只有两个文件，使用起来很简单；
-<!--more-->
+
 ####以下是对.h文件中的说明
 <pre><code>
 @property (nonatomic, copy) void(^GetSelectDate)(NSString *dateStr);
