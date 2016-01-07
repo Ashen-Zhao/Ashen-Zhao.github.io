@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ios | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-07T18:23:33+08:00</updated>
+  <updated>2016-01-07T18:26:32+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[A-shen]]></name>
@@ -12,6 +12,155 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS 常用加密方法]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/01/07/datasafety/"/>
+    <updated>2016-01-07T17:30:15+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/01/07/datasafety</id>
+    <content type="html"><![CDATA[<h1>为何要加密</h1>
+
+<p>&emsp;为什么要加密，顾名思义，如果你不想让别人轻而易举的就拿到你的账号以及登录密码，如果你不想让别人获取你的敏感的数据(利益、聊天等数据),and so on; 不对数据进行加密，那就像你只穿个裤头，在到处跑，随时都可能走光；加密的重要性，我不多说，自己悟吧;<br/>
+&emsp;iOS 开发中经常用到的几种加密方式：MD5、Base64、RSA、AES<br/>
+&emsp;一般来说最常用的就是MD5和Base64：</p>
+
+<ol>
+<li>MD5主要应用于普通请求、返回数据，进行数据完整性校验</li>
+<li>Base64 主要用于防止数据明文传输</li>
+<li>AES 一般用于登录加密</li>
+<li>RSA 经常用于重要数据 以及敏感数据的加密</li>
+</ol>
+
+
+<!--more-->
+
+
+<h1>MD5</h1>
+
+<pre><code>- (NSString *) stringFromMD5 {
+if(self == nil || [self length] == 0) {        return nil;
+}    const char *value = [self UTF8String];    unsigned char outputBuffer[CC_MD5_DIGEST_LENGTH];
+CC_MD5(value, strlen(value), outputBuffer);
+NSMutableString *outputString = [[NSMutableString alloc] initWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+for(NSInteger count = 0; count &lt; CC_MD5_DIGEST_LENGTH; count++){        [outputString appendFormat:@"%02x",outputBuffer[count]];
+}    return outputString;
+</code></pre>
+
+<p>}
+导入头文件：#import &lt;CommonCrypto/CommonDigest.h></p>
+
+<h1>Base64</h1>
+
+<pre><code>static const char _base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+static const short _base64DecodingTable[256] = {
+-2, -2, -2, -2, -2, -2, -2, -2, -2, -1, -1, -2, -1, -1, -2, -2,
+-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+-1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, 62, -2, -2, -2, 63,
+52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -2, -2, -2, -2, -2, -2,
+-2,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14,
+15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -2, -2, -2, -2, -2,
+-2, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -2, -2, -2, -2, -2,
+-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2
+};
+
+
++ (NSString *) encodeBase64WithString: (NSString *) strData {
+NSData *objData = [strData dataUsingEncoding:NSUTF8StringEncoding];
+const unsigned char * objRawData = [objData bytes];
+char * objPointer;    char * strResult;    // Get the Raw Data length and ensure we actually have data
+int intLength = [objData length];    if (intLength == 0) return nil;    // Setup the String-based Result placeholder and pointer within that placeholder
+strResult = (char *)calloc(((intLength + 2) / 3) * 4, sizeof(char));    objPointer = strResult;    // Iterate through everything
+while (intLength &gt; 2) { // keep going until we have less than 24 bits        *objPointer++ = _base64EncodingTable[objRawData[0] &gt;&gt; 2];        *objPointer++ = _base64EncodingTable[((objRawData[0] &amp; 0x03) &lt;&lt; 4) + (objRawData[1] &gt;&gt; 4)]; *objPointer++ = _base64EncodingTable[((objRawData[1] &amp; 0x0f) &lt;&lt; 2) + (objRawData[2] &gt;&gt; 6)]; *objPointer++ = _base64EncodingTable[objRawData[2] &amp; 0x3f];        // we just handled 3 octets (24 bits) of data
+    objRawData += 3;        intLength -= 3;    }    // now deal with the tail end of things    if (intLength != 0) {        *objPointer++ = _base64EncodingTable[objRawData[0] &gt;&gt; 2];        if (intLength &gt; 1) {            *objPointer++ = _base64EncodingTable[((objRawData[0] &amp; 0x03) &lt;&lt; 4) + (objRawData[1] &gt;&gt; 4)]; *objPointer++ = _base64EncodingTable[(objRawData[1] &amp; 0x0f) &lt;&lt; 2];            *objPointer++ = '=';        } else {            *objPointer++ = _base64EncodingTable[(objRawData[0] &amp; 0x03) &lt;&lt; 4];            *objPointer++ = '=';            *objPointer++ = '=';        }    }    // Terminate the string-based result
+*objPointer = '\0';    NSString *rstStr = [NSString stringWithCString:strResult encoding:NSASCIIStringEncoding]; free(objPointer);    return rstStr;    }
+
+
++ (NSData *)decodeBase64WithString:(NSString *)strBase64 {
+const char *objPointer = [strBase64 cStringUsingEncoding:NSASCIIStringEncoding];
+size_t intLength = strlen(objPointer);
+int intCurrent;
+int i = 0, j = 0, k;
+
+unsigned char *objResult = calloc(intLength, sizeof(unsigned char));
+
+// Run through the whole string, converting as we go
+while ( ((intCurrent = *objPointer++) != '\0') &amp;&amp; (intLength-- &gt; 0) ) {
+    if (intCurrent == '=') {
+        if (*objPointer != '=' &amp;&amp; ((i % 4) == 1)) {// || (intLength &gt; 0)) {
+            // the padding character is invalid at this point -- so this entire string is invalid
+            free(objResult);
+            return nil;
+        }
+        continue;
+    }
+
+    intCurrent = _base64DecodingTable[intCurrent];
+    if (intCurrent == -1) {
+        // we're at a whitespace -- simply skip over
+        continue;
+    } else if (intCurrent == -2) {
+        // we're at an invalid character
+        free(objResult);
+        return nil;
+    }
+
+    switch (i % 4) {
+        case 0:
+            objResult[j] = intCurrent &lt;&lt; 2;
+            break;
+
+        case 1:
+            objResult[j++] |= intCurrent &gt;&gt; 4;
+            objResult[j] = (intCurrent &amp; 0x0f) &lt;&lt; 4;
+            break;
+
+        case 2:
+            objResult[j++] |= intCurrent &gt;&gt;2;
+            objResult[j] = (intCurrent &amp; 0x03) &lt;&lt; 6;
+            break;
+
+        case 3:
+            objResult[j++] |= intCurrent;
+            break;
+    }
+    i++;
+}
+
+// mop things up if we ended on a boundary
+k = j;
+if (intCurrent == '=') {
+    switch (i % 4) {
+        case 1:
+            // Invalid state
+            free(objResult);
+            return nil;
+
+        case 2:
+            k++;
+            // flow through
+        case 3:
+            objResult[k] = 0;
+    }
+}
+
+// Cleanup and setup the return NSData
+NSData * objData = [[NSData alloc] initWithBytes:objResult length:j];
+free(objResult);
+return objData;
+}
+</code></pre>
+
+<h1>未完待续</h1>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[从工程中删除Cocoapods]]></title>
@@ -252,95 +401,6 @@ NSMutableArray*tempMarr =[NSMutableArrayarrayWithArray:self.navigationController
 由于只是使用，并没有对其进行很好地封装，如果你感兴趣，可以封装的更好点，来共同交流下；
 附：
 <a href="https://github.com/Ashen-Zhao/ASBirthSheet">Demo下载地址</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS 上传图片方法总结]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2015/12/28/uploadimg/"/>
-    <updated>2015-12-28T17:51:57+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2015/12/28/uploadimg</id>
-    <content type="html"><![CDATA[<h3>开题：</h3>
-
-<p>iOS 开发中难免会遇到上传图片，一般情况下有两种方式：</p>
-
-<p>1.自己动手写（利用NSURLMutableRequest等系统类）</p>
-
-<p>2.使用第三方（如AFNetworking)</p>
-
-<p>据我所经历的，如果你不是大神，还是用第三方吧，自己写的话会很麻烦，需要拼接一些请求头，请求体等，就算弄好了也是废了很多时间了；当然，费时间并不是我不推荐自己动手写，因为在我现在接手的项目中，就是使用的自己写的，上传中会出现丢图等各种问题，特别在网络不好的情况下；</p>
-
-<p>面对这样的上传图片，我的Boss 交给我了一个课题，就是改善上传图片的网络底层库；看在我不是大神的份上，我就选择了AFNetwoking；</p>
-
-<!--more-->
-
-
-<p>  So,对于自己动手实现的方法，在这里我就不多写了；接下来主要是AFNetwoking实现方法：至于如何导入第三方，我不多说，你是直接拉进也行，使用cocoapods也行；</p>
-
-<h3>进入正题：</h3>
-
-<p>以下是上传图片的方法：</p>
-
-<pre>
-<code>
-+(void)uploadImageWithUrl:(NSString *)strUrl dataParams:(NSMutableDictionary *)dataParams imageParams:(NSMutableDictionary *) imageParams Success:(void(^)(NSDictionary* resultDic)) success Failed:(void(^)(NSError *error))fail {
-
- NSArray *keys = [imageParams allKeys];
-
- UIImage * image = [imageParams objectForKey:[keys firstObject]];
-
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//对SSL做处理，防止上传失败
-AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
-    securityPolicy.allowInvalidCertificates = YES;
-    securityPolicy.validatesDomainName = NO;
-    manager.securityPolicy = securityPolicy;
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = 120;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    [manager POST:strUrl parameters:dataParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.5) name:[keys firstObject] fileName:[NSString stringWithFormat:@"%@.jpeg",[keys firstObject]] mimeType:@"image/jpeg"];
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (success) {
-            success(responseObject);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (fail) {
-            fail(error);
-        }
-    }];
-}
-</code></pre>
-
-
-<p>
-接下来是如何调用：</p>
-
-<pre><code>
--(void)uploadImageAction {
-
-NSString *url = @"https://github.com/Ashen-Zhao";
-    NSMutableDictionary *dpp =[@{@"token":@"zhaoshenshenazhao"} mutableCopy];
-    NSMutableDictionary *pimgs= [@{@"file":[UIImage imageNamed:@"a.jpg"]} mutableCopy];
- [NetworkEngine uploadImageWithUrl:url dataParams:dpp imageParams:pimgs Success:^(NSDictionary* resultDic) {
-        NSLog(@"%@", resultDic);
-    } Failed:^(NSError *error) {
-     }];
-}
-</code></pre>
-
-
-<p>参数说明：</p>
-
-<ul>
-<li>strUrl：上传图片的服务器地- - dataParams：数据参数（如token等）</li>
-<li>imageParams：图片参数（字典中的object一定要是UIImage类型；当然我写的是这样，你也可以修改为其他）</li>
-<li>Success：上传成功后的Block回调（resultDic是服务器返回的结果）</li>
-<li>Failed：上传失败后的Block回调（error是错误结果）</li>
-</ul>
-
-
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#x7a;&#104;&#x61;&#111;&#97;&#x73;&#104;&#101;&#110;&#64;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;">&#122;&#104;&#97;&#x6f;&#x61;&#x73;&#x68;&#x65;&#x6e;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#111;&#109;</a>；</p>
 ]]></content>
   </entry>
   
