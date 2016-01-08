@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ios | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-07T18:26:32+08:00</updated>
+  <updated>2016-01-08T09:57:15+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[A-shen]]></name>
@@ -18,24 +18,24 @@
     <link href="http://ashen-zhao.github.io/blog/2016/01/07/datasafety/"/>
     <updated>2016-01-07T17:30:15+08:00</updated>
     <id>http://ashen-zhao.github.io/blog/2016/01/07/datasafety</id>
-    <content type="html"><![CDATA[<h1>为何要加密</h1>
+    <content type="html"><![CDATA[<h3>为何要加密</h3>
 
 <p>&emsp;为什么要加密，顾名思义，如果你不想让别人轻而易举的就拿到你的账号以及登录密码，如果你不想让别人获取你的敏感的数据(利益、聊天等数据),and so on; 不对数据进行加密，那就像你只穿个裤头，在到处跑，随时都可能走光；加密的重要性，我不多说，自己悟吧;<br/>
 &emsp;iOS 开发中经常用到的几种加密方式：MD5、Base64、RSA、AES<br/>
 &emsp;一般来说最常用的就是MD5和Base64：</p>
 
-<ol>
+<blockquote><ol>
 <li>MD5主要应用于普通请求、返回数据，进行数据完整性校验</li>
 <li>Base64 主要用于防止数据明文传输</li>
 <li>AES 一般用于登录加密</li>
 <li>RSA 经常用于重要数据 以及敏感数据的加密</li>
 </ol>
-
+</blockquote>
 
 <!--more-->
 
 
-<h1>MD5</h1>
+<h2>MD5</h2>
 
 <pre><code>- (NSString *) stringFromMD5 {
 if(self == nil || [self length] == 0) {        return nil;
@@ -43,13 +43,14 @@ if(self == nil || [self length] == 0) {        return nil;
 CC_MD5(value, strlen(value), outputBuffer);
 NSMutableString *outputString = [[NSMutableString alloc] initWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
 for(NSInteger count = 0; count &lt; CC_MD5_DIGEST_LENGTH; count++){        [outputString appendFormat:@"%02x",outputBuffer[count]];
-}    return outputString;
+}       return outputString;
+}
 </code></pre>
 
-<p>}
-导入头文件：#import &lt;CommonCrypto/CommonDigest.h></p>
+<p>导入头文件：#import &lt;CommonCrypto/CommonDigest.h> <br/>
+ 该方法为NSString的分类方法</p>
 
-<h1>Base64</h1>
+<h2>Base64</h2>
 
 <pre><code>static const char _base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 static const short _base64DecodingTable[256] = {
@@ -158,7 +159,13 @@ return objData;
 }
 </code></pre>
 
-<h1>未完待续</h1>
+<h2>RSA</h2>
+
+<p>RSA: 比较复杂，这有一篇博客可以参考<a href="http://blog.iamzsx.me/show.html?id=155002">iOS下的RSA加密算法</a></p>
+
+<h2>AES</h2>
+
+<p>对于AES 这也有一个不错的博客<a href="http://www.tuicool.com/articles/UVRjmyN">AES加密算法</a></p>
 ]]></content>
   </entry>
   
