@@ -9,28 +9,29 @@ description: iOS 几种加密方法
 categories: iOS
 ---
 
-#为何要加密
+###为何要加密
 &emsp;为什么要加密，顾名思义，如果你不想让别人轻而易举的就拿到你的账号以及登录密码，如果你不想让别人获取你的敏感的数据(利益、聊天等数据),and so on; 不对数据进行加密，那就像你只穿个裤头，在到处跑，随时都可能走光；加密的重要性，我不多说，自己悟吧;  
 &emsp;iOS 开发中经常用到的几种加密方式：MD5、Base64、RSA、AES  
 &emsp;一般来说最常用的就是MD5和Base64：  
-
+>
 1. MD5主要应用于普通请求、返回数据，进行数据完整性校验
 2. Base64 主要用于防止数据明文传输
 3. AES 一般用于登录加密
 4. RSA 经常用于重要数据 以及敏感数据的加密  
 
 <!--more-->
-#MD5
+##MD5
 	- (NSString *) stringFromMD5 {
     if(self == nil || [self length] == 0) {        return nil;
     }    const char *value = [self UTF8String];    unsigned char outputBuffer[CC_MD5_DIGEST_LENGTH];
     CC_MD5(value, strlen(value), outputBuffer);
     NSMutableString *outputString = [[NSMutableString alloc] initWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
     for(NSInteger count = 0; count < CC_MD5_DIGEST_LENGTH; count++){        [outputString appendFormat:@"%02x",outputBuffer[count]];
-    }    return outputString;
-}
-导入头文件：#import <CommonCrypto/CommonDigest.h>  
-#Base64
+    }    	return outputString;
+	}
+导入头文件：#import <CommonCrypto/CommonDigest.h>   
+ 该方法为NSString的分类方法
+##Base64
 	static const char _base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 	static const short _base64DecodingTable[256] = {
     -2, -2, -2, -2, -2, -2, -2, -2, -2, -1, -1, -2, -1, -1, -2, -2,
@@ -137,4 +138,7 @@ categories: iOS
     return objData;
 	}
   
-#未完待续
+##RSA  
+RSA: 比较复杂，这有一篇博客可以参考[iOS下的RSA加密算法](http://blog.iamzsx.me/show.html?id=155002)  
+##AES  
+对于AES 这也有一个不错的博客[AES加密算法](http://www.tuicool.com/articles/UVRjmyN)    
