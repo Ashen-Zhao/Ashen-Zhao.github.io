@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-08T10:11:51+08:00</updated>
+  <updated>2016-01-08T11:06:48+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[A-shen]]></name>
@@ -12,6 +12,122 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[EasyMarkDown]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/01/08/easymarkdown/"/>
+    <updated>2016-01-08T10:52:13+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/01/08/easymarkdown</id>
+    <content type="html"><![CDATA[<h2>EasyMarkDown</h2>
+
+<hr />
+
+<h2>基本符号</h2>
+
+<ul>
+<li>*, _ , + 3个符号效果都一样，这3个符号被称为 Markdown符号 (符号使用时，有时一个符号不行，请速切换下一个符号)</li>
+<li>空白行表示另起一个段落</li>
+<li>`是表示inline代码，tab是用来标记 代码段，分别对应html的code，pre标签</li>
+</ul>
+
+
+<hr />
+
+<h2>换行</h2>
+
+<ul>
+<li>单一段落( \&lt;p>) 用一个空白行</li>
+<li>连续两个空格 会变成一个 \&lt;br></li>
+<li>连续3个符号，然后是空行，表示 hr横线</li>
+</ul>
+
+
+<hr />
+
+<h2>标题</h2>
+
+<ul>
+<li>生成h1&ndash;h6,在文字前面加上 1&ndash;6个# 来实现</li>
+</ul>
+
+
+<hr />
+
+<h2>引用</h2>
+
+<ul>
+<li>在第一行加上 “>”和一个空格，表示代码引用，还可以嵌套</li>
+</ul>
+
+
+<hr />
+
+<!--more-->
+
+
+<h2>列表</h2>
+
+<p>这个是markdown文件的主要表示方式，主题要点化</p>
+
+<ul>
+<li>使用*,+,-加上一个空格来表示</li>
+<li>可以支持嵌套</li>
+<li>有序列表用 数字+英文点+空格来表示</li>
+<li>列表内容很长，不需要手工输入换行符，css控制段落的宽度，会自动的缩放的</li>
+</ul>
+
+
+<hr />
+
+<h2>链接</h2>
+
+<ul>
+<li>直接写 [描述文本](url &ldquo;可选的title&rdquo;)</li>
+<li>引用 先定义 [ref_name]:url，然后在需要写入url的地方， 这样使用[描述文本][ref_name]，通常的ref_name一般用数字表示，这样显得专业</li>
+<li>简写url：用尖括号包裹url
+这样生成的url锚文本就是url本身</li>
+</ul>
+
+
+<hr />
+
+<h2>插入图片</h2>
+
+<ul>
+<li>一行表示: ![alt_text](url &ldquo;可选的title&rdquo;)</li>
+<li>引用表示法: ![alt_text][id],预先定义 [id]:url &ldquo;可选title&rdquo;</li>
+<li>直接使用\<img>标签，这样可以指定图片的大小尺寸</li>
+</ul>
+
+
+<hr />
+
+<h2>特殊符号</h2>
+
+<ul>
+<li>用\来转义，表示文本中的markdown符号</li>
+<li>可以在文本种直接使用html标签，但是要注意在使用的时候，前后加上空行</li>
+<li>文本前后各加一个符号，表示斜体</li>
+</ul>
+
+
+<hr />
+
+<h2>文本</h2>
+
+<ul>
+<li>文本对齐方式，使用html标签吧： text-align:center/right/left</li>
+<li>文字加粗是通过 文字左右各两个符号</li>
+<li>文字斜体是通过 文字左右各一个符号</li>
+</ul>
+
+
+<hr />
+
+<p></br>
+注：本文内容大致来自于：<a href="http://lutaf.com/markdown-simple-usage.htm">http://lutaf.com/markdown-simple-usage.htm</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS 常用加密方法]]></title>
@@ -496,7 +612,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#x3a;&#x7a;&#104;&#97;&#111;&#97;&#115;&#104;&#101;&#x6e;&#x40;&#x67;&#109;&#x61;&#105;&#108;&#x2e;&#99;&#x6f;&#109;">&#x7a;&#x68;&#97;&#x6f;&#97;&#x73;&#104;&#x65;&#110;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#122;&#104;&#97;&#x6f;&#x61;&#x73;&#x68;&#x65;&#x6e;&#x40;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#x6f;&#109;">&#122;&#x68;&#97;&#x6f;&#97;&#115;&#104;&#x65;&#110;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;</a>；</p>
 ]]></content>
   </entry>
   
