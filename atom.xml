@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-08T17:40:46+08:00</updated>
+  <updated>2016-01-11T10:22:48+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[A-shen]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[UIWebView 与 原生系统的简单跳转交互]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/01/11/webview/"/>
+    <updated>2016-01-11T10:15:09+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/01/11/webview</id>
+    <content type="html"><![CDATA[<h3>简单介绍UIWebView</h3>
+
+<p> 关于UIWebView这里我就不多介绍了，可以简单理解为一个在iOS 端显示网页的一个控件；</p>
+
+<h3>UIWebView的使用</h3>
+
+<p> 它既然也是view，当然就可以像其他view一样的创建，如下：</p>
+
+<pre><code> UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 560)];
+
+ webView.delegate = self;//先在此设置下代理，等下会实现其代理方法</code></pre>
+
+
+<p> <!--more-->
+ 当然这是创建一个对象，想要加载一个网页还需要实现<code>loadRequest:</code>这个方法；这时你会发现该方法需要一个<code>NSURLRequest</code>类型的参数；那简单我们就来创建一个又如何；我们使用NSURLRequest的类方法<code>requestWithURL:</code>来创建；咦，又会发现这个类方法需要一个<code>NSURL</code>类型的参数；不管了，那就先创建NSURL对象吧；</p>
+
+<pre><code>
+ NSURL *url = [NSURL URLWithString:@"http://www.baidu.com"];
+
+[webView loadRequest:[NSURLRequest requestWithURL:url];</code></pre>
+
+
+<p> 切记后面一定要是一个可访问的网址；
+ 最后，因为它也是View，别忘记加到父视图上</p>
+
+<pre><code>[self.view addSubview:webView];</code></pre>
+
+
+<p>既然要实现与原生系统的交互，那就不得不实现它的代理方法</p>
+
+<pre><code>-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+   NSString *urlStr = request.URL.absoluteString; //取出webView交互的url链接；
+        //根据urlStr链接中的参数，去push到系统中的任何页面都可以的
+       /*实现code
+        .....
+       */
+      return YES;
+}</code></pre>
+
+
+<p> <b>附加说明</b>：urlStr是网页中，点击带有响应，传过来的网址，这个网址要看你服务端给的什么内容，针对内容去跳转到对象的页面(如：是一个头像的点击，则跳转到对应的用户信息，这是网址中，服务端就应该封装的有对应的用户的ID);
+ 该代理方法返回值是BOOL类型的，所以当你需要用webView来显示的时候，一定要返回YES; 至于跳转到App内其他页面就没有这么讲究了，YES or NO all ok; 建议返回NO, 以免出现web内与应用内两次跳转；
+ 如果服务端需要传参数进去（如：token) ，这是你就需要在创建<code>NSURL</code>对象时，将token封装进去</p>
+
+<pre>[NSURL URLWithString:@"http://www.baidu.com?token=pzshgawegwegeugiwef93i24"]</pre>
+
+
+<h6>自己在项目中就是这么实现的，如果有疑问或者有更好地方法，请与留言交流；</h6>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[EasyMarkDown]]></title>
@@ -612,7 +668,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#122;&#104;&#x61;&#x6f;&#97;&#115;&#x68;&#101;&#x6e;&#64;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;">&#x7a;&#104;&#x61;&#x6f;&#x61;&#115;&#x68;&#101;&#110;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#109;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#122;&#104;&#97;&#x6f;&#x61;&#115;&#104;&#x65;&#x6e;&#x40;&#103;&#109;&#x61;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#x7a;&#x68;&#x61;&#111;&#x61;&#115;&#104;&#x65;&#x6e;&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;</a>；</p>
 ]]></content>
   </entry>
   
