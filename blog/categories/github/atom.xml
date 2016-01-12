@@ -4,7 +4,7 @@
   <title><![CDATA[Category: github | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-12T12:00:45+08:00</updated>
+  <updated>2016-01-12T12:04:41+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -33,6 +33,9 @@
 <h4>2、git add . 添加到暂存区（保存项目索引，并生产快照）</h4>
 
 <p>这一步一般什么的都不会输出，但是却已经添加好了，不用多想，继续下一步</p>
+
+<!--more-->
+
 
 <h4>3、git commit 提交仓库内容（提交项目索引）</h4>
 
@@ -100,7 +103,8 @@ github 开源代码库以及版本控制系统</p>
 <p>输入 ls -al ~/.ssh 命令  查看是否存在<code>id_rsa.pub</code> 和 <code>id_rsa</code> 文件</p>
 
 <p><img src="/images/isHassshkey.png" alt="附图1" /><br/>
-如果存在，则执行第 3 步， 否则执行第 2 步</p>
+如果存在，则执行第 3 步， 否则执行第 2 步
+  <!--more--></p>
 
 <h2>2.生成新的ssh 密钥</h2>
 

@@ -122,54 +122,12 @@
 
 <p>这一步一般什么的都不会输出，但是却已经添加好了，不用多想，继续下一步</p>
 
-<h4>3、git commit 提交仓库内容（提交项目索引）</h4>
-
-<p><code>git commit -m 'fitst commit'</code></p>
-
-<p>-m 之后的内容是对本次commit的描述</p>
-
-<h5>4、git log (可忽略)</h5>
-
-<p>查看提交的历史记录</p>
-
-<h2>本地Git仓库推送到Github</h2>
-
-<h4>1、首页github上需要创建个仓库,按下图一步一步走</h4>
-
-<hr />
-
-<p>进入github添加仓库界面
-<img src="/images/newGit.png" alt="new" /></p>
-
-<hr />
-
-<p>填写仓库相关内容
-<img src="/images/gitfillcontent.png" alt="addgithub" /></p>
-
-<hr />
-
-<p>仓库创建成功界面，记住图片中的地址
-<img src="/images/githubURL.png" alt="url" /></p>
-
-<h4>2、添加远程仓库，这时候图片中的地址，就有用了</h4>
-
-<p>执行命令：<code>git remote add origin git@github.com:Ashen-Zhao/firstgithub.git</code></p>
-
-<p>git remote add 远程库的名字 远程库的URL</p>
-
-<h4>3、推送到远程分支，git默认会创建一个master主分支</h4>
-
-<p><code>git push origin master</code></p>
-
-<p>到这里，就完成了本地git仓库提交到github了，有没有小激动，速去github刷新页面，看看你的成果吧</p>
-
-<h2>将github仓库，克隆到本地</h2>
-
-<h4>使用git clone 仓库地址 即可</h4>
-
-<p><code>git clone git@github.com:Ashen-Zhao/firstgithub.git</code></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/12/githubused/">阅读全文 →</a>
+    </footer>
   
 
 
@@ -211,26 +169,13 @@ github 开源代码库以及版本控制系统</p>
 <p>输入 ls -al ~/.ssh 命令  查看是否存在<code>id_rsa.pub</code> 和 <code>id_rsa</code> 文件</p>
 
 <p><img src="/images/isHassshkey.png" alt="附图1" /><br/>
-如果存在，则执行第 3 步， 否则执行第 2 步</p>
-
-<h2>2.生成新的ssh 密钥</h2>
-
-<p>输入 ssh-keygen -t rsa -C “emailname@gmail.com”  回车，会让你输入密码，直接输入三个空格，不要密码即可  <br/>
-最后得到了两个文件：id_rsa和id_rsa.pub</p>
-
-<h2>3.将ssh key添加到GitHub中</h2>
-
-<p>打开<a href="https://github.com">github</a> 添加 SSH Key 页面</p>
-
-<p><img src="/images/goaddsshkey.png" alt="附图2" />  <img src="/images/addsshkey.png" alt="附图2" /><br/>
-这要添加的是<code>id_rsa.pub</code>里面的公钥;<br/>
-进入ssh. 目录下，输入 cat id_rsa.pub 即可在窗口中看到公钥，将公钥从 ssh-key 一直复制到邮箱地址（包含邮箱），然后粘贴到github 添加ssh key 的key 输入框中，title则随意输入，然后点击Add 即可；</p>
-
-<blockquote><h2>相关文章</h2>
-
-<h3><a href="http://www.devashen.xyz/blog/2016/01/12/githubused/">GitHub 的简明教程之配置ssh key</a></h3></blockquote>
-</div>
+如果存在，则执行第 3 步， 否则执行第 2 步
+  </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/11/gitsshkey/">阅读全文 →</a>
+    </footer>
   
 
 
