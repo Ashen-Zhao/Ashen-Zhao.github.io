@@ -4,7 +4,7 @@
   <title><![CDATA[Category: github | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-12T11:03:43+08:00</updated>
+  <updated>2016-01-12T11:41:04+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -14,7 +14,46 @@
 
   
   <entry>
-    <title type="html"><![CDATA[使用 GitHub 的简明教程]]></title>
+    <title type="html"><![CDATA[GitHub 的简明教程之使用]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/01/12/githubused/"/>
+    <updated>2016-01-12T10:22:46+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/01/12/githubused</id>
+    <content type="html"><![CDATA[<blockquote><p>相关文章<br/>
+<a href="http://www.devashen.xyz/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a></p></blockquote>
+
+<h2>本地创建Git仓库</h2>
+
+<h4>1、git init 初始化仓库</h4>
+
+<p>打开terminal 命令窗口，利用cd 命令，进入你需要初始化的目录，执行git init 命令；<br/>
+如出现以下类型输入，则成功初始化<br/>
+<code>Initialized empty Git repository in /Users/shou65/Desktop/myfirstgit/.git/</code></p>
+
+<h4>2、git add . 添加到暂存区（保存项目索引，并生产快照）</h4>
+
+<p>这一步一般什么的都不会输出，但是却已经添加好了，不用多想，继续下一步</p>
+
+<h4>3、git commit 提交仓库内容（提交项目索引）</h4>
+
+<p><code>git commit -m 'fitst commit'</code></p>
+
+<p>-m 之后的内容是对本次commit的描述</p>
+
+<h5>4、git log (可忽略)</h5>
+
+<p>查看提交的历史记录</p>
+
+<h2>本地Git仓库提交到Github</h2>
+
+<h4>1、首页github上需要创建个仓库,按下图一步一步走</h4>
+
+<p><img src="/images/newGit.png" alt="new" /><br/>
+<img src="/images/gitfillcontent.png" alt="addgithub" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GitHub 的简明教程之配置ssh key]]></title>
     <link href="http://ashen-zhao.github.io/blog/2016/01/11/gitsshkey/"/>
     <updated>2016-01-11T17:22:46+08:00</updated>
     <id>http://ashen-zhao.github.io/blog/2016/01/11/gitsshkey</id>
@@ -44,8 +83,6 @@ github 开源代码库以及版本控制系统</p>
 <p><img src="/images/goaddsshkey.png" alt="附图2" />  <img src="/images/addsshkey.png" alt="附图2" /><br/>
 这要添加的是<code>id_rsa.pub</code>里面的公钥;<br/>
 进入ssh. 目录下，输入 cat id_rsa.pub 即可在窗口中看到公钥，将公钥从 ssh-key 一直复制到邮箱地址（包含邮箱），然后粘贴到github 添加ssh key 的key 输入框中，title则随意输入，然后点击Add 即可；</p>
-
-<h1>使用GitHub</h1>
 ]]></content>
   </entry>
   

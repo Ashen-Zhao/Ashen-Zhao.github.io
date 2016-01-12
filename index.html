@@ -87,7 +87,69 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/01/11/gitsshkey/">使用 GitHub 的简明教程</a></h1>
+      <h1 class="entry-title"><a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-12T10:22:46+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:22 am</span></time>
+        
+             
+      | <a href="/blog/2016/01/12/githubused/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>相关文章<br/>
+<a href="http://www.devashen.xyz/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a></p></blockquote>
+
+<h2>本地创建Git仓库</h2>
+
+<h4>1、git init 初始化仓库</h4>
+
+<p>打开terminal 命令窗口，利用cd 命令，进入你需要初始化的目录，执行git init 命令；<br/>
+如出现以下类型输入，则成功初始化<br/>
+<code>Initialized empty Git repository in /Users/shou65/Desktop/myfirstgit/.git/</code></p>
+
+<h4>2、git add . 添加到暂存区（保存项目索引，并生产快照）</h4>
+
+<p>这一步一般什么的都不会输出，但是却已经添加好了，不用多想，继续下一步</p>
+
+<h4>3、git commit 提交仓库内容（提交项目索引）</h4>
+
+<p><code>git commit -m 'fitst commit'</code></p>
+
+<p>-m 之后的内容是对本次commit的描述</p>
+
+<h5>4、git log (可忽略)</h5>
+
+<p>查看提交的历史记录</p>
+
+<h2>本地Git仓库提交到Github</h2>
+
+<h4>1、首页github上需要创建个仓库,按下图一步一步走</h4>
+
+<p><img src="/images/newGit.png" alt="new" /><br/>
+<img src="/images/gitfillcontent.png" alt="addgithub" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a></h1>
     
     
       <p class="meta">
@@ -132,8 +194,6 @@ github 开源代码库以及版本控制系统</p>
 <p><img src="/images/goaddsshkey.png" alt="附图2" />  <img src="/images/addsshkey.png" alt="附图2" /><br/>
 这要添加的是<code>id_rsa.pub</code>里面的公钥;<br/>
 进入ssh. 目录下，输入 cat id_rsa.pub 即可在窗口中看到公钥，将公钥从 ssh-key 一直复制到邮箱地址（包含邮箱），然后粘贴到github 添加ssh key 的key 输入框中，title则随意输入，然后点击Add 即可；</p>
-
-<h1>使用GitHub</h1>
 </div>
   
   
@@ -537,48 +597,6 @@ github 开源代码库以及版本控制系统</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/12/28/weather/">百度天气预报API的使用（java版本）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-12-28T07:32:35+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:32 am</span></time>
-        
-             
-      | <a href="/blog/2015/12/28/weather/#comments">评论</a>
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>&emsp;开发微信公众平台时，想要实现查询天气功能，找啊找，就找到了百度地图api；
-使用方法进行简单总结：</p>
-
-<p>此文章内容，转自我之前写的一篇文章： <a href="http://blog.csdn.net/ashenyy/article/details/25072857">http://blog.csdn.net/ashenyy/article/details/25072857</a></p>
-
-<p>要使用百度天气预报api，首先要有密钥ak,申请地址<a href="http://developer.baidu.com/map/lbs-cloud.htm">http://developer.baidu.com/map/lbs-cloud.htm</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/12/28/weather/">阅读全文 →</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -606,7 +624,11 @@ github 开源代码库以及版本控制系统</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2016/01/11/gitsshkey/">使用 GitHub 的简明教程</a>
+        <a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a>
       </li>
     
       <li class="post">
@@ -645,16 +667,12 @@ github 开源代码库以及版本控制系统</p>
         <a href="/blog/2015/12/28/weather/">百度天气预报API的使用（java版本）</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/12/28/startblog/">开始我的Octopress博客</a>
-      </li>
-    
   </ul>
 </section>
 <section>
  <h1>分类</h1>
  <ul id="categories">
-  <li class='category'><a href='/blog/categories/github/'>github (1)</a></li>
+  <li class='category'><a href='/blog/categories/github/'>github (2)</a></li>
 <li class='category'><a href='/blog/categories/ios/'>ios (7)</a></li>
 <li class='category'><a href='/blog/categories/java/'>java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>markdown (1)</a></li>
