@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="baidu-site-verification" content="yVeF1M4b1k" />
   <meta name="baidu-tc-verification" content="cc4c5dafa4482ef6fb01ff5e6892c2bf" />
-  <title>GitHub 的简明教程之使用 - 啊神的技术博客</title>
+  <title>GitHub 的简明教程之入门使用 - 啊神的技术博客</title>
   <meta name="author" content="Ashen">
   
   <meta name="description" content="啊神的技术博客">
@@ -84,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">GitHub 的简明教程之使用</h1>
+      <h1 class="entry-title">GitHub 的简明教程之入门使用</h1>
     
     
       <p class="meta">
@@ -103,8 +103,9 @@
   </header>
 
 
-<div class="entry-content"><blockquote><p>相关文章<br/>
-<a href="http://www.devashen.xyz/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a></p></blockquote>
+<div class="entry-content"><blockquote><h2>相关文章</h2>
+
+<h3><a href="http://www.devashen.xyz/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a></h3></blockquote>
 
 <h2>本地创建Git仓库</h2>
 
@@ -128,12 +129,42 @@
 
 <p>查看提交的历史记录</p>
 
-<h2>本地Git仓库提交到Github</h2>
+<h2>本地Git仓库推送到Github</h2>
 
 <h4>1、首页github上需要创建个仓库,按下图一步一步走</h4>
 
-<p><img src="/images/newGit.png" alt="new" /><br/>
+<hr />
+
+<p>进入github添加仓库界面
+<img src="/images/newGit.png" alt="new" /></p>
+
+<hr />
+
+<p>填写仓库相关内容
 <img src="/images/gitfillcontent.png" alt="addgithub" /></p>
+
+<hr />
+
+<p>仓库创建成功界面，记住图片中的地址
+<img src="/images/githubURL.png" alt="url" /></p>
+
+<h4>2、添加远程仓库，这时候图片中的地址，就有用了</h4>
+
+<p>执行命令：<code>git remote add origin git@github.com:Ashen-Zhao/firstgithub.git</code></p>
+
+<p>git remote add 远程库的名字 远程库的URL</p>
+
+<h4>3、推送到远程分支，git默认会创建一个master主分支</h4>
+
+<p><code>git push origin master</code></p>
+
+<p>到这里，就完成了本地git仓库提交到github了，有没有小激动，速去github刷新页面，看看你的成果吧</p>
+
+<h2>将github仓库，克隆到本地</h2>
+
+<h4>使用git clone 仓库地址 即可</h4>
+
+<p><code>git clone git@github.com:Ashen-Zhao/firstgithub.git</code></p>
 </div>
 
 
@@ -197,7 +228,7 @@
   <section>
     <h1>评论</h1>
     <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
-<div class="ds-thread" data-title="GitHub 的简明教程之使用"></div>
+<div class="ds-thread" data-title="GitHub 的简明教程之入门使用"></div>
 <script type="text/javascript">
   var duoshuoQuery = {short_name:"zhaoashen"};
   (function() {
@@ -233,7 +264,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之使用</a>
+        <a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之入门使用</a>
       </li>
     
       <li class="post">
