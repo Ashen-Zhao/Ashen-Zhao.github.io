@@ -6,16 +6,17 @@ comments: true
 keywords: github使用, ssh key, git
 categories: Github
 ---
->##相关文章  
-###[GitHub 的简明教程之配置ssh key](http://www.devashen.xyz/blog/2016/01/11/gitsshkey/)   
+>###相关文章  
+####[GitHub 的简明教程之配置ssh key](http://www.devashen.xyz/blog/2016/01/11/gitsshkey/)   
 
-##本地创建Git仓库
+###本地创建Git仓库
 ####1、git init 初始化仓库
 打开terminal 命令窗口，利用cd 命令，进入你需要初始化的目录，执行git init 命令；  
 如出现以下类型输入，则成功初始化  
 `Initialized empty Git repository in /Users/shou65/Desktop/myfirstgit/.git/`  
 ####2、git add . 添加到暂存区（保存项目索引，并生产快照）
 这一步一般什么的都不会输出，但是却已经添加好了，不用多想，继续下一步
+<!--more-->
 ####3、git commit 提交仓库内容（提交项目索引）
 `git commit -m 'fitst commit'`  
 
@@ -23,7 +24,7 @@ categories: Github
 #####4、git log (可忽略) 
 查看提交的历史记录  
 
-##本地Git仓库推送到Github
+###本地Git仓库推送到Github
 ####1、首页github上需要创建个仓库,按下图一步一步走
 ***
 进入github添加仓库界面
@@ -43,6 +44,6 @@ git remote add 远程库的名字 远程库的URL
 
 到这里，就完成了本地git仓库提交到github了，有没有小激动，速去github刷新页面，看看你的成果吧
 
-##将github仓库，克隆到本地
+###将github仓库，克隆到本地
 ####使用git clone 仓库地址 即可
 `git clone git@github.com:Ashen-Zhao/firstgithub.git`
