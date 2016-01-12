@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-12T10:29:35+08:00</updated>
+  <updated>2016-01-12T11:01:02+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用 GitHub 的简明教程]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/01/11/gitsshkey/"/>
+    <updated>2016-01-11T17:22:46+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/01/11/gitsshkey</id>
+    <content type="html"><![CDATA[<h1>Git &amp; GitHub极简介</h1>
+
+<p>git 是分布式的代码管理工具，远程的代码管理是基于ssh的，所以要使用远程的git则需要ssh的配置<br/>
+github 开源代码库以及版本控制系统</p>
+
+<h1>GitHub的配置</h1>
+
+<h2>1.检查是否已经存在ssh 密钥</h2>
+
+<p>输入 ls -al ~/.ssh 命令  查看是否存在<code>id_rsa.pub</code> 和 <code>id_rsa</code> 文件</p>
+
+<p><img src="http://ashen-zhao.github.io/images/isHassshkey.png" alt="附图1" /><br/>
+如果存在，则执行第 3 步， 否则执行第 2 步</p>
+
+<h2>2.生成新的ssh 密钥</h2>
+
+<p>输入 ssh-keygen -t rsa -C “emailname@gmail.com”  回车，会让你输入密码，直接输入三个空格，不要密码即可  <br/>
+最后得到了两个文件：id_rsa和id_rsa.pub</p>
+
+<h2>3.将ssh key添加到GitHub中</h2>
+
+<p>打开<a href="https://github.com">github</a> 添加 SSH Key 页面</p>
+
+<p><img src="http://ashen-zhao.github.io/images/goaddsshkey.png" alt="附图2" />  <img src="http://ashen-zhao.github.io/images/addsshkey.png" alt="附图2" /><br/>
+这要添加的是<code>id_rsa.pub</code>里面的公钥;<br/>
+进入ssh. 目录下，输入 cat id_rsa.pub 即可在窗口中看到公钥，将公钥从 ssh-key 一直复制到邮箱地址（包含邮箱），然后粘贴到github 添加ssh key 的key 输入框中，title则随意输入，然后点击Add 即可；</p>
+
+<h1>使用GitHub</h1>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[UIWebView 与 原生系统的简单跳转交互]]></title>
@@ -668,7 +704,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#58;&#122;&#104;&#x61;&#111;&#x61;&#115;&#x68;&#101;&#110;&#64;&#103;&#109;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#122;&#x68;&#x61;&#111;&#x61;&#115;&#104;&#101;&#110;&#64;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#x63;&#111;&#109;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#122;&#x68;&#x61;&#111;&#x61;&#115;&#x68;&#x65;&#110;&#x40;&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#99;&#111;&#x6d;">&#122;&#104;&#x61;&#111;&#x61;&#x73;&#x68;&#x65;&#x6e;&#64;&#x67;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#109;</a>；</p>
 ]]></content>
   </entry>
   

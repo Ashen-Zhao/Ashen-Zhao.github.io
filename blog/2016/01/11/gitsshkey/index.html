@@ -7,12 +7,12 @@
   <meta charset="utf-8">
   <meta name="baidu-site-verification" content="yVeF1M4b1k" />
   <meta name="baidu-tc-verification" content="cc4c5dafa4482ef6fb01ff5e6892c2bf" />
-  <title>多样式UILabel - 啊神的技术博客</title>
+  <title>使用 GitHub 的简明教程 - 啊神的技术博客</title>
   <meta name="author" content="Ashen">
   
-  <meta name="description" content="iOS 如何实现多样式Label">
+  <meta name="description" content="啊神的技术博客">
   
-  <meta name="keywords" content="iOS, 多样式Label">
+  <meta name="keywords" content="github使用, ssh key, git">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2016/01/04/colorfullabel/">
+  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2016/01/11/gitsshkey/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="啊神的技术博客" type="application/atom+xml">
@@ -84,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">多样式UILabel</h1>
+      <h1 class="entry-title">使用 GitHub 的简明教程</h1>
     
     
       <p class="meta">
@@ -93,7 +93,7 @@
 
 
 
-<time class='entry-date' datetime='2016-01-04T16:22:19+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:22 pm</span></time>
+<time class='entry-date' datetime='2016-01-11T17:22:46+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:22 pm</span></time>
         
              
       | <a href="#comments">评论</a>
@@ -103,61 +103,34 @@
   </header>
 
 
-<div class="entry-content"><p> 有时候产品经理说，能把一句话显示多种颜色、多种字体吗？ 灵光一闪，弄多个UILabel来显示不就行了，我只能说可以，也只能说这法有点笨。于是我坚决不用这种方法，苦思冥想，终于有了眉目。先配张图来显摆显摆，其实很容易实现，我也就不啰嗦了，看招：
- <!--more-->
-<img src="http://upload-images.jianshu.io/upload_images/1168293-0ce90e359fcc8c76.png" alt="多样式UILabel" /></p>
+<div class="entry-content"><h1>Git &amp; GitHub极简介</h1>
 
-<h5>由于很简单，不喜请喷我。</h5>
+<p>git 是分布式的代码管理工具，远程的代码管理是基于ssh的，所以要使用远程的git则需要ssh的配置<br/>
+github 开源代码库以及版本控制系统</p>
 
-<p>ok, 上代码，一看也就是一个方法：</p>
+<h1>GitHub的配置</h1>
 
-<pre><code>
--(void)txtArr:(NSArray *)txtArr colorArr:(NSArray *)colorArr fontArr:(NSArray *)fontArr {
+<h2>1.检查是否已经存在ssh 密钥</h2>
 
-    NSInteger okCount = 0;
-    okCount = txtArr.count < colorArr.count ? txtArr.count : colorArr.count;
-    okCount = okCount < fontArr.count ? okCount : fontArr.count;
+<p>输入 ls -al ~/.ssh 命令  查看是否存在<code>id_rsa.pub</code> 和 <code>id_rsa</code> 文件</p>
 
-    NSMutableString *txt = [NSMutableString string];
-    for (NSString *str in txtArr) {
-        [txt appendString:str];
-    }
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:txt];
-    NSInteger startLoc = 0;
-    for (int i = 0; i < okCount; i++) {
-        [str addAttributes:@{NSForegroundColorAttributeName:colorArr[i], NSFontAttributeName:[UIFont systemFontOfSize:[fontArr[i] integerValue]]} range:NSMakeRange(startLoc, [txtArr[i] length])];
-        startLoc += [txtArr[i] length];
-    }
-    self.attributedText = str;
-}
-</code></pre>
+<p><img src="/images/isHassshkey.png" alt="附图1" /><br/>
+如果存在，则执行第 3 步， 否则执行第 2 步</p>
 
+<h2>2.生成新的ssh 密钥</h2>
 
-<h5>参数说明基本都是见明知意（大人，请允许我自恋吧）</h5>
+<p>输入 ssh-keygen -t rsa -C “emailname@gmail.com”  回车，会让你输入密码，直接输入三个空格，不要密码即可  <br/>
+最后得到了两个文件：id_rsa和id_rsa.pub</p>
 
-<ol>
-<li>txtArr: 传入的文本数组（对象是字符串）</li>
-<li>colorArr: 颜色数组  （对象是UIColor）</li>
-<li>fontArr: 字体数组  (对象是字符串如：@&ldquo;18&rdquo; 号字体)</li>
-</ol>
+<h2>3.将ssh key添加到GitHub中</h2>
 
+<p>打开<a href="https://github.com">github</a> 添加 SSH Key 页面</p>
 
-<h5>使用方法，写给新手哦，老手请过滤吧，不然你又该喷我了</h5>
+<p><img src="/images/goaddsshkey.png" alt="附图2" />  <img src="/images/addsshkey.png" alt="附图2" /><br/>
+这要添加的是<code>id_rsa.pub</code>里面的公钥;<br/>
+进入ssh. 目录下，输入 cat id_rsa.pub 即可在窗口中看到公钥，将公钥从 ssh-key 一直复制到邮箱地址（包含邮箱），然后粘贴到github 添加ssh key 的key 输入框中，title则随意输入，然后点击Add 即可；</p>
 
-<p>我还是以代码使用为主</p>
-
-<pre><code>
-NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样式label么，哈哈", nil];
-
-    NSArray *b = [NSArray arrayWithObjects:[UIColor redColor], [UIColor blackColor], [UIColor blueColor], nil];
-    NSArray *c = [NSArray arrayWithObjects:@"19", @"13", @"17", nil];
-    [self.multiLabel txtArr:a colorArr:b fontArr:c];
-</code></pre>
-
-
-<p>哎，对了，我将此方法写成了UILabel的分类了，所以这么使用没什么不妥；至于分类，不懂得，去google吧，没翻墙的还是百度吧；</p>
-
-<p><a href="https://github.com/Ashen-Zhao/multiLabel">Demo下载地址</a></p>
+<h1>使用GitHub</h1>
 </div>
 
 
@@ -173,14 +146,8 @@ NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样�
 
 
 
-<time class='entry-date' datetime='2016-01-04T16:22:19+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:22 pm</span></time>
+<time class='entry-date' datetime='2016-01-11T17:22:46+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:22 pm</span></time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/ios/'>ios</a>
-  
-</span>
 
 
     </p>
@@ -210,10 +177,8 @@ NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/01/04/any-push-pop/" title="Previous Post: iOS 如何随意的push来pop去">&laquo; iOS 如何随意的push来pop去</a>
+        <a class="basic-alignment left" href="/blog/2016/01/11/webview/" title="Previous Post: UIWebView 与 原生系统的简单跳转交互">&laquo; UIWebView 与 原生系统的简单跳转交互</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/01/05/delcocopods/" title="Next Post: 从工程中删除Cocoapods">从工程中删除Cocoapods &raquo;</a>
       
     </p>
   </footer>
@@ -223,7 +188,7 @@ NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样�
   <section>
     <h1>评论</h1>
     <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
-<div class="ds-thread" data-title="多样式UILabel"></div>
+<div class="ds-thread" data-title="使用 GitHub 的简明教程"></div>
 <script type="text/javascript">
   var duoshuoQuery = {short_name:"zhaoashen"};
   (function() {
