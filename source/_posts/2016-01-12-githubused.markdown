@@ -12,10 +12,10 @@ categories: Github
 ###本地创建Git仓库
 ####1、git init 初始化仓库
 打开terminal 命令窗口，利用cd 命令，进入你需要初始化的目录，执行git init 命令；  
-如出现以下类型输入，则成功初始化  
+如出现以下类似的输出，则成功初始化  
 `Initialized empty Git repository in /Users/shou65/Desktop/myfirstgit/.git/`  
 ####2、git add . 添加到暂存区（保存项目索引，并生产快照）
-这一步一般什么的都不会输出，但是却已经添加好了，不用多想，继续下一步
+这一步一般什么的都不会输出，但是却已经添加好了，不用多想，继续下一步 （ps: git add 后面的点，不能忘）
 <!--more-->
 ####3、git commit 提交仓库内容（提交项目索引）
 `git commit -m 'fitst commit'`  
