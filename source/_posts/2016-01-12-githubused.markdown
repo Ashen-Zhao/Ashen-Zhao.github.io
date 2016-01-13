@@ -44,6 +44,8 @@ git remote add 远程库的名字 远程库的URL
 
 到这里，就完成了本地git仓库提交到github了，有没有小激动，速去github刷新页面，看看你的成果吧
 
-###将github仓库，克隆到本地
-####使用git clone 仓库地址 即可
-`git clone git@github.com:Ashen-Zhao/firstgithub.git`
+###将github仓库，弄到本地
+####1、使用git clone 仓库地址（克隆一个新的仓库）
+`git clone git@github.com:Ashen-Zhao/firstgithub.git`  
+####2、将本地仓库更新至远程仓库  
+`git pull origin master`
