@@ -1,8 +1,10 @@
 ---
 layout: post
-title: "多语言版本的开发（一）"
+title: "iOS 多语言版本的开发（一）"
 date: 2016-01-14 11:13:56 +0800
 comments: true
+keywords: iOS本地化, iOS多语言开发, 多语言开发
+description: 如何实现,iOS多语言开发
 categories: iOS
 ---
 ##引言
