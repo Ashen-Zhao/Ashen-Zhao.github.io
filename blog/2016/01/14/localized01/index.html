@@ -6,12 +6,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="baidu-site-verification" content="3GV4a0S11E" />
-  <title>多样式UILabel - 啊神的技术博客</title>
+  <title>多语言版本的开发（一） - 啊神的技术博客</title>
   <meta name="author" content="Ashen">
   
-  <meta name="description" content="iOS 如何实现多样式Label">
+  <meta name="description" content="啊神的技术博客">
   
-  <meta name="keywords" content="iOS, 多样式Label">
+  <meta name="keywords" content="啊神, iOS, 博客, 移动开发, ashen, iOS开发">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2016/01/04/colorfullabel/">
+  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2016/01/14/localized01/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="啊神的技术博客" type="application/atom+xml">
@@ -100,7 +100,7 @@
   
   <header>
     
-      <h1 class="entry-title">多样式UILabel</h1>
+      <h1 class="entry-title">多语言版本的开发（一）</h1>
     
     
       <p class="meta">
@@ -109,7 +109,7 @@
 
 
 
-<time class='entry-date' datetime='2016-01-04T16:22:19+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:22 pm</span></time>
+<time class='entry-date' datetime='2016-01-14T11:13:56+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:13 am</span></time>
         
              
       | <a href="#comments">评论</a>
@@ -119,61 +119,86 @@
   </header>
 
 
-<div class="entry-content"><p> 有时候产品经理说，能把一句话显示多种颜色、多种字体吗？ 灵光一闪，弄多个UILabel来显示不就行了，我只能说可以，也只能说这法有点笨。于是我坚决不用这种方法，苦思冥想，终于有了眉目。先配张图来显摆显摆，其实很容易实现，我也就不啰嗦了，看招：
- <!--more-->
-<img src="http://upload-images.jianshu.io/upload_images/1168293-0ce90e359fcc8c76.png" alt="多样式UILabel" /></p>
+<div class="entry-content"><h2>引言</h2>
 
-<h5>由于很简单，不喜请喷我。</h5>
+<p>&emsp;多语言 &amp; 本地化，随你怎么叫，道理差不多；一个App 要想走出国门，只支持一种语言是不能够的，也是不可能的，多元化世界已经融入我们的生活，对于一些应用，开发多语言版本，已经是不可避免的，特别是旅游等方面的应用；国内也有很多App 已经接入多语言，例如：支付宝、微信、收留我（嘻嘻，做下广告）等；</p>
 
-<p>ok, 上代码，一看也就是一个方法：</p>
+<h2>开发多语言，一般有两种情况</h2>
+
+<p>1、App还没有开始写，这个时候创建一个多语言版本，很是容易，然后再写代码的时候稍微留意下哪里需要保持多语言就行了；<br/>
+2、App已经上线了，而且之前没有任何的为开发多语言准备过，这时候Boss让开发多语言版本，这下你就苦逼了，想想项目中长长短短的中文字符串，没有上千也得上几百了吧，在想想一个一个替换，哎呀妈呀，那么多，想想都想死了，在想想还容易出错，哎呀妈呀，让我死了算了；</p>
+
+<p>别急，这次我就针对两种情况都讲解下；</p>
+
+<h3>项目刚开始启动</h3>
+
+<h4>1、新建一个项目（我就不多说了）</h4>
+
+<h4>2、command + N 添加多语言文件，如下图</h4>
+
+<p><img src="/images/localized01.png" alt="添加多语言文件" /></p>
+
+<h4>3、添加多语言，如图</h4>
+
+<p><img src="/images/localized02.png" alt="添加多语言" /></p>
+
+<p>选择English  点击Localize<br/>
+<img src="/images/localized03.png" alt="添加多语言" /></p>
+
+<p><strong>到这里已经算是添加好了多语言文件，接下来就是添加多语言</strong></p>
+
+<p>之前的XCode（具体到哪一个版本之前，不清楚了，我使用的是XCode7），是可以在如下图中直接点击➕号 ，添加多语言的</p>
+
+<p><img src="/images/localized04.png" alt="添加多语言" /></p>
+
+<p>现在需要进入项目的Project中的Localizations 中进行添加，如图</p>
+
+<p><img src="/images/localized05.png" alt="添加多语言" /></p>
+
+<p>我只添加了中文繁体，简体，以及英文，Demo使用的StoryBoard, 而添加多语言时，我没有选择为StoryBoard添加多语言版本的，毕竟是Demo🐴；但是不影响使用。</p>
+
+<p><img src="/images/localized06.png" alt="添加多语言" /></p>
+
+<p>到这里多语言文件中会出现如上图中的三个.strings 后缀的文件，这就是多语言对应的文件了，多语言添加的方式类似，字典 key=value 一一对应的关系，key 在三个.strings 中必须一致，而value 则分别对应不同的语言字体，即可；</p>
+
+<h4>4、多语言文件的使用</h4>
+
+<p>现分别在不同的语言文件中添加如下测试文本：</p>
+
+<p><code>"showTxt"="this is test text";</code><br/>
+<code>"showTxt"="这是一个测试的文本";</code><br/>
+<code>"showTxt"="這是一個測試的文本";</code></p>
+
+<p>说到使用，就要了解下<code>NSLocalizedString</code>  是什么</p>
 
 <pre><code>
--(void)txtArr:(NSArray *)txtArr colorArr:(NSArray *)colorArr fontArr:(NSArray *)fontArr {
-
-    NSInteger okCount = 0;
-    okCount = txtArr.count < colorArr.count ? txtArr.count : colorArr.count;
-    okCount = okCount < fontArr.count ? okCount : fontArr.count;
-
-    NSMutableString *txt = [NSMutableString string];
-    for (NSString *str in txtArr) {
-        [txt appendString:str];
-    }
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:txt];
-    NSInteger startLoc = 0;
-    for (int i = 0; i < okCount; i++) {
-        [str addAttributes:@{NSForegroundColorAttributeName:colorArr[i], NSFontAttributeName:[UIFont systemFontOfSize:[fontArr[i] integerValue]]} range:NSMakeRange(startLoc, [txtArr[i] length])];
-        startLoc += [txtArr[i] length];
-    }
-    self.attributedText = str;
-}
-</code></pre>
+ #define NSLocalizedString(key, comment) \
+        [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]
+ #define NSLocalizedStringFromTable(key, tbl, comment) \
+        [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:(tbl)]
+ #define NSLocalizedStringFromTableInBundle(key, tbl, bundle, comment) \
+        [bundle localizedStringForKey:(key) value:@"" table:(tbl)]
+ #define NSLocalizedStringWithDefaultValue(key, tbl, bundle, val, comment) \
+        [bundle localizedStringForKey:(key) value:(val) table:(tbl)] </code></pre>
 
 
-<h5>参数说明基本都是见明知意（大人，请允许我自恋吧）</h5>
+<p>其实就是宏，而宏定义的又是在资源文件中寻找对应的资源文件；<strong>在这里有个坑点</strong>，当你使用第一种实现多语言本地化，意味着你的多语言文件名字<strong>必须</strong>是<code>Localizable</code>,否则你的多语言实现，到最后显示的却只能是key； <br/>
+第一种适合于，让应用跟随系统的语言版本进行切换，而用户却不能手动进行切换； 我们要实现的是既可以跟随系统，又可以用户自己切换，就不能使用这一个了，那就要使用第二种<code>NSLocalizedStringFromTable(key, tbl, comment)</code>&emsp;tbl这个参数，就是我们自己命名的多语言文件名称；</p>
 
-<ol>
-<li>txtArr: 传入的文本数组（对象是字符串）</li>
-<li>colorArr: 颜色数组  （对象是UIColor）</li>
-<li>fontArr: 字体数组  (对象是字符串如：@&ldquo;18&rdquo; 号字体)</li>
-</ol>
+<p>因此我们暂且这样使用（这样直接使用，会跟随系统语言）：</p>
 
+<p><code>NSLocalizedStringFromTable(@"showTxt", @"ASLocalized", nil);</code></p>
 
-<h5>使用方法，写给新手哦，老手请过滤吧，不然你又该喷我了</h5>
+<p>参数说明： 第一个参数，是多语言中的key, 第二个参数，是多语言文件的名字，第三个是对key的注释说明，一般为nil就可以了；</p>
 
-<p>我还是以代码使用为主</p>
+<p>对于这样使用<code>NSLocalizedString("showTxt", nil)</code> ，切记多语言文件名<strong>必须</strong>是<code>Localizable</code>, 这里我们就不可以使用这种了；</p>
 
-<pre><code>
-NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样式label么，哈哈", nil];
+<h4>到这里，就可以实现简单的跟随系统语言的多语言版本了;</h4>
 
-    NSArray *b = [NSArray arrayWithObjects:[UIColor redColor], [UIColor blackColor], [UIColor blueColor], nil];
-    NSArray *c = [NSArray arrayWithObjects:@"19", @"13", @"17", nil];
-    [self.multiLabel txtArr:a colorArr:b fontArr:c];
-</code></pre>
+<p>效果图如下：</p>
 
-
-<p>哎，对了，我将此方法写成了UILabel的分类了，所以这么使用没什么不妥；至于分类，不懂得，去google吧，没翻墙的还是百度吧；</p>
-
-<p><a href="https://github.com/Ashen-Zhao/multiLabel">Demo下载地址</a></p>
+<p><img src="/images/localized07.png" alt="添加多语言" /><br/>
+<img src="/images/localized08.png" alt="添加多语言" /></p>
 </div>
 
 
@@ -189,7 +214,7 @@ NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样�
 
 
 
-<time class='entry-date' datetime='2016-01-04T16:22:19+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:22 pm</span></time>
+<time class='entry-date' datetime='2016-01-14T11:13:56+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:13 am</span></time>
       
 
 <span class="categories">
@@ -226,10 +251,8 @@ NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/01/04/any-push-pop/" title="Previous Post: iOS 如何随意的push来pop去">&laquo; iOS 如何随意的push来pop去</a>
+        <a class="basic-alignment left" href="/blog/2016/01/12/githubused/" title="Previous Post: GitHub 的简明教程之入门使用">&laquo; GitHub 的简明教程之入门使用</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/01/05/delcocopods/" title="Next Post: 从工程中删除Cocoapods">从工程中删除Cocoapods &raquo;</a>
       
     </p>
   </footer>
@@ -239,7 +262,7 @@ NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样�
   <section>
     <h1>评论</h1>
     <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
-<div class="ds-thread" data-title="多样式UILabel"></div>
+<div class="ds-thread" data-title="多语言版本的开发（一）"></div>
 <script type="text/javascript">
   var duoshuoQuery = {short_name:"zhaoashen"};
   (function() {

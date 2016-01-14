@@ -67,7 +67,7 @@
   <header role="banner"><hgroup>
   <h1><a href="/">啊神的技术博客</a></h1>
   
-    <h2>不是大牛，也要写技术博客</h2>
+    <h2>小博客，我的小智慧</h2>
   
 </hgroup>
 
@@ -97,6 +97,117 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/14/localized01/">多语言版本的开发（一）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-14T11:13:56+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:13 am</span></time>
+        
+             
+      | <a href="/blog/2016/01/14/localized01/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>引言</h2>
+
+<p>&emsp;多语言 &amp; 本地化，随你怎么叫，道理差不多；一个App 要想走出国门，只支持一种语言是不能够的，也是不可能的，多元化世界已经融入我们的生活，对于一些应用，开发多语言版本，已经是不可避免的，特别是旅游等方面的应用；国内也有很多App 已经接入多语言，例如：支付宝、微信、收留我（嘻嘻，做下广告）等；</p>
+
+<h2>开发多语言，一般有两种情况</h2>
+
+<p>1、App还没有开始写，这个时候创建一个多语言版本，很是容易，然后再写代码的时候稍微留意下哪里需要保持多语言就行了；<br/>
+2、App已经上线了，而且之前没有任何的为开发多语言准备过，这时候Boss让开发多语言版本，这下你就苦逼了，想想项目中长长短短的中文字符串，没有上千也得上几百了吧，在想想一个一个替换，哎呀妈呀，那么多，想想都想死了，在想想还容易出错，哎呀妈呀，让我死了算了；</p>
+
+<p>别急，这次我就针对两种情况都讲解下；</p>
+
+<h3>项目刚开始启动</h3>
+
+<h4>1、新建一个项目（我就不多说了）</h4>
+
+<h4>2、command + N 添加多语言文件，如下图</h4>
+
+<p><img src="/images/localized01.png" alt="添加多语言文件" /></p>
+
+<h4>3、添加多语言，如图</h4>
+
+<p><img src="/images/localized02.png" alt="添加多语言" /></p>
+
+<p>选择English  点击Localize<br/>
+<img src="/images/localized03.png" alt="添加多语言" /></p>
+
+<p><strong>到这里已经算是添加好了多语言文件，接下来就是添加多语言</strong></p>
+
+<p>之前的XCode（具体到哪一个版本之前，不清楚了，我使用的是XCode7），是可以在如下图中直接点击➕号 ，添加多语言的</p>
+
+<p><img src="/images/localized04.png" alt="添加多语言" /></p>
+
+<p>现在需要进入项目的Project中的Localizations 中进行添加，如图</p>
+
+<p><img src="/images/localized05.png" alt="添加多语言" /></p>
+
+<p>我只添加了中文繁体，简体，以及英文，Demo使用的StoryBoard, 而添加多语言时，我没有选择为StoryBoard添加多语言版本的，毕竟是Demo🐴；但是不影响使用。</p>
+
+<p><img src="/images/localized06.png" alt="添加多语言" /></p>
+
+<p>到这里多语言文件中会出现如上图中的三个.strings 后缀的文件，这就是多语言对应的文件了，多语言添加的方式类似，字典 key=value 一一对应的关系，key 在三个.strings 中必须一致，而value 则分别对应不同的语言字体，即可；</p>
+
+<h4>4、多语言文件的使用</h4>
+
+<p>现分别在不同的语言文件中添加如下测试文本：</p>
+
+<p><code>"showTxt"="this is test text";</code><br/>
+<code>"showTxt"="这是一个测试的文本";</code><br/>
+<code>"showTxt"="這是一個測試的文本";</code></p>
+
+<p>说到使用，就要了解下<code>NSLocalizedString</code>  是什么</p>
+
+<pre><code>
+ #define NSLocalizedString(key, comment) \
+        [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]
+ #define NSLocalizedStringFromTable(key, tbl, comment) \
+        [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:(tbl)]
+ #define NSLocalizedStringFromTableInBundle(key, tbl, bundle, comment) \
+        [bundle localizedStringForKey:(key) value:@"" table:(tbl)]
+ #define NSLocalizedStringWithDefaultValue(key, tbl, bundle, val, comment) \
+        [bundle localizedStringForKey:(key) value:(val) table:(tbl)] </code></pre>
+
+
+<p>其实就是宏，而宏定义的又是在资源文件中寻找对应的资源文件；<strong>在这里有个坑点</strong>，当你使用第一种实现多语言本地化，意味着你的多语言文件名字<strong>必须</strong>是<code>Localizable</code>,否则你的多语言实现，到最后显示的却只能是key； <br/>
+第一种适合于，让应用跟随系统的语言版本进行切换，而用户却不能手动进行切换； 我们要实现的是既可以跟随系统，又可以用户自己切换，就不能使用这一个了，那就要使用第二种<code>NSLocalizedStringFromTable(key, tbl, comment)</code>&emsp;tbl这个参数，就是我们自己命名的多语言文件名称；</p>
+
+<p>因此我们暂且这样使用（这样直接使用，会跟随系统语言）：</p>
+
+<p><code>NSLocalizedStringFromTable(@"showTxt", @"ASLocalized", nil);</code></p>
+
+<p>参数说明： 第一个参数，是多语言中的key, 第二个参数，是多语言文件的名字，第三个是对key的注释说明，一般为nil就可以了；</p>
+
+<p>对于这样使用<code>NSLocalizedString("showTxt", nil)</code> ，切记多语言文件名<strong>必须</strong>是<code>Localizable</code>, 这里我们就不可以使用这种了；</p>
+
+<h4>到这里，就可以实现简单的跟随系统语言的多语言版本了;</h4>
+
+<p>效果图如下：</p>
+
+<p><img src="/images/localized07.png" alt="添加多语言" /><br/>
+<img src="/images/localized08.png" alt="添加多语言" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -546,53 +657,6 @@ github 开源代码库以及版本控制系统</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/12/28/uploadimg/">iOS 上传图片方法总结</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-12-28T17:51:57+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:51 pm</span></time>
-        
-             
-      | <a href="/blog/2015/12/28/uploadimg/#comments">评论</a>
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>开题：</h3>
-
-<p>iOS 开发中难免会遇到上传图片，一般情况下有两种方式：</p>
-
-<p>1.自己动手写（利用NSURLMutableRequest等系统类）</p>
-
-<p>2.使用第三方（如AFNetworking)</p>
-
-<p>据我所经历的，如果你不是大神，还是用第三方吧，自己写的话会很麻烦，需要拼接一些请求头，请求体等，就算弄好了也是废了很多时间了；当然，费时间并不是我不推荐自己动手写，因为在我现在接手的项目中，就是使用的自己写的，上传中会出现丢图等各种问题，特别在网络不好的情况下；</p>
-
-<p>面对这样的上传图片，我的Boss 交给我了一个课题，就是改善上传图片的网络底层库；看在我不是大神的份上，我就选择了AFNetwoking；</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/12/28/uploadimg/">阅读全文 →</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -618,6 +682,10 @@ github 开源代码库以及版本控制系统</p>
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/14/localized01/">多语言版本的开发（一）</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之入门使用</a>
@@ -659,17 +727,13 @@ github 开源代码库以及版本控制系统</p>
         <a href="/blog/2015/12/28/uploadimg/">iOS 上传图片方法总结</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/12/28/weather/">百度天气预报API的使用（java版本）</a>
-      </li>
-    
   </ul>
 </section>
 <section>
  <h1>分类</h1>
  <ul id="categories">
   <li class='category'><a href='/blog/categories/github/'>github (2)</a></li>
-<li class='category'><a href='/blog/categories/ios/'>ios (7)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>ios (8)</a></li>
 <li class='category'><a href='/blog/categories/java/'>java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>markdown (1)</a></li>
 <li class='category'><a href='/blog/categories/nothing/'>nothing (1)</a></li>

@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-13T16:55:08+08:00</updated>
+  <updated>2016-01-14T14:22:25+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,94 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[多语言版本的开发（一）]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/01/14/localized01/"/>
+    <updated>2016-01-14T11:13:56+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/01/14/localized01</id>
+    <content type="html"><![CDATA[<h2>引言</h2>
+
+<p>&emsp;多语言 &amp; 本地化，随你怎么叫，道理差不多；一个App 要想走出国门，只支持一种语言是不能够的，也是不可能的，多元化世界已经融入我们的生活，对于一些应用，开发多语言版本，已经是不可避免的，特别是旅游等方面的应用；国内也有很多App 已经接入多语言，例如：支付宝、微信、收留我（嘻嘻，做下广告）等；</p>
+
+<h2>开发多语言，一般有两种情况</h2>
+
+<p>1、App还没有开始写，这个时候创建一个多语言版本，很是容易，然后再写代码的时候稍微留意下哪里需要保持多语言就行了；<br/>
+2、App已经上线了，而且之前没有任何的为开发多语言准备过，这时候Boss让开发多语言版本，这下你就苦逼了，想想项目中长长短短的中文字符串，没有上千也得上几百了吧，在想想一个一个替换，哎呀妈呀，那么多，想想都想死了，在想想还容易出错，哎呀妈呀，让我死了算了；</p>
+
+<p>别急，这次我就针对两种情况都讲解下；</p>
+
+<h3>项目刚开始启动</h3>
+
+<h4>1、新建一个项目（我就不多说了）</h4>
+
+<h4>2、command + N 添加多语言文件，如下图</h4>
+
+<p><img src="http://ashen-zhao.github.io/images/localized01.png" alt="添加多语言文件" /></p>
+
+<h4>3、添加多语言，如图</h4>
+
+<p><img src="http://ashen-zhao.github.io/images/localized02.png" alt="添加多语言" /></p>
+
+<p>选择English  点击Localize<br/>
+<img src="http://ashen-zhao.github.io/images/localized03.png" alt="添加多语言" /></p>
+
+<p><strong>到这里已经算是添加好了多语言文件，接下来就是添加多语言</strong></p>
+
+<p>之前的XCode（具体到哪一个版本之前，不清楚了，我使用的是XCode7），是可以在如下图中直接点击➕号 ，添加多语言的</p>
+
+<p><img src="http://ashen-zhao.github.io/images/localized04.png" alt="添加多语言" /></p>
+
+<p>现在需要进入项目的Project中的Localizations 中进行添加，如图</p>
+
+<p><img src="http://ashen-zhao.github.io/images/localized05.png" alt="添加多语言" /></p>
+
+<p>我只添加了中文繁体，简体，以及英文，Demo使用的StoryBoard, 而添加多语言时，我没有选择为StoryBoard添加多语言版本的，毕竟是Demo🐴；但是不影响使用。</p>
+
+<p><img src="http://ashen-zhao.github.io/images/localized06.png" alt="添加多语言" /></p>
+
+<p>到这里多语言文件中会出现如上图中的三个.strings 后缀的文件，这就是多语言对应的文件了，多语言添加的方式类似，字典 key=value 一一对应的关系，key 在三个.strings 中必须一致，而value 则分别对应不同的语言字体，即可；</p>
+
+<h4>4、多语言文件的使用</h4>
+
+<p>现分别在不同的语言文件中添加如下测试文本：</p>
+
+<p><code>"showTxt"="this is test text";</code><br/>
+<code>"showTxt"="这是一个测试的文本";</code><br/>
+<code>"showTxt"="這是一個測試的文本";</code></p>
+
+<p>说到使用，就要了解下<code>NSLocalizedString</code>  是什么</p>
+
+<pre><code>
+ #define NSLocalizedString(key, comment) \
+        [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]
+ #define NSLocalizedStringFromTable(key, tbl, comment) \
+        [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:(tbl)]
+ #define NSLocalizedStringFromTableInBundle(key, tbl, bundle, comment) \
+        [bundle localizedStringForKey:(key) value:@"" table:(tbl)]
+ #define NSLocalizedStringWithDefaultValue(key, tbl, bundle, val, comment) \
+        [bundle localizedStringForKey:(key) value:(val) table:(tbl)] </code></pre>
+
+
+<p>其实就是宏，而宏定义的又是在资源文件中寻找对应的资源文件；<strong>在这里有个坑点</strong>，当你使用第一种实现多语言本地化，意味着你的多语言文件名字<strong>必须</strong>是<code>Localizable</code>,否则你的多语言实现，到最后显示的却只能是key； <br/>
+第一种适合于，让应用跟随系统的语言版本进行切换，而用户却不能手动进行切换； 我们要实现的是既可以跟随系统，又可以用户自己切换，就不能使用这一个了，那就要使用第二种<code>NSLocalizedStringFromTable(key, tbl, comment)</code>&emsp;tbl这个参数，就是我们自己命名的多语言文件名称；</p>
+
+<p>因此我们暂且这样使用（这样直接使用，会跟随系统语言）：</p>
+
+<p><code>NSLocalizedStringFromTable(@"showTxt", @"ASLocalized", nil);</code></p>
+
+<p>参数说明： 第一个参数，是多语言中的key, 第二个参数，是多语言文件的名字，第三个是对key的注释说明，一般为nil就可以了；</p>
+
+<p>对于这样使用<code>NSLocalizedString("showTxt", nil)</code> ，切记多语言文件名<strong>必须</strong>是<code>Localizable</code>, 这里我们就不可以使用这种了；</p>
+
+<h4>到这里，就可以实现简单的跟随系统语言的多语言版本了;</h4>
+
+<p>效果图如下：</p>
+
+<p><img src="http://ashen-zhao.github.io/images/localized07.png" alt="添加多语言" /><br/>
+<img src="http://ashen-zhao.github.io/images/localized08.png" alt="添加多语言" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[GitHub 的简明教程之入门使用]]></title>
@@ -784,7 +872,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#122;&#x68;&#x61;&#111;&#x61;&#115;&#x68;&#101;&#x6e;&#x40;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#122;&#x68;&#97;&#x6f;&#x61;&#x73;&#x68;&#x65;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#x2e;&#x63;&#111;&#109;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#x7a;&#x68;&#97;&#x6f;&#x61;&#115;&#x68;&#101;&#x6e;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;">&#122;&#x68;&#x61;&#x6f;&#97;&#x73;&#104;&#x65;&#x6e;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>；</p>
 ]]></content>
   </entry>
   
