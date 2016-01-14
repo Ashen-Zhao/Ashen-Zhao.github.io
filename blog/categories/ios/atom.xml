@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ios | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-14T14:40:26+08:00</updated>
+  <updated>2016-01-14T14:42:59+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -26,6 +26,9 @@
 
 <p>1、App还没有开始写，这个时候创建一个多语言版本，很是容易，然后再写代码的时候稍微留意下哪里需要保持多语言就行了；<br/>
 2、App已经上线了，而且之前没有任何的为开发多语言准备过，这时候Boss让开发多语言版本，这下你就苦逼了，想想项目中长长短短的中文字符串，没有上千也得上几百了吧，在想想一个一个替换，哎呀妈呀，那么多，想想都想死了，在想想还容易出错，哎呀妈呀，让我死了算了；</p>
+
+<!--more-->
+
 
 <p>别急，这次我就针对两种情况都讲解下；</p>
 
