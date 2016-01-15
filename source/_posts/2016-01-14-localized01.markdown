@@ -78,4 +78,7 @@ categories: iOS
 效果图如下：  
 
 ![添加多语言](/images/localized07.png)  
-![添加多语言](/images/localized08.png)
+![添加多语言](/images/localized08.png)  
+
+>####相关文章  
+####[iOS 多语言版本的开发（二）](/blog/2016/01/15/localized02/)
