@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="3GV4a0S11E" />
+  <title>iOS 多语言版本的开发（二） - 啊神的技术博客</title>
+  <meta name="author" content="Ashen">
+  
+  <meta name="description" content="如何实现,iOS多语言开发">
+  
+  <meta name="keywords" content="iOS本地化, iOS多语言开发, 多语言开发">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2016/01/15/localized02/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="啊神的技术博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+ function addBlankTargetForLinks () {
+   $('a[href^="http"]').each(function(){
+       $(this).attr('target', '_blank');
+   });
+ }
+ 
+ $(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+ });
+ </script>
+<script>
+
+(function(){
+
+    var bp = document.createElement('script');
+
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+    var s = document.getElementsByTagName("script")[0];
+
+    s.parentNode.insertBefore(bp, s);
+
+})();
+
+</script>
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">啊神的技术博客</a></h1>
+  
+    <h2>我的小博客，小智慧</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="ashen-zhao.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/"><b>首 页</b></a></li>
+  <li><a href="/blog/archives"><b>博客归档</b></a></li>
+  <li><a href="/blog/categories/ios"><b>iOS 文章</b></a></li>
+  <li><a href="/blog/categories/nothing"><b>随笔</b></a></li>
+  <li><a href="https://github.com/Ashen-Zhao" target="_blank"><b>有关博主</b></a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS 多语言版本的开发（二）</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-15T05:13:56+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:13 am</span></time>
+        
+             
+      | <a href="#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>题记</h3>
+
+<p>&emsp;&emsp;<a href="/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a> 中我们实现到了，让应用跟随系统语言进行切换，而用户自己却不能切换的功能，也基本上算是实现了多语言版本；可是，对于某些应用来说，实现跟随系统语言切换的同时， 也想要实现让用户自己选择应用语言版本的功能；针对这种情况，利用这篇文章来写写如何让用户自己切换应用语言版本；</p>
+
+<h3>语言文件存在的形式</h3>
+
+<p>想要实现用户自己手动切换语言版本，就先要了解语言文件在资源文件中存在的形式;</p>
+
+<p><img src="/images/localized09.png" alt="多语言" /></p>
+
+<p>如图中，不管是英语（en.lproj）、简体（zh-Hans.lproj）、还是繁体（zh-Hant.lproj）都是以<code>.lproj</code> 的文件夹形式存在, 所以当我们要收到切换语言的时候，其实也就是收到去取这些<code>.lproj</code> 文件夹中的<code>ASLocalized.strings</code>文件；</p>
+
+<!--more-->
+
+
+<p>
+&emsp;到这里，原理应该懂了，接下来就是动手实现了；</p>
+
+<h3>根据语言获取 ASLocalized.strings</h3>
+
+<p>这时候，需要根据不同的<code>语言.lproj</code> 获取到对应的<code>ASLocalized.strings</code>语言文件, 从而让页面显示对应的语言内容;<br/>
+这里暂且先根据English获取英语的语言文件，English 的.lproj存在的形式是<code>en.lproj</code></p>
+
+<pre><code>
+NSString *path = [[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"];
+NSString *showValue = [[NSBundle bundleWithPath:path] localizedStringForKey:@"showTxt" value:nil table:@"ASLocalized"];
+NSLog(@"result: %@", showValue);
+ </code></pre>
+
+
+<p>输出结果：result: this is test text</p>
+
+<p>以上代码，只是以English 为语言文件，是写死的，如果想要让用户自己手动改变，只需要替换掉 <code>[[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"]</code> 中的<code>en</code> 为其他的语言标识就好了； 既然是用户手动切换，那就需要写代码去实现了；</p>
+
+<p>到这里，有一个问题，<strong><em>如何让用户选择后一个语言后，即使程序退出后，下次进入依然保留呢</em></strong>， 既然需要保存数据，就要涉及到本地存储了，对于少量的保存我们可以使用<code>NSUserDefaults</code> 来操作，简单方便快捷；至于其他的存储方式四大基本对象的write方法，归档，sqllite，CoreData 需要的同学，可以自己去脑补，这里我不多介绍了；</p>
+
+<h3>使用NSUserDefaults 记录选择的语言</h3>
+
+<p>这里我简单写了个界面，作为辅助讲解</p>
+
+<p><img src="/images/localized10.png" alt="多语言" width="300" height="450"></p>
+
+<pre><code>
+- (IBAction)changeLanguage:(UIButton *)sender {
+    
+    switch (sender.tag) {
+        case 101: { //简体
+            [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans" forKey:appLanguage];
+        }
+            break;
+        case 102: { //繁体
+            [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:appLanguage];
+        }
+            break;
+        case 103: { //English
+            [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:appLanguage];
+        }
+            break;
+        default:
+            break;
+    }
+}
+</code></pre>
+
+
+<p></p>
+
+<p>以上方法，是图中三种语言的点击事件，分别将对应的语言标识，记录到<code>NSUserDefaults</code> 对应的 <code>appLanguage</code> key 中</p>
+
+<p>既然重新选择了语言，就需要重新加载控件的内容，因为是Demo🐴，这里直接将给控件赋值写成一个方法，如下：</p>
+
+<pre><code>
+- (void)showLbl {
+    NSString *lanType =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"]];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:lanType ofType:@"lproj"];
+    
+    NSString *showValue = [[NSBundle bundleWithPath:path] localizedStringForKey:@"showTxt" value:nil table:@"ASLocalized"];
+    NSLog(@"result: %@", showValue);
+    self.lblShowTxt.text = showValue;
+}
+
+</code></pre>
+
+
+<p></p>
+
+<p>可将此方法在点击事件中调用下，即可；</p>
+
+<p>Demo效果图：</p>
+
+<p><img src="/images/localized11.gif" alt="多语言" /></p>
+
+<h3>首次进入应用的考虑</h3>
+
+<p>到这里，还没有完，这时我们需要考虑下，用户第一次进来时，该显示什么样的语言，是跟随系统，还是我们给一种默认的语言；</p>
+
+<h4>1、给一种默认语言</h4>
+
+<p>这种处理很简单，只需要在<code>didFinishLaunchingWithOptions</code> 方法中，进行判断本地是否记录了语言标识，如果没有给一种默认即可，代码如下：</p>
+
+<pre>`
+if (![[NSUserDefaults standardUserDefaults] objectForKey:appLanguage]) { 
+     [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans"    forKey:appLanguage];
+}`</pre>
+
+
+<p></p>
+
+<h4>2、跟随系统语言</h4>
+
+<p>这种处理相对来说，比较复杂写，首页需要获取系统的首选语言顺序，然后取第一个首选语言，其次，还要判断你要做的语言版本，首选语言组中存在与否；<br/>
+获取首选语言：<code> NSArray  *languages = [NSLocale preferredLanguages];</code><br/>
+获取第一个首选语言：<code> NSString *language = [languages objectAtIndex:0];</code></p>
+
+<p>处理过程如下：</p>
+
+<pre><code>
+if (![[NSUserDefaults standardUserDefaults] objectForKey:appLanguage]) {
+        NSArray  *languages = [NSLocale preferredLanguages];
+        NSString *language = [languages objectAtIndex:0];
+        if ([language hasPrefix:@"zh-Hans"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans" forKey:appLanguage];
+        } else if ([language hasPrefix:@"zh-TW"] || [language hasPrefix:@"zh-HK"] || [language hasPrefix:@"zh-Hant"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:appLanguage];
+        } else if ([language hasPrefix:@"en"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:appLanguage];
+        }else{
+            [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans" forKey:appLanguage];
+        }
+    }
+</code></pre>
+
+
+<p></p>
+
+<p>注：由于繁体又有台湾繁体和香港繁体之分，所以代码中也做出了相应的处理；</p>
+
+<p>╮(╯▽╰)╭ 到了这里基本上算是完成了多语言版本的工作了，但是，但是，但是，这只是完成了项目起步期，项目中还不存在大量的中文字符串的情况；暂时先不考虑项目已经开发完成的情况，接下来先来优化下，我们刚刚写过的代码；<br/>
+对于 <code>showLbl</code> 方法中的内容，可以定义成宏，以供项目中，任何地方需要多元化时的使用;</p>
+
+<pre><code> 
+ #define ASLocalizedString(key)  [NSString stringWithFormat:@"%@", [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"]] ofType:@"lproj"]] localizedStringForKey:(key) value:nil table:@"ASLocalized"]]
+</code> </pre>
+
+
+<p>
+为了方便，我将<code>showLbl</code> 中取key对应的语言内容，封装进了一个带参数的宏中；</p>
+
+<p>使用起来就很Easy了，这样足以 <code>ASLocalizedString(@"showTxt")</code></p>
+
+<p>我在github上，上传了本篇<a href="https://github.com/Ashen-Zhao/easyLocalized">Demo</a> 以供辅助参考；</p>
+
+<p><a href="https://github.com/Ashen-Zhao/easyLocalized">查看Demo 点击这里</a></p>
+
+<blockquote><h4>相关文章</h4>
+
+<h4><a href="/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a></h4></blockquote>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Ashen</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-01-15T05:13:56+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:13 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>ios</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+    
+  <h2>分享</h2>  
+      <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+</br></br>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->  
+    
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/01/14/localized01/" title="Previous Post: iOS 多语言版本的开发（一）">&laquo; iOS 多语言版本的开发（一）</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+  <section>
+    <h1>评论</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread" data-title="iOS 多语言版本的开发（二）"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"zhaoashen"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END --></div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>博主简介</h1>
+  <ul>
+  	<li><p>现专注于iOS 应用开发， 曾做过.NET 网站后台开发， 业余时间学习Java 用于微信公众开发</p></li>
+  	<li>email：zhaoashen@gmail.com</li>
+  	<li>github: <a href="https://github.com/Ashen-Zhao" target="_blank">https://github.com/Ashen-Zhao</a></li>
+  </ul>
+  
+
+</section>
+<section>
+   <h1>新浪微博</h1>
+   <ul id="sinaweibo">
+   	<li>
+		<iframe width="100%" height="130" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=130&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2424982293&verifier=7834bdd6&dpc=1">
+		</iframe>
+   	</li>
+   </ul>
+</section><section>
+  <h1>最近发布</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之入门使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/11/webview/">UIWebView 与 原生系统的简单跳转交互</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/08/easymarkdown/">EasyMarkDown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/07/datasafety/">iOS 常用加密方法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/05/delcocopods/">从工程中删除Cocoapods</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/04/colorfullabel/">多样式UILabel</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/04/any-push-pop/">iOS 如何随意的push来pop去</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/29/birthSelector/">iOS 只需几步实现生日选择器</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+ <h1>分类</h1>
+ <ul id="categories">
+  <li class='category'><a href='/blog/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>ios (9)</a></li>
+<li class='category'><a href='/blog/categories/java/'>java (1)</a></li>
+<li class='category'><a href='/blog/categories/markdown/'>markdown (1)</a></li>
+<li class='category'><a href='/blog/categories/nothing/'>nothing (1)</a></li>
+
+ </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+   &copy; 2016 - Ashen -
+  <span class="credit"> By <a href="http://octopress.org/">Octopress</a> 
+  </span>
+  <span style="display:none;">
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257171054'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1257171054%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+   </span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
