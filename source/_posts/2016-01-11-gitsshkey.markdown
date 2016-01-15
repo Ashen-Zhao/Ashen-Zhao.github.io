@@ -28,4 +28,4 @@ github 开源代码库以及版本控制系统
 进入ssh. 目录下，输入 cat id_rsa.pub 即可在窗口中看到公钥，将公钥从 ssh-key 一直复制到邮箱地址（包含邮箱），然后粘贴到github 添加ssh key 的key 输入框中，title则随意输入，然后点击Add 即可；  
 
 >###相关文章  
-####[GitHub 的简明教程之配置ssh key](http://www.devashen.xyz/blog/2016/01/12/githubused/)   
+####[GitHub 的简明教程之配置ssh key](/blog/2016/01/12/githubused/)   

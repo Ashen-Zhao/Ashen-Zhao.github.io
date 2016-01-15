@@ -7,7 +7,7 @@ keywords: github使用, ssh key, git
 categories: Github
 ---
 >###相关文章  
-####[GitHub 的简明教程之配置ssh key](http://www.devashen.xyz/blog/2016/01/11/gitsshkey/)   
+####[GitHub 的简明教程之配置ssh key](/blog/2016/01/11/gitsshkey/)   
 
 ###本地创建Git仓库
 ####1、git init 初始化仓库
