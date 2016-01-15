@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-14T17:08:32+08:00</updated>
+  <updated>2016-01-15T11:12:50+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -111,7 +111,7 @@
     <id>http://ashen-zhao.github.io/blog/2016/01/12/githubused</id>
     <content type="html"><![CDATA[<blockquote><h3>相关文章</h3>
 
-<h4><a href="http://www.devashen.xyz/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a></h4></blockquote>
+<h4><a href="http://ashen-zhao.github.io/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a></h4></blockquote>
 
 <h3>本地创建Git仓库</h3>
 
@@ -216,7 +216,7 @@ github 开源代码库以及版本控制系统</p>
 
 <blockquote><h3>相关文章</h3>
 
-<h4><a href="http://www.devashen.xyz/blog/2016/01/12/githubused/">GitHub 的简明教程之配置ssh key</a></h4></blockquote>
+<h4><a href="http://ashen-zhao.github.io/blog/2016/01/12/githubused/">GitHub 的简明教程之配置ssh key</a></h4></blockquote>
 ]]></content>
   </entry>
   
@@ -875,7 +875,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#x3a;&#122;&#x68;&#x61;&#111;&#x61;&#x73;&#x68;&#101;&#x6e;&#x40;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#109;">&#122;&#104;&#97;&#x6f;&#x61;&#x73;&#x68;&#101;&#110;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x7a;&#104;&#x61;&#111;&#x61;&#x73;&#x68;&#x65;&#x6e;&#x40;&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;">&#x7a;&#x68;&#97;&#x6f;&#97;&#115;&#104;&#x65;&#110;&#64;&#x67;&#x6d;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;</a>；</p>
 ]]></content>
   </entry>
   

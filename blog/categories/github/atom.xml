@@ -4,7 +4,7 @@
   <title><![CDATA[Category: github | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-14T17:08:32+08:00</updated>
+  <updated>2016-01-15T11:12:50+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -20,7 +20,7 @@
     <id>http://ashen-zhao.github.io/blog/2016/01/12/githubused</id>
     <content type="html"><![CDATA[<blockquote><h3>相关文章</h3>
 
-<h4><a href="http://www.devashen.xyz/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a></h4></blockquote>
+<h4><a href="/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a></h4></blockquote>
 
 <h3>本地创建Git仓库</h3>
 
@@ -125,7 +125,7 @@ github 开源代码库以及版本控制系统</p>
 
 <blockquote><h3>相关文章</h3>
 
-<h4><a href="http://www.devashen.xyz/blog/2016/01/12/githubused/">GitHub 的简明教程之配置ssh key</a></h4></blockquote>
+<h4><a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之配置ssh key</a></h4></blockquote>
 ]]></content>
   </entry>
   
