@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ios | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-15T17:21:23+08:00</updated>
+  <updated>2016-01-16T23:51:26+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -20,7 +20,7 @@
     <id>http://ashen-zhao.github.io/blog/2016/01/15/localized02</id>
     <content type="html"><![CDATA[<h3>题记</h3>
 
-<p>&emsp;&emsp;<a href="/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a> 中我们实现到了，让应用跟随系统语言进行切换，而用户自己却不能切换的功能，也基本上算是实现了多语言版本；可是，对于某些应用来说，实现跟随系统语言切换的同时， 也想要实现让用户自己选择应用语言版本的功能；针对这种情况，利用这篇文章来写写如何让用户自己切换应用语言版本；</p>
+<p>&emsp;&emsp;<a href="/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a> 中我们完成了让应用跟随系统语言进行切换，而用户自己却不能切换的功能，也基本上算是实现了多语言版本；可是，对于某些应用来说，实现跟随系统语言切换的同时， 也想要实现让用户自己选择应用语言版本的功能；针对这种情况，利用这篇文章来写写如何让用户自己切换应用语言版本；</p>
 
 <h3>语言文件存在的形式</h3>
 
