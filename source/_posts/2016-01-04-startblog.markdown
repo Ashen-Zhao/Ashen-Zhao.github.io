@@ -6,7 +6,7 @@ comments: true
 tags: [博客, octopress]
 keywords: 啊神, 啊神的技术博客
 description:  啊神的技术博客
-categories: Nothing
+categories: 随笔
 ---
 
 ###&emsp;今天研究了下Octopress 与 github的pages 建立个人博客，感觉还可以，于是就搭建起了自己的个人博客；

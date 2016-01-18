@@ -22,165 +22,192 @@
 require 'stringex'
 
 module Jekyll
-
-  # The CategoryIndex class creates a single category page for the specified category.
-  class CategoryIndex < Page
-
-    # Initializes a new CategoryIndex.
-    #
-    #  +base+         is the String path to the <source>.
-    #  +category_dir+ is the String path between <source> and the category folder.
-    #  +category+     is the category currently being processed.
-    def initialize(site, base, category_dir, category)
-      @site = site
-      @base = base
-      @dir  = category_dir
-      @name = 'index.html'
-      self.process(@name)
-      # Read the YAML data from the layout page.
-      self.read_yaml(File.join(base, '_layouts'), 'category_index.html')
-      self.data['category']    = category
-      # Set the title for this page.
-      title_prefix             = site.config['category_title_prefix'] || 'Category: '
-      self.data['title']       = "#{title_prefix}#{category}"
-#      self.data['title']       = "#{category}"
-      # Set the meta-description for this page.
-      meta_description_prefix  = site.config['category_meta_description_prefix'] || 'Category: '
-      self.data['description'] = "#{meta_description_prefix}#{category}"
-#      self.data['description'] = "#{category}"
-    end
-
-  end
-
-  # The CategoryFeed class creates an Atom feed for the specified category.
-  class CategoryFeed < Page
-
-    # Initializes a new CategoryFeed.
-    #
-    #  +base+         is the String path to the <source>.
-    #  +category_dir+ is the String path between <source> and the category folder.
-    #  +category+     is the category currently being processed.
-    def initialize(site, base, category_dir, category)
-      @site = site
-      @base = base
-      @dir  = category_dir
-      @name = 'atom.xml'
-      self.process(@name)
-      # Read the YAML data from the layout page.
-      self.read_yaml(File.join(base, '_includes/custom'), 'category_feed.xml')
-      self.data['category']    = category
-      # Set the title for this page.
-      title_prefix             = site.config['category_title_prefix'] || 'Category: '
-      self.data['title']       = "#{title_prefix}#{category}"
-      # Set the meta-description for this page.
-      meta_description_prefix  = site.config['category_meta_description_prefix'] || 'Category: '
-      self.data['description'] = "#{meta_description_prefix}#{category}"
-
-      # Set the correct feed URL.
-      self.data['feed_url'] = "#{category_dir}/#{name}"
-    end
-
-  end
-
-  # The Site class is a built-in Jekyll class with access to global site config information.
-  class Site
-
-    # Creates an instance of CategoryIndex for each category page, renders it, and
-    # writes the output to a file.
-    #
-    #  +category_dir+ is the String path to the category folder.
-    #  +category+     is the category currently being processed.
-    def write_category_index(category_dir, category)
-      index = CategoryIndex.new(self, self.source, category_dir, category)
-      index.render(self.layouts, site_payload)
-      index.write(self.dest)
-      # Record the fact that this page has been added, otherwise Site::cleanup will remove it.
-      self.pages << index
-
-      # Create an Atom-feed for each index.
-      feed = CategoryFeed.new(self, self.source, category_dir, category)
-      feed.render(self.layouts, site_payload)
-      feed.write(self.dest)
-      # Record the fact that this page has been added, otherwise Site::cleanup will remove it.
-      self.pages << feed
-    end
-
-    # Loops through the list of category pages and processes each one.
-    def write_category_indexes
-      if self.layouts.key? 'category_index'
-        dir = self.config['category_dir'] || 'categories'
-        self.categories.keys.each do |category|
-          self.write_category_index(File.join(dir, category.to_url), category)
+    
+    def self.get_category_attributes(category)
+        att = category.split('|')
+        slug = att[0].to_url
+        name = att[0].split.map(&:capitalize).join(' ')
+        if att[2].nil?
+            if !att[1].nil?
+                name = att[1].split.map(&:capitalize).join(' ')
+            end
+        else
+            if att[1].empty?
+                name = att[0].upcase
+            else
+                name = att[1].upcase
+            end
         end
-
-      # Throw an exception if the layout couldn't be found.
-      else
-        raise <<-ERR
-
-
-===============================================
- Error for category_generator.rb plugin
------------------------------------------------
- No 'category_index.html' in source/_layouts/
- Perhaps you haven't installed a theme yet.
-===============================================
-
-ERR
-      end
+        [slug, name]
     end
 
-  end
+    # The CategoryIndex class creates a single category page for the specified category.
+    class CategoryIndex < Page
+        
+        # Initializes a new CategoryIndex.
+        #
+        #  +base+         is the String path to the <source>.
+        #  +category_dir+ is the String path between <source> and the category folder.
+        #  +category+     is the category currently being processed.
+        def initialize(site, base, category_dir, category)
+            @site = site
+            @base = base
+            @dir  = category_dir
+            @name = 'index.html'
+            self.process(@name)
+            # Read the YAML data from the layout page.
+            self.read_yaml(File.join(base, '_layouts'), 'category_index.html')
+            self.data['category']    = category
+            # Set the title for this page.
+            title_prefix             = site.config['category_title_prefix'] || 'Category: '
+#            self.data['title']       = "#{title_prefix}#{category}"
 
-
-  # Jekyll hook - the generate method is called by jekyll, and generates all of the category pages.
-  class GenerateCategories < Generator
-    safe true
-    priority :low
-
-    def generate(site)
-      site.write_category_indexes
+            att = Jekyll.get_category_attributes(category)
+            self.data['title']       = "#{title_prefix}#{att[1]}"
+            
+            # Set the meta-description for this page.
+            meta_description_prefix  = site.config['category_meta_description_prefix'] || 'Category: '
+#            self.data['description'] = "#{meta_description_prefix}#{category}"
+             self.data['description'] = "#{meta_description_prefix}#{att[1]}"
+        end
+        
     end
-
-  end
-
-
-  # Adds some extra filters used during the category creation process.
-  module Filters
-
-    # Outputs a list of categories as comma-separated <a> links. This is used
-    # to output the category list for each post on a category page.
-    #
-    #  +categories+ is the list of categories to format.
-    #
-    # Returns string
-    #
-    def category_links(categories)
-      categories.sort.map { |c| category_link c }.join(', ')
+    
+    # The CategoryFeed class creates an Atom feed for the specified category.
+    class CategoryFeed < Page
+        
+        # Initializes a new CategoryFeed.
+        #
+        #  +base+         is the String path to the <source>.
+        #  +category_dir+ is the String path between <source> and the category folder.
+        #  +category+     is the category currently being processed.
+        def initialize(site, base, category_dir, category)
+            @site = site
+            @base = base
+            @dir  = category_dir
+            @name = 'atom.xml'
+            self.process(@name)
+            # Read the YAML data from the layout page.
+            self.read_yaml(File.join(base, '_includes/custom'), 'category_feed.xml')
+            self.data['category']    = category
+            # Set the title for this page.
+            title_prefix             = site.config['category_title_prefix'] || 'Category: '
+#            self.data['title']       = "#{title_prefix}#{category}"
+            att = Jekyll.get_category_attributes(category)
+            self.data['title']       = "#{title_prefix}#{att[1]}"
+            # Set the meta-description for this page.
+            meta_description_prefix  = site.config['category_meta_description_prefix'] || 'Category: '
+#            self.data['description'] = "#{meta_description_prefix}#{category}"
+            self.data['description'] = "#{meta_description_prefix}#{att[1]}"
+            # Set the correct feed URL.
+            self.data['feed_url'] = "#{category_dir}/#{name}"
+        end
+        
     end
-
-    # Outputs a single category as an <a> link.
-    #
-    #  +category+ is a category string to format as an <a> link
-    #
-    # Returns string
-    #
-    def category_link(category)
-      dir = @context.registers[:site].config['category_dir']
-      "<a class='category' href='/#{dir}/#{category.to_url}/'>#{category}</a>"
+    
+    # The Site class is a built-in Jekyll class with access to global site config information.
+    class Site
+        
+        # Creates an instance of CategoryIndex for each category page, renders it, and
+        # writes the output to a file.
+        #
+        #  +category_dir+ is the String path to the category folder.
+        #  +category+     is the category currently being processed.
+        def write_category_index(category_dir, category)
+            index = CategoryIndex.new(self, self.source, category_dir, category)
+            index.render(self.layouts, site_payload)
+            index.write(self.dest)
+            # Record the fact that this page has been added, otherwise Site::cleanup will remove it.
+            self.pages << index
+            
+            # Create an Atom-feed for each index.
+            feed = CategoryFeed.new(self, self.source, category_dir, category)
+            feed.render(self.layouts, site_payload)
+            feed.write(self.dest)
+            # Record the fact that this page has been added, otherwise Site::cleanup will remove it.
+            self.pages << feed
+        end
+        
+        # Loops through the list of category pages and processes each one.
+        def write_category_indexes
+            if self.layouts.key? 'category_index'
+                dir = self.config['category_dir'] || 'categories'
+                self.categories.keys.each do |category|
+#                    self.write_category_index(File.join(dir, category.to_url), category)
+                    att = Jekyll.get_category_attributes(category)
+                    self.write_category_index(File.join(dir, att[0]), category)
+                end
+                
+                # Throw an exception if the layout couldn't be found.
+                else
+                raise <<-ERR
+                
+                
+                ===============================================
+                Error for category_generator.rb plugin
+                -----------------------------------------------
+                No 'category_index.html' in source/_layouts/
+                Perhaps you haven't installed a theme yet.
+                ===============================================
+                
+                ERR
+            end
+        end
+        
     end
-
-    # Outputs the post.date as formatted html, with hooks for CSS styling.
-    #
-    #  +date+ is the date object to format as HTML.
-    #
-    # Returns string
-    def date_to_html_string(date)
-      result = '<span class="month">' + date.strftime('%b').upcase + '</span> '
-      result << date.strftime('<span class="day">%d</span> ')
-      result << date.strftime('<span class="year">%Y</span> ')
-      result
+    
+    
+    # Jekyll hook - the generate method is called by jekyll, and generates all of the category pages.
+    class GenerateCategories < Generator
+        safe true
+        priority :low
+        
+        def generate(site)
+            site.write_category_indexes
+        end
+        
     end
-
-  end
-
+    
+    
+    # Adds some extra filters used during the category creation process.
+    module Filters
+        
+        # Outputs a list of categories as comma-separated <a> links. This is used
+        # to output the category list for each post on a category page.
+        #
+        #  +categories+ is the list of categories to format.
+        #
+        # Returns string
+        #
+        def category_links(categories)
+            categories.sort.map { |c| category_link c }.join(', ')
+        end
+        
+        # Outputs a single category as an <a> link.
+        #
+        #  +category+ is a category string to format as an <a> link
+        #
+        # Returns string
+        #
+        def category_link(category)
+            dir = @context.registers[:site].config['category_dir']
+#            "<a class='category' href='/#{dir}/#{category.to_url}/'>#{category}</a>"
+            att = Jekyll.get_category_attributes(category)
+            "<a class='category' href='/#{dir}/#{att[0]}/'>#{att[1]}</a>"
+        end
+        
+        # Outputs the post.date as formatted html, with hooks for CSS styling.
+        #
+        #  +date+ is the date object to format as HTML.
+        #
+        # Returns string
+        def date_to_html_string(date)
+            result = '<span class="month">' + date.strftime('%b').upcase + '</span> '
+            result << date.strftime('<span class="day">%d</span> ')
+            result << date.strftime('<span class="year">%Y</span> ')
+            result
+        end
+        
+    end
+    
 end
