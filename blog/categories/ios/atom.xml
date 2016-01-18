@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: ios | 啊神的技术博客]]></title>
+  <title><![CDATA[Category: Ios | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-18T15:01:07+08:00</updated>
+  <updated>2016-01-18T21:13:00+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS 多语言版本的开发（三）]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/01/18/localized03/"/>
+    <updated>2016-01-18T16:06:48+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/01/18/localized03</id>
+    <content type="html"><![CDATA[<h3>写在前言</h3>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS 多语言版本的开发（二）]]></title>
@@ -483,38 +492,6 @@ return objData;
 <h2>AES</h2>
 
 <p>对于AES 这也有一个不错的博客<a href="http://www.tuicool.com/articles/UVRjmyN">AES加密算法</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[从工程中删除Cocoapods]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2016/01/05/delcocopods/"/>
-    <updated>2016-01-05T17:16:42+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2016/01/05/delcocopods</id>
-    <content type="html"><![CDATA[<p>&emsp;会有这么一种情况，因为需要改动的第三方比较多，不想使用cocoapods管理第三方，这时候，对于已经使用cocoapods的情况，需要进行删除处理，就可以按照以下步骤进行：</p>
-
-<ol>
-<li><p>删除工程文件夹下的Podfile、Podfile.lock及Pods文件夹</p></li>
-<li><p>删除xcworkspace文件</p></li>
-<li><p>使用xcodeproj文件打开工程，删除Frameworks组下的Pods.xcconfig及libPods.a引用</p></li>
-<li><p>在工程设置中的Build Phases下删除Check Pods Manifest.lock及Copy Pods Resources, 可能还会有Embed Pods Frameworks也删了，总之带有Pods全删了</p></li>
-</ol>
-
-
-<!--more-->
-
-
-<p><img src="/images/delcocopods.png" alt="删除图" /></p>
-
-<p><strong>注意</strong>:如果将cocoapods集成到工程中后不小心修改或删除了其相关文件导致无法便以通过例如：不小心把</p>
-
-<p>Pods.xcconfig给删除了然后出现diff: /../Podfile.lock: No such file or directory，用上面的方法删除cocoapods后，</p>
-
-<p>再重新$sudo pod install一下就好了。</p>
-
-<p>如果编译的时候出现权限问题，对工程文件夹$sudo chmod 777 path-to-project-folder/*</p>
-
-<p>$sudo chown 777 path-to-project-folder/*</p>
 ]]></content>
   </entry>
   
