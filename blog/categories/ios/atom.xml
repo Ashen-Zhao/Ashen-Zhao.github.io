@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ios | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-16T23:51:26+08:00</updated>
+  <updated>2016-01-18T10:50:28+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -28,7 +28,7 @@
 
 <p><img src="/images/localized09.png" alt="多语言" /></p>
 
-<p>如图中，不管是英语（en.lproj）、简体（zh-Hans.lproj）、还是繁体（zh-Hant.lproj）都是以<code>.lproj</code> 的文件夹形式存在, 所以当我们要收到切换语言的时候，其实也就是收到去取这些<code>.lproj</code> 文件夹中的<code>ASLocalized.strings</code>文件；</p>
+<p>如图中，不管是英语（en.lproj）、简体（zh-Hans.lproj）、还是繁体（zh-Hant.lproj）都是以<code>.lproj</code> 的文件夹形式存在, 所以当我们要切换语言的时候，其实也就是做到去取这些<code>.lproj</code> 文件夹中的<code>ASLocalized.strings</code>文件；</p>
 
 <!--more-->
 
@@ -167,7 +167,7 @@ if (![[NSUserDefaults standardUserDefaults] objectForKey:appLanguage]) {
 <p>
 为了方便，我将<code>showLbl</code> 中取key对应的语言内容，封装进了一个带参数的宏中；</p>
 
-<p>使用起来就很Easy了，这样足以 <code>ASLocalizedString(@"showTxt")</code></p>
+<p>使用起来就很Easy了，只需要这样使用即可： <code>ASLocalizedString(@"showTxt")</code></p>
 
 <p>我在github上，上传了本篇<a href="https://github.com/Ashen-Zhao/easyLocalized">Demo</a> 以供辅助参考；</p>
 
