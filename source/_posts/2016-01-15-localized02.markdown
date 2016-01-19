@@ -131,3 +131,4 @@ if (![[NSUserDefaults standardUserDefaults] objectForKey:appLanguage]) {
 
 >####相关文章  
 ####[iOS 多语言版本的开发（一）](/blog/2016/01/14/localized01/)
+####[iOS 多语言版本的开发（三）](/blog/2016/01/18/localized03/)

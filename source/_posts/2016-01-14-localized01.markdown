@@ -82,3 +82,4 @@ categories: i|OS
 
 >####相关文章  
 ####[iOS 多语言版本的开发（二）](/blog/2016/01/15/localized02/)
+####[iOS 多语言版本的开发（三）](/blog/2016/01/18/localized03/)
