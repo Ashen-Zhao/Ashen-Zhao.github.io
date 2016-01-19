@@ -170,6 +170,12 @@
 2、ASLocalizedString(key) ， 该宏使用面积广，可以将其定义成公共头文件中，然后用时引用头文件即可，也可将文件封装进pch文件中，这样无需使用头文件接口使用<br/>
 3、替换后，可能会有些地方报错，command + b 编译下，看看报错的地方，进行相应修改即可。报错原因：a. 可能是你定义的常量字符串； b. 可能是定义的宏；  c.  可能是替换后没有换行； 基本上报的错误很明显，进行修改即可；<br/>
 4、在迭代版本中，再次使用中文字符串，就需要使用<code>ASLocalizedString(key)</code>， 来代替了，然后再多语言文件中，进行<code>key=value</code> 配置；</p>
+
+<blockquote><h4>相关文章</h4>
+
+<h4><a href="/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a></h4>
+
+<h4><a href="/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a></h4></blockquote>
 </div>
 
 
