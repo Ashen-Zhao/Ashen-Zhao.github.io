@@ -6,7 +6,7 @@ comments: true
 tags: [iOS push, pop, 随意pop]
 keywords: iOS穿插pop, push, pop
 description:  iOS 如何随意的push来pop去
-categories: iOS
+categories: i|OS
 ---
 ##iOS 导航控制器如何随意push和pop
 ---

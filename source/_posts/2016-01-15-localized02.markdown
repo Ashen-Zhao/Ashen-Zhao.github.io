@@ -5,7 +5,7 @@ date: 2016-01-15 05:13:56 +0800
 comments: true
 keywords: iOS本地化, iOS多语言开发, 多语言开发
 description: 如何实现,iOS多语言开发
-categories: iOS
+categories: i|OS
 ---
 ###题记  
 

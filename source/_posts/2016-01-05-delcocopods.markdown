@@ -7,7 +7,7 @@ tags: [删除Cocoapods, Cocoapods]
 keywords: 删除Cocoapods, Cocoapods
 description:  从工程中删除Cocoapods
 
-categories: iOS
+categories: i|OS
 ---
 &emsp;会有这么一种情况，因为需要改动的第三方比较多，不想使用cocoapods管理第三方，这时候，对于已经使用cocoapods的情况，需要进行删除处理，就可以按照以下步骤进行：
 

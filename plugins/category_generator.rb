@@ -26,18 +26,25 @@ module Jekyll
     def self.get_category_attributes(category)
         att = category.split('|')
         slug = att[0].to_url
-        name = att[0].split.map(&:capitalize).join(' ')
-        if att[2].nil?
-            if !att[1].nil?
-                name = att[1].split.map(&:capitalize).join(' ')
-            end
+        
+        if !att[1].nil?
+        name = att[0].downcase + att[1].upcase
         else
-            if att[1].empty?
-                name = att[0].upcase
-            else
-                name = att[1].upcase
-            end
+        name = att[0].split.map(&:capitalize).join(' ')
         end
+
+#        name = att[0].split.map(&:capitalize).join(' ')
+#        if att[2].nil?
+#            if !att[1].nil?
+#                name = att[1].split.map(&:capitalize).join(' ')
+#            end
+#        else
+#            if att[1].empty?
+#                name = att[0].upcase
+#            else
+#                name = att[1].upcase
+#            end
+#        end
         [slug, name]
     end
 

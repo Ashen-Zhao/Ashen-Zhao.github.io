@@ -5,7 +5,7 @@ date: 2016-01-11 10:15:09 +0800
 comments: true
 keywords: UIWebview, UIWebView的交互
 description: UIWebView与原生系统的简单跳转交互
-categories: iOS
+categories: i|OS
 ---
 ###简单介绍UIWebView
  关于UIWebView这里我就不多介绍了，可以简单理解为一个在iOS 端显示网页的一个控件；

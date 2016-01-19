@@ -6,7 +6,7 @@ comments: true
 tags: [iOS 上传, 上传图片, iOS上传图片]
 keywords: 上传图片, iOS上传, 上传图片iOS, iOS如何上传图片
 description:  iOS如何上传图片
-categories: iOS
+categories: i|OS
 ---
 ###开题：
 iOS 开发中难免会遇到上传图片，一般情况下有两种方式：

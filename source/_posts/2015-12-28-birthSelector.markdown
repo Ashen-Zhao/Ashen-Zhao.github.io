@@ -6,7 +6,7 @@ comments: true
 tags: [日历, iOS生日选择器, 日历选择]
 keywords: 日历, iOS生日选择器, 日历选择
 description:  iOS 实现生日选择器
-categories: iOS
+categories: i|OS
 ---
   项目开发中难免会遇到让用户填写出生年月的时候，本章来介绍一下我自己写的生日选择器的[ASBirthSheet](https://github.com/Ashen-Zhao/ASBirthSheet); 
   <!--more-->

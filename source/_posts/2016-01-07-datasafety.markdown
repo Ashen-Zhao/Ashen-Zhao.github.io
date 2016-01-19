@@ -6,7 +6,7 @@ comments: true
 tags: iOS 加密方法, 加密
 keywords: iOS加密方法, iOS安全, 加密, MD5, RSA, Base64
 description: iOS 几种加密方法
-categories: iOS
+categories: i|OS
 ---
 
 ###为何要加密
