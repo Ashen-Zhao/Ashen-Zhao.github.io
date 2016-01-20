@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>多样式UILabel - 啊神的技术博客</title>
+  <title>简单实现双击tabBarItem刷新页面 - 啊神的技术博客</title>
   <meta name="author" content="Ashen">
   
-  <meta name="description" content="iOS 如何实现多样式Label">
+  <meta name="description" content="简单实现iOS双击tabbaritem刷新页面数据">
   
-  <meta name="keywords" content="iOS, 多样式Label">
+  <meta name="keywords" content="双击tabBar, 刷新页面, UITabBarController, UITabBarItem">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2016/01/04/colorfullabel/">
+  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2016/01/20/doubleclick/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="啊神的技术博客" type="application/atom+xml">
@@ -99,7 +99,7 @@
   
   <header>
     
-      <h1 class="entry-title">多样式UILabel</h1>
+      <h1 class="entry-title">简单实现双击tabBarItem刷新页面</h1>
     
     
       <p class="meta">
@@ -108,7 +108,7 @@
 
 
 
-<time class='entry-date' datetime='2016-01-04T16:22:19+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:22 pm</span></time>
+<time class='entry-date' datetime='2016-01-20T17:44:11+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:44 pm</span></time>
         
              
       | <a href="#comments">评论</a>
@@ -118,61 +118,34 @@
   </header>
 
 
-<div class="entry-content"><p> 有时候产品经理说，能把一句话显示多种颜色、多种字体吗？ 灵光一闪，弄多个UILabel来显示不就行了，我只能说可以，也只能说这法有点笨。于是我坚决不用这种方法，苦思冥想，终于有了眉目。先配张图来显摆显摆，其实很容易实现，我也就不啰嗦了，看招：
- <!--more-->
-<img src="/images/doubleLabel.png" alt="多样式UILabel" /></p>
+<div class="entry-content"><h3>如何实现双击tabbarItem刷新页面？</h3>
 
-<h5>由于很简单，不喜请喷我。</h5>
-
-<p>ok, 上代码，一看也就是一个方法：</p>
+<p>&emsp;在网上寻找了一圈，众说纷纭，大差不差，而且基本上实现的不是双击才刷新，而是双击刷新一次后，只要再次单击就会刷新，这样很容易造成用户不小心点着，降低用户体验；见于这种局面，我花费了近一个小时，鼓捣出来了，只有双击的时候，才会去刷新页面（其实是伪双击，也就是单击两次，没有做两次单击时间间隔限制），废话不说了，直接上代码：</p>
 
 <pre><code>
--(void)txtArr:(NSArray *)txtArr colorArr:(NSArray *)colorArr fontArr:(NSArray *)fontArr {
-
-    NSInteger okCount = 0;
-    okCount = txtArr.count < colorArr.count ? txtArr.count : colorArr.count;
-    okCount = okCount < fontArr.count ? okCount : fontArr.count;
-
-    NSMutableString *txt = [NSMutableString string];
-    for (NSString *str in txtArr) {
-        [txt appendString:str];
-    }
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:txt];
-    NSInteger startLoc = 0;
-    for (int i = 0; i < okCount; i++) {
-        [str addAttributes:@{NSForegroundColorAttributeName:colorArr[i], NSFontAttributeName:[UIFont systemFontOfSize:[fontArr[i] integerValue]]} range:NSMakeRange(startLoc, [txtArr[i] length])];
-        startLoc += [txtArr[i] length];
-    }
-    self.attributedText = str;
+int i = 0;
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    i++;
+    UIViewController *tbSelectedController = tabBarController.selectedViewController;
+    if ([tbSelectedController isEqual:viewController]) {
+        if (currentIndex == 1 && tabBarController.selectedIndex == 1 && i % 2 != 0) {
+            UINavigationController *nav = self.viewControllers[1];
+            TestViewController *tVC = nav.viewControllers[0];
+            [tVC doubleClickRefrsh];
+        }
+        currentIndex = tabBarController.selectedIndex;
+        return NO;
+    }
+    i = 1;
+    return YES;
 }
 </code></pre>
 
 
-<h5>参数说明基本都是见明知意（大人，请允许我自恋吧）</h5>
-
-<ol>
-<li>txtArr: 传入的文本数组（对象是字符串）</li>
-<li>colorArr: 颜色数组  （对象是UIColor）</li>
-<li>fontArr: 字体数组  (对象是字符串如：@&ldquo;18&rdquo; 号字体)</li>
-</ol>
-
-
-<h5>使用方法，写给新手哦，老手请过滤吧，不然你又该喷我了</h5>
-
-<p>我还是以代码使用为主</p>
-
-<pre><code>
-NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样式label么，哈哈", nil];
-
-    NSArray *b = [NSArray arrayWithObjects:[UIColor redColor], [UIColor blackColor], [UIColor blueColor], nil];
-    NSArray *c = [NSArray arrayWithObjects:@"19", @"13", @"17", nil];
-    [self.multiLabel txtArr:a colorArr:b fontArr:c];
-</code></pre>
-
-
-<p>哎，对了，我将此方法写成了UILabel的分类了，所以这么使用没什么不妥；至于分类，不懂得，去google吧，没翻墙的还是百度吧；</p>
-
-<p><a href="https://github.com/Ashen-Zhao/multiLabel">Demo下载地址</a></p>
+<p>
+这里是 <code>UITabBarDelegate</code> 的代理方法，实现的是双击第二个tabBarItem，则刷新其对应的第一个视图的节目数据;<br/>
+至于<code>i</code>的存在，是为了记录是否是双击，我是根据<code>i</code>是偶数还是奇数来进行判断的；<br/>
+就酱紫吧，不清楚的只管拿去用就行了，我就不多解释了，只有这几行代码，真没啥解释的了(^o^)/~</p>
 </div>
 
 
@@ -188,7 +161,7 @@ NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样�
 
 
 
-<time class='entry-date' datetime='2016-01-04T16:22:19+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:22 pm</span></time>
+<time class='entry-date' datetime='2016-01-20T17:44:11+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:44 pm</span></time>
       
 
 <span class="categories">
@@ -225,10 +198,8 @@ NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/01/04/any-push-pop/" title="Previous Post: iOS 如何随意的push来pop去">&laquo; iOS 如何随意的push来pop去</a>
+        <a class="basic-alignment left" href="/blog/2016/01/18/localized03/" title="Previous Post: iOS 多语言版本的开发（三）">&laquo; iOS 多语言版本的开发（三）</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/01/05/delcocopods/" title="Next Post: 从工程中删除Cocoapods">从工程中删除Cocoapods &raquo;</a>
       
     </p>
   </footer>
@@ -238,7 +209,7 @@ NSArray *a = [NSArray arrayWithObjects:@"瞅啥瞅", @"我不就是", @"多样�
   <section>
     <h1>评论</h1>
     <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
-<div class="ds-thread" data-title="多样式UILabel"></div>
+<div class="ds-thread" data-title="简单实现双击tabBarItem刷新页面"></div>
 <script type="text/javascript">
   var duoshuoQuery = {short_name:"zhaoashen"};
   (function() {
