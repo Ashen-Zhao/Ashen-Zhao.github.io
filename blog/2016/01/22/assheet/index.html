@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>EasyMarkDown - 啊神的技术博客</title>
+  <title>仿照微博、微信弹出ActionSheet样式 - 啊神的技术博客</title>
   <meta name="author" content="Ashen">
   
-  <meta name="description" content="一分钟学会Markdown语法">
+  <meta name="description" content="仿照微博、微信弹出ActionSheet样式,一款自定义的ActionSheet弹框工具类">
   
-  <meta name="keywords" content="Markdown简明语法, Markdown, 一分钟">
+  <meta name="keywords" content="ActionSheet, 自定义弹框, 自定义ActionSheet样式">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2016/01/08/easymarkdown/">
+  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2016/01/22/assheet/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="啊神的技术博客" type="application/atom+xml">
@@ -99,7 +99,7 @@
   
   <header>
     
-      <h1 class="entry-title">EasyMarkDown</h1>
+      <h1 class="entry-title">仿照微博、微信弹出ActionSheet样式</h1>
     
     
       <p class="meta">
@@ -108,7 +108,7 @@
 
 
 
-<time class='entry-date' datetime='2016-01-08T10:52:13+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:52 am</span></time>
+<time class='entry-date' datetime='2016-01-22T15:08:16+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>3:08 pm</span></time>
         
              
       | <a href="#comments">评论</a>
@@ -118,114 +118,139 @@
   </header>
 
 
-<div class="entry-content"><h2>EasyMarkDown</h2>
+<div class="entry-content"><p>&emsp;iOS 开发中，很多应用都会用到从屏幕底部弹出的UIActionSheet, 但是使用的过程中，总感觉系统的样式怪怪的，或者与自己开发的App的UI不是很协调，总之与自己的App搭配就一个字：丑。 说起ActionSheet样式，应该来看看主流的微博与微信是什么样式的；</p>
 
-<hr />
+<p><img src="/images/assheet02.PNG" width="200" height="370" alt="微信">
+<img src="/images/assheet01.PNG" width="200" height="370" alt="微博"></p>
 
-<h2>基本符号</h2>
-
-<ul>
-<li>*, _ , + 3个符号效果都一样，这3个符号被称为 Markdown符号 (符号使用时，有时一个符号不行，请速切换下一个符号)</li>
-<li>空白行表示另起一个段落</li>
-<li>`是表示inline代码，tab是用来标记 代码段，分别对应html的code，pre标签</li>
-</ul>
-
-
-<hr />
-
-<h2>换行</h2>
-
-<ul>
-<li>单一段落( &lt;p>) 用一个空白行</li>
-<li>连续两个空格 会变成一个 &lt;br></li>
-<li>连续3个符号，然后是空行，表示 hr横线</li>
-</ul>
-
-
-<hr />
-
-<h2>标题</h2>
-
-<ul>
-<li>生成h1&ndash;h6,在文字前面加上 1&ndash;6个# 来实现</li>
-</ul>
-
-
-<hr />
-
-<h2>引用</h2>
-
-<ul>
-<li>在第一行加上 “>”和一个空格，表示代码引用，还可以嵌套</li>
-</ul>
-
-
-<hr />
+<p>看上去的确挺自然，一点也不像系统自带的，给人的感觉就是不协调，不协调的</p>
 
 <!--more-->
 
 
-<h2>列表</h2>
+<p><img src="/images/assheet03.PNG" width="200" height="370" alt="微信"></p>
 
-<p>这个是markdown文件的主要表示方式，主题要点化</p>
+<p>看吧系统的与人家设计的，看上去就逊色许多。
+出于比较喜欢微博、微信这种设计，就自己动手鼓弄着也写了个<a href="https://github.com/Ashen-Zhao/ASSheet">工具类</a>，为以后使用做准备，使用起来很简单，只需传入titles 数组，以及实现一个Block 点击回调，就可以很快的实现像微博微信那样的样式，先看看效果图吧：</p>
 
-<ul>
-<li>使用*,+,-加上一个空格来表示</li>
-<li>可以支持嵌套</li>
-<li>有序列表用 数字+英文点+空格来表示</li>
-<li>列表内容很长，不需要手工输入换行符，css控制段落的宽度，会自动的缩放的</li>
-</ul>
+<p><img src="/images/assheet04.gif" alt="ActionSheet" /></p>
+
+<h3>我是如何实现的</h3>
+
+<p>&emsp;写一个继承自UIView的类，用这个view 来做为弹出后的幕布（也就是半透明的背景），然后给这个view 添加一个单击手势，手势方法就是讲该view移除隐藏的方法，然后将次view 背景色设置成半透明, 用 <code>[self setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.5]]</code> 来设置半透明背景色。<br/>
+&emsp;然后再定义个UIview *titleBgkView属性，该view 用来当titles 的幕布， 随后创建该view， 并且将此view 的frame 根据titles 的多少进行动态调整，我这里重写了大幕布的init 方法<code>- (instancetype)initWithFrame:(CGRect)frame titleArr:(NSArray *)titleArr</code> 传入titles 数组。 <br/>
+&emsp;再然后，根据传入的titles 进行创建title按钮，将创建的按钮添加到titleBgkView 上。<br/>
+噗，我这是写的啥，我还是直接上代码吧，对不住各位了，实在写不下去了，程序员嘛还是直接看代码来的最直接，对吧。
+这是我的.m 文件实现代码</p>
+
+<pre> <code> 
+- (instancetype)initWithFrame:(CGRect)frame titleArr:(NSArray *)titleArr {
+    self = [super initWithFrame:frame];
+    size = [UIScreen mainScreen].bounds.size;
+    [self setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.5]];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hiddenSheet)];
+    [self addGestureRecognizer:tap];
+    [self makeBaseUIWithTitleArr:titleArr];
+    
+    return self;
+}
+
+- (void)makeBaseUIWithTitleArr:(NSArray *)titleArr{
+   
+    self.bgkView = [[UIView alloc] initWithFrame:CGRectMake(0, size.height, size.width, titleArr.count * 50 + 55)];
+    _bgkView.backgroundColor = [UIColor colorWithRed:0xe9/255.0 green:0xe9/255.0 blue:0xe9/255.0 alpha:1.0];
+    [self addSubview:_bgkView];
+
+    CGFloat y = [self createBtnWithTitle:@"取消" origin_y: _bgkView.frame.size.height - 50 tag:-1 action:@selector(hiddenSheet)] - 55;
+    for (int i = 0; i < titleArr.count; i++) {
+        y = [self createBtnWithTitle:titleArr[i] origin_y:y tag:i action:@selector(click:)];
+    }
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect frame = _bgkView.frame;
+        frame.origin.y -= frame.size.height;
+        _bgkView.frame = frame;
+    }];
+   
+}
+
+- (CGFloat)createBtnWithTitle:(NSString *)title origin_y:(CGFloat)y tag:(NSInteger)tag action:(SEL)method {
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:title forState:UIControlStateNormal];
+    btn.frame = CGRectMake(0, y, size.width, 50);
+    btn.backgroundColor = [UIColor whiteColor];
+    btn.tag = tag;
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];
+    [_bgkView addSubview:btn];
+    return y -= tag == -1 ? 0 : 50.4;
+}
+- (void)hiddenSheet {
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect frame = _bgkView.frame;
+        frame.origin.y += frame.size.height;
+        _bgkView.frame = frame;
+    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self removeFromSuperview];
+    });
+}
+
+- (void)click:(UIButton *)btn {
+    if (self.Click) {
+        _Click(btn.tag);
+    }
+}
+
+</code> </pre>
 
 
-<hr />
+<p></p>
 
-<h2>链接</h2>
+<p>这是.h 文件代码</p>
 
-<ul>
-<li>直接写 [描述文本](url &ldquo;可选的title&rdquo;)</li>
-<li>引用 先定义 [ref_name]:url，然后在需要写入url的地方， 这样使用[描述文本][ref_name]，通常的ref_name一般用数字表示，这样显得专业</li>
-<li>简写url：用尖括号包裹url
-这样生成的url锚文本就是url本身</li>
-</ul>
+<pre> <code> 
+@property (nonatomic, copy) void (^Click)(NSInteger clickIndex);
+- (instancetype)initWithFrame:(CGRect)frame titleArr:(NSArray *)titleArr;
+- (void)hiddenSheet;
 
-
-<hr />
-
-<h2>插入图片</h2>
-
-<ul>
-<li>一行表示: ![alt_text](url &ldquo;可选的title&rdquo;)</li>
-<li>引用表示法: ![alt_text][id],预先定义 [id]:url &ldquo;可选title&rdquo;</li>
-<li>直接使用&lt;img>标签，这样可以指定图片的大小尺寸</li>
-</ul>
+</code></pre>
 
 
-<hr />
+<p></p>
 
-<h2>特殊符号</h2>
+<p>看吧，这多简单方便，有代码直接上，废话少说，程序员对代码的情结不容小觑，哼哈哈。</p>
 
-<ul>
-<li>用\来转义，表示文本中的markdown符号</li>
-<li>可以在文本种直接使用html标签，但是要注意在使用的时候，前后加上空行</li>
-<li>文本前后各加一个符号，表示斜体</li>
-</ul>
+<p>这里我也把使用的代码给贴出来吧，慢慢观察，仔细看，哈哈，使用起来很容易</p>
+
+<pre> <code>
+- (IBAction)showSheet:(id)sender {
+    AS_Sheet *a = [[AS_Sheet alloc] initWithFrame:self.view.bounds titleArr:@[@"从手机相册选择", @"拍照", @"小视频"]];
+    __weak typeof(a) weakA = a;
+    a.Click = ^(NSInteger clickIndex) {
+        switch (clickIndex) {
+            case 0:
+                NSLog(@"相册选择");
+                break;
+            case 1:
+                NSLog(@"拍照");
+                break;
+            case 2:
+                NSLog(@"小视频");
+                break;
+            default:
+                break;
+        }
+        [weakA hiddenSheet];
+    };
+    [self.navigationController.view addSubview:a];
+}
+
+</code></pre>
 
 
-<hr />
+<p></p>
 
-<h2>文本</h2>
-
-<ul>
-<li>文本对齐方式，使用html标签吧： text-align:center/right/left</li>
-<li>文字加粗是通过 文字左右各两个符号</li>
-<li>文字斜体是通过 文字左右各一个符号</li>
-</ul>
-
-
-<hr />
-
-<p></br>
-注：本文内容大致来自于：<a href="http://lutaf.com/markdown-simple-usage.htm">http://lutaf.com/markdown-simple-usage.htm</a></p>
+<p>最后，老规矩我还是把<a href="https://github.com/Ashen-Zhao/ASSheet">Demo附上</a>，以供辅助</p>
 </div>
 
 
@@ -241,12 +266,12 @@
 
 
 
-<time class='entry-date' datetime='2016-01-08T10:52:13+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:52 am</span></time>
+<time class='entry-date' datetime='2016-01-22T15:08:16+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>3:08 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/markdown/'>Markdown</a>
+    <a class='category' href='/blog/categories/i/'>iOS</a>
   
 </span>
 
@@ -278,10 +303,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/01/07/datasafety/" title="Previous Post: iOS 常用加密方法">&laquo; iOS 常用加密方法</a>
+        <a class="basic-alignment left" href="/blog/2016/01/20/doubleclick/" title="Previous Post: 简单实现双击tabBarItem刷新页面">&laquo; 简单实现双击tabBarItem刷新页面</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/01/11/webview/" title="Next Post: UIWebView 与 原生系统的简单跳转交互">UIWebView 与 原生系统的简单跳转交互 &raquo;</a>
       
     </p>
   </footer>
@@ -291,7 +314,7 @@
   <section>
     <h1>评论</h1>
     <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
-<div class="ds-thread" data-title="EasyMarkDown"></div>
+<div class="ds-thread" data-title="仿照微博、微信弹出ActionSheet样式"></div>
 <script type="text/javascript">
   var duoshuoQuery = {short_name:"zhaoashen"};
   (function() {
