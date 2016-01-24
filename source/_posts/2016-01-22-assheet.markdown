@@ -1,0 +1,127 @@
+---
+layout: post
+title: "仿照微博、微信弹出ActionSheet样式"
+date: 2016-01-22 15:08:16 +0800
+comments: true
+keywords: ActionSheet, 自定义弹框, 自定义ActionSheet样式
+description: 仿照微博、微信弹出ActionSheet样式,一款自定义的ActionSheet弹框工具类
+categories: i|OS
+---
+&emsp;iOS 开发中，很多应用都会用到从屏幕底部弹出的UIActionSheet, 但是使用的过程中，总感觉系统的样式怪怪的，或者与自己开发的App的UI不是很协调，总之与自己的App搭配就一个字：丑。 说起ActionSheet样式，应该来看看主流的微博与微信是什么样式的；  
+
+<img src="/images/assheet02.PNG" width="200" height="370" alt="微信">
+<img src="/images/assheet01.PNG" width="200" height="370" alt="微博">  
+
+看上去的确挺自然，一点也不像系统自带的，给人的感觉就是不协调，不协调的  
+<!--more-->
+<img src="/images/assheet03.PNG" width="200" height="370" alt="微信">  
+
+看吧系统的与人家设计的，看上去就逊色许多。
+出于比较喜欢微博、微信这种设计，就自己动手鼓弄着也写了个[工具类](https://github.com/Ashen-Zhao/ASSheet)，为以后使用做准备，使用起来很简单，只需传入titles 数组，以及实现一个Block 点击回调，就可以很快的实现像微博微信那样的样式，先看看效果图吧：  
+
+![ActionSheet](/images/assheet04.gif)
+
+###我是如何实现的  
+
+&emsp;写一个继承自UIView的类，用这个view 来做为弹出后的幕布（也就是半透明的背景），然后给这个view 添加一个单击手势，手势方法就是讲该view移除隐藏的方法，然后将次view 背景色设置成半透明, 用 `[self setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.5]]` 来设置半透明背景色。  
+&emsp;然后再定义个UIview *titleBgkView属性，该view 用来当titles 的幕布， 随后创建该view， 并且将此view 的frame 根据titles 的多少进行动态调整，我这里重写了大幕布的init 方法`- (instancetype)initWithFrame:(CGRect)frame titleArr:(NSArray *)titleArr` 传入titles 数组。   
+&emsp;再然后，根据传入的titles 进行创建title按钮，将创建的按钮添加到titleBgkView 上。  
+噗，我这是写的啥，我还是直接上代码吧，对不住各位了，实在写不下去了，程序员嘛还是直接看代码来的最直接，对吧。
+这是我的.m 文件实现代码  
+<pre> <code> 
+- (instancetype)initWithFrame:(CGRect)frame titleArr:(NSArray *)titleArr {
+    self = [super initWithFrame:frame];
+    size = [UIScreen mainScreen].bounds.size;
+    [self setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.5]];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hiddenSheet)];
+    [self addGestureRecognizer:tap];
+    [self makeBaseUIWithTitleArr:titleArr];
+    
+    return self;
+}
+
+- (void)makeBaseUIWithTitleArr:(NSArray *)titleArr{
+   
+    self.bgkView = [[UIView alloc] initWithFrame:CGRectMake(0, size.height, size.width, titleArr.count * 50 + 55)];
+    _bgkView.backgroundColor = [UIColor colorWithRed:0xe9/255.0 green:0xe9/255.0 blue:0xe9/255.0 alpha:1.0];
+    [self addSubview:_bgkView];
+
+    CGFloat y = [self createBtnWithTitle:@"取消" origin_y: _bgkView.frame.size.height - 50 tag:-1 action:@selector(hiddenSheet)] - 55;
+    for (int i = 0; i < titleArr.count; i++) {
+        y = [self createBtnWithTitle:titleArr[i] origin_y:y tag:i action:@selector(click:)];
+    }
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect frame = _bgkView.frame;
+        frame.origin.y -= frame.size.height;
+        _bgkView.frame = frame;
+    }];
+   
+}
+
+- (CGFloat)createBtnWithTitle:(NSString *)title origin_y:(CGFloat)y tag:(NSInteger)tag action:(SEL)method {
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:title forState:UIControlStateNormal];
+    btn.frame = CGRectMake(0, y, size.width, 50);
+    btn.backgroundColor = [UIColor whiteColor];
+    btn.tag = tag;
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];
+    [_bgkView addSubview:btn];
+    return y -= tag == -1 ? 0 : 50.4;
+}
+- (void)hiddenSheet {
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect frame = _bgkView.frame;
+        frame.origin.y += frame.size.height;
+        _bgkView.frame = frame;
+    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self removeFromSuperview];
+    });
+}
+
+- (void)click:(UIButton *)btn {
+    if (self.Click) {
+        _Click(btn.tag);
+    }
+}
+
+</code> </pre>  
+
+这是.h 文件代码  
+<pre> <code> 
+@property (nonatomic, copy) void (^Click)(NSInteger clickIndex);
+- (instancetype)initWithFrame:(CGRect)frame titleArr:(NSArray *)titleArr;
+- (void)hiddenSheet;
+
+</code></pre>  
+
+看吧，这多简单方便，有代码直接上，废话少说，程序员对代码的情结不容小觑，哼哈哈。   
+
+这里我也把使用的代码给贴出来吧，慢慢观察，仔细看，哈哈，使用起来很容易  
+<pre> <code>
+- (IBAction)showSheet:(id)sender {
+    AS_Sheet *a = [[AS_Sheet alloc] initWithFrame:self.view.bounds titleArr:@[@"从手机相册选择", @"拍照", @"小视频"]];
+    __weak typeof(a) weakA = a;
+    a.Click = ^(NSInteger clickIndex) {
+        switch (clickIndex) {
+            case 0:
+                NSLog(@"相册选择");
+                break;
+            case 1:
+                NSLog(@"拍照");
+                break;
+            case 2:
+                NSLog(@"小视频");
+                break;
+            default:
+                break;
+        }
+        [weakA hiddenSheet];
+    };
+    [self.navigationController.view addSubview:a];
+}
+
+</code></pre>  
+
+最后，老规矩我还是把[Demo附上](https://github.com/Ashen-Zhao/ASSheet)，以供辅助
