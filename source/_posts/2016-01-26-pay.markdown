@@ -1,0 +1,9 @@
+---
+layout: post
+title: "iOS之支付功能"
+date: 2016-01-26 11:15:35 +0800
+comments: true
+keywords: 微信支付, 支付宝支付, paypal支付, iOS支付
+categories: iOS
+---
+###先挖个坑，埋点土，近期推出支付开发（微信、支付宝、paypal，可能还有银联卡支付），记得时刻关注哦
