@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ios | 啊神的技术博客]]></title>
+  <link href="http://ashen-zhao.github.io/blog/categories/ios/atom.xml" rel="self"/>
+  <link href="http://ashen-zhao.github.io/"/>
+  <updated>2016-01-26T11:20:21+08:00</updated>
+  <id>http://ashen-zhao.github.io/</id>
+  <author>
+    <name><![CDATA[Ashen]]></name>
+    <email><![CDATA[zhaoashen@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iOS之支付功能]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/01/26/pay/"/>
+    <updated>2016-01-26T11:15:35+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/01/26/pay</id>
+    <content type="html"><![CDATA[<h3>先挖个坑，埋点土，近期推出支付开发（微信、支付宝、paypal，可能还有银联卡支付），记得时刻关注哦</h3>
+]]></content>
+  </entry>
+  
+</feed>

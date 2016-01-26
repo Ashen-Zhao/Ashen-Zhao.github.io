@@ -41,22 +41,6 @@
   addBlankTargetForLinks();
  });
  </script>
-<script>
-
-(function(){
-
-    var bp = document.createElement('script');
-
-    bp.src = '//push.zhanzhang.baidu.com/push.js';
-
-    var s = document.getElementsByTagName("script")[0];
-
-    s.parentNode.insertBefore(bp, s);
-
-})();
-
-</script>
-
 
   
 
@@ -96,6 +80,38 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/26/pay/">iOS之支付功能</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-26T11:15:35+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:15 am</span></time>
+        
+             
+      | <a href="/blog/2016/01/26/pay/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>先挖个坑，埋点土，近期推出支付开发（微信、支付宝、paypal，可能还有银联卡支付），记得时刻关注哦</h3>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -198,49 +214,6 @@ int i = 0;
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/18/localized03/">iOS 多语言版本的开发（三）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-01-18T16:06:48+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:06 pm</span></time>
-        
-             
-      | <a href="/blog/2016/01/18/localized03/#comments">评论</a>
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>写在前面</h3>
-
-<p>&emsp;<a href="/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a> 中我们实现了如何让用户自己去切换系统语言的功能，我们还写了<a href="https://github.com/Ashen-Zhao/easyLocalized">Demo</a> 以供辅助学习；但是，继以上两篇文章都是建立在项目刚刚启动或启动不久，项目中存在的中文字符串还不是很多，手动改起来也还可以接受; 那么问题来了，如果项目已经竣工或者已经迭代几个版本了，那该如何实现了？手动改起来也不太现实，耗时耗力不讨好的手动，在这里就不用考虑了。 不让考虑，是因为我有更简单快捷高效的方法，让我慢慢与您道来；</p>
-
-<h3>如何辨别项目中的中文字符串?</h3>
-
-<p>&emsp;既然要替换项目中使用到的中文字符串，那么前提就必须要先找到这些个字符串，然后将这些字符串，替换成我们定义的<strong>宏</strong>， 为了替换方便，可将这些字符串自身作为<code>key</code>， 这里不理解的不要紧，下面我还会讲到。 既然是辨别中文字符串，那也就是说在项目文件中进行匹配查找，说到匹配，那就需要正则表达式了，用正则表达式匹配Xcode中的使用的中文字符串，使用<code>(@"[^"]*[\u4E00-\u9FA5]+[^"\n]*?")\s*</code> 即可， 打开你的Xcode 试试看，切记find 后面的选项要选择 <code>Regular Expression</code>, 默认选中的是<code>Text</code>, 如图</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/01/18/localized03/">阅读全文 →</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -272,6 +245,10 @@ int i = 0;
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/pay/">iOS之支付功能</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/01/22/assheet/">仿照微博、微信弹出ActionSheet样式</a>
@@ -313,16 +290,13 @@ int i = 0;
         <a href="/blog/2016/01/07/datasafety/">iOS 常用加密方法</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/01/05/delcocopods/">从工程中删除Cocoapods</a>
-      </li>
-    
   </ul>
 </section>
 <section>
  <h1>分类</h1>
  <ul id="categories">
   <li class='category'><a href='/blog/categories/github/'>Github (2)</a></li>
+<li class='category'><a href='/blog/categories/ios/'>Ios (1)</a></li>
 <li class='category'><a href='/blog/categories/i/'>iOS (12)</a></li>
 <li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
