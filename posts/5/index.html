@@ -86,6 +86,51 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2016/01/05/delcocopods/">从工程中删除Cocoapods</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-05T17:16:42+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:16 pm</span></time>
+        
+             
+      | <a href="/blog/2016/01/05/delcocopods/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>&emsp;会有这么一种情况，因为需要改动的第三方比较多，不想使用cocoapods管理第三方，这时候，对于已经使用cocoapods的情况，需要进行删除处理，就可以按照以下步骤进行：</p>
+
+<ol>
+<li><p>删除工程文件夹下的Podfile、Podfile.lock及Pods文件夹</p></li>
+<li><p>删除xcworkspace文件</p></li>
+<li><p>使用xcodeproj文件打开工程，删除Frameworks组下的Pods.xcconfig及libPods.a引用</p></li>
+<li><p>在工程设置中的Build Phases下删除Check Pods Manifest.lock及Copy Pods Resources, 可能还会有Embed Pods Frameworks也删了，总之带有Pods全删了</p></li>
+</ol>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/05/delcocopods/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2016/01/04/colorfullabel/">多样式UILabel</a></h1>
     
     
@@ -173,97 +218,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/01/love/">迟到的爱，是现在和未来</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-01-01T16:28:50+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>4:28 pm</span></time>
-        
-             
-      | <a href="/blog/2016/01/01/love/#comments">评论</a>
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><b></p>
-
-<p>爱在此处绽放</p>
-
-<p>心底的声音，从未停止呼喊</p>
-
-<p>爱的懵懵懂懂，爱的小心翼翼</p>
-
-<p>尽管，使出全力想要呵护，保护这份爱，想让她从不受伤害</p>
-
-<p>尽管如此</p>
-
-<p>你越是在乎，越是想要保护，就越容易出差错</p>
-
-<p>爱，不是小心翼翼</p>
-
-<p>爱，需要交流，需要内心世界的交互</p>
-
-<p>一直以为，爱，如果你懂我，我什么都不用说</p>
-
-<p>可那只是理想</p>
-
-<p>你不说，谁会懂？爱不是玩家家</p>
-
-<p>既然承诺，就有责任，爱不是游戏</p>
-
-<p>我对爱情的认真，连我自己都想不到我会做什么我自己想都没想的事</p>
-
-<p>爱，需要勇气</p>
-
-<p>需要在自己害怕的时候，依然挺起胸膛保护你的她，让对方感觉不到你的胆怯</p>
-
-<p>想信爱，从不怀疑，从不动摇</p>
-
-<p>天荒地老，愿与之白头偕老
-</b></p>
-
-<hr />
-
-<h4>对待爱情的态度，本该如此</h4>
-
-<pre>
-      ******       ******
-    **********   **********
-  ************* *************
- *****************************
- *****************************
- *****************************
-  ***************************
-    ***********************
-      *******************
-        ***************
-          ***********
-            *******
-              ***
-               *
-</pre>
-
-
-<p></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -297,6 +251,10 @@
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/pay.markdown/">iOS之支付功能</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/01/26/pay/">iOS之支付功能</a>
@@ -338,17 +296,13 @@
         <a href="/blog/2016/01/08/easymarkdown/">EasyMarkDown</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/01/07/datasafety/">iOS 常用加密方法</a>
-      </li>
-    
   </ul>
 </section>
 <section>
  <h1>分类</h1>
  <ul id="categories">
   <li class='category'><a href='/blog/categories/github/'>Github (2)</a></li>
-<li class='category'><a href='/blog/categories/i/'>iOS (13)</a></li>
+<li class='category'><a href='/blog/categories/i/'>iOS (14)</a></li>
 <li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
 <li class='category'><a href='/blog/categories/sui-bi/'>随笔 (2)</a></li>
