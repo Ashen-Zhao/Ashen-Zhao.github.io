@@ -86,37 +86,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/01/26/pay.markdown/">iOS之支付功能</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-01-26T11:15:35+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:15 am</span></time>
-        
-             
-      | <a href="/blog/2016/01/26/pay.markdown/#comments">评论</a>
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">###先挖个坑，埋点土，近期推出支付开发（微信、支付宝、paypal，可能还有银联卡支付），记得时刻关注哦</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/blog/2016/01/26/pay/">iOS之支付功能</a></h1>
     
     
@@ -186,6 +155,65 @@
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/20/doubleclick/">简单实现双击tabBarItem刷新页面</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-20T17:44:11+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:44 pm</span></time>
+        
+             
+      | <a href="/blog/2016/01/20/doubleclick/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>如何实现双击tabbarItem刷新页面？</h3>
+
+<p>&emsp;在网上寻找了一圈，众说纷纭，大差不差，而且基本上实现的不是双击才刷新，而是双击刷新一次后，只要再次单击就会刷新，这样很容易造成用户不小心点着，降低用户体验；见于这种局面，我花费了近一个小时，鼓捣出来了，只有双击的时候，才会去刷新页面（其实是伪双击，也就是单击两次，没有做两次单击时间间隔限制），废话不说了，直接上代码：</p>
+
+<pre><code>
+int i = 0;
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    i++;
+    UIViewController *tbSelectedController = tabBarController.selectedViewController;
+    if ([tbSelectedController isEqual:viewController]) {
+        if (currentIndex == 1 && tabBarController.selectedIndex == 1 && i % 2 != 0) {
+            UINavigationController *nav = self.viewControllers[1];
+            TestViewController *tVC = nav.viewControllers[0];
+            [tVC doubleClickRefrsh];
+        }
+        currentIndex = tabBarController.selectedIndex;
+        return NO;
+    }
+    i = 1;
+    return YES;
+}
+</code></pre>
+
+
+<p>
+这里是 <code>UITabBarDelegate</code> 的代理方法，实现的是双击第二个tabBarItem，则刷新其对应的第一个视图的节目数据;<br/>
+至于<code>i</code>的存在，是为了记录是否是双击，我是根据<code>i</code>是偶数还是奇数来进行判断的；<br/>
+就酱紫吧，不清楚的只管拿去用就行了，我就不多解释了，只有这几行代码，真没啥解释的了(^o^)/~</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -217,10 +245,6 @@
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2016/01/26/pay.markdown/">iOS之支付功能</a>
-      </li>
     
       <li class="post">
         <a href="/blog/2016/01/26/pay/">iOS之支付功能</a>
@@ -262,13 +286,17 @@
         <a href="/blog/2016/01/08/easymarkdown/">EasyMarkDown</a>
       </li>
     
+      <li class="post">
+        <a href="/blog/2016/01/07/datasafety/">iOS 常用加密方法</a>
+      </li>
+    
   </ul>
 </section>
 <section>
  <h1>分类</h1>
  <ul id="categories">
   <li class='category'><a href='/blog/categories/github/'>Github (2)</a></li>
-<li class='category'><a href='/blog/categories/i/'>iOS (14)</a></li>
+<li class='category'><a href='/blog/categories/i/'>iOS (13)</a></li>
 <li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
 <li class='category'><a href='/blog/categories/sui-bi/'>随笔 (2)</a></li>
