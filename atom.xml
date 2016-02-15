@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-01-30T13:56:35+08:00</updated>
+  <updated>2016-02-15T14:13:14+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -1403,7 +1403,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#x7a;&#104;&#x61;&#x6f;&#x61;&#115;&#x68;&#101;&#x6e;&#x40;&#x67;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#122;&#x68;&#97;&#x6f;&#97;&#115;&#104;&#x65;&#110;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#109;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#58;&#122;&#104;&#97;&#x6f;&#97;&#x73;&#x68;&#x65;&#x6e;&#64;&#x67;&#109;&#x61;&#105;&#108;&#46;&#x63;&#111;&#x6d;">&#x7a;&#104;&#x61;&#x6f;&#x61;&#x73;&#x68;&#101;&#110;&#64;&#103;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;</a>；</p>
 ]]></content>
   </entry>
   
@@ -1610,6 +1610,202 @@ public String readStringXml(String xml,String ifcity) {
 <h3>&emsp;初来乍到，还请各位多多关注;</h3>
 
 <h3>&emsp;在下方评论区内，可以给我留言来交流学习哦；</h3>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[博主资料]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2015/02/15/myinfo/"/>
+    <updated>2015-02-15T11:58:15+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2015/02/15/myinfo</id>
+    <content type="html"><![CDATA[<h3>赵阿申</h3>
+
+<p>[男]程序猿</p>
+
+<p>手机号码: (+86) 159-3860-9304</p>
+
+<p>电子邮箱: zhaoashen@163.com、<a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#x7a;&#x68;&#97;&#x6f;&#97;&#115;&#104;&#x65;&#110;&#64;&#103;&#109;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#122;&#104;&#x61;&#x6f;&#x61;&#x73;&#104;&#x65;&#110;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#109;</a></p>
+
+<p>个人博客:<a href="http://www.devashen.com">http://www.devashen.com</a></p>
+
+<p>GitHub:<a href="https://github.com/ashen-zhao">https://github.com/ashen-zhao</a></p>
+
+<h2>iOS 项目经历</h2>
+
+<hr />
+
+<h3>项目一</h3>
+
+<p><strong>项目名称：</strong>收留我（版本迭代）<a href="https://appsto.re/cn/oOb6R.i">App下载地址</a></p>
+
+<p><strong>项目概述：</strong>简单来说，收留我是一款，你要去哪儿玩，便可以提前几天在App 内预约你要去的地方的本地人，一旦预约成功，这个本地人就会带你体验当地的一些好玩的景点；</p>
+
+<p><strong>责任描述：</strong>
+  主要负责“收留我” App 的 Bug 修复、性能优化、部分功能重构以及新增功能;<br/>
+ 在职期间共迭代10 个版本，以下是版本分别对应的主要工作 ：</p>
+
+<p>•  v3.0.1 修复应用存在Bug为主<br/>
+•  v3.1.0 添加微信、支付宝支付功能<br/>
+•  v3.1.1 添加paypal支付，修复部分Bug<br/>
+•  v3.2.0 重构了上传多张图片，解决上传丢失、卡死、速度慢的问题<br/>
+•  v3.2.1 重构聊天功能，用云信替换环信<br/>
+•  v3.3.0 新增智能匹配功能<br/>
+•  v3.3.1 添加预约服务功能<br/>
+•  v3.3.2 添加由服务端控制的主页悬停按钮键<br/>
+•  v3.3.3 添加繁简切换功能<br/>
+ •  v3.3.4 重构网络底层库等一些优化</p>
+
+<p><strong>技术要点：</strong><br/>
+•  使用支付宝、Paypal 以及微信支付 SDK,，实现支付功能；<br/>
+•  使用云信IM 替换掉环信IM ，实现即时通讯功能；<br/>
+•  使用正则匹配检测项目中所有使用中文字符串，实现多语言功能；<br/>
+•  实现 H5 与 Native 系统的交互；<br/>
+•  实现依据推送消息类型，进入不同的应用页面;<br/>
+•  新增3DTouch快捷菜单;<br/>
+•  使用通知以及Block，实现多张图片上传，并且发布出后与用户选择的图片顺序一致;</p>
+
+<h3>项目二</h3>
+
+<p><strong>项目名称：</strong> 知事（独立开发）<a href="https://appsto.re/cn/OEgr8.i">App下载地址</a>&emsp;<a href="https://github.com/Ashen-Zhao/zhishiNews">源码下载地址</a></p>
+
+<p><strong>项目概述：</strong>
+知事 App 是为 iPhone 用户量身定制的新闻类产品，界面简洁易操作， 符合苹果终端用户的操作习惯，有着优质的新闻内容，丰富的瀑布流图片，以及短视频。</p>
+
+<p><strong>功能描述：</strong> <br/>
+•  分类别浏览新闻;<br/>
+•  随机产生最新阅读;<br/>
+•  以瀑布流的形式展示图片新闻;<br/>
+•  图片浏览器用来对图片浏览以及操作图片;<br/>
+•  视频在线观看;</p>
+
+<p><strong>技术要点：</strong>
+•  用第三方实现 path 侧边栏抽屉效果，修改第三方实现一些页面不响应滑动调出侧 边栏手势;
+•  使用 UIView 自定义导航，实现导航滚动切换类别;
+•  使用第三方 UICollectionViewLayout 实现不规则的瀑布流效果；
+•  使用 FMDB 实现新闻、图片、视频的收藏；
+•  UIScrollView的重用机制实现图片浏览器，解决内存吃力的问题；
+•  利用 AFNetworking,  封装 Block 网络请求类；
+•  用 SDWebImage 实现图片的异步请求；
+•  使用 ShareSDK 实现多平台分享功能；
+•  使用多套 UITableViewCell 布局页面；
+•  自定义系统的MPMoviePlayerController的view播放样式</p>
+
+<h3>项目三</h3>
+
+<p><strong>项目名称：</strong>
+邻家音乐（独立开发）  <a href="https://github.com/Ashen-Zhao/linjiaMusic">源码下载地址</a></p>
+
+<p><strong>项目概述：</strong>
+邻家音乐是一款音乐类的应用App, 进入应用会有一个音库，以供选择喜欢的类型，还有热推音乐，为用户提供最新最热的音乐，此外用户还可以随意搜索自己喜欢的歌曲;总之为用户提供一个全新的音乐的模式;</p>
+
+<p><strong>功能描述：</strong><br/>
+•  提供新歌、排行、歌手、类别等多种选择；<br/>
+•  提供热听歌曲和最新专辑；<br/>
+•  歌曲搜索；<br/>
+•  最近 30 条播放记录以及歌曲收藏；<br/>
+•  歌曲在线播放；</p>
+
+<p><strong>技术要点：</strong><br/>
+•  使用MVC架构模式， 搭建项目框架；  <br/>
+•  使用第三方类库 SwipeView 实现手势切换页签；          <br/>
+•  UITableViewHeaderFooterView 实现自定义 tableView 的页眉；<br/>
+•  用 CoreData 实现歌曲的最近播放记录与个人喜爱记录；<br/>
+•  用 AVPlayer 实现播放网络歌曲；<br/>
+•  使用单例, 实现全局播放音乐；<br/>
+•  用 UISearchBar 实现搜索功能；<br/>
+•  用 AFNetworkReachabilityManager 监听网络状态；<br/>
+•  使用文件管理类 NSFileManager，实现清理缓存；</p>
+
+<h2>工作经历</h2>
+
+<hr />
+
+<p>2015.6 - 2016.1 &emsp;&emsp; 杭州搜留信息科技有限公司 &emsp;&emsp;iOS 开发工程师</p>
+
+<hr />
+
+<p><strong>工作职责:</strong><br/>
+ • 修复软件运营过程成出现的Bug；<br/>
+ • 改善软件的性能，提高用户体验；<br/>
+ • 参与新增功能的计划讨论；<br/>
+ • 负责测试软件并将软件发布到App Store；</p>
+
+<p>2015.2 - 2015.6 &emsp;&emsp; 蓝鸥科技有限公司 &emsp;&emsp; iOS 学员</p>
+
+<hr />
+
+<p><strong>工作职责:</strong><br/>
+ • 快速全面的掌握iOS 开发技能</p>
+
+<p><strong>培训理由:</strong>
+ • 培训并不可耻，比起自学，学校教的反而更快速，更全面；当然培训只是快速掌握，想要在IT行业发展，时刻学习是不可少的，主动学习新技术才是IT 的王道。</p>
+
+<p>2012.9 - 2014.7 &emsp;&emsp; 励志工作室 &emsp;&emsp; .NET 开发工程师</p>
+
+<hr />
+
+<p><strong>工作职责:</strong>
+ • 主要负责 .NET 网站后台开发；<br/>
+ • 参与项目需求分析；<br/>
+ • 负责项目的测试与发布；</p>
+
+<h2>技能清单</h2>
+
+<hr />
+
+<h3>iOS 技能</h3>
+
+<p>•   熟练掌握 MRC 和 ARC 内存管理机制；<br/>
+•   熟练掌握 MVC 架构模式和 单例模式、代理、观察者等设计模式, 了解 MVVM 模式;<br/>
+•   熟练使用 SQLite 数据库、CoreData、文件读写方式进行数据持久化； <br/>
+•   熟练使用 XML、JSON 解析；<br/>
+•   熟练掌握 Block 语法编程； <br/>
+•   有较强的纯代码编写能力， 熟练使用 StoryBoard 和 Xib 搭建 UI 框架； <br/>
+•   熟练使用 CocoaPods 管理第三方库；<br/>
+•   熟练掌握 GCD、NSThread、NSOperationQueue 等 iOS 多线程编程技术；<br/>
+•   熟练使用 AFNetworking、FMDB、SDWebImage、MJRefresh、ShareSDK 等第三方库；<br/>
+•   熟练使用 Xcode 等相关工具，掌握常用的调试方法和技巧；<br/>
+•   熟练 iOS 应用真机测试、程序发布的整个流程；<br/>
+•   熟练使用 SVN 版本控制;<br/>
+•  了解 Swift、 Socket 网络编程、HTTP 协议、TCP / IP 协议； <br/>
+•  了解 XMPP 搭建 IM 平台；<br/>
+•  了解 Push 消息推送机制和本地消息推送机制；<br/>
+•  了解 CoreGraphics、MapKit、CoreLocation等框架；<br/>
+•  具有良好的编程习惯、代码规范、具备较强的阅读他人代码的能力；</p>
+
+<h3>Web 开发</h3>
+
+<p>•  使用 HTML + CSS 做静态网页；<br/>
+•  用 .NET 开发网站；<br/>
+•  用 photoshop 做一些简单的图；</p>
+
+<h3>云和开放平台</h3>
+
+<p>•  用 Java 写微信公众应用；<br/>
+•  使用 BAE / SAE 托管应用代码；</p>
+
+<h3>Octopress及GitHub</h3>
+
+<p>•  使用Octopress 搭建博客，并托管到GitHub<br/>
+•  使用GitHub进行代码的托管</p>
+
+<h2>教育</h2>
+
+<hr />
+
+<p>学历：本科&emsp;&emsp;&emsp;专业：计算机科学与技术&emsp;&emsp;&emsp;学校：郑州大学</p>
+
+<h2>我眼里的我</h2>
+
+<hr />
+
+<p> 自从用 HTML 写了一个简单的个人页面之后，就对编程爱到骨子里去了，神奇的代码，完全吸引了我全部的热情；我热爱编程，就像老鼠爱着大米； 我喜欢专研技术，爱逛科技论坛，这让我的学习能力很强；看到新的技术出现，总是爱捣鼓捣鼓，不知不觉，总有人叫我 ‘大申’，其实我叫 ‘阿申’ 啦；我虽爱技术，但我并不木讷， 我也是有着幽默精神的男帝程序猿；</p>
+
+<h2>致谢</h2>
+
+<hr />
+
+<p> 感谢您花时间阅读我的简历，期待能有机会和您共事。</p>
 ]]></content>
   </entry>
   
