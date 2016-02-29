@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-02-25T20:12:49+08:00</updated>
+  <updated>2016-02-29T17:44:08+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -845,17 +845,12 @@ github 开源代码库以及版本控制系统</p>
 <h2>MD5</h2>
 
 <pre><code>- (NSString *) stringFromMD5 {
-if(self == nil || [self length] == 0) {
-    return nil;
-}
-const char *value = [self UTF8String];
-unsigned char outputBuffer[CC_MD5_DIGEST_LENGTH];
+if(self == nil || [self length] == 0) {        return nil;
+}    const char *value = [self UTF8String];    unsigned char outputBuffer[CC_MD5_DIGEST_LENGTH];
 CC_MD5(value, strlen(value), outputBuffer);
 NSMutableString *outputString = [[NSMutableString alloc] initWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-for(NSInteger count = 0; count &lt; CC_MD5_DIGEST_LENGTH; count++){
-    [outputString appendFormat:@"%02x",outputBuffer[count]];
-}
-    return outputString;
+for(NSInteger count = 0; count &lt; CC_MD5_DIGEST_LENGTH; count++){        [outputString appendFormat:@"%02x",outputBuffer[count]];
+}       return outputString;
 }
 </code></pre>
 
@@ -888,39 +883,12 @@ static const short _base64DecodingTable[256] = {
 + (NSString *) encodeBase64WithString: (NSString *) strData {
 NSData *objData = [strData dataUsingEncoding:NSUTF8StringEncoding];
 const unsigned char * objRawData = [objData bytes];
-char * objPointer;
-char * strResult;
-// Get the Raw Data length and ensure we actually have data
-int intLength = [objData length];
-if (intLength == 0) return nil;
-// Setup the String-based Result placeholder and pointer within that placeholder
-strResult = (char *)calloc(((intLength + 2) / 3) * 4, sizeof(char));
-objPointer = strResult;
-// Iterate through everything
-while (intLength &gt; 2) { // keep going until we have less than 24 bits
-    *objPointer++ = _base64EncodingTable[objRawData[0] &gt;&gt; 2];
-    *objPointer++ = _base64EncodingTable[((objRawData[0] &amp; 0x03) &lt;&lt; 4) + (objRawData[1] &gt;&gt; 4)]; *objPointer++ = _base64EncodingTable[((objRawData[1] &amp; 0x0f) &lt;&lt; 2) + (objRawData[2] &gt;&gt; 6)]; *objPointer++ = _base64EncodingTable[objRawData[2] &amp; 0x3f];
-    // we just handled 3 octets (24 bits) of data
-    objRawData += 3;
-    intLength -= 3;
-}
-// now deal with the tail end of things
-if (intLength != 0) {
-    *objPointer++ = _base64EncodingTable[objRawData[0] &gt;&gt; 2];
-    if (intLength &gt; 1) {
-        *objPointer++ = _base64EncodingTable[((objRawData[0] &amp; 0x03) &lt;&lt; 4) + (objRawData[1] &gt;&gt; 4)]; *objPointer++ = _base64EncodingTable[(objRawData[1] &amp; 0x0f) &lt;&lt; 2];
-        *objPointer++ = '=';
-    } else {
-        *objPointer++ = _base64EncodingTable[(objRawData[0] &amp; 0x03) &lt;&lt; 4];
-        *objPointer++ = '=';
-        *objPointer++ = '=';
-    }
-}
-// Terminate the string-based result
-*objPointer = '\0';
-NSString *rstStr = [NSString stringWithCString:strResult encoding:NSASCIIStringEncoding]; free(objPointer);
-return rstStr;
-}
+char * objPointer;    char * strResult;    // Get the Raw Data length and ensure we actually have data
+int intLength = [objData length];    if (intLength == 0) return nil;    // Setup the String-based Result placeholder and pointer within that placeholder
+strResult = (char *)calloc(((intLength + 2) / 3) * 4, sizeof(char));    objPointer = strResult;    // Iterate through everything
+while (intLength &gt; 2) { // keep going until we have less than 24 bits        *objPointer++ = _base64EncodingTable[objRawData[0] &gt;&gt; 2];        *objPointer++ = _base64EncodingTable[((objRawData[0] &amp; 0x03) &lt;&lt; 4) + (objRawData[1] &gt;&gt; 4)]; *objPointer++ = _base64EncodingTable[((objRawData[1] &amp; 0x0f) &lt;&lt; 2) + (objRawData[2] &gt;&gt; 6)]; *objPointer++ = _base64EncodingTable[objRawData[2] &amp; 0x3f];        // we just handled 3 octets (24 bits) of data
+    objRawData += 3;        intLength -= 3;    }    // now deal with the tail end of things    if (intLength != 0) {        *objPointer++ = _base64EncodingTable[objRawData[0] &gt;&gt; 2];        if (intLength &gt; 1) {            *objPointer++ = _base64EncodingTable[((objRawData[0] &amp; 0x03) &lt;&lt; 4) + (objRawData[1] &gt;&gt; 4)]; *objPointer++ = _base64EncodingTable[(objRawData[1] &amp; 0x0f) &lt;&lt; 2];            *objPointer++ = '=';        } else {            *objPointer++ = _base64EncodingTable[(objRawData[0] &amp; 0x03) &lt;&lt; 4];            *objPointer++ = '=';            *objPointer++ = '=';        }    }    // Terminate the string-based result
+*objPointer = '\0';    NSString *rstStr = [NSString stringWithCString:strResult encoding:NSASCIIStringEncoding]; free(objPointer);    return rstStr;    }
 
 
 + (NSData *)decodeBase64WithString:(NSString *)strBase64 {
@@ -1403,7 +1371,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x7a;&#104;&#97;&#x6f;&#97;&#115;&#104;&#101;&#x6e;&#64;&#103;&#109;&#97;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#x7a;&#x68;&#97;&#111;&#97;&#115;&#104;&#x65;&#110;&#64;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#109;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#58;&#122;&#104;&#x61;&#x6f;&#x61;&#x73;&#x68;&#x65;&#x6e;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#109;">&#x7a;&#104;&#x61;&#x6f;&#x61;&#115;&#x68;&#101;&#x6e;&#x40;&#x67;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;</a>；</p>
 ]]></content>
   </entry>
   
@@ -1614,7 +1582,7 @@ public String readStringXml(String xml,String ifcity) {
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[博主资料]]></title>
+    <title type="html"><![CDATA[我的资料]]></title>
     <link href="http://ashen-zhao.github.io/blog/2015/02/15/myinfo/"/>
     <updated>2015-02-15T11:58:15+08:00</updated>
     <id>http://ashen-zhao.github.io/blog/2015/02/15/myinfo</id>
@@ -1624,7 +1592,7 @@ public String readStringXml(String xml,String ifcity) {
 
 <p>手机号码: (+86) 159-3860-9304</p>
 
-<p>电子邮箱: zhaoashen@163.com、<a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#x7a;&#104;&#97;&#111;&#x61;&#x73;&#x68;&#101;&#x6e;&#64;&#x67;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#122;&#x68;&#x61;&#x6f;&#97;&#115;&#104;&#101;&#110;&#x40;&#103;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;</a></p>
+<p>电子邮箱: zhaoashen@163.com、<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#58;&#x7a;&#104;&#97;&#111;&#97;&#115;&#104;&#101;&#x6e;&#x40;&#103;&#109;&#97;&#105;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#122;&#x68;&#97;&#111;&#97;&#x73;&#x68;&#x65;&#110;&#x40;&#103;&#109;&#97;&#105;&#108;&#46;&#x63;&#111;&#x6d;</a></p>
 
 <p>个人博客:<a href="http://www.devashen.com">http://www.devashen.com</a></p>
 
