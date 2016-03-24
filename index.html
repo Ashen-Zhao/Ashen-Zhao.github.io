@@ -86,7 +86,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/01/26/pay/">iOS之支付功能</a></h1>
+      <h1 class="entry-title"><a href="/blog/2016/01/26/pay/">iOS之接地气的移动支付</a></h1>
     
     
       <p class="meta">
@@ -105,7 +105,191 @@
   </header>
 
 
-  <div class="entry-content"><h3>先挖个坑，埋点土，近期推出支付开发（微信、支付宝、paypal，可能还有银联卡支付），记得时刻关注哦</h3>
+  <div class="entry-content"><h3>iOS 移动支付之种类</h3>
+
+<p>iOS 端的移动支付，大概包括：支付宝支付、微信支付、银联卡支付、paypal支付，现在又多出一个Apple pay支付；</p>
+
+<h3>如何集成这些种类的支付方式</h3>
+
+<p>谈及如何集成这些支付方式，面对各种支付方式的SDK以及Demo写的详细的完美无缺，我还真不如还如何去写，这里我就接地气的写写，写的不好请勿喷哦☺！</p>
+
+<h3>支付宝支付</h3>
+
+<h3>大致有以下步骤：</h3>
+
+<h4>1.向支付宝申请, 与支付宝签约，获得商户PID（partner）和账号ID（seller）和私钥(privateKey)</h4>
+
+<p>注：*这一步，一般公司会搞定的，这里只是让你知道来龙去脉☺<br/>
+&emsp; 没有支付宝账号的同学，可以<a href="https://memberprod.alipay.com/account/reg/index.htm">点击这里注册账号</a>; <br/>
+&emsp; 已经有支付宝账号的同学<a href="https://b.alipay.com/order/productDetail.htm?productId=2015110218010538">点击这里申请移动支付</a><br/>
+申请签约有个门槛比较难，就是不管你是个人还是企业，都需要营业执照，这点有点蛋疼，不过人家也是为了有质量的管理申请者嘛，可以理解，我这里没有营业执照，申请工作就死在了摇篮里，不过大致流程，我基本弄清楚了，<strong>不过作为开发者，这申请工作就不用多关心了，一般公司都会有申请过的</strong>，我这里写出来也就是让我们开发者也大概知道流程，而不是直接就是用，只知去向，不知来龙。  <br/>
+申请签约成功后，就可以查看 PID（partner）和账号ID（seller）和私钥(privateKey) ，<a href="https://b.alipay.com/order/serviceIndex.htm">查看地址点击这里</a> 进行登录，点击下图中的查询PID和Key;<br/>
+<img src="/images/pay01.png" alt="Pay" /><br/>
+但是这里查询到的Key 是公钥，不是私钥，你到底该怎么弄私钥呢？同学们，不用急，支付宝文档写的还是比较清楚的，<a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.cxzipP&amp;treeId=58&amp;articleId=103242&amp;docType=1">点击这里可以查看RSA私钥及公钥生成</a></p>
+
+<p>这里文档给出了两种平台下的生产方式，我们既然是iOS 开发者，那就选择Linux用户生产的方式吧，可以直接在Mac的终端敲这些命令；
+<img src="/images/pay02.png" alt="支付" /><br/>
+敲过这些命令后，会在本地生产两个文件，分别是私钥和公钥文件<br/>
+在命令行敲入（以行为单位）<br/>
+$cd ~/<br/>
+$open .  //打开文件的存放位置<br/>
+想要查看文件内容，还需要使用命令<br/>
+$cat rsa_private_key.pem  //会在终端显示文件中的内容，这就是私钥<br/>
+到这里，第一步基本上就可以了，具体还需要自己动手试试，不然还是会一头雾水。</p>
+
+<h4>2.下载支付宝SDK以及Demo</h4>
+
+<p>这一步，没啥好说的，给个地址就行<a href="https://doc.open.alipay.com/doc2/detail.htm?treeId=54&amp;articleId=104509&amp;docType=1">SDK以及Demo下载地址</a></p>
+
+<h4>3.集成SDK到工程中（生成订单信息,签名加密）</h4>
+
+<h5>支付宝官方集成文档</h5>
+
+<p>集成支付宝SDK的步骤，这里是官方给出的<a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.SiPSmP&amp;treeId=59&amp;articleId=103676&amp;docType=1">集成文档</a>, 按照步骤集成总是会出错，这不是我们脑子不行，而是官方毕竟是官方。<br/>
+查看支付宝给出的Demo，会发现这些文件必须要加到项目中：
+<img src="/images/pay05.png" alt="" /><br/>
+其中小方框中的为必须加入，而除了小方框以外的，那就要看你们后台人员是否将签名成功字符串格式化的订单字符串，给你传到前端来，如果没有，那就必须你自己在前端处理； 按理说，这些应该由后台来处理，为了订单信息的安全，以及前端业务的轻运行，都该有后端来处理（注：这点不懂，不要紧，后面还会根据代码在进行讲解;</p>
+
+<h5>集成中可能遇到的错误</h5>
+
+<p>1）Cannot find interface declaration for &lsquo;NSObject&rsquo;<br/>
+<img src="/images/pay03.png" alt="" /><br/>
+解决方案：a. 可以在报错的文件中加入<code>#import &lt;Foundation/Foundation.h&gt;</code><br/>
+b. 可以建个pch文件加入</p>
+
+<pre>`
+#ifdef __OBJC__
+#import UIKit/UIKit.h
+#import Foundation/Foundation.h
+#endif
+`</pre>
+
+
+<p></p>
+
+<p>2)提示找不到 openssl/asn1.h 文件<br/>
+<img src="/images/pay06.png" alt="" /><br/>
+解决方案：Build Settings &ndash;> Search Paths &ndash;> Header Search paths:$(PROJECT_DIR)/ASPayDemo/Alipay<br/>
+<img src="/images/pay07.png" alt="" /></p>
+
+<p>3)_CNCopyCurrentNetworkInfo,referenced from:<br/>
+<img src="/images/pay08.png" alt="" /><br/>
+解决方案：添加SystemConfiguration.framework</p>
+
+<p><img src="/images/pay09.png" alt="" /></p>
+
+<h4>部署代码</h4>
+
+<pre>
+<code>
+
+    NSString *partner = @""; //PID
+
+    NSString *seller = @""; //收款账户，手机号或者邮箱
+   
+    NSString*privateKey= @"";// 私钥
+    
+    if ([partner length] == 0 ||
+        [seller length] == 0 ||
+        [privateKey length] == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"缺少partner或者seller或者私钥。"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    Order *order = [[Order alloc] init];
+    order.partner = partner;
+    order.seller = seller;
+    order.tradeNO = @"20160324012412412"; //订单ID（由商家自行制定）
+    order.productName = @"iOS 高级教程"; //商品标题
+    order.productDescription = @"这是一本关于iOS的一本高级教程书"; //商品描述
+    order.amount = @"0.1"; //商品价格
+    order.notifyURL = @"http://www.devashen.com/Notify/Alipay/"; //回调URL
+    
+    order.service = @"mobile.securitypay.pay";
+    order.paymentType = @"1";
+    order.inputCharset = @"utf-8";
+    order.itBPay = @"30m";
+    order.showUrl = @"m.alipay.com";
+    
+    NSString *appScheme = @"alisdkdemo";
+    
+    //将商品信息拼接成字符串   该方法支付宝已经封好
+    NSString *orderSpec = [order description];
+    
+    
+    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
+    id<DataSigner> signer = CreateRSADataSigner(privateKey);
+    //调用签名
+    NSString *signedString = [signer signString:orderSpec];
+    
+    
+    
+    
+    //将签名成功字符串格式化为订单字符串,请严格按照该格式
+    NSString *orderString = nil;
+    if (signedString != nil) {
+        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                       orderSpec, signedString, @"RSA"];
+        
+        
+        //***************上面提到好的后台，会把订单字符串直接传给我们，而我们要做的其实也就只剩下这一步了********************/
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+            if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"9000"]) {
+                //9000为支付成功
+                
+            }
+            
+        }];
+    }
+
+</code></pre>
+
+
+<p>
+看代码，如果后台将签名成功字符串格式化的订单字符串，给你传到前端来，那我们就只需要做很少的工作就可以了，只需要直接处理订单字符串即可：</p>
+
+<pre><code>
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+            if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"9000"]) {
+                //9000为支付成功
+                
+            }
+            
+        }];
+</code></pre>
+
+
+<p>
+最后，千万别忘了，在Appdelegate中，处理支付宝客户端返回url处理方法, 少了这一步，支付宝SDK的回调方法是不会执行的：</p>
+
+<pre><code>
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+   //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+        }];
+    return YES;
+}
+</code></pre>
+
+
+<p>
+到这里，支付宝支付基本上完成， 迫不及待的你，赶紧去试验试验吧， 别忘了给你们相关负责人要对应的PID、收款账号、以及私钥，当然如果后台直接传给你订单字符串的话，你可以直接给后台要接口了，置于PID什么的你就不用管了。</p>
+
+<h5>相关连接</h5>
+
+<p><a href="https://github.com/ashen-zhao/aspay">本文章对应的Demo, 包含后端是、否给你订单字符串的两种处理</a></p>
+
+<p><a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.AIe1BQ&amp;treeId=59&amp;articleId=103563&amp;docType=1">支付宝移动支付SDK官方文档</a></p>
 </div>
   
   
@@ -244,7 +428,7 @@ int i = 0;
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2016/01/26/pay/">iOS之支付功能</a>
+        <a href="/blog/2016/01/26/pay/">iOS之接地气的移动支付</a>
       </li>
     
       <li class="post">
