@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-03-24T17:31:47+08:00</updated>
+  <updated>2016-03-24T17:34:44+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -37,8 +37,12 @@
 &emsp; 已经有支付宝账号的同学<a href="https://b.alipay.com/order/productDetail.htm?productId=2015110218010538">点击这里申请移动支付</a><br/>
 申请签约有个门槛比较难，就是不管你是个人还是企业，都需要营业执照，这点有点蛋疼，不过人家也是为了有质量的管理申请者嘛，可以理解，我这里没有营业执照，申请工作就死在了摇篮里，不过大致流程，我基本弄清楚了，<strong>不过作为开发者，这申请工作就不用多关心了，一般公司都会有申请过的</strong>，我这里写出来也就是让我们开发者也大概知道流程，而不是直接就是用，只知去向，不知来龙。  <br/>
 申请签约成功后，就可以查看 PID（partner）和账号ID（seller）和私钥(privateKey) ，<a href="https://b.alipay.com/order/serviceIndex.htm">查看地址点击这里</a> 进行登录，点击下图中的查询PID和Key;<br/>
-<img src="http://ashen-zhao.github.io/images/pay01.png" alt="Pay" /><br/>
-但是这里查询到的Key 是公钥，不是私钥，你到底该怎么弄私钥呢？同学们，不用急，支付宝文档写的还是比较清楚的，<a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.cxzipP&amp;treeId=58&amp;articleId=103242&amp;docType=1">点击这里可以查看RSA私钥及公钥生成</a></p>
+<img src="http://ashen-zhao.github.io/images/pay01.png" alt="Pay" /></p>
+
+<!--more-->
+
+
+<p>但是这里查询到的Key 是公钥，不是私钥，你到底该怎么弄私钥呢？同学们，不用急，支付宝文档写的还是比较清楚的，<a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.cxzipP&amp;treeId=58&amp;articleId=103242&amp;docType=1">点击这里可以查看RSA私钥及公钥生成</a></p>
 
 <p>这里文档给出了两种平台下的生产方式，我们既然是iOS 开发者，那就选择Linux用户生产的方式吧，可以直接在Mac的终端敲这些命令；
 <img src="http://ashen-zhao.github.io/images/pay02.png" alt="支付" /><br/>
@@ -1555,7 +1559,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#x3a;&#122;&#x68;&#x61;&#111;&#97;&#115;&#x68;&#101;&#110;&#64;&#103;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#111;&#109;">&#122;&#x68;&#x61;&#111;&#x61;&#x73;&#x68;&#101;&#x6e;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#58;&#x7a;&#104;&#x61;&#x6f;&#97;&#115;&#x68;&#101;&#x6e;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#122;&#104;&#x61;&#111;&#97;&#115;&#x68;&#x65;&#110;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>；</p>
 ]]></content>
   </entry>
   
