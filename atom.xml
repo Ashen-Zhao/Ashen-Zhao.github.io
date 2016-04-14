@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-03-24T17:34:44+08:00</updated>
+  <updated>2016-04-14T14:07:02+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[让UIImageView显示Gif图]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/04/14/gifimageview/"/>
+    <updated>2016-04-14T13:57:05+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/04/14/gifimageview</id>
+    <content type="html"><![CDATA[<p>&emsp;各位同学们，这次给大家分享一个小工具，可以解决你在开发过程中，需要显示Gif图片的需求；由于太过于简单，我这里就不多说了；有需要的同学，请前往<a href="https://github.com/ashen-zhao/asGifImageView">https://github.com/ashen-zhao/asGifImageView</a>进行下载，不需要的同学也可以去Star，留着以后使用，最后，记得关注我哦，哈哈😄；</p>
+
+<h2>接下来，简单写一下如何使用该工具</h2>
+
+<h4>功能说明：</h4>
+
+<p>这是一个UIImageView的分类，可以让UIImageView支持显示本地Gif以及网络Gif图片。</p>
+
+<h4>使用说明</h4>
+
+<p>1.导入分类头文件 <code>#import "UIImageView+ASGif.h"</code><br/>
+2.调用<br/>
+&emsp;a.显示本地gif图片 <br/>
+    <code>[self.gifImgV showGifImageWithData:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"abc" ofType:@"gif"]]];</code><br/>
+&emsp;b.显示网络gif图片<br/>
+       <code>[self.gifImgV showGifImageWithURL:[NSURL URLWithString:@"http://ww1.sinaimg.cn/large/85cccab3gw1etdi67ue4eg208q064n50.gif"]];</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS之接地气的移动支付]]></title>
@@ -1559,7 +1583,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#58;&#x7a;&#104;&#x61;&#x6f;&#97;&#115;&#x68;&#101;&#x6e;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#122;&#104;&#x61;&#111;&#97;&#115;&#x68;&#x65;&#110;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>；</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#122;&#104;&#x61;&#111;&#x61;&#115;&#104;&#101;&#110;&#64;&#x67;&#x6d;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#122;&#104;&#x61;&#111;&#x61;&#115;&#x68;&#x65;&#110;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#109;</a>；</p>
 ]]></content>
   </entry>
   
