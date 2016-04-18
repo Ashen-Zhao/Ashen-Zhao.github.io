@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/i/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-04-14T14:12:39+08:00</updated>
+  <updated>2016-04-18T16:03:17+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -21,6 +21,10 @@
     <content type="html"><![CDATA[<p>&emsp;各位同学们，这次给大家分享一个小工具，可以解决你在开发过程中，需要显示Gif图片的需求；由于太过于简单，我这里就不多说了；有需要的同学，请前往<a href="https://github.com/ashen-zhao/asGifImageView">https://github.com/ashen-zhao/asGifImageView</a>进行下载，不需要的同学也可以去Star，留着以后使用，最后，记得关注我哦，哈哈😄；</p>
 
 <h2>接下来，简单写一下如何使用该工具</h2>
+
+<h4>示例图</h4>
+
+<p><img src="/images/gifView.gif" alt="gifUIImageView" /></p>
 
 <h4>功能说明：</h4>
 
