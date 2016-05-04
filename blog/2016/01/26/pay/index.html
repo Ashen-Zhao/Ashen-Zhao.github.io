@@ -10,7 +10,7 @@
   
   <meta name="description" content="啊神的技术博客">
   
-  <meta name="keywords" content="微信支付, 支付宝支付, paypal支付, iOS支付">
+  <meta name="keywords" content="微信支付, 支付宝支付, paypal支付, iOS支付,啊神">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -129,7 +129,7 @@
 <p>但是这里查询到的Key 是公钥，不是私钥，你到底该怎么弄私钥呢？同学们，不用急，支付宝文档写的还是比较清楚的，<a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.cxzipP&amp;treeId=58&amp;articleId=103242&amp;docType=1">点击这里可以查看RSA私钥及公钥生成</a></p>
 
 <p>这里文档给出了两种平台下的生产方式，我们既然是iOS 开发者，那就选择Linux用户生产的方式吧，可以直接在Mac的终端敲这些命令；
-<img src="/images/pay02.png" alt="支付" /><br/>
+<img src="/images/pay02.png" alt="啊神支付" /><br/>
 敲过这些命令后，会在本地生产两个文件，分别是私钥和公钥文件<br/>
 在命令行敲入（以行为单位）<br/>
 $cd ~/<br/>
@@ -148,13 +148,13 @@ $cat rsa_private_key.pem  //会在终端显示文件中的内容，这就是私�
 
 <p>集成支付宝SDK的步骤，这里是官方给出的<a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.SiPSmP&amp;treeId=59&amp;articleId=103676&amp;docType=1">集成文档</a>, 按照步骤集成总是会出错，这不是我们脑子不行，而是官方毕竟是官方。<br/>
 查看支付宝给出的Demo，会发现这些文件必须要加到项目中：
-<img src="/images/pay05.png" alt="" /><br/>
+<img src="/images/pay05.png" alt="啊神" /><br/>
 其中小方框中的为必须加入，而除了小方框以外的，那就要看你们后台人员是否将签名成功字符串格式化的订单字符串，给你传到前端来，如果没有，那就必须你自己在前端处理； 按理说，这些应该由后台来处理，为了订单信息的安全，以及前端业务的轻运行，都该有后端来处理（注：这点不懂，不要紧，后面还会根据代码在进行讲解;</p>
 
 <h5>集成中可能遇到的错误</h5>
 
 <p>1）Cannot find interface declaration for &lsquo;NSObject&rsquo;<br/>
-<img src="/images/pay03.png" alt="" /><br/>
+<img src="/images/pay03.png" alt="啊神" /><br/>
 解决方案：a. 可以在报错的文件中加入<code>#import &lt;Foundation/Foundation.h&gt;</code><br/>
 b. 可以建个pch文件加入</p>
 
@@ -169,15 +169,15 @@ b. 可以建个pch文件加入</p>
 <p></p>
 
 <p>2)提示找不到 openssl/asn1.h 文件<br/>
-<img src="/images/pay06.png" alt="" /><br/>
+<img src="/images/pay06.png" alt="啊神" /><br/>
 解决方案：Build Settings &ndash;> Search Paths &ndash;> Header Search paths:$(PROJECT_DIR)/ASPayDemo/Alipay<br/>
-<img src="/images/pay07.png" alt="" /></p>
+<img src="/images/pay07.png" alt="啊神" /></p>
 
 <p>3)_CNCopyCurrentNetworkInfo,referenced from:<br/>
-<img src="/images/pay08.png" alt="" /><br/>
+<img src="/images/pay08.png" alt="啊神" /><br/>
 解决方案：添加SystemConfiguration.framework</p>
 
-<p><img src="/images/pay09.png" alt="" /></p>
+<p><img src="/images/pay09.png" alt="啊神" /></p>
 
 <h4>部署代码</h4>
 

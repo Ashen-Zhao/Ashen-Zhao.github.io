@@ -8,9 +8,9 @@
   <title>iOS 多语言版本的开发（三） - 啊神的技术博客</title>
   <meta name="author" content="Ashen">
   
-  <meta name="description" content="如何实现,iOS多语言开发">
+  <meta name="description" content="如何实现,iOS多语言开发,啊神">
   
-  <meta name="keywords" content="iOS本地化, iOS多语言开发, 多语言开发, 多语言">
+  <meta name="keywords" content="iOS本地化, iOS多语言开发, 多语言开发, 多语言,啊神">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,19 +113,19 @@
 <!--more-->
 
 
-<p><img src="/images/localized301.png" alt="多语言" /></p>
+<p><img src="/images/localized301.png" alt="啊神多语言" /></p>
 
 <h3>如何取出识别到的中文字符串？</h3>
 
 <p>&emsp;我们已经知道如何识别项目中的字符串了，但是如何取出来使用呢？ 这就需要遍历项目中所有的指定后缀（e.g:  .h、.m等）的文件，然后利用正则表达匹配所有使用到的中文字符串，并写入文件中。为了方便起见，我将此过程写了一个Mac客户端<a href="https://github.com/Ashen-Zhao/ReadChinese">小应用</a>，可直接将选中的项目中所有的中文字符串，导出到指定的路径下；该应用还可以选择对于重复出现的中文字符串进行处理，以及还可以将中文字符串导出为繁体； <a href="https://github.com/Ashen-Zhao/ReadChinese">小应用</a>更值得关注的是它导出的文件，可以直接拿来当做多语言文件中的<code>key=value</code> 使用，非常简单，喜欢的可以去<a href="https://github.com/Ashen-Zhao/ReadChinese">下载看看</a>， 含有源码的哦；小应用运行图如下：</p>
 
-<p><img src="/images/readChinese.jpg" alt="多语言" /></p>
+<p><img src="/images/readChinese.jpg" alt="啊神多语言" /></p>
 
 <h3>如何使用取出的中文字符串？</h3>
 
 <p>&emsp;已经拿到取出的中文字符串文件，这个文件是可以直接拿来用做多语言文件使用的，小应用导出的文件，只可以用于中文以及繁体多语言文件，而对于其他的语言，就需要你拿着导出的文件，找你们公司的翻译人员，进行翻译； 拿繁体版来举个例子，导出来的繁体文件如下（收留我App导出的文件）：</p>
 
-<p><img src="/images/localized303.png" alt="多语言" /></p>
+<p><img src="/images/localized303.png" alt="啊神多语言" /></p>
 
 <p>这个繁体文件，可以直接作为繁体多语言使用，如何想要翻译成英文，可以将此文件拷贝一份，交给翻译人员，让其翻译。翻译的时候，你一定要给翻译人员沟通好，让其只翻译<code>value</code>, 也就是图中<code>=</code> 后面双引号中的内容，格式什么的也不要让他乱改，否则容易出现问题，导致key与value对不上号。 一切沟通妥当后，等翻译把文件给你后，直接将文件中的内容，复制到多语言文件的英语文件中即可；</p>
 
@@ -146,7 +146,7 @@
 
 <p>替换规则如图：</p>
 
-<p><img src="/images/localized304.png" alt="多语言" /></p>
+<p><img src="/images/localized304.png" alt="啊神多语言" /></p>
 
 <p>这次选中的是<code>Replace</code>, 不是<code>Find</code>。按图中所示，选择完毕后，点击<code>ReplaceAll</code>, 会出来一个弹框，不用管它直接继续，即可，然后你在看项目中使用到的中文字符串是否已经替换掉了，到这里基本上大功告成了；</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/i/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-04-18T16:03:17+08:00</updated>
+  <updated>2016-05-04T13:40:26+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -24,7 +24,7 @@
 
 <h4>示例图</h4>
 
-<p><img src="/images/gifView.gif" alt="gifUIImageView" /></p>
+<p><img src="/images/gifView.gif" alt="啊神gifUIImageView" /></p>
 
 <h4>功能说明：</h4>
 
@@ -73,7 +73,7 @@
 <p>但是这里查询到的Key 是公钥，不是私钥，你到底该怎么弄私钥呢？同学们，不用急，支付宝文档写的还是比较清楚的，<a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.cxzipP&amp;treeId=58&amp;articleId=103242&amp;docType=1">点击这里可以查看RSA私钥及公钥生成</a></p>
 
 <p>这里文档给出了两种平台下的生产方式，我们既然是iOS 开发者，那就选择Linux用户生产的方式吧，可以直接在Mac的终端敲这些命令；
-<img src="/images/pay02.png" alt="支付" /><br/>
+<img src="/images/pay02.png" alt="啊神支付" /><br/>
 敲过这些命令后，会在本地生产两个文件，分别是私钥和公钥文件<br/>
 在命令行敲入（以行为单位）<br/>
 $cd ~/<br/>
@@ -92,13 +92,13 @@ $cat rsa_private_key.pem  //会在终端显示文件中的内容，这就是私�
 
 <p>集成支付宝SDK的步骤，这里是官方给出的<a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.SiPSmP&amp;treeId=59&amp;articleId=103676&amp;docType=1">集成文档</a>, 按照步骤集成总是会出错，这不是我们脑子不行，而是官方毕竟是官方。<br/>
 查看支付宝给出的Demo，会发现这些文件必须要加到项目中：
-<img src="/images/pay05.png" alt="" /><br/>
+<img src="/images/pay05.png" alt="啊神" /><br/>
 其中小方框中的为必须加入，而除了小方框以外的，那就要看你们后台人员是否将签名成功字符串格式化的订单字符串，给你传到前端来，如果没有，那就必须你自己在前端处理； 按理说，这些应该由后台来处理，为了订单信息的安全，以及前端业务的轻运行，都该有后端来处理（注：这点不懂，不要紧，后面还会根据代码在进行讲解;</p>
 
 <h5>集成中可能遇到的错误</h5>
 
 <p>1）Cannot find interface declaration for &lsquo;NSObject&rsquo;<br/>
-<img src="/images/pay03.png" alt="" /><br/>
+<img src="/images/pay03.png" alt="啊神" /><br/>
 解决方案：a. 可以在报错的文件中加入<code>#import &lt;Foundation/Foundation.h&gt;</code><br/>
 b. 可以建个pch文件加入</p>
 
@@ -113,15 +113,15 @@ b. 可以建个pch文件加入</p>
 <p></p>
 
 <p>2)提示找不到 openssl/asn1.h 文件<br/>
-<img src="/images/pay06.png" alt="" /><br/>
+<img src="/images/pay06.png" alt="啊神" /><br/>
 解决方案：Build Settings &ndash;> Search Paths &ndash;> Header Search paths:$(PROJECT_DIR)/ASPayDemo/Alipay<br/>
-<img src="/images/pay07.png" alt="" /></p>
+<img src="/images/pay07.png" alt="啊神" /></p>
 
 <p>3)_CNCopyCurrentNetworkInfo,referenced from:<br/>
-<img src="/images/pay08.png" alt="" /><br/>
+<img src="/images/pay08.png" alt="啊神" /><br/>
 解决方案：添加SystemConfiguration.framework</p>
 
-<p><img src="/images/pay09.png" alt="" /></p>
+<p><img src="/images/pay09.png" alt="啊神" /></p>
 
 <h4>部署代码</h4>
 
@@ -258,7 +258,7 @@ b. 可以建个pch文件加入</p>
 <p>看吧,系统的与人家设计的，看上去就逊色许多。
 出于比较喜欢微博、微信这种设计，就自己动手鼓弄着也写了个<a href="https://github.com/Ashen-Zhao/ASSheet">工具类</a>，为以后使用做准备，使用起来很简单，只需传入titles 数组，以及实现一个Block 点击回调，就可以很快的实现像微博微信那样的样式，先看看效果图吧：</p>
 
-<p><img src="/images/assheet04.gif" alt="ActionSheet" /></p>
+<p><img src="/images/assheet04.gif" alt="啊神ActionSheet" /></p>
 
 <h3>我是如何实现的</h3>
 
@@ -431,19 +431,19 @@ int i = 0;
 <!--more-->
 
 
-<p><img src="/images/localized301.png" alt="多语言" /></p>
+<p><img src="/images/localized301.png" alt="啊神多语言" /></p>
 
 <h3>如何取出识别到的中文字符串？</h3>
 
 <p>&emsp;我们已经知道如何识别项目中的字符串了，但是如何取出来使用呢？ 这就需要遍历项目中所有的指定后缀（e.g:  .h、.m等）的文件，然后利用正则表达匹配所有使用到的中文字符串，并写入文件中。为了方便起见，我将此过程写了一个Mac客户端<a href="https://github.com/Ashen-Zhao/ReadChinese">小应用</a>，可直接将选中的项目中所有的中文字符串，导出到指定的路径下；该应用还可以选择对于重复出现的中文字符串进行处理，以及还可以将中文字符串导出为繁体； <a href="https://github.com/Ashen-Zhao/ReadChinese">小应用</a>更值得关注的是它导出的文件，可以直接拿来当做多语言文件中的<code>key=value</code> 使用，非常简单，喜欢的可以去<a href="https://github.com/Ashen-Zhao/ReadChinese">下载看看</a>， 含有源码的哦；小应用运行图如下：</p>
 
-<p><img src="/images/readChinese.jpg" alt="多语言" /></p>
+<p><img src="/images/readChinese.jpg" alt="啊神多语言" /></p>
 
 <h3>如何使用取出的中文字符串？</h3>
 
 <p>&emsp;已经拿到取出的中文字符串文件，这个文件是可以直接拿来用做多语言文件使用的，小应用导出的文件，只可以用于中文以及繁体多语言文件，而对于其他的语言，就需要你拿着导出的文件，找你们公司的翻译人员，进行翻译； 拿繁体版来举个例子，导出来的繁体文件如下（收留我App导出的文件）：</p>
 
-<p><img src="/images/localized303.png" alt="多语言" /></p>
+<p><img src="/images/localized303.png" alt="啊神多语言" /></p>
 
 <p>这个繁体文件，可以直接作为繁体多语言使用，如何想要翻译成英文，可以将此文件拷贝一份，交给翻译人员，让其翻译。翻译的时候，你一定要给翻译人员沟通好，让其只翻译<code>value</code>, 也就是图中<code>=</code> 后面双引号中的内容，格式什么的也不要让他乱改，否则容易出现问题，导致key与value对不上号。 一切沟通妥当后，等翻译把文件给你后，直接将文件中的内容，复制到多语言文件的英语文件中即可；</p>
 
@@ -464,7 +464,7 @@ int i = 0;
 
 <p>替换规则如图：</p>
 
-<p><img src="/images/localized304.png" alt="多语言" /></p>
+<p><img src="/images/localized304.png" alt="啊神多语言" /></p>
 
 <p>这次选中的是<code>Replace</code>, 不是<code>Find</code>。按图中所示，选择完毕后，点击<code>ReplaceAll</code>, 会出来一个弹框，不用管它直接继续，即可，然后你在看项目中使用到的中文字符串是否已经替换掉了，到这里基本上大功告成了；</p>
 
