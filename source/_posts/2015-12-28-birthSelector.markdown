@@ -3,15 +3,15 @@ layout: post
 title: "iOS 只需几步实现生日选择器"
 date: 2015-12-29 15:19:49 +0800
 comments: true
-tags: [日历, iOS生日选择器, 日历选择]
-keywords: 日历, iOS生日选择器, 日历选择
-description:  iOS 实现生日选择器
+tags: [日历, iOS生日选择器, 日历选择, 啊神]
+keywords: 日历, iOS生日选择器, 日历选择, 啊神
+description:  iOS 实现生日选择器, 啊神
 categories: i|OS
 ---
   项目开发中难免会遇到让用户填写出生年月的时候，本章来介绍一下我自己写的生日选择器的[ASBirthSheet](https://github.com/Ashen-Zhao/ASBirthSheet); 
   <!--more-->
   </br>
-大致就是这个样子![示例图](http://ashen-zhao.github.io/images/birthsrceenshot.png)
+大致就是这个样子![啊神示例图](http://ashen-zhao.github.io/images/birthsrceenshot.png)
   我对生日选择器页面进行了简单的封装，算上.h文件只有两个文件，使用起来很简单；
 
 ####以下是对.h文件中的说明

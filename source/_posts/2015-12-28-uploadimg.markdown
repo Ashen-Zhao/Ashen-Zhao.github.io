@@ -3,9 +3,9 @@ layout: post
 title: "iOS 上传图片方法总结"
 date: 2015-12-28 17:51:57 +0800
 comments: true
-tags: [iOS 上传, 上传图片, iOS上传图片]
-keywords: 上传图片, iOS上传, 上传图片iOS, iOS如何上传图片
-description:  iOS如何上传图片
+tags: [iOS 上传, 上传图片, iOS上传图片,啊神]
+keywords: 上传图片, iOS上传, 上传图片iOS, iOS如何上传图片,啊神
+description:  iOS如何上传图片,啊神
 categories: i|OS
 ---
 ###开题：

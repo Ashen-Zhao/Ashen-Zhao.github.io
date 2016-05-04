@@ -3,9 +3,9 @@ layout: post
 title: "从工程中删除Cocoapods"
 date: 2016-01-05 17:16:42 +0800
 comments: true
-tags: [删除Cocoapods, Cocoapods]
-keywords: 删除Cocoapods, Cocoapods
-description:  从工程中删除Cocoapods
+tags: [删除Cocoapods, Cocoapods, 啊神]
+keywords: 删除Cocoapods, Cocoapods, 啊神
+description:  从工程中删除Cocoapods, 啊神
 
 categories: i|OS
 ---
@@ -19,7 +19,7 @@ categories: i|OS
 
 4. 在工程设置中的Build Phases下删除Check Pods Manifest.lock及Copy Pods Resources, 可能还会有Embed Pods Frameworks也删了，总之带有Pods全删了
 <!--more-->
-![删除图](/images/delcocopods.png)
+![啊神删除图](/images/delcocopods.png)
 
 **注意**:如果将cocoapods集成到工程中后不小心修改或删除了其相关文件导致无法便以通过例如：不小心把
 

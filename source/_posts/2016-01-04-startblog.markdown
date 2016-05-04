@@ -3,7 +3,7 @@ layout: post
 title: "开始我的博客之旅"
 date: 2015-12-28 07:08:39 +0800
 comments: true
-tags: [博客, octopress]
+tags: [博客, octopress, 啊神]
 keywords: 啊神, 啊神的技术博客
 description:  啊神的技术博客
 categories: 随笔

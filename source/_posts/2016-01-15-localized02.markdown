@@ -3,8 +3,8 @@ layout: post
 title: "iOS 多语言版本的开发（二）"
 date: 2016-01-15 05:13:56 +0800
 comments: true
-keywords: iOS本地化, iOS多语言开发, 多语言开发
-description: 如何实现,iOS多语言开发
+keywords: iOS本地化, iOS多语言开发, 多语言开发,啊神
+description: 如何实现,iOS多语言开发,啊神
 categories: i|OS
 ---
 ###题记  
@@ -14,7 +14,7 @@ categories: i|OS
 ###语言文件存在的形式  
 想要实现用户自己手动切换语言版本，就先要了解语言文件在资源文件中存在的形式;  
 
-![多语言](/images/localized09.png)  
+![啊神多语言](/images/localized09.png)  
 
 如图中，不管是英语（en.lproj）、简体（zh-Hans.lproj）、还是繁体（zh-Hant.lproj）都是以`.lproj` 的文件夹形式存在, 所以当我们要切换语言的时候，其实也就是做到去取这些`.lproj` 文件夹中的`ASLocalized.strings`文件； 
 <!--more--> 
@@ -81,7 +81,7 @@ NSLog(@"result: %@", showValue);
 
 Demo效果图：  
 
-![多语言](/images/localized11.gif)  
+![啊神多语言](/images/localized11.gif)  
 
 ###首次进入应用的考虑
 到这里，还没有完，这时我们需要考虑下，用户第一次进来时，该显示什么样的语言，是跟随系统，还是我们给一种默认的语言；  

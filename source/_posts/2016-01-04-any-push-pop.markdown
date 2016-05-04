@@ -3,9 +3,9 @@ layout: post
 title: "iOS 如何随意的push来pop去"
 date: 2016-01-04 11:08:00 +0800
 comments: true
-tags: [iOS push, pop, 随意pop]
-keywords: iOS穿插pop, push, pop
-description:  iOS 如何随意的push来pop去
+tags: [iOS push, pop, 随意pop,啊神]
+keywords: iOS穿插pop, push, pop,啊神
+description:  iOS 如何随意的push来pop去,啊神
 categories: i|OS
 ---
 ##iOS 导航控制器如何随意push和pop

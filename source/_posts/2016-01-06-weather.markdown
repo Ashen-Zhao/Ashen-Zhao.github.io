@@ -3,9 +3,9 @@ layout: post
 title: "百度天气预报API的使用（java版本）"
 date: 2015-12-28 7:32:35 +0800
 comments: true
-tags: java, api, 百度天气Api
-keywords: 百度天气, 微信开发天气
-description: 使用百度天气api, 实现查询天气情况
+tags: java, api, 百度天气Api,啊神
+keywords: 百度天气, 微信开发天气,啊神
+description: 使用百度天气api, 实现查询天气情况,啊神
 categories: java
 ---
 &emsp;开发微信公众平台时，想要实现查询天气功能，找啊找，就找到了百度地图api；

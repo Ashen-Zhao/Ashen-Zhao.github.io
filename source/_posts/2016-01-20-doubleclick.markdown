@@ -3,8 +3,8 @@ layout: post
 title: "简单实现双击tabBarItem刷新页面"
 date: 2016-01-20 17:44:11 +0800
 comments: true
-keywords: 双击tabBar, 刷新页面, UITabBarController, UITabBarItem
-description: 简单实现iOS双击tabbaritem刷新页面数据
+keywords: 双击tabBar, 刷新页面, UITabBarController, UITabBarItem,啊神
+description: 简单实现iOS双击tabbaritem刷新页面数据,啊神
 categories: i|OS
 ---
 ###如何实现双击tabbarItem刷新页面？

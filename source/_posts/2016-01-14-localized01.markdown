@@ -3,8 +3,8 @@ layout: post
 title: "iOS 多语言版本的开发（一）"
 date: 2016-01-14 11:13:56 +0800
 comments: true
-keywords: iOS本地化, iOS多语言开发, 多语言开发
-description: 如何实现,iOS多语言开发
+keywords: iOS本地化, iOS多语言开发, 多语言开发,啊神
+description: 如何实现,iOS多语言开发,啊神
 categories: i|OS
 ---
 ##引言
@@ -21,13 +21,13 @@ categories: i|OS
 ####1、新建一个项目（我就不多说了）  
 
 ####2、command + N 添加多语言文件，如下图  
-![添加多语言文件](/images/localized01.png)  
+![啊神添加多语言文件](/images/localized01.png)  
 
 ####3、添加多语言，如图  
-![添加多语言](/images/localized02.png)  
+![啊神添加多语言](/images/localized02.png)  
 
 选择English  点击Localize  
-![添加多语言](/images/localized03.png)  
+![啊神添加多语言](/images/localized03.png)  
 
 **到这里已经算是添加好了多语言文件，接下来就是添加多语言**  
 
@@ -37,11 +37,11 @@ categories: i|OS
 
 现在需要进入项目的Project中的Localizations 中进行添加，如图  
 
-![添加多语言](/images/localized05.png)  
+![啊神添加多语言](/images/localized05.png)  
 
 我只添加了中文繁体，简体，以及英文，Demo使用的StoryBoard, 而添加多语言时，我没有选择为StoryBoard添加多语言版本的，毕竟是Demo🐴；但是不影响使用。
 
-![添加多语言](/images/localized06.png)   
+![啊神添加多语言](/images/localized06.png)   
 
 到这里多语言文件中会出现如上图中的三个.strings 后缀的文件，这就是多语言对应的文件了，多语言添加的方式类似，字典 key=value 一一对应的关系，key 在三个.strings 中必须一致，而value 则分别对应不同的语言字体，即可；  
 
@@ -77,8 +77,8 @@ categories: i|OS
 ####到这里，就可以实现简单的跟随系统语言的多语言版本了;
 效果图如下：  
 
-![添加多语言](/images/localized07.png)  
-![添加多语言](/images/localized08.png)  
+![啊神添加多语言](/images/localized07.png)  
+![啊神添加多语言](/images/localized08.png)  
 
 >####相关文章  
 ####[iOS 多语言版本的开发（二）](/blog/2016/01/15/localized02/)

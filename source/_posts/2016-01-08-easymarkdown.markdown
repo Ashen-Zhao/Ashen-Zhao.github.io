@@ -3,8 +3,8 @@ layout: post
 title: "EasyMarkDown"
 date: 2016-01-08 10:52:13 +0800
 comments: true
-keywords: Markdown简明语法, Markdown, 一分钟
-description: 一分钟学会Markdown语法
+keywords: Markdown简明语法, Markdown, 一分钟,啊神
+description: 一分钟学会Markdown语法,啊神
 categories: Markdown
 ---
 ## EasyMarkDown

@@ -3,7 +3,7 @@ layout: post
 title: "GitHub 的简明教程之入门使用"
 date: 2016-01-12 10:22:46 +0800
 comments: true
-keywords: github使用, ssh key, git
+keywords: github使用, ssh key, git,啊神
 categories: Github
 ---
 >###相关文章  
@@ -28,13 +28,13 @@ categories: Github
 ####1、首页github上需要创建个仓库,按下图一步一步走
 ***
 进入github添加仓库界面
-![new](/images/newGit.png)    
+![啊神new](/images/newGit.png)    
 ***
 填写仓库相关内容
-![addgithub](/images/gitfillcontent.png)  
+![啊神addgithub](/images/gitfillcontent.png)  
 ***
 仓库创建成功界面，记住图片中的地址
-![url](/images/githubURL.png)  
+![啊神url](/images/githubURL.png)  
 ####2、添加远程仓库，这时候图片中的地址，就有用了  
 执行命令：`git remote add origin git@github.com:Ashen-Zhao/firstgithub.git`  
 

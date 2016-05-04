@@ -3,8 +3,8 @@ layout: post
 title: "仿照微博、微信弹出ActionSheet样式"
 date: 2016-01-22 15:08:16 +0800
 comments: true
-keywords: ActionSheet, 自定义弹框, 自定义ActionSheet样式
-description: 仿照微博、微信弹出ActionSheet样式,一款自定义的ActionSheet弹框工具类
+keywords: ActionSheet, 自定义弹框, 自定义ActionSheet样式,啊神
+description: 仿照微博、微信弹出ActionSheet样式,一款自定义的,啊神ActionSheet弹框工具类
 categories: i|OS
 ---
 &emsp;iOS 开发中，很多应用都会用到从屏幕底部弹出的UIActionSheet, 但是使用的过程中，总感觉系统的样式怪怪的，或者与自己开发的App的UI不是很协调，总之与自己的App搭配就一个字：丑。 说起ActionSheet样式，应该来看看主流的微博与微信是什么样式的；  
@@ -19,7 +19,7 @@ categories: i|OS
 看吧,系统的与人家设计的，看上去就逊色许多。
 出于比较喜欢微博、微信这种设计，就自己动手鼓弄着也写了个[工具类](https://github.com/Ashen-Zhao/ASSheet)，为以后使用做准备，使用起来很简单，只需传入titles 数组，以及实现一个Block 点击回调，就可以很快的实现像微博微信那样的样式，先看看效果图吧：  
 
-![ActionSheet](/images/assheet04.gif)
+![啊神ActionSheet](/images/assheet04.gif)
 
 ###我是如何实现的  
 
