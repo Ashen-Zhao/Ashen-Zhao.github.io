@@ -1,0 +1,29 @@
+---
+layout: post
+title: "二维码扫描识别"
+date: 2016-07-20 14:31:51 +0800
+comments: true
+keywords: iOS, 二维码, 二维码扫描, 识别, 二维码识别, 赵阿申,啊神
+description: 二维码扫描识别,赵阿申,啊神
+categories: i|OS
+---
+&emsp;最近忙于工作，工作之余也在学习swift，在github上开源了正在开发维护的swift项目[模仿的百思不得姐](https://github.com/ashen-zhao/baisiapp)；不过今天不是来介绍这个开源项目的，而是来给大家介绍一个很简单的功能之 iOS 二维码扫描识别；  
+
+#####我将该功能进行了简单的封装，只需要简单调用就可以实现；   
+
+#####封装文件：  
+`QRCodeManager.h`该文件是封装的二维码识别功能  
+
+#####调用方法：  
+<pre><code>    _qr = [[QRCodeManager alloc] init];
+     _qr.delegate = self;
+    [_qr configureManager:self.view];
+</code></pre>  
+#####服从协议`QRCodeManagerDelegate`实现代理方法： 
+`- (void)qrCodeResult:(NSString *)result` ，result即为扫描识别到的二维码信息了，就是这么简单。  
+
+####Demo示例图  
+![二维码扫描识别](/images/qrcode.gif)    
+
+####Demo源码地址：
+[二维码扫描识别Demo下载地址](https://github.com/ashen-zhao/asqrcode)
