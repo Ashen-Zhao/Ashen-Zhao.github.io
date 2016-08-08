@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-07-20T16:07:07+08:00</updated>
+  <updated>2016-08-08T14:40:24+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,102 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS 中的网络加密]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/08/05/https/"/>
+    <updated>2016-08-05T17:28:40+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/08/05/https</id>
+    <content type="html"><![CDATA[<h2>iOS 中的网络加密</h2>
+
+<hr />
+
+<h5>引言：公司的接口一般会两种协议的，一种HTTP，一种HTTPS的，HTTP 只要请求，服务器就会响应，如果我们不对请求和响应做出加密处理，所有信息都是会被检测劫持到的，是很不安全的，客户端加密可以使用本文这套工具类进行处理。但是不论在任何时候，都应该将服务置于HTTPS上，因为它可以避免中间人攻击的问题，还自带了基于非对称密钥的加密通道。</h5>
+
+<h3>HTTPS交互原理</h3>
+
+<p>简答说，HTTPS 就是 HTTP协议加了一层SSL协议的加密处理，SSL 证书就是遵守 SSL协议，由受信任的数字证书颁发机构CA（如GlobalSign，wosign），在验证服务器身份后颁发，这是需要花钱滴，签发后的证书作为公钥一般放在服务器的根目录下，便于客户端请求返回给客户端，私钥在服务器的内部中心保存，用于解密公钥。</p>
+
+<h4>HTTPS 客户端与服务器交互过程：</h4>
+
+<p>1）客户端发送请求，服务器返回公钥给客户端；</p>
+
+<p>2）客户端生成对称加密秘钥，用公钥对其进行加密后，返回给服务器；</p>
+
+<p>3）服务器收到后，利用私钥解开得到对称加密秘钥，保存；</p>
+
+<p>4）之后的交互都使用对称加密后的数据进行交互。</p>
+
+<!--more-->
+
+
+<h3>证书</h3>
+
+<p>简单说，证书有两种，一种是正经的：</p>
+
+<p>CA颁发的证书</p>
+
+<p>一种是不正经的：</p>
+
+<p>自己生成签发的证书</p>
+
+<h3>我们需要做什么</h3>
+
+<p>如果遇到正经的证书，我们直接用AFNetworking 直接请求就好了，AFNetworking 内部帮我们封装了HTTPS的请求方式，但是大部分公司接口都是不正经的证书，这时需要我们做以下几步：</p>
+
+<p>1）将服务器的公钥证书拖到Xcode中</p>
+
+<p>2）修改验证模式</p>
+
+<pre><code>manager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
+</code></pre>
+
+<h3>原理</h3>
+
+<p>简单来说，就是你本可以修改AFN这个设置来允许客户端接收服务器的任何证书，但是这么做有个问题，就是你无法验证证书是否是你的服务器后端的证书，给中间人攻击，即通过重定向路由来分析伪造你的服务器端打开了大门。</p>
+
+<pre><code>AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
+securityPolicy.allowInvalidCertificates = YES;
+</code></pre>
+
+<h3>解决方法</h3>
+
+<p>AFNetworking是允许内嵌证书的，通过内嵌证书，AFNetworking就通过比对服务器端证书、内嵌的证书、站点域名是否一致来验证连接的服务器是否正确。由于CA证书验证是通过站点域名进行验证的，如果你的服务器后端有绑定的域名，这是最方便的。将你的服务器端证书，如果是pem格式的，用下面的命令转成cer格式</p>
+
+<pre><code>openssl x509 -in &lt;你的服务器证书&gt;.pem -outform der -out server.cer
+</code></pre>
+
+<p>然后将生成的server.cer文件，如果有自建ca，再加上ca的cer格式证书，引入到app的bundle里，AFNetworking在</p>
+
+<pre><code>AFSecurityPolicy *securityPolicy = [AFSecurityPolicy AFSSLPinningModeCertificate];
+</code></pre>
+
+<p>或者</p>
+
+<pre><code>AFSecurityPolicy *securityPolicy = [AFSecurityPolicy AFSSLPinningModePublicKey];
+</code></pre>
+
+<p>情况下，会自动扫描bundle中.cer的文件，并引入，这样就可以通过自签证书来验证服务器唯一性了。</p>
+
+<h3>AFSecurityPolicy三种验证模式</h3>
+
+<p>1）AFSSLPinningModeNone
+这个模式表示不做SSL pinning，
+只跟浏览器一样在系统的信任机构列表里验证服务端返回的证书。若证书是信任机构签发的就会通过，若是自己服务器生成的证书就不会通过。</p>
+
+<p>2）AFSSLPinningModeCertificate
+这个模式表示用证书绑定方式验证证书，需要客户端保存有服务端的证书拷贝，这里验证分两步，第一步验证证书的域名有效期等信息，第二步是对比服务端返回的证书跟客户端返回的是否一致。</p>
+
+<p>3）AFSSLPinningModePublicKey
+这个模式同样是用证书绑定方式验证，客户端要有服务端的证书拷贝，
+只是验证时只验证证书里的公钥，不验证证书的有效期等信息。只要公钥是正确的，就能保证通信不会被窃听，因为中间人没有私钥，无法解开通过公钥加密的数据。</p>
+
+<hr />
+
+<p>此文章转载自：<a href="http://charsdavy.github.io/2016/06/15/ios-network-encrypt">http://charsdavy.github.io/2016/06/15/ios-network-encrypt</a> <br/>
+感谢原作者让我们又学到了知识。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[二维码扫描识别]]></title>
@@ -1624,194 +1720,7 @@ NSString *url = @"https://github.com/Ashen-Zhao";
 </ul>
 
 
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#x6f;&#x3a;&#122;&#104;&#x61;&#x6f;&#x61;&#x73;&#104;&#x65;&#110;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;">&#122;&#104;&#x61;&#111;&#97;&#115;&#x68;&#101;&#110;&#64;&#x67;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#x6d;</a>；</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[百度天气预报API的使用（java版本）]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2015/12/28/weather/"/>
-    <updated>2015-12-28T07:32:35+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2015/12/28/weather</id>
-    <content type="html"><![CDATA[<p>&emsp;开发微信公众平台时，想要实现查询天气功能，找啊找，就找到了百度地图api；
-使用方法进行简单总结：</p>
-
-<p>此文章内容，转自我之前写的一篇文章： <a href="http://blog.csdn.net/ashenyy/article/details/25072857">http://blog.csdn.net/ashenyy/article/details/25072857</a></p>
-
-<p>要使用百度天气预报api，首先要有密钥ak,申请地址<a href="http://developer.baidu.com/map/lbs-cloud.htm">http://developer.baidu.com/map/lbs-cloud.htm</a></p>
-
-<!--more-->
-
-
-<p>然后向<a href="http://api.map.baidu.com/telematics/v3/weather?location=%E9%83%91%E5%B7%9E&amp;output=xml&amp;ak=A72e372de05e63c8740b2622d0ed8ab1">http://api.map.baidu.com/telematics/v3/weather?location=%E9%83%91%E5%B7%9E&amp;output=xml&amp;ak=A72e372de05e63c8740b2622d0ed8ab1</a>
-请求，然后会返还给你一个xml文档格式的天气预报如下：</p>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
-&lt;CityWeatherResponse&gt;
-&lt;status&gt;success&lt;/status&gt;
- &lt;date&gt;2014-04-29&lt;/date&gt;
-&lt;results&gt;
-&lt;currentCity&gt;郑州&lt;/currentCity&gt;
-&lt;weather_data&gt;
-      &lt;date&gt;周二(今天, 实时：20℃)&lt;/date&gt;
-  &lt;dayPictureUrl&gt;http://api.map.baidu.com/images/weather/day/qing.png&lt;;/dayPictureUrl&gt;
-  &lt;nightPictureUrl&gt;http://api.map.baidu.com/images/weather/night/qing.png&lt;;/nightPictureUrl&gt;
-  &lt;weather&gt;晴&lt;/weather&gt;
-  &lt;wind&gt;微风&lt;/wind&gt;
-  &lt;temperature&gt;13℃&lt;/temperature&gt;
-      &lt;date&gt;周三&lt;/date&gt;
-  &lt;dayPictureUrl&gt;http://api.map.baidu.com/images/weather/day/qing.png&lt;;/dayPictureUrl&gt;
-  &lt;nightPictureUrl&gt;http://api.map.baidu.com/images/weather/night/qing.png&lt;;/nightPictureUrl&gt;
-  &lt;weather&gt;晴&lt;/weather&gt;
-  &lt;wind&gt;微风&lt;/wind&gt;
-  &lt;temperature&gt;28 ~ 15℃&lt;/temperature&gt;
-      &lt;date&gt;周四&lt;/date&gt;
-  &lt;dayPictureUrl&gt;http://api.map.baidu.com/images/weather/day/duoyun.png&lt;;/dayPictureUrl&gt;
-  &lt;nightPictureUrl&gt;http://api.map.baidu.com/images/weather/night/yin.png&lt;;/nightPictureUrl&gt;
-  &lt;weather&gt;多云转阴&lt;/weather&gt;
-  &lt;wind&gt;微风&lt;/wind&gt;
-  &lt;temperature&gt;30 ~ 15℃&lt;/temperature&gt;
-      &lt;date&gt;周五&lt;/date&gt;
-  &lt;dayPictureUrl&gt;http://api.map.baidu.com/images/weather/day/yin.png&lt;;/dayPictureUrl&gt;
-  &lt;nightPictureUrl&gt;http://api.map.baidu.com/images/weather/night/duoyun.png&lt;;/nightPictureUrl&gt;
-  &lt;weather&gt;阴转多云&lt;/weather&gt;
-  &lt;wind&gt;微风&lt;/wind&gt;
-  &lt;temperature&gt;25 ~ 15℃&lt;/temperature&gt;
-    &lt;/weather_data&gt;
-&lt;/results&gt;
-&lt;/CityWeatherResponse&gt;
-</code></pre>
-
-<p>接下 来只需要对此xml文档解析取出数据即可
-具体代码如下：</p>
-
-<pre><code>
-    package com.ashen.testapi;
-    import java.io.BufferedReader;
-    import java.io.InputStream;
-    import java.io.InputStreamReader;
-    import java.io.UnsupportedEncodingException;
-    import java.net.HttpURLConnection;
-    import java.net.URL;
-    import java.net.URLEncoder;
-    import java.util.Iterator;
-    import java.util.List;
-    import org.dom4j.Document;
-    import org.dom4j.DocumentException;
-    import org.dom4j.DocumentHelper;
-    import org.dom4j.Element;
-    public class BaiduWeather {
-    //获取天气信息
-  public static String GetWeater(String city) {
-    BaiduWeather wu=new BaiduWeather();
-    String buffstr=null;
-    try {
-        String xml= wu.GetXmlCode(URLEncoder.encode(city, "utf-8"));  //设置输入城市的编码，以满足百度天气api需要
-        buffstr=wu.readStringXml(xml,city);//调用xml解析函数
-    } catch (Exception e) {
-    e.printStackTrace();
-    }
-    return  buffstr;
-    }
-    public String GetXmlCode(String city) throws UnsupportedEncodingException{
-    String requestUrl = "http://api.map.baidu.com/telematics/v3/weather?location="+city+"&output=xml&ak=A72e372de05e63c8740b2622d0ed8ab1";  
-    StringBuffer buffer = null;  
-    try {  
-    // 建立连接  
-    URL url = new URL(requestUrl);
-    HttpURLConnection httpUrlConn = (HttpURLConnection) url.openConnection();  
-    httpUrlConn.setDoInput(true);  
-    httpUrlConn.setRequestMethod("GET");  
-    // 获取输入流  
-    InputStream inputStream = httpUrlConn.getInputStream();  
-    InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");  
-    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);  
-    // 读取返回结果  
-    buffer = new StringBuffer();  
-    String str = null;  
-    while ((str = bufferedReader.readLine()) != null) {  
-      buffer.append(str);  
-    }  
-  
-   // 释放资源  
-   bufferedReader.close();  
-    inputStreamReader.close();  
-    inputStream.close();  
-    httpUrlConn.disconnect();  
-    } catch (Exception e) {  
-    e.printStackTrace();  
-    }  
-    return buffer.toString();  //返回获取的xml字符串
-}
-public String readStringXml(String xml,String ifcity) {
-  StringBuffer buff=new StringBuffer();  //用来拼接天气信息的
-  Document doc = null;
-  List listdate=null;  //用来存放日期
-  List listday=null;  //用来存放白天图片路径信息
-  List listweather=null;
-  List listwind=null;
-  List listtem=null;
-  try {
-    // 读取并解析XML文档
-    //下面的是通过解析xml字符串的
-    doc = DocumentHelper.parseText(xml); // 将字符串转为XML  
-    Element rootElt = doc.getRootElement(); // 获取根节点    
-    Iterator iter = rootElt.elementIterator("results"); // 获取根节点下的子节点results
-    String status=rootElt.elementText("status"); //获取状态，如果等于success,表示有数据
-    if(!status.equals("success"))
-      return "暂无数据";  //如果不存在数据，直接返回
-    String date= rootElt.elementText("date");  //获取根节点下的，当天日期
-    buff.append(date+"\n");
-    //遍历results节点
-      while (iter.hasNext()) {
-      Element recordEle = (Element) iter.next();
-      Iterator iters = recordEle.elementIterator("weather_data"); //
-    //遍历results节点下的weather_data节点
-      while (iters.hasNext()) {
-        Element itemEle = (Element) iters.next();  
-        listdate=itemEle.elements("date");
-      //将date集合放到listdate中
-        listday=itemEle.elements("dayPictureUrl");
-        listweather=itemEle.elements("weather");
-        listwind=itemEle.elements("wind");
-        listtem=itemEle.elements("temperature");
-    }    
-    for(int i=0; i < listdate.size();i++){     //由于每一个list.size都相等，这里统一处理
-      Element eledate=(Element)listdate.get(i); //依次取出date
-      Element eleday=(Element)listday.get(i);//..
-      Element eleweather=(Element)listweather.get(i);
-      Element elewind=(Element)listwind.get(i);
-      Element eletem=(Element)listtem.get(i);            
-      buff.append(eledate.getText()+"==="+eleweather.getText()+"==="+elewind.getText()+"==="+eletem.getText()+"\n");  //拼接信息
-        //*****************如果想用到微信公众号上，还请自己继续写代码，我只能帮到这了，数据已经分离开了。
-      //微信天气处理  省略
-    }  
-    }
-    } catch (DocumentException e) {
-    e.printStackTrace();
-    } catch (Exception e) {
-    e.printStackTrace();
-    }
-    return buff.toString();  
-}
-    public static void main(String[] args){
-    //测试
-    System.out.println(GetWeater("郑州").toString());
-    }
-}
-</code></pre>
-
-
-<p>测试结果：
-2014-04-29</p>
-
-<p>周二(今天, 实时：20℃)===晴===微风===13℃</p>
-
-<p>周三===晴===微风===28 ~ 15℃</p>
-
-<p>周四===多云转阴===微风===30 ~ 15℃</p>
-
-<p>周五===阴转多云===微风===25 ~ 15℃</p>
+<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#58;&#122;&#x68;&#x61;&#x6f;&#x61;&#115;&#104;&#x65;&#110;&#x40;&#x67;&#109;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#x6d;">&#x7a;&#104;&#97;&#111;&#97;&#x73;&#104;&#101;&#110;&#x40;&#103;&#109;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#x6d;</a>；</p>
 ]]></content>
   </entry>
   
