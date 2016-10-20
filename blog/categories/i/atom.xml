@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/i/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-08-08T14:40:24+08:00</updated>
+  <updated>2016-10-20T16:48:52+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -508,7 +508,7 @@ b. 可以建个pch文件加入</p>
 
 <p></p>
 
-<p>最后，老规矩我还是把<a href="https://github.com/Ashen-Zhao/ASSheet">Demo附上</a>，以供辅助</p>
+<p>最后，老规矩我还是把<a href="https://github.com/Ashen-Zhao/ASSheet">Demo附上</a>，以供辅助参考，Demo中包含swift版本和OC版本</p>
 ]]></content>
   </entry>
   
