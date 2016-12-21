@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-10-20T16:48:52+08:00</updated>
+  <updated>2016-12-21T10:09:04+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[探索Xcode8编译为什么那么慢？]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/12/21/xcode8build/"/>
+    <updated>2016-12-21T10:12:58+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/12/21/xcode8build</id>
+    <content type="html"><![CDATA[<h3>背景</h3>
+
+<p>随着<code>Xcode8</code>和<code>swift3.0</code>的正式到来，我开始着手将<code>swift2.3</code>的项目转到<code>swift3</code>（至于转换过程，这里不多做介绍，Xcode自带的转换工具，基本可以转换80%左右，剩下的自己慢慢调试即可。）但是，转到swift3只会，在用Xcode8编译，发现编译过程变得非常慢，哪怕打一个空格，都要重新编译很久。于是在网上查找解决办法，查找了半天各种方法全用，发现于事无补。<br/>
+&emsp;&emsp;有什么加一个<code>HEADERMAP_USES_VFS = YES</code>（）<a href="http://www.cnblogs.com/qqsscc/p/6044234.html">这是地址，反正这个对我没用，感兴趣的话自己试试</a></p>
+
+<h5>针对这种情况，我就自己探索，出发点是排查哪些文件，哪些方法导致编译变慢？</h5>
+
+<h3>探索Xcode编译，在哪些地方可以看到编译文件过程</h3>
+
+<p>通过多次编译查看，发现在Xcode左边栏，最后一个选项，是每次的编译运行等记录， 每行记录中都会有每次编译的文件编译记录。如下图</p>
+
+<!--more-->
+
+
+<p>
+<img src="http://ashen-zhao.github.io/images/build1.png" alt="图1" /></p>
+
+<p>再次查看正在编译的一条记录(正在编译的记录后面有一个转圈圈的”菊花“)，发现有图中1、2两种标识， 一个绿色✅说明，这是编译完成了，另一个是灰色→箭头，说明是正在编译；此时发现灰色一直停留在这里，指向图中的文件，左边的菊花一直转个不停， 编译卡住了。这样一来就找到编译是什么文件导致的那么慢。</p>
+
+<p><img src="http://ashen-zhao.github.io/images/build2.png" alt="图2" /></p>
+
+<h3>排查文件中哪些代码导致的编译卡住？</h3>
+
+<p>排查的方法，采用比较笨的方法，暴力注释方法：<strong><em>就是注释找到卡住的文件中的所有方法里的代码，不要注释方法，再次编译，此时发现该文件很快通过编译，然后在依次解开部分方法注释，再次编译，直到发现解开某个方法的注释后，编译再次卡住，那就说明那个方法中的代码写的有问题，然后在依次注释，解开注释，排查方法中的某一行代码的问题。</em></strong>经过一番排查，我找到了我代码中卡住的部分代码，如下图红色圈中的代码</p>
+
+<p><img src="http://ashen-zhao.github.io/images/build3.png" alt="图3" /></p>
+
+<p>在字典中的key对应的value，没有给直接的值，而是给出一个表达式，这样会导致Xcode8的编译速度极其慢，不知道为什么会出现这样的问题，之前的Xcode版本是没有的。</p>
+
+<p>找到问题所在，解决问题就简单了，于是修改代码如下图：</p>
+
+<p><img src="http://ashen-zhao.github.io/images/build4.png" alt="图4" /></p>
+
+<p>修改之后，再次编译，重新回到了快速编译的时代了，再也不用等上5-10分钟不等了。</p>
+
+<p>  以上过程，是针对我遇到的问题而言的，不知道是否存在普遍性，如若你也遇到，刚好看了我的文章，也解决了问题，那就会心一笑吧，如若你也遇到了，但是没有解决问题，也请你会心一笑吧。<br/>
+     <a href="https://forums.developer.apple.com/thread/62737">这是苹果开发者提到的Xcode8编译超慢的问题，我看了下，也做了对应修改，发现对我并没有什么用， 感兴趣的话进去看看吧</a></p>
+
+<p>有时候自己慢慢去探索出问题的所在，也是很不错的体验。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS 中的网络加密]]></title>
@@ -1632,95 +1679,6 @@ NSMutableArray*tempMarr =[NSMutableArrayarrayWithArray:self.navigationController
 由于只是使用，并没有对其进行很好地封装，如果你感兴趣，可以封装的更好点，来共同交流下；
 附：
 <a href="https://github.com/Ashen-Zhao/ASBirthSheet">Demo下载地址</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS 上传图片方法总结]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2015/12/28/uploadimg/"/>
-    <updated>2015-12-28T17:51:57+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2015/12/28/uploadimg</id>
-    <content type="html"><![CDATA[<h3>开题：</h3>
-
-<p>iOS 开发中难免会遇到上传图片，一般情况下有两种方式：</p>
-
-<p>1.自己动手写（利用NSURLMutableRequest等系统类）</p>
-
-<p>2.使用第三方（如AFNetworking)</p>
-
-<p>据我所经历的，如果你不是大神，还是用第三方吧，自己写的话会很麻烦，需要拼接一些请求头，请求体等，就算弄好了也是废了很多时间了；当然，费时间并不是我不推荐自己动手写，因为在我现在接手的项目中，就是使用的自己写的，上传中会出现丢图等各种问题，特别在网络不好的情况下；</p>
-
-<p>面对这样的上传图片，我的Boss 交给我了一个课题，就是改善上传图片的网络底层库；看在我不是大神的份上，我就选择了AFNetwoking；</p>
-
-<!--more-->
-
-
-<p>  So,对于自己动手实现的方法，在这里我就不多写了；接下来主要是AFNetwoking实现方法：至于如何导入第三方，我不多说，你是直接拉进也行，使用cocoapods也行；</p>
-
-<h3>进入正题：</h3>
-
-<p>以下是上传图片的方法：</p>
-
-<pre>
-<code>
-+(void)uploadImageWithUrl:(NSString *)strUrl dataParams:(NSMutableDictionary *)dataParams imageParams:(NSMutableDictionary *) imageParams Success:(void(^)(NSDictionary* resultDic)) success Failed:(void(^)(NSError *error))fail {
-
- NSArray *keys = [imageParams allKeys];
-
- UIImage * image = [imageParams objectForKey:[keys firstObject]];
-
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//对SSL做处理，防止上传失败
-AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
-    securityPolicy.allowInvalidCertificates = YES;
-    securityPolicy.validatesDomainName = NO;
-    manager.securityPolicy = securityPolicy;
-    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = 120;
-    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    [manager POST:strUrl parameters:dataParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.5) name:[keys firstObject] fileName:[NSString stringWithFormat:@"%@.jpeg",[keys firstObject]] mimeType:@"image/jpeg"];
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (success) {
-            success(responseObject);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (fail) {
-            fail(error);
-        }
-    }];
-}
-</code></pre>
-
-
-<p>
-接下来是如何调用：</p>
-
-<pre><code>
--(void)uploadImageAction {
-
-NSString *url = @"https://github.com/Ashen-Zhao";
-    NSMutableDictionary *dpp =[@{@"token":@"zhaoshenshenazhao"} mutableCopy];
-    NSMutableDictionary *pimgs= [@{@"file":[UIImage imageNamed:@"a.jpg"]} mutableCopy];
- [NetworkEngine uploadImageWithUrl:url dataParams:dpp imageParams:pimgs Success:^(NSDictionary* resultDic) {
-        NSLog(@"%@", resultDic);
-    } Failed:^(NSError *error) {
-     }];
-}
-</code></pre>
-
-
-<p>参数说明：</p>
-
-<ul>
-<li>strUrl：上传图片的服务器地- - dataParams：数据参数（如token等）</li>
-<li>imageParams：图片参数（字典中的object一定要是UIImage类型；当然我写的是这样，你也可以修改为其他）</li>
-<li>Success：上传成功后的Block回调（resultDic是服务器返回的结果）</li>
-<li>Failed：上传失败后的Block回调（error是错误结果）</li>
-</ul>
-
-
-<p>  以上就是AFNetworking上传图片的方法， 分享给大家一起学习，你也可以自己改造这个方法，如果你发现更好的方法，请留言给我或者发邮件给我<a href="&#109;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#122;&#104;&#97;&#111;&#97;&#115;&#x68;&#x65;&#110;&#x40;&#103;&#109;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#x7a;&#104;&#97;&#111;&#x61;&#115;&#x68;&#x65;&#x6e;&#x40;&#103;&#109;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#x6d;</a>；</p>
 ]]></content>
   </entry>
   

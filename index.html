@@ -86,6 +86,52 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2016/12/21/xcode8build/">探索Xcode8编译为什么那么慢？</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-21T10:12:58+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>10:12 am</span></time>
+        
+             
+      | <a href="/blog/2016/12/21/xcode8build/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>背景</h3>
+
+<p>随着<code>Xcode8</code>和<code>swift3.0</code>的正式到来，我开始着手将<code>swift2.3</code>的项目转到<code>swift3</code>（至于转换过程，这里不多做介绍，Xcode自带的转换工具，基本可以转换80%左右，剩下的自己慢慢调试即可。）但是，转到swift3只会，在用Xcode8编译，发现编译过程变得非常慢，哪怕打一个空格，都要重新编译很久。于是在网上查找解决办法，查找了半天各种方法全用，发现于事无补。<br/>
+&emsp;&emsp;有什么加一个<code>HEADERMAP_USES_VFS = YES</code>（）<a href="http://www.cnblogs.com/qqsscc/p/6044234.html">这是地址，反正这个对我没用，感兴趣的话自己试试</a></p>
+
+<h5>针对这种情况，我就自己探索，出发点是排查哪些文件，哪些方法导致编译变慢？</h5>
+
+<h3>探索Xcode编译，在哪些地方可以看到编译文件过程</h3>
+
+<p>通过多次编译查看，发现在Xcode左边栏，最后一个选项，是每次的编译运行等记录， 每行记录中都会有每次编译的文件编译记录。如下图</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/12/21/xcode8build/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2016/08/05/https/">iOS 中的网络加密</a></h1>
     
     
@@ -196,57 +242,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/04/14/gifimageview/">让UIImageView显示Gif图</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-04-14T13:57:05+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:57 pm</span></time>
-        
-             
-      | <a href="/blog/2016/04/14/gifimageview/#comments">评论</a>
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>&emsp;各位同学们，这次给大家分享一个小工具，可以解决你在开发过程中，需要显示Gif图片的需求；由于太过于简单，我这里就不多说了；有需要的同学，请前往<a href="https://github.com/ashen-zhao/asGifImageView">https://github.com/ashen-zhao/asGifImageView</a>进行下载，不需要的同学也可以去Star，留着以后使用，最后，记得关注我哦，哈哈😄；</p>
-
-<h2>接下来，简单写一下如何使用该工具</h2>
-
-<h4>示例图</h4>
-
-<p><img src="/images/gifView.gif" alt="啊神gifUIImageView" /></p>
-
-<h4>功能说明：</h4>
-
-<p>这是一个UIImageView的分类，可以让UIImageView支持显示本地Gif以及网络Gif图片。</p>
-
-<h4>使用说明</h4>
-
-<p>1.导入分类头文件 <code>#import "UIImageView+ASGif.h"</code><br/>
-2.调用<br/>
-&emsp;a.显示本地gif图片 <br/>
-    <code>[self.gifImgV showGifImageWithData:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"abc" ofType:@"gif"]]];</code><br/>
-&emsp;b.显示网络gif图片<br/>
-       <code>[self.gifImgV showGifImageWithURL:[NSURL URLWithString:@"http://ww1.sinaimg.cn/large/85cccab3gw1etdi67ue4eg208q064n50.gif"]];</code></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -275,6 +270,10 @@
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/12/21/xcode8build/">探索Xcode8编译为什么那么慢？</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/08/05/https/">iOS 中的网络加密</a>
@@ -316,17 +315,13 @@
         <a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之入门使用</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a>
-      </li>
-    
   </ul>
 </section>
 <section>
  <h1>分类</h1>
  <ul id="categories">
   <li class='category'><a href='/blog/categories/github/'>Github (2)</a></li>
-<li class='category'><a href='/blog/categories/i/'>iOS (16)</a></li>
+<li class='category'><a href='/blog/categories/i/'>iOS (17)</a></li>
 <li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
 <li class='category'><a href='/blog/categories/sui-bi/'>随笔 (2)</a></li>

@@ -86,6 +86,57 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2016/04/14/gifimageview/">让UIImageView显示Gif图</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-04-14T13:57:05+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:57 pm</span></time>
+        
+             
+      | <a href="/blog/2016/04/14/gifimageview/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>&emsp;各位同学们，这次给大家分享一个小工具，可以解决你在开发过程中，需要显示Gif图片的需求；由于太过于简单，我这里就不多说了；有需要的同学，请前往<a href="https://github.com/ashen-zhao/asGifImageView">https://github.com/ashen-zhao/asGifImageView</a>进行下载，不需要的同学也可以去Star，留着以后使用，最后，记得关注我哦，哈哈😄；</p>
+
+<h2>接下来，简单写一下如何使用该工具</h2>
+
+<h4>示例图</h4>
+
+<p><img src="/images/gifView.gif" alt="啊神gifUIImageView" /></p>
+
+<h4>功能说明：</h4>
+
+<p>这是一个UIImageView的分类，可以让UIImageView支持显示本地Gif以及网络Gif图片。</p>
+
+<h4>使用说明</h4>
+
+<p>1.导入分类头文件 <code>#import "UIImageView+ASGif.h"</code><br/>
+2.调用<br/>
+&emsp;a.显示本地gif图片 <br/>
+    <code>[self.gifImgV showGifImageWithData:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"abc" ofType:@"gif"]]];</code><br/>
+&emsp;b.显示网络gif图片<br/>
+       <code>[self.gifImgV showGifImageWithURL:[NSURL URLWithString:@"http://ww1.sinaimg.cn/large/85cccab3gw1etdi67ue4eg208q064n50.gif"]];</code></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2016/01/26/pay/">iOS之接地气的移动支付</a></h1>
     
     
@@ -179,65 +230,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/20/doubleclick/">简单实现双击tabBarItem刷新页面</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-01-20T17:44:11+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:44 pm</span></time>
-        
-             
-      | <a href="/blog/2016/01/20/doubleclick/#comments">评论</a>
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>如何实现双击tabbarItem刷新页面？</h3>
-
-<p>&emsp;在网上寻找了一圈，众说纷纭，大差不差，而且基本上实现的不是双击才刷新，而是双击刷新一次后，只要再次单击就会刷新，这样很容易造成用户不小心点着，降低用户体验；见于这种局面，我花费了近一个小时，鼓捣出来了，只有双击的时候，才会去刷新页面（其实是伪双击，也就是单击两次，没有做两次单击时间间隔限制），废话不说了，直接上代码：</p>
-
-<pre><code>
-int i = 0;
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
-    i++;
-    UIViewController *tbSelectedController = tabBarController.selectedViewController;
-    if ([tbSelectedController isEqual:viewController]) {
-        if (currentIndex == 1 && tabBarController.selectedIndex == 1 && i % 2 != 0) {
-            UINavigationController *nav = self.viewControllers[1];
-            TestViewController *tVC = nav.viewControllers[0];
-            [tVC doubleClickRefrsh];
-        }
-        currentIndex = tabBarController.selectedIndex;
-        return NO;
-    }
-    i = 1;
-    return YES;
-}
-</code></pre>
-
-
-<p>
-这里是 <code>UITabBarDelegate</code> 的代理方法，实现的是双击第二个tabBarItem，则刷新其对应的第一个视图的节目数据;<br/>
-至于<code>i</code>的存在，是为了记录是否是双击，我是根据<code>i</code>是偶数还是奇数来进行判断的；<br/>
-就酱紫吧，不清楚的只管拿去用就行了，我就不多解释了，只有这几行代码，真没啥解释的了(^o^)/~</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -268,6 +260,10 @@ int i = 0;
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/12/21/xcode8build/">探索Xcode8编译为什么那么慢？</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/08/05/https/">iOS 中的网络加密</a>
@@ -309,17 +305,13 @@ int i = 0;
         <a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之入门使用</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a>
-      </li>
-    
   </ul>
 </section>
 <section>
  <h1>分类</h1>
  <ul id="categories">
   <li class='category'><a href='/blog/categories/github/'>Github (2)</a></li>
-<li class='category'><a href='/blog/categories/i/'>iOS (16)</a></li>
+<li class='category'><a href='/blog/categories/i/'>iOS (17)</a></li>
 <li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
 <li class='category'><a href='/blog/categories/sui-bi/'>随笔 (2)</a></li>

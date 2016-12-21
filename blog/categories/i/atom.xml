@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/i/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2016-10-20T16:48:52+08:00</updated>
+  <updated>2016-12-21T10:09:04+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[探索Xcode8编译为什么那么慢？]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/12/21/xcode8build/"/>
+    <updated>2016-12-21T10:12:58+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/12/21/xcode8build</id>
+    <content type="html"><![CDATA[<h3>背景</h3>
+
+<p>随着<code>Xcode8</code>和<code>swift3.0</code>的正式到来，我开始着手将<code>swift2.3</code>的项目转到<code>swift3</code>（至于转换过程，这里不多做介绍，Xcode自带的转换工具，基本可以转换80%左右，剩下的自己慢慢调试即可。）但是，转到swift3只会，在用Xcode8编译，发现编译过程变得非常慢，哪怕打一个空格，都要重新编译很久。于是在网上查找解决办法，查找了半天各种方法全用，发现于事无补。<br/>
+&emsp;&emsp;有什么加一个<code>HEADERMAP_USES_VFS = YES</code>（）<a href="http://www.cnblogs.com/qqsscc/p/6044234.html">这是地址，反正这个对我没用，感兴趣的话自己试试</a></p>
+
+<h5>针对这种情况，我就自己探索，出发点是排查哪些文件，哪些方法导致编译变慢？</h5>
+
+<h3>探索Xcode编译，在哪些地方可以看到编译文件过程</h3>
+
+<p>通过多次编译查看，发现在Xcode左边栏，最后一个选项，是每次的编译运行等记录， 每行记录中都会有每次编译的文件编译记录。如下图</p>
+
+<!--more-->
+
+
+<p>
+<img src="/images/build1.png" alt="图1" /></p>
+
+<p>再次查看正在编译的一条记录(正在编译的记录后面有一个转圈圈的”菊花“)，发现有图中1、2两种标识， 一个绿色✅说明，这是编译完成了，另一个是灰色→箭头，说明是正在编译；此时发现灰色一直停留在这里，指向图中的文件，左边的菊花一直转个不停， 编译卡住了。这样一来就找到编译是什么文件导致的那么慢。</p>
+
+<p><img src="/images/build2.png" alt="图2" /></p>
+
+<h3>排查文件中哪些代码导致的编译卡住？</h3>
+
+<p>排查的方法，采用比较笨的方法，暴力注释方法：<strong><em>就是注释找到卡住的文件中的所有方法里的代码，不要注释方法，再次编译，此时发现该文件很快通过编译，然后在依次解开部分方法注释，再次编译，直到发现解开某个方法的注释后，编译再次卡住，那就说明那个方法中的代码写的有问题，然后在依次注释，解开注释，排查方法中的某一行代码的问题。</em></strong>经过一番排查，我找到了我代码中卡住的部分代码，如下图红色圈中的代码</p>
+
+<p><img src="/images/build3.png" alt="图3" /></p>
+
+<p>在字典中的key对应的value，没有给直接的值，而是给出一个表达式，这样会导致Xcode8的编译速度极其慢，不知道为什么会出现这样的问题，之前的Xcode版本是没有的。</p>
+
+<p>找到问题所在，解决问题就简单了，于是修改代码如下图：</p>
+
+<p><img src="/images/build4.png" alt="图4" /></p>
+
+<p>修改之后，再次编译，重新回到了快速编译的时代了，再也不用等上5-10分钟不等了。</p>
+
+<p>  以上过程，是针对我遇到的问题而言的，不知道是否存在普遍性，如若你也遇到，刚好看了我的文章，也解决了问题，那就会心一笑吧，如若你也遇到了，但是没有解决问题，也请你会心一笑吧。<br/>
+     <a href="https://forums.developer.apple.com/thread/62737">这是苹果开发者提到的Xcode8编译超慢的问题，我看了下，也做了对应修改，发现对我并没有什么用， 感兴趣的话进去看看吧</a></p>
+
+<p>有时候自己慢慢去探索出问题的所在，也是很不错的体验。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS 中的网络加密]]></title>
@@ -368,147 +415,6 @@ b. 可以建个pch文件加入</p>
 <p><a href="https://github.com/ashen-zhao/aspay">本文章对应的Demo, 包含后端是、否给你订单字符串的两种处理</a></p>
 
 <p><a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.AIe1BQ&amp;treeId=59&amp;articleId=103563&amp;docType=1">支付宝移动支付SDK官方文档</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[仿照微博、微信弹出ActionSheet样式]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2016/01/22/assheet/"/>
-    <updated>2016-01-22T15:08:16+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2016/01/22/assheet</id>
-    <content type="html"><![CDATA[<p>&emsp;iOS 开发中，很多应用都会用到从屏幕底部弹出的UIActionSheet, 但是使用的过程中，总感觉系统的样式怪怪的，或者与自己开发的App的UI不是很协调，总之与自己的App搭配就一个字：丑。 说起ActionSheet样式，应该来看看主流的微博与微信是什么样式的；</p>
-
-<p><img src="http://ashen-zhao.github.io/images/assheet02.PNG" width="200" height="370" alt="微信">
-<img src="http://ashen-zhao.github.io/images/assheet01.PNG" width="200" height="370" alt="微博"></p>
-
-<p>看上去的确挺自然，一点也不像系统自带的，给人的感觉就是不协调，不协调的</p>
-
-<!--more-->
-
-
-<p><img src="http://ashen-zhao.github.io/images/assheet03.png" width="200" height="370" alt="微信"></p>
-
-<p>看吧,系统的与人家设计的，看上去就逊色许多。
-出于比较喜欢微博、微信这种设计，就自己动手鼓弄着也写了个<a href="https://github.com/Ashen-Zhao/ASSheet">工具类</a>，为以后使用做准备，使用起来很简单，只需传入titles 数组，以及实现一个Block 点击回调，就可以很快的实现像微博微信那样的样式，先看看效果图吧：</p>
-
-<p><img src="/images/assheet04.gif" alt="啊神ActionSheet" /></p>
-
-<h3>我是如何实现的</h3>
-
-<p>&emsp;写一个继承自UIView的类，用这个view 来做为弹出后的幕布（也就是半透明的背景），然后给这个view 添加一个单击手势，手势方法就是讲该view移除隐藏的方法，然后将次view 背景色设置成半透明, 用 <code>[self setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.5]]</code> 来设置半透明背景色。<br/>
-&emsp;然后再定义个UIview *titleBgkView属性，该view 用来当titles 的幕布， 随后创建该view， 并且将此view 的frame 根据titles 的多少进行动态调整，我这里重写了大幕布的init 方法<code>- (instancetype)initWithFrame:(CGRect)frame titleArr:(NSArray *)titleArr</code> 传入titles 数组。 <br/>
-&emsp;再然后，根据传入的titles 进行创建title按钮，将创建的按钮添加到titleBgkView 上。<br/>
-噗，我这是写的啥，我还是直接上代码吧，对不住各位了，实在写不下去了，程序员嘛还是直接看代码来的最直接，对吧。
-这是我的.m 文件实现代码</p>
-
-<pre> <code> 
-- (instancetype)initWithFrame:(CGRect)frame titleArr:(NSArray *)titleArr {
-    self = [super initWithFrame:frame];
-    size = [UIScreen mainScreen].bounds.size;
-    [self setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.5]];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hiddenSheet)];
-    [self addGestureRecognizer:tap];
-    [self makeBaseUIWithTitleArr:titleArr];
-    
-    return self;
-}
-
-- (void)makeBaseUIWithTitleArr:(NSArray *)titleArr{
-   
-    self.bgkView = [[UIView alloc] initWithFrame:CGRectMake(0, size.height, size.width, titleArr.count * 50 + 55)];
-    _bgkView.backgroundColor = [UIColor colorWithRed:0xe9/255.0 green:0xe9/255.0 blue:0xe9/255.0 alpha:1.0];
-    [self addSubview:_bgkView];
-
-    CGFloat y = [self createBtnWithTitle:@"取消" origin_y: _bgkView.frame.size.height - 50 tag:-1 action:@selector(hiddenSheet)] - 55;
-    for (int i = 0; i < titleArr.count; i++) {
-        y = [self createBtnWithTitle:titleArr[i] origin_y:y tag:i action:@selector(click:)];
-    }
-    [UIView animateWithDuration:0.3 animations:^{
-        CGRect frame = _bgkView.frame;
-        frame.origin.y -= frame.size.height;
-        _bgkView.frame = frame;
-    }];
-   
-}
-
-- (CGFloat)createBtnWithTitle:(NSString *)title origin_y:(CGFloat)y tag:(NSInteger)tag action:(SEL)method {
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:title forState:UIControlStateNormal];
-    btn.frame = CGRectMake(0, y, size.width, 50);
-    btn.backgroundColor = [UIColor whiteColor];
-    btn.tag = tag;
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btn addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];
-    [_bgkView addSubview:btn];
-    return y -= tag == -1 ? 0 : 50.4;
-}
-- (void)hiddenSheet {
-    [UIView animateWithDuration:0.3 animations:^{
-        CGRect frame = _bgkView.frame;
-        frame.origin.y += frame.size.height;
-        _bgkView.frame = frame;
-    }];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self removeFromSuperview];
-    });
-}
-
-- (void)click:(UIButton *)btn {
-    if (self.Click) {
-        _Click(btn.tag);
-    }
-}
-
-</code> </pre>
-
-
-<p></p>
-
-<p>这是.h 文件代码</p>
-
-<pre> <code> 
-@property (nonatomic, copy) void (^Click)(NSInteger clickIndex);
-- (instancetype)initWithFrame:(CGRect)frame titleArr:(NSArray *)titleArr;
-- (void)hiddenSheet;
-
-</code></pre>
-
-
-<p></p>
-
-<p>看吧，这多简单方便，有代码直接上，废话少说，程序员对代码的情结不容小觑，哼哈哈。</p>
-
-<p>这里我也把使用的代码给贴出来吧，慢慢观察，仔细看，哈哈，使用起来很容易</p>
-
-<pre> <code>
-- (IBAction)showSheet:(id)sender {
-    AS_Sheet *a = [[AS_Sheet alloc] initWithFrame:self.view.bounds titleArr:@[@"从手机相册选择", @"拍照", @"小视频"]];
-    __weak typeof(a) weakA = a;
-    a.Click = ^(NSInteger clickIndex) {
-        switch (clickIndex) {
-            case 0:
-                NSLog(@"相册选择");
-                break;
-            case 1:
-                NSLog(@"拍照");
-                break;
-            case 2:
-                NSLog(@"小视频");
-                break;
-            default:
-                break;
-        }
-        [weakA hiddenSheet];
-    };
-    [self.navigationController.view addSubview:a];
-}
-
-</code></pre>
-
-
-<p></p>
-
-<p>最后，老规矩我还是把<a href="https://github.com/Ashen-Zhao/ASSheet">Demo附上</a>，以供辅助参考，Demo中包含swift版本和OC版本</p>
 ]]></content>
   </entry>
   
