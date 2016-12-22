@@ -8,9 +8,9 @@
   <title>探索Xcode8编译为什么那么慢？ - 啊神的技术博客</title>
   <meta name="author" content="Ashen">
   
-  <meta name="description" content="Xcode8编译慢，swift3编译慢">
+  <meta name="description" content="Xcode8编译慢，swift3编译慢,Xcode编译慢, swift编译慢">
   
-  <meta name="keywords" content="Xcode8,Swift3, Xcode8编译速度慢,探索编译速度, 解决Xcode8编译慢的问题">
+  <meta name="keywords" content="Xcode8, Xcode编译慢, swift编译慢, Swift3, Xcode8编译速度慢,探索编译速度, 解决Xcode8编译慢的问题">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +111,8 @@
 
 <h3>探索Xcode编译，在哪些地方可以看到编译文件过程</h3>
 
+<hr />
+
 <p>通过多次编译查看，发现在Xcode左边栏，最后一个选项，是每次的编译运行等记录， 每行记录中都会有每次编译的文件编译记录。如下图</p>
 
 <!--more-->
@@ -125,11 +127,13 @@
 
 <h3>排查文件中哪些代码导致的编译卡住？</h3>
 
+<hr />
+
 <p>排查的方法，采用比较笨的方法，暴力注释方法：<strong><em>就是注释找到卡住的文件中的所有方法里的代码，不要注释方法，再次编译，此时发现该文件很快通过编译，然后在依次解开部分方法注释，再次编译，直到发现解开某个方法的注释后，编译再次卡住，那就说明那个方法中的代码写的有问题，然后在依次注释，解开注释，排查方法中的某一行代码的问题。</em></strong>经过一番排查，我找到了我代码中卡住的部分代码，如下图红色圈中的代码</p>
 
 <p><img src="/images/build3.png" alt="图3" /></p>
 
-<p>在字典中的key对应的value，没有给直接的值，而是给出一个表达式，这样会导致Xcode8的编译速度极其慢，不知道为什么会出现这样的问题，之前的Xcode版本是没有的。</p>
+<p><font color=red>在字典中的key对应的value，没有给直接的值，而是给出一个表达式，这样会导致Xcode8的编译速度极其慢，不知道为什么会出现这样的问题，之前的Xcode版本是没有的。</font></p>
 
 <p>找到问题所在，解决问题就简单了，于是修改代码如下图：</p>
 
@@ -141,6 +145,17 @@
      <a href="https://forums.developer.apple.com/thread/62737">这是苹果开发者提到的Xcode8编译超慢的问题，我看了下，也做了对应修改，发现对我并没有什么用， 感兴趣的话进去看看吧</a></p>
 
 <p>有时候自己慢慢去探索出问题的所在，也是很不错的体验。</p>
+
+<hr />
+
+<h3>后知后觉</h3>
+
+<hr />
+
+<p>后来我知道了，也可以通过，查看具体的swift函数编译时间来定位哪个函数卡住了，而不用<code>暴力注释法</code>.<br/>
+首先要到Build Settings 给 Other Swift Flags  添加一项<code>
+-Xfrontend -debug-time-function-bodies</code> <br/>
+就可以查看编译通过的文件中的函数编译时间，找到绿色✅的文件的那一行，在最后面有一个图标，点击展开具体内容，向下移动就会看到每个函数执行的具体时间。</p>
 </div>
 
 
