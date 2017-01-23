@@ -86,6 +86,54 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-11T17:22:46+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:22 pm</span></time>
+        
+             
+      | <a href="/blog/2016/01/11/gitsshkey/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Git &amp; GitHub极简介</h2>
+
+<p>git 是分布式的代码管理工具，远程的代码管理是基于ssh的，所以要使用远程的git则需要ssh的配置<br/>
+github 开源代码库以及版本控制系统</p>
+
+<h2>GitHub的配置</h2>
+
+<h3>1.检查是否已经存在ssh 密钥</h3>
+
+<p>输入 ls -al ~/.ssh 命令  查看是否存在<code>id_rsa.pub</code> 和 <code>id_rsa</code> 文件</p>
+
+<p><img src="/images/isHassshkey.png" alt="啊神附图1" /><br/>
+如果存在，则执行第 3 步， 否则执行第 2 步
+  </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/11/gitsshkey/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2016/01/11/webview/">UIWebView 与 原生系统的简单跳转交互</a></h1>
     
     
@@ -208,55 +256,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/07/datasafety/">iOS 常用加密方法</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-01-07T17:30:15+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:30 pm</span></time>
-        
-             
-      | <a href="/blog/2016/01/07/datasafety/#comments">评论</a>
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>为何要加密</h3>
-
-<p>&emsp;为什么要加密，顾名思义，如果你不想让别人轻而易举的就拿到你的账号以及登录密码，如果你不想让别人获取你的敏感的数据(利益、聊天等数据),and so on; 不对数据进行加密，那就像你只穿个裤头，在到处跑，随时都可能走光；加密的重要性，我不多说，自己悟吧;<br/>
-&emsp;iOS 开发中经常用到的几种加密方式：MD5、Base64、RSA、AES<br/>
-&emsp;一般来说最常用的就是MD5和Base64：</p>
-
-<blockquote><ol>
-<li>MD5主要应用于普通请求、返回数据，进行数据完整性校验</li>
-<li>Base64 主要用于防止数据明文传输</li>
-<li>AES 一般用于登录加密</li>
-<li>RSA 经常用于重要数据 以及敏感数据的加密</li>
-</ol>
-</blockquote>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/01/07/datasafety/">阅读全文 →</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -287,6 +286,10 @@
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/01/23/reading/">读书，从2017开始</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/12/21/xcode8build/">探索Xcode8编译为什么那么慢？</a>
@@ -328,10 +331,6 @@
         <a href="/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之入门使用</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -341,7 +340,7 @@
 <li class='category'><a href='/blog/categories/i/'>iOS (17)</a></li>
 <li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
-<li class='category'><a href='/blog/categories/sui-bi/'>随笔 (2)</a></li>
+<li class='category'><a href='/blog/categories/sui-bi/'>随笔 (3)</a></li>
 
  </ul>
 </section>

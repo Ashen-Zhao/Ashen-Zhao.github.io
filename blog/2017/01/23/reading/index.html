@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>UIWebView 与 原生系统的简单跳转交互 - 啊神的技术博客</title>
+  <title>读书，从2017开始 - 啊神的技术博客</title>
   <meta name="author" content="Ashen">
   
-  <meta name="description" content="UIWebView与原生系统的简单跳转交互,啊神">
+  <meta name="description" content="啊神的技术博客">
   
-  <meta name="keywords" content="UIWebview, UIWebView的交互,啊神">
+  <meta name="keywords" content="啊神, iOS, 啊神的技术博客, 移动开发, ashen, iOS开发, octopress,赵阿申,阿申">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2016/01/11/webview/">
+  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2017/01/23/reading/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="啊神的技术博客" type="application/atom+xml">
@@ -83,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">UIWebView 与 原生系统的简单跳转交互</h1>
+      <h1 class="entry-title">读书，从2017开始</h1>
     
     
       <p class="meta">
@@ -92,7 +92,7 @@
 
 
 
-<time class='entry-date' datetime='2016-01-11T10:15:09+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:15 am</span></time>
+<time class='entry-date' datetime='2017-01-23T11:23:46+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2017</span></span> <span class='time'>11:23 am</span></time>
         
              
       | <a href="#comments">评论</a>
@@ -102,54 +102,32 @@
   </header>
 
 
-<div class="entry-content"><h3>简单介绍UIWebView</h3>
+<div class="entry-content"><h3>诱因</h3>
 
-<p> 关于UIWebView这里我就不多介绍了，可以简单理解为一个在iOS 端显示网页的一个控件；</p>
+<p>&emsp;&emsp;最近发生了很多事，让我开始反思自己，让我逐渐认识到自己的不足。工作上，同事一个个能言善辩，应答如流，而我却如同木头一般。生活上，朋友们都在笑谈风声，而我却又如同木头一般。每到这个时候，心情就会有点不好，心情不好我就会去看一些大牛的博客，不看技术的，只看大牛的一些生活记录博客，看大牛写的一些博客，对生活，对工作的见解，很是到位，看来他们也是读了无数的书，才能有如此的见解，让我心生敬佩、向往。</p>
 
-<h3>UIWebView的使用</h3>
+<p>&emsp;&emsp;究其原因就是我读书太少，没有那么多墨水，来表达心中所想。很感谢，哪些能力比较强的人，让我认识自己的不足，至少现在开始我还来得及弥补。</p>
 
-<p> 它既然也是view，当然就可以像其他view一样的创建，如下：</p>
+<h3>读书，从2017开始</h3>
 
-<pre><code> UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 560)];
+<p>&emsp;&emsp;找到自己缺少什么，就去做什么，是一件简单却又难以坚持的事情。读书，对于我来说，可能比较陌生，我很少去读书，偶尔也就看个短文，对于一本本厚厚的书籍，我是没看过几本的。著名的四大名著，我是一页都没看过的，这可能是种遗憾吧，但这也是个警钟，每每想起都会让我觉得，读书，读书，读书的重要性。 之说以在这里写下这边文章，我也是想监督下自己，不再向以往那样，只是嘴皮子上说说而已，这次要拿出实际行动来读书。</p>
 
- webView.delegate = self;//先在此设置下代理，等下会实现其代理方法</code></pre>
+<p>读书，从2017年开始。</p>
 
+<h3>读书计划</h3>
 
-<p> <!--more-->
- 当然这是创建一个对象，想要加载一个网页还需要实现<code>loadRequest:</code>这个方法；这时你会发现该方法需要一个<code>NSURLRequest</code>类型的参数；那简单我们就来创建一个又如何；我们使用NSURLRequest的类方法<code>requestWithURL:</code>来创建；咦，又会发现这个类方法需要一个<code>NSURL</code>类型的参数；不管了，那就先创建NSURL对象吧；</p>
+<p>1.每两个月或者一个月读一本书<br/>
+2.读完一本做阅后感<br/>
+3.前4个月，可以不用严格执行第一条（刚开始不能太多要求）<br/>
+4.读书方式，可选择电子书、纸质书等</p>
 
-<pre><code>
- NSURL *url = [NSURL URLWithString:@"http://www.baidu.com"];
+<h3>读书目的</h3>
 
-[webView loadRequest:[NSURLRequest requestWithURL:url];</code></pre>
+<p>丰富自己的知识体系，提高自己的表达能力以及沟通能力，摆脱被淘汰的可能，能做到自己营销，摆脱社交恐惧症。。。。</p>
 
+<hr />
 
-<p> 切记后面一定要是一个可访问的网址；
- 最后，因为它也是View，别忘记加到父视图上</p>
-
-<pre><code>[self.view addSubview:webView];</code></pre>
-
-
-<p>既然要实现与原生系统的交互，那就不得不实现它的代理方法</p>
-
-<pre><code>-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-   NSString *urlStr = request.URL.absoluteString; //取出webView交互的url链接；
-        //根据urlStr链接中的参数，去push到系统中的任何页面都可以的
-       /*实现code
-        .....
-       */
-      return YES;
-}</code></pre>
-
-
-<p> <b>附加说明</b>：urlStr是网页中，点击带有响应，传过来的网址，这个网址要看你服务端给的什么内容，针对内容去跳转到对象的页面(如：是一个头像的点击，则跳转到对应的用户信息，这是网址中，服务端就应该封装的有对应的用户的ID);
- 该代理方法返回值是BOOL类型的，所以当你需要用webView来显示的时候，一定要返回YES; 至于跳转到App内其他页面就没有这么讲究了，YES or NO all ok; 建议返回NO, 以免出现web内与应用内两次跳转；
- 如果服务端需要传参数进去（如：token) ，这是你就需要在创建<code>NSURL</code>对象时，将token封装进去</p>
-
-<pre>[NSURL URLWithString:@"http://www.baidu.com?token=pzshgawegwegeugiwef93i24"]</pre>
-
-
-<h6>自己在项目中就是这么实现的，如果有疑问或者有更好地方法，请与留言交流；</h6>
+<p>随时随地随便谁。</p>
 </div>
 
 
@@ -165,12 +143,12 @@
 
 
 
-<time class='entry-date' datetime='2016-01-11T10:15:09+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:15 am</span></time>
+<time class='entry-date' datetime='2017-01-23T11:23:46+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2017</span></span> <span class='time'>11:23 am</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/i/'>iOS</a>
+    <a class='category' href='/blog/categories/sui-bi/'>随笔</a>
   
 </span>
 
@@ -202,10 +180,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/01/08/easymarkdown/" title="Previous Post: EasyMarkDown">&laquo; EasyMarkDown</a>
+        <a class="basic-alignment left" href="/blog/2016/12/21/xcode8build/" title="Previous Post: 探索Xcode8编译为什么那么慢？">&laquo; 探索Xcode8编译为什么那么慢？</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/01/11/gitsshkey/" title="Next Post: GitHub 的简明教程之配置ssh key">GitHub 的简明教程之配置ssh key &raquo;</a>
       
     </p>
   </footer>
@@ -215,7 +191,7 @@
   <section>
     <h1>评论</h1>
     <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
-<div class="ds-thread" data-title="UIWebView 与 原生系统的简单跳转交互"></div>
+<div class="ds-thread" data-title="读书，从2017开始"></div>
 <script type="text/javascript">
   var duoshuoQuery = {short_name:"zhaoashen"};
   (function() {

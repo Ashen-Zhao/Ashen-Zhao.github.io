@@ -86,6 +86,55 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2016/01/07/datasafety/">iOS 常用加密方法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-07T17:30:15+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:30 pm</span></time>
+        
+             
+      | <a href="/blog/2016/01/07/datasafety/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>为何要加密</h3>
+
+<p>&emsp;为什么要加密，顾名思义，如果你不想让别人轻而易举的就拿到你的账号以及登录密码，如果你不想让别人获取你的敏感的数据(利益、聊天等数据),and so on; 不对数据进行加密，那就像你只穿个裤头，在到处跑，随时都可能走光；加密的重要性，我不多说，自己悟吧;<br/>
+&emsp;iOS 开发中经常用到的几种加密方式：MD5、Base64、RSA、AES<br/>
+&emsp;一般来说最常用的就是MD5和Base64：</p>
+
+<blockquote><ol>
+<li>MD5主要应用于普通请求、返回数据，进行数据完整性校验</li>
+<li>Base64 主要用于防止数据明文传输</li>
+<li>AES 一般用于登录加密</li>
+<li>RSA 经常用于重要数据 以及敏感数据的加密</li>
+</ol>
+</blockquote>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/07/datasafety/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2016/01/05/delcocopods/">从工程中删除Cocoapods</a></h1>
     
     
@@ -162,62 +211,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/04/any-push-pop/">iOS 如何随意的push来pop去</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-01-04T11:08:00+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:08 am</span></time>
-        
-             
-      | <a href="/blog/2016/01/04/any-push-pop/#comments">评论</a>
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>iOS 导航控制器如何随意push和pop</h2>
-
-<hr />
-
-<p>第一次开始写技术文章，请同学们多多关照，有错的地方请给我指出，大家学习一起成长，好了，我就废话不多少了；</p>
-
-<hr />
-
-<h4>主题思想：如A、B、C、D 四个视图控制器</h4>
-
-<p>想要在 A push B 后， B 在push 到 D ，然后从 D pop 到 C ,在从 C pop 的A</p>
-
-<hr />
-
-<h4>解决方法如下：</h4>
-
-<p>1.假如此时在 A 控制器下，想要到 push 到 B， 可以这样写</p>
-
-<pre><code> [self.navigationController pushViewController: B :YES];
-</code></pre>
-
-<p> </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/01/04/any-push-pop/">阅读全文 →</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -248,6 +241,10 @@
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/01/23/reading/">读书，从2017开始</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/12/21/xcode8build/">探索Xcode8编译为什么那么慢？</a>
@@ -289,10 +286,6 @@
         <a href="/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之入门使用</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -302,7 +295,7 @@
 <li class='category'><a href='/blog/categories/i/'>iOS (17)</a></li>
 <li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
-<li class='category'><a href='/blog/categories/sui-bi/'>随笔 (2)</a></li>
+<li class='category'><a href='/blog/categories/sui-bi/'>随笔 (3)</a></li>
 
  </ul>
 </section>
