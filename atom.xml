@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2017-02-09T16:43:45+08:00</updated>
+  <updated>2017-02-14T14:03:22+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[集成友盟分享中遇到的奇怪的错误]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2017/02/14/qi-guai-de-cuo-wu/"/>
+    <updated>2017-02-14T13:35:47+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2017/02/14/qi-guai-de-cuo-wu</id>
+    <content type="html"><![CDATA[<h3>开发中遇到的一些看似不起眼的警告，往往却是问题的所在！</h3>
+
+<hr />
+
+<p>这不，这次我就遇到了这个坑，为了提醒自己不要轻易忽略警告，以此文章记录一下，埋坑的艰辛。</p>
+
+<p>我是在集成友盟分享SDK的时候，使用<code>cocoapods</code>导入的友盟分享组件，在命令行敲下pod install只会，安装也完成了，就是出现以下一些警告，我大概浏览了一下，看不出所以然，就没管, 继续在集成。</p>
+
+<p><i>[!] The <code>ULife [Debug]</code> target overrides the <code>OTHER_LDFLAGS</code> build setting defined in <code>Pods/Target Support Files/Pods-ULife/Pods-ULife.debug.xcconfig'. This can lead to problems with the CocoaPods installation
+    - Use the</code>$(inherited)` flag, or
+    - Remove the build settings from the target.</p>
+
+<p>[!] The <code>ULife [Release]</code> target overrides the <code>OTHER_LDFLAGS</code> build setting defined in <code>Pods/Target Support Files/Pods-ULife/Pods-ULife.release.xcconfig'. This can lead to problems with the CocoaPods installation
+    - Use the</code>$(inherited)` flag, or
+    - Remove the build settings from the target.<br/>
+</i></p>
+
+<!--more-->
+
+
+<p>直到我开始使用友盟的一些类库时，使用也是没有问题的，可当我编译时，却出现了以下错误信息：</p>
+
+<p><i>Undefined symbols for architecture arm64:
+  &ldquo;<em>OBJC_CLASS</em>$_UMSocialManager&rdquo;, referenced from:
+      objc-class-ref in AppDelegate.o
+ld: symbol(s) not found for architecture arm64
+clang: error: linker command failed with exit code 1 (use -v to see invocation) </i></p>
+
+<p>咋一看，还以为是不支持64位呢，可是官方明明写着支持64位的，也就没有去怀疑官方，就开始各种清理缓存，重复编译，各种谷歌，百度，可终究没有可行的办法。去友盟问客服，沟通成本太高，每次掉线，重新连接又是一个新人，也未能解决。</p>
+
+<p>实在没有办法了，我又重新pod update一下，这次发现依然是上面提到的警告信息，这次我没有忽略，而是仔细的看了下，大概知道了，产生此警告的原因是项目 Target 中的一些设置，CocoaPods 也做了默认的设置，如果两个设置结果不一致，就会造成问题。</p>
+
+<p>警告中，提示要想使用cocoapods中的设置，需要在项目中定义<code>PODS_ROOT</code> 和 <code>Other Linker Flags</code>的地方，把他们的值用<code>$(inherited)</code>替换掉。</p>
+
+<p>大致解决办法知道了， 开始在<code>Build Settings</code>中的PODS_ROOT<code>和</code>Other Linker Flags<code>处进行修改，添加一项</code>$(inherited)<code>，Other Linker Flags</code>我这里没有替换掉，而是添加一项，怕我本来的项也是有用的，就没有替换。</p>
+
+<p>最后修改后，我再次编译，竟然通过了，我喜极而泣的写下了这篇文章来记录下这次忽略警告的教训经历。</p>
+
+<hr />
+
+<p>注：在我在网上搜索时，有说，点击项目文件 project.xcodeproj，右键<code>显示包内容</code>，用文本编辑器打开<code>project.pbxproj</code>，删除<code>OTHER_LDFLAGS</code>的地方，保存，回到 Xcode，编译也能通过。这种删除内容的解决办法，我一般不轻易使用的，所以我没有去证实这种做法，若有兴趣，你可以尝试下，不过做好备份哦~~</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[读书，从2017开始]]></title>
@@ -1618,74 +1667,6 @@ NSMutableArray*tempMarr =[NSMutableArrayarrayWithArray:self.navigationController
 </code></pre>
 
 <p><a href="https://github.com/Ashen-Zhao/anypushpop">Demo下载地址</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[迟到的爱，是现在和未来]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2016/01/01/love/"/>
-    <updated>2016-01-01T16:28:50+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2016/01/01/love</id>
-    <content type="html"><![CDATA[<p><b></p>
-
-<p>爱在此处绽放</p>
-
-<p>心底的声音，从未停止呼喊</p>
-
-<p>爱的懵懵懂懂，爱的小心翼翼</p>
-
-<p>尽管，使出全力想要呵护，保护这份爱，想让她从不受伤害</p>
-
-<p>尽管如此</p>
-
-<p>你越是在乎，越是想要保护，就越容易出差错</p>
-
-<p>爱，不是小心翼翼</p>
-
-<p>爱，需要交流，需要内心世界的交互</p>
-
-<p>一直以为，爱，如果你懂我，我什么都不用说</p>
-
-<p>可那只是理想</p>
-
-<p>你不说，谁会懂？爱不是玩家家</p>
-
-<p>既然承诺，就有责任，爱不是游戏</p>
-
-<p>我对爱情的认真，连我自己都想不到我会做什么我自己想都没想的事</p>
-
-<p>爱，需要勇气</p>
-
-<p>需要在自己害怕的时候，依然挺起胸膛保护你的她，让对方感觉不到你的胆怯</p>
-
-<p>想信爱，从不怀疑，从不动摇</p>
-
-<p>天荒地老，愿与之白头偕老
-</b></p>
-
-<hr />
-
-<h4>对待爱情的态度，本该如此</h4>
-
-<pre>
-      ******       ******
-    **********   **********
-  ************* *************
- *****************************
- *****************************
- *****************************
-  ***************************
-    ***********************
-      *******************
-        ***************
-          ***********
-            *******
-              ***
-               *
-</pre>
-
-
-<p></p>
 ]]></content>
   </entry>
   

@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>简单实现双击tabBarItem刷新页面 - 啊神的技术博客</title>
+  <title>集成友盟分享中遇到的奇怪的错误 - 啊神的技术博客</title>
   <meta name="author" content="Ashen">
   
-  <meta name="description" content="简单实现iOS双击tabbaritem刷新页面数据,啊神">
+  <meta name="description" content="啊神的技术博客">
   
-  <meta name="keywords" content="双击tabBar, 刷新页面, UITabBarController, UITabBarItem,啊神">
+  <meta name="keywords" content="cocoapods警告,`$(inherited)`,友盟编译错误,Undefined symbols for architecture arm64">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2016/01/20/doubleclick/">
+  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2017/02/14/qi-guai-de-cuo-wu/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="啊神的技术博客" type="application/atom+xml">
@@ -83,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">简单实现双击tabBarItem刷新页面</h1>
+      <h1 class="entry-title">集成友盟分享中遇到的奇怪的错误</h1>
     
     
       <p class="meta">
@@ -92,7 +92,7 @@
 
 
 
-<time class='entry-date' datetime='2016-01-20T17:44:11+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:44 pm</span></time>
+<time class='entry-date' datetime='2017-02-14T13:35:47+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>1:35 pm</span></time>
         
              
       | <a href="#comments">评论</a>
@@ -102,34 +102,47 @@
   </header>
 
 
-<div class="entry-content"><h3>如何实现双击tabbarItem刷新页面？</h3>
+<div class="entry-content"><h3>开发中遇到的一些看似不起眼的警告，往往却是问题的所在！</h3>
 
-<p>&emsp;在网上寻找了一圈，众说纷纭，大差不差，而且基本上实现的不是双击才刷新，而是双击刷新一次后，只要再次单击就会刷新，这样很容易造成用户不小心点着，降低用户体验；见于这种局面，我花费了近一个小时，鼓捣出来了，只有双击的时候，才会去刷新页面（其实是伪双击，也就是单击两次，没有做两次单击时间间隔限制），废话不说了，直接上代码：</p>
+<hr />
 
-<pre><code>
-int i = 0;
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
-    i++;
-    UIViewController *tbSelectedController = tabBarController.selectedViewController;
-    if ([tbSelectedController isEqual:viewController]) {
-        if (currentIndex == 1 && tabBarController.selectedIndex == 1 && i % 2 != 0) {
-            UINavigationController *nav = self.viewControllers[1];
-            TestViewController *tVC = nav.viewControllers[0];
-            [tVC doubleClickRefrsh];
-        }
-        currentIndex = tabBarController.selectedIndex;
-        return NO;
-    }
-    i = 1;
-    return YES;
-}
-</code></pre>
+<p>这不，这次我就遇到了这个坑，为了提醒自己不要轻易忽略警告，以此文章记录一下，埋坑的艰辛。</p>
+
+<p>我是在集成友盟分享SDK的时候，使用<code>cocoapods</code>导入的友盟分享组件，在命令行敲下pod install只会，安装也完成了，就是出现以下一些警告，我大概浏览了一下，看不出所以然，就没管, 继续在集成。</p>
+
+<p><i>[!] The <code>ULife [Debug]</code> target overrides the <code>OTHER_LDFLAGS</code> build setting defined in <code>Pods/Target Support Files/Pods-ULife/Pods-ULife.debug.xcconfig'. This can lead to problems with the CocoaPods installation
+    - Use the</code>$(inherited)` flag, or
+    - Remove the build settings from the target.</p>
+
+<p>[!] The <code>ULife [Release]</code> target overrides the <code>OTHER_LDFLAGS</code> build setting defined in <code>Pods/Target Support Files/Pods-ULife/Pods-ULife.release.xcconfig'. This can lead to problems with the CocoaPods installation
+    - Use the</code>$(inherited)` flag, or
+    - Remove the build settings from the target.<br/>
+</i></p>
+
+<!--more-->
 
 
-<p>
-这里是 <code>UITabBarDelegate</code> 的代理方法，实现的是双击第二个tabBarItem，则刷新其对应的第一个视图的节目数据;<br/>
-至于<code>i</code>的存在，是为了记录是否是双击，我是根据<code>i</code>是偶数还是奇数来进行判断的；<br/>
-就酱紫吧，不清楚的只管拿去用就行了，我就不多解释了，只有这几行代码，真没啥解释的了(^o^)/~</p>
+<p>直到我开始使用友盟的一些类库时，使用也是没有问题的，可当我编译时，却出现了以下错误信息：</p>
+
+<p><i>Undefined symbols for architecture arm64:
+  &ldquo;<em>OBJC_CLASS</em>$_UMSocialManager&rdquo;, referenced from:
+      objc-class-ref in AppDelegate.o
+ld: symbol(s) not found for architecture arm64
+clang: error: linker command failed with exit code 1 (use -v to see invocation) </i></p>
+
+<p>咋一看，还以为是不支持64位呢，可是官方明明写着支持64位的，也就没有去怀疑官方，就开始各种清理缓存，重复编译，各种谷歌，百度，可终究没有可行的办法。去友盟问客服，沟通成本太高，每次掉线，重新连接又是一个新人，也未能解决。</p>
+
+<p>实在没有办法了，我又重新pod update一下，这次发现依然是上面提到的警告信息，这次我没有忽略，而是仔细的看了下，大概知道了，产生此警告的原因是项目 Target 中的一些设置，CocoaPods 也做了默认的设置，如果两个设置结果不一致，就会造成问题。</p>
+
+<p>警告中，提示要想使用cocoapods中的设置，需要在项目中定义<code>PODS_ROOT</code> 和 <code>Other Linker Flags</code>的地方，把他们的值用<code>$(inherited)</code>替换掉。</p>
+
+<p>大致解决办法知道了， 开始在<code>Build Settings</code>中的PODS_ROOT<code>和</code>Other Linker Flags<code>处进行修改，添加一项</code>$(inherited)<code>，Other Linker Flags</code>我这里没有替换掉，而是添加一项，怕我本来的项也是有用的，就没有替换。</p>
+
+<p>最后修改后，我再次编译，竟然通过了，我喜极而泣的写下了这篇文章来记录下这次忽略警告的教训经历。</p>
+
+<hr />
+
+<p>注：在我在网上搜索时，有说，点击项目文件 project.xcodeproj，右键<code>显示包内容</code>，用文本编辑器打开<code>project.pbxproj</code>，删除<code>OTHER_LDFLAGS</code>的地方，保存，回到 Xcode，编译也能通过。这种删除内容的解决办法，我一般不轻易使用的，所以我没有去证实这种做法，若有兴趣，你可以尝试下，不过做好备份哦~~</p>
 </div>
 
 
@@ -145,7 +158,7 @@ int i = 0;
 
 
 
-<time class='entry-date' datetime='2016-01-20T17:44:11+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:44 pm</span></time>
+<time class='entry-date' datetime='2017-02-14T13:35:47+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>1:35 pm</span></time>
       
 
 <span class="categories">
@@ -182,10 +195,8 @@ int i = 0;
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/01/18/localized03/" title="Previous Post: iOS 多语言版本的开发（三）">&laquo; iOS 多语言版本的开发（三）</a>
+        <a class="basic-alignment left" href="/blog/2017/01/23/reading/" title="Previous Post: 读书，从2017开始">&laquo; 读书，从2017开始</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/01/22/assheet/" title="Next Post: 仿照微博、微信弹出ActionSheet样式">仿照微博、微信弹出ActionSheet样式 &raquo;</a>
       
     </p>
   </footer>
@@ -195,7 +206,7 @@ int i = 0;
   <section>
     <h1>评论</h1>
     <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
-<div class="ds-thread" data-title="简单实现双击tabBarItem刷新页面"></div>
+<div class="ds-thread" data-title="集成友盟分享中遇到的奇怪的错误"></div>
 <script type="text/javascript">
   var duoshuoQuery = {short_name:"zhaoashen"};
   (function() {
