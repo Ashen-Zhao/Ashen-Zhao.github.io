@@ -86,6 +86,54 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2016/01/11/webview/">UIWebView 与 原生系统的简单跳转交互</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-11T10:15:09+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:15 am</span></time>
+        
+             
+      | <a href="/blog/2016/01/11/webview/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>简单介绍UIWebView</h3>
+
+<p> 关于UIWebView这里我就不多介绍了，可以简单理解为一个在iOS 端显示网页的一个控件；</p>
+
+<h3>UIWebView的使用</h3>
+
+<p> 它既然也是view，当然就可以像其他view一样的创建，如下：</p>
+
+<pre><code> UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 560)];
+
+ webView.delegate = self;//先在此设置下代理，等下会实现其代理方法</code></pre>
+
+
+<p> </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/11/webview/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2016/01/08/easymarkdown/">EasyMarkDown</a></h1>
     
     
@@ -209,51 +257,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/05/delcocopods/">从工程中删除Cocoapods</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-01-05T17:16:42+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:16 pm</span></time>
-        
-             
-      | <a href="/blog/2016/01/05/delcocopods/#comments">评论</a>
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>&emsp;会有这么一种情况，因为需要改动的第三方比较多，不想使用cocoapods管理第三方，这时候，对于已经使用cocoapods的情况，需要进行删除处理，就可以按照以下步骤进行：</p>
-
-<ol>
-<li><p>删除工程文件夹下的Podfile、Podfile.lock及Pods文件夹</p></li>
-<li><p>删除xcworkspace文件</p></li>
-<li><p>使用xcodeproj文件打开工程，删除Frameworks组下的Pods.xcconfig及libPods.a引用</p></li>
-<li><p>在工程设置中的Build Phases下删除Check Pods Manifest.lock及Copy Pods Resources, 可能还会有Embed Pods Frameworks也删了，总之带有Pods全删了</p></li>
-</ol>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/01/05/delcocopods/">阅读全文 →</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -284,6 +287,10 @@
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/02/22/autobuild/">iOS自动打包上传脚本</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2017/02/14/qi-guai-de-cuo-wu/">集成友盟分享中遇到的奇怪的错误</a>
@@ -325,17 +332,13 @@
         <a href="/blog/2016/01/18/localized03/">iOS 多语言版本的开发（三）</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a>
-      </li>
-    
   </ul>
 </section>
 <section>
  <h1>分类</h1>
  <ul id="categories">
   <li class='category'><a href='/blog/categories/github/'>Github (2)</a></li>
-<li class='category'><a href='/blog/categories/i/'>iOS (18)</a></li>
+<li class='category'><a href='/blog/categories/i/'>iOS (19)</a></li>
 <li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
 <li class='category'><a href='/blog/categories/sui-bi/'>随笔 (3)</a></li>

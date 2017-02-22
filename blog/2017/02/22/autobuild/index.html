@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iOS自动打包上传脚本 - 啊神的技术博客</title>
+  <meta name="author" content="Ashen">
+  
+  <meta name="description" content="啊神的技术博客">
+  
+  <meta name="keywords" content="python脚本,iOS自动编译,iOS自动上传,iOS自动打包">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2017/02/22/autobuild/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="啊神的技术博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  
+  <script src="http://cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript">
+ function addBlankTargetForLinks () {
+   $('a[href^="http"]').each(function(){
+       $(this).attr('target', '_blank');
+   });
+ }
+ 
+ $(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+ });
+ </script>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">啊神的技术博客</a></h1>
+  
+    <h2>我的小博客，小智慧</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="ashen-zhao.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+﻿<ul class="main-navigation">
+  <li><a href="/"><b>首 页</b></a></li>
+  <li><a href="/blog/archives"><b>博客归档</b></a></li>
+  <li><a href="/blog/categories/i"><b>iOS 文章</b></a></li>
+  <li><a href="/blog/categories/sui-bi"><b>随笔</b></a></li>
+  <li><a href="https://github.com/Ashen-Zhao"><b>有关博主</b></a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS自动打包上传脚本</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-22T16:46:25+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2017</span></span> <span class='time'>4:46 pm</span></time>
+        
+             
+      | <a href="#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>自从将swift2.2升级到swift3.0, 每次使用Xcode8编译都很慢，很是不爽，于是有了研究下xcodebuild命令行打包的想法，起初不知道用shell，还是用python, 在网上大概搜了一下，关于python的比较多点，于是就先学习python的基础语法，然后再去看看大神的一些脚本，就开始专研命令行打包了。总之，过程很艰辛，结果很满意，以下便是我修改后的<a href="https://github.com/ashen-zhao/autobuild">python自动打包脚本</a>，命令行使用，打包完成会询问是否上传蒲公英平台，以及询问是否上传appstore，还有是否保留archive文件。<br/>
+<a href="https://github.com/ashen-zhao/autobuild">自动打包脚本下载地址</a></p>
+
+<!--more-->
+
+
+
+
+<pre>
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+#./autobuild.py -p youproject.xcodeproj
+#./autobuild.py -w youproject.xcworkspace
+
+import argparse
+import subprocess
+import requests
+import os
+import datetime
+
+#configuration for iOS build setting
+CONFIGURATION = "Release"
+EXPORT_OPTIONS_PLIST = "exportOptions.plist"
+
+#发布版本号
+VERSION = '1.0.0'
+BUILD = '17021803'
+
+#要打包的TARGET名字
+TARGET = 'ULife'
+
+#Info.plist路径
+PLIST_PATH = "xxxxxx/Info.plist"
+
+#存放路径以时间命令
+DATE = datetime.datetime.now().strftime('%Y-%m-%d_%H.%M.%S')
+
+#会在桌面创建输出ipa文件的目录
+EXPORT_MAIN_DIRECTORY = "~/Desktop/" + TARGET + DATE
+
+#xcarchive文件路径（含有dsym），后续查找BUG用途
+ARCHIVEPATH = EXPORT_MAIN_DIRECTORY + "/%s%s.xcarchive" %(TARGET,VERSION)
+
+#ipa路径
+IPAPATH = EXPORT_MAIN_DIRECTORY + "/%s.ipa" %(TARGET)
+
+#苹果开发者账号
+APPLEID = 'xxxxxx'
+APPLEPWD = 'xxxxx'
+
+# configuration for pgyer
+PGYER_UPLOAD_URL = "http://www.pgyer.com/apiv1/app/upload"
+DOWNLOAD_BASE_URL = "http://www.pgyer.com"
+USER_KEY = "xxxxxx"
+API_KEY = "xxxxx"
+#设置从蒲公英下载应用时的密码
+PYGER_PASSWORD = "xxxxx"
+
+def cleanArchiveFile():
+    cleanCmd = "rm -r %s" %(ARCHIVEPATH)
+    process = subprocess.Popen(cleanCmd, shell = True)
+    process.wait()
+    print "cleaned archiveFile: %s" %(ARCHIVEPATH)
+
+def uploadIpaToAppStore():
+    print "iPA上传中...."
+    altoolPath = "/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
+
+    exportCmd = "%s --validate-app -f %s -u %s -p %s -t ios --output-format xml" % (altoolPath, IPAPATH, APPLEID,APPLEPWD)
+    process = subprocess.Popen(exportCmd, shell=True)
+    (stdoutdata, stderrdata) = process.communicate()
+
+    validateResult = process.returncode
+    if validateResult == 0:
+        print '~~~~~~~~~~~~~~~~iPA验证通过~~~~~~~~~~~~~~~~'
+        exportCmd = "%s --upload-app -f %s -u %s -p %s -t ios --output-format normal" % (
+        altoolPath, IPAPATH, APPLEID, APPLEPWD)
+        process = subprocess.Popen(exportCmd, shell=True)
+        (stdoutdata, stderrdata) = process.communicate()
+
+        uploadresult = process.returncode
+        if uploadresult == 0:
+            print '~~~~~~~~~~~~~~~~iPA上传成功'
+        else:
+            print '~~~~~~~~~~~~~~~~iPA上传失败'
+    else:
+        print "~~~~~~~~~~~~~~~~iPA验证失败~~~~~~~~~~~~~~~~"
+
+def parserUploadResult(jsonResult):
+    resultCode = jsonResult['code']
+    if resultCode == 0:
+        downUrl = DOWNLOAD_BASE_URL +"/"+jsonResult['data']['appShortcutUrl']
+        print "Upload Success"
+        print "DownUrl is:" + downUrl
+    else:
+        print "Upload Fail!"
+        print "Reason:"+jsonResult['message']
+
+def uploadIpaToPgyer(ipaPath):
+    print "ipaPath:"+ipaPath
+    ipaPath = os.path.expanduser(ipaPath)
+    ipaPath = unicode(ipaPath, "utf-8")
+    files = {'file': open(ipaPath, 'rb')}
+    headers = {'enctype':'multipart/form-data'}
+    payload = {'uKey':USER_KEY,'_api_key':API_KEY,'publishRange':'2','isPublishToPublic':'2', 'password':PYGER_PASSWORD}
+    print "uploading...."
+    r = requests.post(PGYER_UPLOAD_URL, data = payload ,files=files,headers=headers)
+    if r.status_code == requests.codes.ok:
+        result = r.json()
+        parserUploadResult(result)
+    else:
+        print 'HTTPError,Code:'+r.status_code
+
+def exportArchive():
+    exportCmd = "xcodebuild -exportArchive -archivePath %s -exportPath %s -exportOptionsPlist %s" %(ARCHIVEPATH, EXPORT_MAIN_DIRECTORY, EXPORT_OPTIONS_PLIST)
+    process = subprocess.Popen(exportCmd, shell=True)
+    (stdoutdata, stderrdata) = process.communicate()
+
+    signReturnCode = process.returncode
+    if signReturnCode != 0:
+        print "export %s failed" %(TARGET)
+        return ""
+    else:
+        return EXPORT_MAIN_DIRECTORY
+
+def buildProject(project):
+    archiveCmd = 'xcodebuild -project %s -scheme %s -configuration %s archive -archivePath %s -destination generic/platform=iOS' %(project, TARGET, CONFIGURATION, ARCHIVEPATH)
+    process = subprocess.Popen(archiveCmd, shell=True)
+    process.wait()
+
+    archiveReturnCode = process.returncode
+    if archiveReturnCode != 0:
+        print "archive project %s failed" %(project)
+        cleanArchiveFile()
+
+def buildWorkspace(workspace):
+    archiveCmd = 'xcodebuild -workspace %s -scheme %s -configuration %s archive -archivePath %s -destination generic/platform=iOS' %(workspace, TARGET, CONFIGURATION, ARCHIVEPATH)
+    process = subprocess.Popen(archiveCmd, shell=True)
+    process.wait()
+
+    archiveReturnCode = process.returncode
+    if archiveReturnCode != 0:
+        print "archive workspace %s failed" %(workspace)
+        cleanArchiveFile()
+
+def xcbuild(options):
+    project = options.project
+    workspace = options.workspace
+
+    if project is None and workspace is None:
+        pass
+    elif project is not None:
+        buildProject(project)
+    elif workspace is not None:
+        buildWorkspace(workspace)
+
+    #导出ipa文件
+    exportarchive = exportArchive()
+    print "~~~~~~~~~~~~~~~~是否上传到蒲公英~~~~~~~~~~~~~~~~"
+    print "        1 不上传 (默认)"
+    print "        2 上传 "
+    isuploadpgyer = raw_input("您的决定：")
+    if isuploadpgyer == "2" and exportarchive != "":
+        uploadIpaToPgyer(IPAPATH)
+
+    print "~~~~~~~~~~~~~~~~是否上传到AppStore~~~~~~~~~~~~~~~~"
+    print "        1 不上传 (默认)"
+    print "        2 上传 "
+    isuploadappstore = raw_input("您的决定：")
+    if isuploadappstore == '2':
+        uploadIpaToAppStore()
+    else:
+        print "~~~~~~~~~~~~~~~~是否删除archive文件~~~~~~~~~~~~~~~~"
+        print "        1 保留 (默认)"
+        print "        2 删除 "
+        iscleararchive = raw_input("您的决定：")
+        if iscleararchive == "2":
+            cleanArchiveFile()
+
+
+def main():
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-w", "--workspace", help="Build the workspace name.xcworkspace.", metavar="name.xcworkspace")
+    parser.add_argument("-p", "--project", help="Build the project name.xcodeproj.", metavar="name.xcodeproj")
+
+    options = parser.parse_args()
+
+    print "options: %s" % (options)
+
+    os.system('/usr/libexec/PlistBuddy -c "Set:CFBundleShortVersionString %s" %s' % (VERSION,PLIST_PATH))
+    os.system('/usr/libexec/PlistBuddy -c "Set:CFBundleVersion %s" %s' % (BUILD, PLIST_PATH))
+
+    xcbuild(options)
+
+if __name__ == '__main__':
+    main()
+
+</pre>
+
+
+<hr />
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Ashen</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2017-02-22T16:46:25+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2017</span></span> <span class='time'>4:46 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/i/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+    
+  <h2>分享</h2>  
+      <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+</br></br>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->  
+    
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2017/02/14/qi-guai-de-cuo-wu/" title="Previous Post: 集成友盟分享中遇到的奇怪的错误">&laquo; 集成友盟分享中遇到的奇怪的错误</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+  <section>
+    <h1>评论</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread" data-title="iOS自动打包上传脚本"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"zhaoashen"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END --></div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+    <h1>博主简介</h1>
+    <ul>
+        <li><p>现专注于iOS 应用开发， 曾做过.NET 网站后台开发， 业余时间学习Java 用于微信公众开发</p></li>
+        <li>email：zhaoashen@gmail.com</li>
+        <li>github: <a href="https://github.com/ashen-zhao" target="_blank">https://github.com/ashen-zhao</a></li>
+    </ul>
+</section><section>
+    <h1>新浪微博</h1>
+    <ul id="sinaweibo">
+        <li>
+            <iframe width="100%" height="130" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=130&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2424982293&verifier=7834bdd6&dpc=1">
+            </iframe>
+        </li>
+    </ul>
+</section><section>
+  <h1>最近发布</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/02/22/autobuild/">iOS自动打包上传脚本</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/14/qi-guai-de-cuo-wu/">集成友盟分享中遇到的奇怪的错误</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/01/23/reading/">读书，从2017开始</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/21/xcode8build/">探索Xcode8编译为什么那么慢？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/08/05/https/">iOS 中的网络加密</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/20/qrcode/">二维码扫描识别</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/14/gifimageview/">让UIImageView显示Gif图</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/pay/">iOS之接地气的移动支付</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/22/assheet/">仿照微博、微信弹出ActionSheet样式</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/20/doubleclick/">简单实现双击tabBarItem刷新页面</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/localized03/">iOS 多语言版本的开发（三）</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+ <h1>分类</h1>
+ <ul id="categories">
+  <li class='category'><a href='/blog/categories/github/'>Github (2)</a></li>
+<li class='category'><a href='/blog/categories/i/'>iOS (19)</a></li>
+<li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
+<li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
+<li class='category'><a href='/blog/categories/sui-bi/'>随笔 (3)</a></li>
+
+ </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+   &copy; 2017 - Ashen -
+  <span class="credit"> By <a href="http://octopress.org/">Octopress</a> 
+  </span>
+  <span style="display:none;">
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259882277'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1259882277%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+   </span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
