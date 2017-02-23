@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/i/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2017-02-22T17:06:57+08:00</updated>
+  <updated>2017-02-23T10:03:58+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -237,6 +237,9 @@ if __name__ == '__main__':
 
 <p>我是在集成友盟分享SDK的时候，使用<code>cocoapods</code>导入的友盟分享组件，在命令行敲下pod install只会，安装也完成了，就是出现以下一些警告，我大概浏览了一下，看不出所以然，就没管, 继续在集成。</p>
 
+<!--more-->
+
+
 <p><i>[!] The <code>ULife [Debug]</code> target overrides the <code>OTHER_LDFLAGS</code> build setting defined in <code>Pods/Target Support Files/Pods-ULife/Pods-ULife.debug.xcconfig'. This can lead to problems with the CocoaPods installation
     - Use the</code>$(inherited)` flag, or
     - Remove the build settings from the target.</p>
@@ -245,9 +248,6 @@ if __name__ == '__main__':
     - Use the</code>$(inherited)` flag, or
     - Remove the build settings from the target.<br/>
 </i></p>
-
-<!--more-->
-
 
 <p>直到我开始使用友盟的一些类库时，使用也是没有问题的，可当我编译时，却出现了以下错误信息：</p>
 
