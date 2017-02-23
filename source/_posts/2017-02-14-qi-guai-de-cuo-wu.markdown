@@ -13,7 +13,7 @@ categories: i|OS
 这不，这次我就遇到了这个坑，为了提醒自己不要轻易忽略警告，以此文章记录一下，埋坑的艰辛。   
 
 我是在集成友盟分享SDK的时候，使用`cocoapods`导入的友盟分享组件，在命令行敲下pod install只会，安装也完成了，就是出现以下一些警告，我大概浏览了一下，看不出所以然，就没管, 继续在集成。
-
+<!--more-->
 <i>[!] The `ULife [Debug]` target overrides the `OTHER_LDFLAGS` build setting defined in `Pods/Target Support Files/Pods-ULife/Pods-ULife.debug.xcconfig'. This can lead to problems with the CocoaPods installation
     - Use the `$(inherited)` flag, or
     - Remove the build settings from the target.
@@ -22,7 +22,7 @@ categories: i|OS
     - Use the `$(inherited)` flag, or
     - Remove the build settings from the target.  
 </i>
-<!--more-->
+
 直到我开始使用友盟的一些类库时，使用也是没有问题的，可当我编译时，却出现了以下错误信息：  
 
 <i>Undefined symbols for architecture arm64:
