@@ -10,6 +10,17 @@ categories: i|OS
 自从将swift2.2升级到swift3.0, 每次使用Xcode8编译都很慢，很是不爽，于是有了研究下xcodebuild命令行打包的想法，起初不知道用shell，还是用python, 在网上大概搜了一下，关于python的比较多点，于是就先学习python的基础语法，然后再去看看大神的一些脚本，就开始专研命令行打包了。总之，过程很艰辛，结果很满意，以下便是我修改后的[python自动打包脚本](https://github.com/ashen-zhao/autobuild)，命令行使用，打包完成会询问是否上传蒲公英平台，以及询问是否上传appstore，还有是否保留archive文件。  
 [自动打包脚本下载地址](https://github.com/ashen-zhao/autobuild) 
 <!--more-->
+###使用方法
+1、下载完成后，将autobuild.py以及exportOptions.plist文件放到你的项目跟目录下（即与xx.xcworkspace或者xx.xcworkspace在同一个目录下）  
+2、打开autobuild.py，修改配置信息  
+3、打开命令终端，进入项目根目录  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;a.如果你是xx.xcworkspace  
+&emsp;&emsp;	`./autobuild.py -p youproject.xcodeproj`  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;b.如果你是xx.xcworkspace  
+&emsp;&emsp; `./autobuild.py -w youproject.xcworkspace`  
+
+4、等待终端回应，依据终端提示进行相关操作  
+5、最终会在桌面生成带有时间戳的文件夹，含义ipa以及xcarchive文件
 
 <pre>
 #!/usr/bin/env python
