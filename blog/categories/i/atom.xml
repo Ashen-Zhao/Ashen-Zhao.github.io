@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/i/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2017-02-23T10:03:58+08:00</updated>
+  <updated>2017-02-24T09:37:00+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -24,7 +24,18 @@
 <!--more-->
 
 
+<h3>使用方法</h3>
 
+<p>1、下载完成后，将autobuild.py以及exportOptions.plist文件放到你的项目跟目录下（即与xx.xcworkspace或者xx.xcworkspace在同一个目录下）<br/>
+2、打开autobuild.py，修改配置信息<br/>
+3、打开命令终端，进入项目根目录<br/>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;a.如果你是xx.xcworkspace<br/>
+&emsp;&emsp;    <code>./autobuild.py -p youproject.xcodeproj</code><br/>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;b.如果你是xx.xcworkspace<br/>
+&emsp;&emsp; <code>./autobuild.py -w youproject.xcworkspace</code></p>
+
+<p>4、等待终端回应，依据终端提示进行相关操作<br/>
+5、最终会在桌面生成带有时间戳的文件夹，含义ipa以及xcarchive文件</p>
 
 <pre>
 #!/usr/bin/env python
