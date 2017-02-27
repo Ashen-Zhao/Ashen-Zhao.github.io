@@ -67,9 +67,9 @@
   </fieldset>
 </form>
   
-﻿<ul class="main-navigation">
+<ul class="main-navigation">
   <li><a href="/"><b>首 页</b></a></li>
-  <li><a href="/blog/archives"><b>博客归档</b></a></li>
+  <li><a href="/blog/archives"><b>归档</b></a></li>
   <li><a href="/blog/categories/i"><b>iOS 文章</b></a></li>
   <li><a href="/blog/categories/sui-bi"><b>随笔</b></a></li>
   <li><a href="https://github.com/Ashen-Zhao"><b>有关博主</b></a></li>
@@ -86,7 +86,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/07/20/qrcode/">二维码扫描识别</a></h1>
+      <h1 class="entry-title"><a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之入门使用</a></h1>
     
     
       <p class="meta">
@@ -95,153 +95,342 @@
 
 
 
-<time class='entry-date' datetime='2016-07-20T14:31:51+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>2:31 pm</span></time>
+<time class='entry-date' datetime='2016-01-12T10:22:46+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:22 am</span></time>
         
              
-      | <a href="/blog/2016/07/20/qrcode/#comments">评论</a>
+      | <a href="/blog/2016/01/12/githubused/#comments">评论</a>
      
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>&emsp;最近忙于工作，工作之余也在学习swift，在github上开源了正在开发维护的swift项目<a href="https://github.com/ashen-zhao/baisiapp">模仿的百思不得姐</a>；不过今天不是来介绍这个开源项目的，而是来给大家介绍一个很简单的功能之 iOS 二维码扫描识别；</p>
+  <div class="entry-content"><blockquote><h3>相关文章</h3>
 
-<h5>我将该功能进行了简单的封装，只需要简单调用就可以实现；</h5>
+<h4><a href="/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a></h4></blockquote>
 
-<h5>封装文件：</h5>
+<h3>本地创建Git仓库</h3>
 
-<p><code>QRCodeManager.h</code>该文件是封装的二维码识别功能</p>
+<h4>1、git init 初始化仓库</h4>
 
-<h5>调用方法：</h5>
+<p>打开terminal 命令窗口，利用cd 命令，进入你需要初始化的目录，执行git init 命令；<br/>
+如出现以下类似的输出，则成功初始化<br/>
+<code>Initialized empty Git repository in /Users/shou65/Desktop/myfirstgit/.git/</code></p>
 
-<pre><code>    _qr = [[QRCodeManager alloc] init];
-     _qr.delegate = self;
-    [_qr configureManager:self.view];
-</code></pre>
+<h4>2、git add . 添加到暂存区（保存项目索引，并生产快照）</h4>
 
-
-<p></p>
-
-<h5>服从协议<code>QRCodeManagerDelegate</code>实现代理方法：</h5>
-
-<p><code>- (void)qrCodeResult:(NSString *)result</code> ，result即为扫描识别到的二维码信息了，就是这么简单。</p>
-
-<h4>Demo示例图</h4>
-
-<p><img src="/images/qrcode.gif" alt="二维码扫描识别" /></p>
-
-<h4>Demo源码地址：</h4>
-
-<p><a href="https://github.com/ashen-zhao/asqrcode">二维码扫描识别Demo下载地址</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/04/14/gifimageview/">让UIImageView显示Gif图</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-04-14T13:57:05+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:57 pm</span></time>
-        
-             
-      | <a href="/blog/2016/04/14/gifimageview/#comments">评论</a>
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>&emsp;各位同学们，这次给大家分享一个小工具，可以解决你在开发过程中，需要显示Gif图片的需求；由于太过于简单，我这里就不多说了；有需要的同学，请前往<a href="https://github.com/ashen-zhao/asGifImageView">https://github.com/ashen-zhao/asGifImageView</a>进行下载，不需要的同学也可以去Star，留着以后使用，最后，记得关注我哦，哈哈😄；</p>
-
-<h2>接下来，简单写一下如何使用该工具</h2>
-
-<h4>示例图</h4>
-
-<p><img src="/images/gifView.gif" alt="啊神gifUIImageView" /></p>
-
-<h4>功能说明：</h4>
-
-<p>这是一个UIImageView的分类，可以让UIImageView支持显示本地Gif以及网络Gif图片。</p>
-
-<h4>使用说明</h4>
-
-<p>1.导入分类头文件 <code>#import "UIImageView+ASGif.h"</code><br/>
-2.调用<br/>
-&emsp;a.显示本地gif图片 <br/>
-    <code>[self.gifImgV showGifImageWithData:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"abc" ofType:@"gif"]]];</code><br/>
-&emsp;b.显示网络gif图片<br/>
-       <code>[self.gifImgV showGifImageWithURL:[NSURL URLWithString:@"http://ww1.sinaimg.cn/large/85cccab3gw1etdi67ue4eg208q064n50.gif"]];</code></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/26/pay/">iOS之接地气的移动支付</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-01-26T11:15:35+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:15 am</span></time>
-        
-             
-      | <a href="/blog/2016/01/26/pay/#comments">评论</a>
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>iOS 移动支付之种类</h3>
-
-<p>iOS 端的移动支付，大概包括：支付宝支付、微信支付、银联卡支付、paypal支付，现在又多出一个Apple pay支付；</p>
-
-<h3>如何集成这些种类的支付方式</h3>
-
-<p>谈及如何集成这些支付方式，面对各种支付方式的SDK以及Demo写的详细的完美无缺，我还真不如还如何去写，这里我就接地气的写写，写的不好请勿喷哦☺！</p>
-
-<h3>支付宝支付</h3>
-
-<h3>大致有以下步骤：</h3>
-
-<h4>1.向支付宝申请, 与支付宝签约，获得商户PID（partner）和账号ID（seller）和私钥(privateKey)</h4>
-
-<p>注：*这一步，一般公司会搞定的，这里只是让你知道来龙去脉☺<br/>
-&emsp; 没有支付宝账号的同学，可以<a href="https://memberprod.alipay.com/account/reg/index.htm">点击这里注册账号</a>; <br/>
-&emsp; 已经有支付宝账号的同学<a href="https://b.alipay.com/order/productDetail.htm?productId=2015110218010538">点击这里申请移动支付</a><br/>
-申请签约有个门槛比较难，就是不管你是个人还是企业，都需要营业执照，这点有点蛋疼，不过人家也是为了有质量的管理申请者嘛，可以理解，我这里没有营业执照，申请工作就死在了摇篮里，不过大致流程，我基本弄清楚了，<strong>不过作为开发者，这申请工作就不用多关心了，一般公司都会有申请过的</strong>，我这里写出来也就是让我们开发者也大概知道流程，而不是直接就是用，只知去向，不知来龙。  <br/>
-申请签约成功后，就可以查看 PID（partner）和账号ID（seller）和私钥(privateKey) ，<a href="https://b.alipay.com/order/serviceIndex.htm">查看地址点击这里</a> 进行登录，点击下图中的查询PID和Key;<br/>
-<img src="/images/pay01.png" alt="Pay" /></p>
+<p>这一步一般什么的都不会输出，但是却已经添加好了，不用多想，继续下一步 （ps: git add 后面的点，不能忘）</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2016/01/26/pay/">阅读全文 →</a>
+      <a rel="full-article" href="/blog/2016/01/12/githubused/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-11T17:22:46+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:22 pm</span></time>
+        
+             
+      | <a href="/blog/2016/01/11/gitsshkey/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Git &amp; GitHub极简介</h2>
+
+<p>git 是分布式的代码管理工具，远程的代码管理是基于ssh的，所以要使用远程的git则需要ssh的配置<br/>
+github 开源代码库以及版本控制系统</p>
+
+<h2>GitHub的配置</h2>
+
+<h3>1.检查是否已经存在ssh 密钥</h3>
+
+<p>输入 ls -al ~/.ssh 命令  查看是否存在<code>id_rsa.pub</code> 和 <code>id_rsa</code> 文件</p>
+
+<p><img src="/images/isHassshkey.png" alt="啊神附图1" /><br/>
+如果存在，则执行第 3 步， 否则执行第 2 步
+  </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/11/gitsshkey/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/11/webview/">UIWebView 与 原生系统的简单跳转交互</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-11T10:15:09+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:15 am</span></time>
+        
+             
+      | <a href="/blog/2016/01/11/webview/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>简单介绍UIWebView</h3>
+
+<p> 关于UIWebView这里我就不多介绍了，可以简单理解为一个在iOS 端显示网页的一个控件；</p>
+
+<h3>UIWebView的使用</h3>
+
+<p> 它既然也是view，当然就可以像其他view一样的创建，如下：</p>
+
+<pre><code> UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 560)];
+
+ webView.delegate = self;//先在此设置下代理，等下会实现其代理方法</code></pre>
+
+
+<p> </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/11/webview/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/08/easymarkdown/">EasyMarkDown</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-08T10:52:13+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:52 am</span></time>
+        
+             
+      | <a href="/blog/2016/01/08/easymarkdown/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>EasyMarkDown</h2>
+
+<hr />
+
+<h2>基本符号</h2>
+
+<ul>
+<li>*, _ , + 3个符号效果都一样，这3个符号被称为 Markdown符号 (符号使用时，有时一个符号不行，请速切换下一个符号)</li>
+<li>空白行表示另起一个段落</li>
+<li>`是表示inline代码，tab是用来标记 代码段，分别对应html的code，pre标签</li>
+</ul>
+
+
+<hr />
+
+<h2>换行</h2>
+
+<ul>
+<li>单一段落( &lt;p>) 用一个空白行</li>
+<li>连续两个空格 会变成一个 &lt;br></li>
+<li>连续3个符号，然后是空行，表示 hr横线</li>
+</ul>
+
+
+<hr />
+
+<h2>标题</h2>
+
+<ul>
+<li>生成h1&ndash;h6,在文字前面加上 1&ndash;6个# 来实现</li>
+</ul>
+
+
+<hr />
+
+<h2>引用</h2>
+
+<ul>
+<li>在第一行加上 “>”和一个空格，表示代码引用，还可以嵌套</li>
+</ul>
+
+
+<hr />
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/08/easymarkdown/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/07/datasafety/">iOS 常用加密方法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-07T17:30:15+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:30 pm</span></time>
+        
+             
+      | <a href="/blog/2016/01/07/datasafety/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>为何要加密</h3>
+
+<p>&emsp;为什么要加密，顾名思义，如果你不想让别人轻而易举的就拿到你的账号以及登录密码，如果你不想让别人获取你的敏感的数据(利益、聊天等数据),and so on; 不对数据进行加密，那就像你只穿个裤头，在到处跑，随时都可能走光；加密的重要性，我不多说，自己悟吧;<br/>
+&emsp;iOS 开发中经常用到的几种加密方式：MD5、Base64、RSA、AES<br/>
+&emsp;一般来说最常用的就是MD5和Base64：</p>
+
+<blockquote><ol>
+<li>MD5主要应用于普通请求、返回数据，进行数据完整性校验</li>
+<li>Base64 主要用于防止数据明文传输</li>
+<li>AES 一般用于登录加密</li>
+<li>RSA 经常用于重要数据 以及敏感数据的加密</li>
+</ol>
+</blockquote>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/07/datasafety/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/05/delcocopods/">从工程中删除Cocoapods</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-05T17:16:42+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:16 pm</span></time>
+        
+             
+      | <a href="/blog/2016/01/05/delcocopods/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>&emsp;会有这么一种情况，因为需要改动的第三方比较多，不想使用cocoapods管理第三方，这时候，对于已经使用cocoapods的情况，需要进行删除处理，就可以按照以下步骤进行：</p>
+
+<ol>
+<li><p>删除工程文件夹下的Podfile、Podfile.lock及Pods文件夹</p></li>
+<li><p>删除xcworkspace文件</p></li>
+<li><p>使用xcodeproj文件打开工程，删除Frameworks组下的Pods.xcconfig及libPods.a引用</p></li>
+<li><p>在工程设置中的Build Phases下删除Check Pods Manifest.lock及Copy Pods Resources, 可能还会有Embed Pods Frameworks也删了，总之带有Pods全删了</p></li>
+</ol>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/05/delcocopods/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/04/colorfullabel/">多样式UILabel</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-04T16:22:19+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:22 pm</span></time>
+        
+             
+      | <a href="/blog/2016/01/04/colorfullabel/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p> 有时候产品经理说，能把一句话显示多种颜色、多种字体吗？ 灵光一闪，弄多个UILabel来显示不就行了，我只能说可以，也只能说这法有点笨。于是我坚决不用这种方法，苦思冥想，终于有了眉目。先配张图来显摆显摆，其实很容易实现，我也就不啰嗦了，看招：
+ </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/01/04/colorfullabel/">阅读全文 →</a>
     </footer>
   
 
@@ -321,6 +510,22 @@
     
       <li class="post">
         <a href="/blog/2016/01/20/doubleclick/">简单实现双击tabBarItem刷新页面</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/localized03/">iOS 多语言版本的开发（三）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之入门使用</a>
       </li>
     
   </ul>

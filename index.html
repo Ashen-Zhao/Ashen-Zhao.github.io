@@ -67,9 +67,9 @@
   </fieldset>
 </form>
   
-﻿<ul class="main-navigation">
+<ul class="main-navigation">
   <li><a href="/"><b>首 页</b></a></li>
-  <li><a href="/blog/archives"><b>博客归档</b></a></li>
+  <li><a href="/blog/archives"><b>归档</b></a></li>
   <li><a href="/blog/categories/i"><b>iOS 文章</b></a></li>
   <li><a href="/blog/categories/sui-bi"><b>随笔</b></a></li>
   <li><a href="https://github.com/Ashen-Zhao"><b>有关博主</b></a></li>
@@ -199,6 +199,210 @@
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/01/23/reading/">读书，从2017开始</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-01-23T11:23:46+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2017</span></span> <span class='time'>11:23 am</span></time>
+        
+             
+      | <a href="/blog/2017/01/23/reading/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>诱因</h3>
+
+<p>&emsp;&emsp;最近发生了很多事，让我开始反思自己，让我逐渐认识到自己的不足。工作上，同事一个个能言善辩，应答如流，而我却如同木头一般。生活上，朋友们都在笑谈风声，而我却又如同木头一般。每到这个时候，心情就会有点不好，心情不好我就会去看一些大牛的博客，不看技术的，只看大牛的一些生活记录博客，看大牛写的一些博客，对生活，对工作的见解，很是到位，看来他们也是读了无数的书，才能有如此的见解，让我心生敬佩、向往。</p>
+
+<p>&emsp;&emsp;究其原因就是我读书太少，没有那么多墨水，来表达心中所想。很感谢，哪些能力比较强的人，让我认识自己的不足，至少现在开始我还来得及弥补。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2017/01/23/reading/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/21/xcode8build/">探索Xcode8编译为什么那么慢？</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-21T10:12:58+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>10:12 am</span></time>
+        
+             
+      | <a href="/blog/2016/12/21/xcode8build/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>背景</h3>
+
+<p>随着<code>Xcode8</code>和<code>swift3.0</code>的正式到来，我开始着手将<code>swift2.3</code>的项目转到<code>swift3</code>（至于转换过程，这里不多做介绍，Xcode自带的转换工具，基本可以转换80%左右，剩下的自己慢慢调试即可。）但是，转到swift3只会，在用Xcode8编译，发现编译过程变得非常慢，哪怕打一个空格，都要重新编译很久。于是在网上查找解决办法，查找了半天各种方法全用，发现于事无补。<br/>
+&emsp;&emsp;有什么加一个<code>HEADERMAP_USES_VFS = YES</code>（）<a href="http://www.cnblogs.com/qqsscc/p/6044234.html">这是地址，反正这个对我没用，感兴趣的话自己试试</a></p>
+
+<h5>针对这种情况，我就自己探索，出发点是排查哪些文件，哪些方法导致编译变慢？</h5>
+
+<h3>探索Xcode编译，在哪些地方可以看到编译文件过程</h3>
+
+<hr />
+
+<p>通过多次编译查看，发现在Xcode左边栏，最后一个选项，是每次的编译运行等记录， 每行记录中都会有每次编译的文件编译记录。如下图</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/12/21/xcode8build/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/05/https/">iOS 中的网络加密</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-08-05T17:28:40+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:28 pm</span></time>
+        
+             
+      | <a href="/blog/2016/08/05/https/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>iOS 中的网络加密</h2>
+
+<hr />
+
+<h5>引言：公司的接口一般会两种协议的，一种HTTP，一种HTTPS的，HTTP 只要请求，服务器就会响应，如果我们不对请求和响应做出加密处理，所有信息都是会被检测劫持到的，是很不安全的，客户端加密可以使用本文这套工具类进行处理。但是不论在任何时候，都应该将服务置于HTTPS上，因为它可以避免中间人攻击的问题，还自带了基于非对称密钥的加密通道。</h5>
+
+<h3>HTTPS交互原理</h3>
+
+<p>简答说，HTTPS 就是 HTTP协议加了一层SSL协议的加密处理，SSL 证书就是遵守 SSL协议，由受信任的数字证书颁发机构CA（如GlobalSign，wosign），在验证服务器身份后颁发，这是需要花钱滴，签发后的证书作为公钥一般放在服务器的根目录下，便于客户端请求返回给客户端，私钥在服务器的内部中心保存，用于解密公钥。</p>
+
+<h4>HTTPS 客户端与服务器交互过程：</h4>
+
+<p>1）客户端发送请求，服务器返回公钥给客户端；</p>
+
+<p>2）客户端生成对称加密秘钥，用公钥对其进行加密后，返回给服务器；</p>
+
+<p>3）服务器收到后，利用私钥解开得到对称加密秘钥，保存；</p>
+
+<p>4）之后的交互都使用对称加密后的数据进行交互。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/08/05/https/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/07/20/qrcode/">二维码扫描识别</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-07-20T14:31:51+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>2:31 pm</span></time>
+        
+             
+      | <a href="/blog/2016/07/20/qrcode/#comments">评论</a>
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>&emsp;最近忙于工作，工作之余也在学习swift，在github上开源了正在开发维护的swift项目<a href="https://github.com/ashen-zhao/baisiapp">模仿的百思不得姐</a>；不过今天不是来介绍这个开源项目的，而是来给大家介绍一个很简单的功能之 iOS 二维码扫描识别；</p>
+
+<h5>我将该功能进行了简单的封装，只需要简单调用就可以实现；</h5>
+
+<h5>封装文件：</h5>
+
+<p><code>QRCodeManager.h</code>该文件是封装的二维码识别功能</p>
+
+<h5>调用方法：</h5>
+
+<pre><code>    _qr = [[QRCodeManager alloc] init];
+     _qr.delegate = self;
+    [_qr configureManager:self.view];
+</code></pre>
+
+
+<p></p>
+
+<h5>服从协议<code>QRCodeManagerDelegate</code>实现代理方法：</h5>
+
+<p><code>- (void)qrCodeResult:(NSString *)result</code> ，result即为扫描识别到的二维码信息了，就是这么简单。</p>
+
+<h4>Demo示例图</h4>
+
+<p><img src="/images/qrcode.gif" alt="二维码扫描识别" /></p>
+
+<h4>Demo源码地址：</h4>
+
+<p><a href="https://github.com/ashen-zhao/asqrcode">二维码扫描识别Demo下载地址</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -270,6 +474,22 @@
     
       <li class="post">
         <a href="/blog/2016/01/20/doubleclick/">简单实现双击tabBarItem刷新页面</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/localized03/">iOS 多语言版本的开发（三）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/12/githubused/">GitHub 的简明教程之入门使用</a>
       </li>
     
   </ul>
