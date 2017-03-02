@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2017-02-27T09:44:16+08:00</updated>
+  <updated>2017-03-02T18:42:43+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[UITableView重用机制导致CABasicAnimation动画失效]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2017/03/02/dong-hua-shi-xiao/"/>
+    <updated>2017-03-02T18:24:49+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2017/03/02/dong-hua-shi-xiao</id>
+    <content type="html"><![CDATA[<p>开发随记，再给cell上添加一个小动画图片时，遇到一个很蛋疼的问题，动画明明会动，而且退出后台在回来也会动，可就是拉出屏幕外，在回来时，动画失效了，不会动了。以下是动画代码，就是一个简单的摇摆动画</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let rotationAnim = CABasicAnimation(keyPath: "transform.rotation.z")
+</span><span class='line'>            rotationAnim.toValue = M_PI/5
+</span><span class='line'>            rotationAnim.autoreverses = true
+</span><span class='line'>            rotationAnim.repeatCount = MAXFLOAT
+</span><span class='line'>            rotationAnim.duration = 0.2
+</span><span class='line'>            rotationAnim.isRemovedOnCompletion = false
+</span><span class='line'>            moveImgv.layer.add(rotationAnim, forKey: nil)</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<p>于是就开始看CABasicAnimation的类的属性说明，该设置的都设置了，可还是不行，百度，谷歌，搜狗统统找不到原因，全是CABasicAnimation的简单教程。</p>
+
+<p>无奈至极呀，就开始检查代码，看有没有可以修改的地方，一通乱世只会，在上面代码中的最后一行<br/>
+<code>moveImgv.layer.add(rotationAnim, forKey: nil)</code></p>
+
+<p>我发现forkey是nil，可当我给它一个值的时候，</p>
+
+<p><code>moveImgv.layer.add(rotationAnim, forKey: "moveanimation")</code><br/>
+再次调试，却发现重用后，动画终于可以动了，原来我废了那么久的时间，却是这样的问题，真是想哭，又想笑😁。</p>
+
+<p>就是这样的问题，在网上找了好久，却找不到结果，可能是大家都写了key了吧，在此写下这边文章，希望有遇到像我一样的问题的同学可以找到解决办法。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[《自我营销七堂课》读书心得]]></title>
@@ -1732,38 +1772,6 @@ return objData;
 <h2>AES</h2>
 
 <p>对于AES 这也有一个不错的博客<a href="http://www.tuicool.com/articles/UVRjmyN">AES加密算法</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[从工程中删除Cocoapods]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2016/01/05/delcocopods/"/>
-    <updated>2016-01-05T17:16:42+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2016/01/05/delcocopods</id>
-    <content type="html"><![CDATA[<p>&emsp;会有这么一种情况，因为需要改动的第三方比较多，不想使用cocoapods管理第三方，这时候，对于已经使用cocoapods的情况，需要进行删除处理，就可以按照以下步骤进行：</p>
-
-<ol>
-<li><p>删除工程文件夹下的Podfile、Podfile.lock及Pods文件夹</p></li>
-<li><p>删除xcworkspace文件</p></li>
-<li><p>使用xcodeproj文件打开工程，删除Frameworks组下的Pods.xcconfig及libPods.a引用</p></li>
-<li><p>在工程设置中的Build Phases下删除Check Pods Manifest.lock及Copy Pods Resources, 可能还会有Embed Pods Frameworks也删了，总之带有Pods全删了</p></li>
-</ol>
-
-
-<!--more-->
-
-
-<p><img src="http://ashen-zhao.github.io/images/delcocopods.png" alt="啊神删除图" /></p>
-
-<p><strong>注意</strong>:如果将cocoapods集成到工程中后不小心修改或删除了其相关文件导致无法便以通过例如：不小心把</p>
-
-<p>Pods.xcconfig给删除了然后出现diff: /../Podfile.lock: No such file or directory，用上面的方法删除cocoapods后，</p>
-
-<p>再重新$sudo pod install一下就好了。</p>
-
-<p>如果编译的时候出现权限问题，对工程文件夹$sudo chmod 777 path-to-project-folder/*</p>
-
-<p>$sudo chown 777 path-to-project-folder/*</p>
 ]]></content>
   </entry>
   

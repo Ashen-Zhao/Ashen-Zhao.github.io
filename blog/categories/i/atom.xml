@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/i/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2017-02-27T09:44:16+08:00</updated>
+  <updated>2017-03-02T18:42:43+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[UITableView重用机制导致CABasicAnimation动画失效]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2017/03/02/dong-hua-shi-xiao/"/>
+    <updated>2017-03-02T18:24:49+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2017/03/02/dong-hua-shi-xiao</id>
+    <content type="html"><![CDATA[<p>开发随记，再给cell上添加一个小动画图片时，遇到一个很蛋疼的问题，动画明明会动，而且退出后台在回来也会动，可就是拉出屏幕外，在回来时，动画失效了，不会动了。以下是动画代码，就是一个简单的摇摆动画</p>
+
+<pre><code>let rotationAnim = CABasicAnimation(keyPath: "transform.rotation.z")
+            rotationAnim.toValue = M_PI/5
+            rotationAnim.autoreverses = true
+            rotationAnim.repeatCount = MAXFLOAT
+            rotationAnim.duration = 0.2
+            rotationAnim.isRemovedOnCompletion = false
+            moveImgv.layer.add(rotationAnim, forKey: nil)
+</code></pre>
+
+<!--more-->
+
+
+<p>于是就开始看CABasicAnimation的类的属性说明，该设置的都设置了，可还是不行，百度，谷歌，搜狗统统找不到原因，全是CABasicAnimation的简单教程。</p>
+
+<p>无奈至极呀，就开始检查代码，看有没有可以修改的地方，一通乱世只会，在上面代码中的最后一行<br/>
+<code>moveImgv.layer.add(rotationAnim, forKey: nil)</code></p>
+
+<p>我发现forkey是nil，可当我给它一个值的时候，</p>
+
+<p><code>moveImgv.layer.add(rotationAnim, forKey: "moveanimation")</code><br/>
+再次调试，却发现重用后，动画终于可以动了，原来我废了那么久的时间，却是这样的问题，真是想哭，又想笑😁。</p>
+
+<p>就是这样的问题，在网上找了好久，却找不到结果，可能是大家都写了key了吧，在此写下这边文章，希望有遇到像我一样的问题的同学可以找到解决办法。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS自动打包上传脚本]]></title>
@@ -439,43 +472,6 @@ securityPolicy.allowInvalidCertificates = YES;
 
 <p>此文章转载自：<a href="http://charsdavy.github.io/2016/06/15/ios-network-encrypt">http://charsdavy.github.io/2016/06/15/ios-network-encrypt</a> <br/>
 感谢原作者让我们又学到了知识。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[二维码扫描识别]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2016/07/20/qrcode/"/>
-    <updated>2016-07-20T14:31:51+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2016/07/20/qrcode</id>
-    <content type="html"><![CDATA[<p>&emsp;最近忙于工作，工作之余也在学习swift，在github上开源了正在开发维护的swift项目<a href="https://github.com/ashen-zhao/baisiapp">模仿的百思不得姐</a>；不过今天不是来介绍这个开源项目的，而是来给大家介绍一个很简单的功能之 iOS 二维码扫描识别；</p>
-
-<h5>我将该功能进行了简单的封装，只需要简单调用就可以实现；</h5>
-
-<h5>封装文件：</h5>
-
-<p><code>QRCodeManager.h</code>该文件是封装的二维码识别功能</p>
-
-<h5>调用方法：</h5>
-
-<pre><code>    _qr = [[QRCodeManager alloc] init];
-     _qr.delegate = self;
-    [_qr configureManager:self.view];
-</code></pre>
-
-
-<p></p>
-
-<h5>服从协议<code>QRCodeManagerDelegate</code>实现代理方法：</h5>
-
-<p><code>- (void)qrCodeResult:(NSString *)result</code> ，result即为扫描识别到的二维码信息了，就是这么简单。</p>
-
-<h4>Demo示例图</h4>
-
-<p><img src="/images/qrcode.gif" alt="二维码扫描识别" /></p>
-
-<h4>Demo源码地址：</h4>
-
-<p><a href="https://github.com/ashen-zhao/asqrcode">二维码扫描识别Demo下载地址</a></p>
 ]]></content>
   </entry>
   
