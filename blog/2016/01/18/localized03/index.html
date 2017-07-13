@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iOS 多语言版本的开发（三） - 啊神的技术博客</title>
+  <meta name="author" content="Ashen">
+  
+  <meta name="description" content="如何实现,iOS多语言开发,啊神">
+  
+  <meta name="keywords" content="iOS本地化, iOS多语言开发, 多语言开发, 多语言,啊神">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2016/01/18/localized03/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="啊神的技术博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  
+  <script src="http://cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<script type="text/javascript">
+ function addBlankTargetForLinks () {
+   $('a[href^="http"]').each(function(){
+       $(this).attr('target', '_blank');
+   });
+ }
+ 
+ $(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+ });
+ </script>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">啊神的技术博客</a></h1>
+  
+    <h2>我的小博客，小智慧</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="ashen-zhao.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/"><b>首 页</b></a></li>
+  <li><a href="/blog/archives"><b>归档</b></a></li>
+  <li><a href="/blog/categories/i"><b>iOS 文章</b></a></li>
+  <li><a href="/blog/categories/sui-bi"><b>随笔</b></a></li>
+  <li><a href="https://github.com/Ashen-Zhao"><b>有关博主</b></a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS 多语言版本的开发（三）</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-18T16:06:48+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:06 pm</span></time>
+        
+             
+      | <a href="#comments">评论</a>
+      
+     
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>写在前面</h3>
+
+<p>&emsp;<a href="/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a> 中我们实现了如何让用户自己去切换系统语言的功能，我们还写了<a href="https://github.com/Ashen-Zhao/easyLocalized">Demo</a> 以供辅助学习；但是，继以上两篇文章都是建立在项目刚刚启动或启动不久，项目中存在的中文字符串还不是很多，手动改起来也还可以接受; 那么问题来了，如果项目已经竣工或者已经迭代几个版本了，那该如何实现了？手动改起来也不太现实，耗时耗力不讨好的手动，在这里就不用考虑了。 不让考虑，是因为我有更简单快捷高效的方法，让我慢慢与您道来；</p>
+
+<h3>如何辨别项目中的中文字符串?</h3>
+
+<p>&emsp;既然要替换项目中使用到的中文字符串，那么前提就必须要先找到这些个字符串，然后将这些字符串，替换成我们定义的<strong>宏</strong>， 为了替换方便，可将这些字符串自身作为<code>key</code>， 这里不理解的不要紧，下面我还会讲到。 既然是辨别中文字符串，那也就是说在项目文件中进行匹配查找，说到匹配，那就需要正则表达式了，用正则表达式匹配Xcode中的使用的中文字符串，使用<code>(@"[^"]*[\u4E00-\u9FA5]+[^"\n]*?")\s*</code> 即可， 打开你的Xcode 试试看，切记find 后面的选项要选择 <code>Regular Expression</code>, 默认选中的是<code>Text</code>, 如图</p>
+
+<!--more-->
+
+
+<p><img src="/images/localized301.png" alt="啊神多语言" /></p>
+
+<h3>如何取出识别到的中文字符串？</h3>
+
+<p>&emsp;我们已经知道如何识别项目中的字符串了，但是如何取出来使用呢？ 这就需要遍历项目中所有的指定后缀（e.g:  .h、.m等）的文件，然后利用正则表达匹配所有使用到的中文字符串，并写入文件中。为了方便起见，我将此过程写了一个Mac客户端<a href="https://github.com/Ashen-Zhao/ReadChinese">小应用</a>，可直接将选中的项目中所有的中文字符串，导出到指定的路径下；该应用还可以选择对于重复出现的中文字符串进行处理，以及还可以将中文字符串导出为繁体； <a href="https://github.com/Ashen-Zhao/ReadChinese">小应用</a>更值得关注的是它导出的文件，可以直接拿来当做多语言文件中的<code>key=value</code> 使用，非常简单，喜欢的可以去<a href="https://github.com/Ashen-Zhao/ReadChinese">下载看看</a>， 含有源码的哦；小应用运行图如下：</p>
+
+<p><img src="/images/readChinese.jpg" alt="啊神多语言" /></p>
+
+<h3>如何使用取出的中文字符串？</h3>
+
+<p>&emsp;已经拿到取出的中文字符串文件，这个文件是可以直接拿来用做多语言文件使用的，小应用导出的文件，只可以用于中文以及繁体多语言文件，而对于其他的语言，就需要你拿着导出的文件，找你们公司的翻译人员，进行翻译； 拿繁体版来举个例子，导出来的繁体文件如下（收留我App导出的文件）：</p>
+
+<p><img src="/images/localized303.png" alt="啊神多语言" /></p>
+
+<p>这个繁体文件，可以直接作为繁体多语言使用，如何想要翻译成英文，可以将此文件拷贝一份，交给翻译人员，让其翻译。翻译的时候，你一定要给翻译人员沟通好，让其只翻译<code>value</code>, 也就是图中<code>=</code> 后面双引号中的内容，格式什么的也不要让他乱改，否则容易出现问题，导致key与value对不上号。 一切沟通妥当后，等翻译把文件给你后，直接将文件中的内容，复制到多语言文件的英语文件中即可；</p>
+
+<h3>如何将项目中的中文字符串进行替换</h3>
+
+<p>&emsp;多语言文件已经配置完成，到了这里，那么问题来了，我们只是取出项目中使用的中文字符串，然后将字符串封装成多语言文件，但是对于项目中使用的中文字符串依然还是中文字符串，我们还并没有进行替换处理。当然，这一步我们是不能够忘了，由于是替换项目中所有的使用中文字符串，我们还是谨慎为好，首先将你的项目进行<strong>备份、备份、备份</strong>，非常重要的事情说三篇，切记一定要备份。备份好后，我们就可以开始替换工作了，没有备份的不要往下看了，赶紧备份去；<br/>
+&emsp;假设你已经备份好了，你就可以开始替换工作了，前面我们说过让中文字符串自身作为<code>key</code> 进行替换，之所以让其自身作为key, 是因为这样可以大大减轻替换的困难度，而且还有利于代码的可读性，基本上算是保持原有代码；既然要替换项目中的使用中文字符串，就要用到Xcode 自带的字符串替换功能，首先还需要使用正则表达式<code>(@"[^"]*[\u4E00-\u9FA5]+[^"\n]*?")\s*</code>，匹配出项目中使用的中文字符串，然后在对其进行替换处理。</p>
+
+<p>&emsp;由于我们在<a href="/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a>中，对取key对应的语言内容，进行了宏的封装, 这里我们可以将匹配到的使用中文字符直接替换成我们定义的宏的使用</p>
+
+<pre><code>#define ASLocalizedString(key)  [NSString stringWithFormat:@"%@", [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"]] ofType:@"lproj"]] localizedStringForKey:(key) value:nil table:@"ASLocalized"]] </code></pre>
+
+
+<p>
+以上是宏的定义，我们需要将字符串进行替换成宏的使用，如：<br/>
+&emsp;替换前是这样的<code>_lbl.text = @"我是多语言";</code><br/>
+&emsp;替换后<code>_lbl.text = ASLocalizedString(@"我是多语言")</code></p>
+
+<p>替换规则如图：</p>
+
+<p><img src="/images/localized304.png" alt="啊神多语言" /></p>
+
+<p>这次选中的是<code>Replace</code>, 不是<code>Find</code>。按图中所示，选择完毕后，点击<code>ReplaceAll</code>, 会出来一个弹框，不用管它直接继续，即可，然后你在看项目中使用到的中文字符串是否已经替换掉了，到这里基本上大功告成了；</p>
+
+<h3>遗留问题</h3>
+
+<p>1、正则表达式，不懂得可以先照文章里写就行，然后再去学习下，<a href="http://deerchao.net/tutorials/regex/regex.htm">这里有篇基础文章</a><br/>
+2、ASLocalizedString(key) ， 该宏使用面积广，可以将其定义成公共头文件中，然后用时引用头文件即可，也可将文件封装进pch文件中，这样无需使用头文件接口使用<br/>
+3、替换后，可能会有些地方报错，command + b 编译下，看看报错的地方，进行相应修改即可。报错原因：a. 可能是你定义的常量字符串； b. 可能是定义的宏；  c.  可能是替换后没有换行； 基本上报的错误很明显，进行修改即可；<br/>
+4、在迭代版本中，再次使用中文字符串，就需要使用<code>ASLocalizedString(key)</code>， 来代替了，然后再多语言文件中，进行<code>key=value</code> 配置；</p>
+
+<blockquote><h4>相关文章</h4>
+
+<h4><a href="/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a></h4>
+
+<h4><a href="/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a></h4></blockquote>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Ashen</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-01-18T16:06:48+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:06 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/i/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+    
+  <h2>分享</h2>  
+      <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+</br></br>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->  
+    
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/01/15/localized02/" title="Previous Post: iOS 多语言版本的开发（二）">&laquo; iOS 多语言版本的开发（二）</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2016/01/20/doubleclick/" title="Next Post: 简单实现双击tabBarItem刷新页面">简单实现双击tabBarItem刷新页面 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+  <section>
+    <h1>评论</h1>
+    <div id="comments" aria-live="polite"><div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+    var cloudTieConfig = {
+        url: document.location.href,
+        sourceId: "",
+        productKey: "36b2c0d04fdc417594b4b43dea8526e8",
+        target: "cloud-tie-wrapper"
+    };
+</script>
+<script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+    <h1>博主简介</h1>
+    <ul>
+        <li><p>现专注于iOS 应用开发， 曾做过.NET 网站后台开发， 业余时间学习Java 用于微信公众开发</p></li>
+        <li>email：zhaoashen@gmail.com</li>
+        <li>github: <a href="https://github.com/ashen-zhao" target="_blank">https://github.com/ashen-zhao</a></li>
+    </ul>
+</section><section>
+    <h1>新浪微博</h1>
+    <ul id="sinaweibo">
+        <li>
+            <iframe width="100%" height="130" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=130&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2424982293&verifier=7834bdd6&dpc=1">
+            </iframe>
+        </li>
+    </ul>
+</section><section>
+  <h1>最近发布</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/03/02/dong-hua-shi-xiao/">UITableView重用机制导致CABasicAnimation动画失效</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/24/zi-wo-ying-xiao-qi-tang-ke-du-hou-gan/">《自我营销七堂课》读书心得</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/22/autobuild/">iOS自动打包上传脚本</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/14/qi-guai-de-cuo-wu/">集成友盟分享中遇到的奇怪的错误</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/01/23/reading/">读书，从2017开始</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/21/xcode8build/">探索Xcode8编译为什么那么慢？</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/08/05/https/">iOS 中的网络加密</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/20/qrcode/">二维码扫描识别</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/14/gifimageview/">让UIImageView显示Gif图</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/pay/">iOS之接地气的移动支付</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/22/assheet/">仿照微博、微信弹出ActionSheet样式</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/20/doubleclick/">简单实现双击tabBarItem刷新页面</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/18/localized03/">iOS 多语言版本的开发（三）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+ <h1>分类</h1>
+ <ul id="categories">
+  <li class='category'><a href='/blog/categories/github/'>Github (2)</a></li>
+<li class='category'><a href='/blog/categories/i/'>iOS (20)</a></li>
+<li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
+<li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
+<li class='category'><a href='/blog/categories/sui-bi/'>随笔 (4)</a></li>
+
+ </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+   &copy; 2017 - Ashen -
+  <span class="credit">
+      Hosted by <a href="https://pages.coding.me">Coding Pages</a>
+  </span>
+  <span style="display:none;">
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259882277'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1259882277%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+   </span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
