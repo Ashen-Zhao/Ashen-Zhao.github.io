@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://ashen-zhao.github.io/blog/2017/07/14/xcodedai-ma-quan-hei/</loc>
+<lastmod>2017-07-14T16:44:48+08:00</lastmod>
+</url>
+<url>
 <loc>http://ashen-zhao.github.io/blog/2017/03/02/dong-hua-shi-xiao/</loc>
 <lastmod>2017-03-02T18:24:49+08:00</lastmod>
 </url>
@@ -132,15 +136,6 @@
 </url>
 <url>
 <loc>http://ashen-zhao.github.io/blog/categories/github/</loc>
-</url>
-<url>
-<loc>http://ashen-zhao.github.io/posts/2/</loc>
-</url>
-<url>
-<loc>http://ashen-zhao.github.io/posts/3/</loc>
-</url>
-<url>
-<loc>http://ashen-zhao.github.io/posts/4/</loc>
 </url>
 <url>
 <loc>http://ashen-zhao.github.io/her/index.html</loc>

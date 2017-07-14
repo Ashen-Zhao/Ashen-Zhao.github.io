@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/i/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2017-07-13T16:30:37+08:00</updated>
+  <updated>2017-07-14T17:11:48+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xcode代码全黑的另一种解决办法]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2017/07/14/xcodedai-ma-quan-hei/"/>
+    <updated>2017-07-14T16:44:48+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2017/07/14/xcodedai-ma-quan-hei</id>
+    <content type="html"><![CDATA[<h4>Xcode代码全黑且没有智能提示，应该算是开发中最烦恼的事之一了吧，一旦遇到这样问题，之前除了Clean项目，删除DerivedData文件夹，然而这样并没有什么用，偶尔重启Xcode或许运气好的话，彩色世界就会回来了。</h4>
+
+<h4>运气为什么好就能回来了，联想到Xcode比较吃内存，在联想到我苦逼的4g内存，估计Xcode代码全黑，可内存有联系呀，瞬间茅塞顿开呀，赶紧打开活动监视器，看到占用内存最多的 SourceKitService，大概百度了下SourceKitService这个进程，也没发现有什么比较严重的东东，就退出SourceKitService这个进程，回到Xcode发现，代码不再是全黑了，又回到彩色世界了，世界又是那么的美好，编程也变得快乐了</h4>
+
+<h4>总结，Xcode代码全黑的另一种解决办法，就是打开活动监视器，退出SourceKitService进程，就可以了。</h4>
+
+<p>注：可能只针对内存比较小的电脑（另外：我的项目是swift项目）</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[UITableView重用机制导致CABasicAnimation动画失效]]></title>
@@ -376,102 +391,6 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation) 
 首先要到Build Settings 给 Other Swift Flags  添加一项<code>
 -Xfrontend -debug-time-function-bodies</code> <br/>
 就可以查看编译通过的文件中的函数编译时间，找到绿色✅的文件的那一行，在最后面有一个图标，点击展开具体内容，向下移动就会看到每个函数执行的具体时间。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS 中的网络加密]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2016/08/05/https/"/>
-    <updated>2016-08-05T17:28:40+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2016/08/05/https</id>
-    <content type="html"><![CDATA[<h2>iOS 中的网络加密</h2>
-
-<hr />
-
-<h5>引言：公司的接口一般会两种协议的，一种HTTP，一种HTTPS的，HTTP 只要请求，服务器就会响应，如果我们不对请求和响应做出加密处理，所有信息都是会被检测劫持到的，是很不安全的，客户端加密可以使用本文这套工具类进行处理。但是不论在任何时候，都应该将服务置于HTTPS上，因为它可以避免中间人攻击的问题，还自带了基于非对称密钥的加密通道。</h5>
-
-<h3>HTTPS交互原理</h3>
-
-<p>简答说，HTTPS 就是 HTTP协议加了一层SSL协议的加密处理，SSL 证书就是遵守 SSL协议，由受信任的数字证书颁发机构CA（如GlobalSign，wosign），在验证服务器身份后颁发，这是需要花钱滴，签发后的证书作为公钥一般放在服务器的根目录下，便于客户端请求返回给客户端，私钥在服务器的内部中心保存，用于解密公钥。</p>
-
-<h4>HTTPS 客户端与服务器交互过程：</h4>
-
-<p>1）客户端发送请求，服务器返回公钥给客户端；</p>
-
-<p>2）客户端生成对称加密秘钥，用公钥对其进行加密后，返回给服务器；</p>
-
-<p>3）服务器收到后，利用私钥解开得到对称加密秘钥，保存；</p>
-
-<p>4）之后的交互都使用对称加密后的数据进行交互。</p>
-
-<!--more-->
-
-
-<h3>证书</h3>
-
-<p>简单说，证书有两种，一种是正经的：</p>
-
-<p>CA颁发的证书</p>
-
-<p>一种是不正经的：</p>
-
-<p>自己生成签发的证书</p>
-
-<h3>我们需要做什么</h3>
-
-<p>如果遇到正经的证书，我们直接用AFNetworking 直接请求就好了，AFNetworking 内部帮我们封装了HTTPS的请求方式，但是大部分公司接口都是不正经的证书，这时需要我们做以下几步：</p>
-
-<p>1）将服务器的公钥证书拖到Xcode中</p>
-
-<p>2）修改验证模式</p>
-
-<pre><code>manager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
-</code></pre>
-
-<h3>原理</h3>
-
-<p>简单来说，就是你本可以修改AFN这个设置来允许客户端接收服务器的任何证书，但是这么做有个问题，就是你无法验证证书是否是你的服务器后端的证书，给中间人攻击，即通过重定向路由来分析伪造你的服务器端打开了大门。</p>
-
-<pre><code>AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
-securityPolicy.allowInvalidCertificates = YES;
-</code></pre>
-
-<h3>解决方法</h3>
-
-<p>AFNetworking是允许内嵌证书的，通过内嵌证书，AFNetworking就通过比对服务器端证书、内嵌的证书、站点域名是否一致来验证连接的服务器是否正确。由于CA证书验证是通过站点域名进行验证的，如果你的服务器后端有绑定的域名，这是最方便的。将你的服务器端证书，如果是pem格式的，用下面的命令转成cer格式</p>
-
-<pre><code>openssl x509 -in &lt;你的服务器证书&gt;.pem -outform der -out server.cer
-</code></pre>
-
-<p>然后将生成的server.cer文件，如果有自建ca，再加上ca的cer格式证书，引入到app的bundle里，AFNetworking在</p>
-
-<pre><code>AFSecurityPolicy *securityPolicy = [AFSecurityPolicy AFSSLPinningModeCertificate];
-</code></pre>
-
-<p>或者</p>
-
-<pre><code>AFSecurityPolicy *securityPolicy = [AFSecurityPolicy AFSSLPinningModePublicKey];
-</code></pre>
-
-<p>情况下，会自动扫描bundle中.cer的文件，并引入，这样就可以通过自签证书来验证服务器唯一性了。</p>
-
-<h3>AFSecurityPolicy三种验证模式</h3>
-
-<p>1）AFSSLPinningModeNone
-这个模式表示不做SSL pinning，
-只跟浏览器一样在系统的信任机构列表里验证服务端返回的证书。若证书是信任机构签发的就会通过，若是自己服务器生成的证书就不会通过。</p>
-
-<p>2）AFSSLPinningModeCertificate
-这个模式表示用证书绑定方式验证证书，需要客户端保存有服务端的证书拷贝，这里验证分两步，第一步验证证书的域名有效期等信息，第二步是对比服务端返回的证书跟客户端返回的是否一致。</p>
-
-<p>3）AFSSLPinningModePublicKey
-这个模式同样是用证书绑定方式验证，客户端要有服务端的证书拷贝，
-只是验证时只验证证书里的公钥，不验证证书的有效期等信息。只要公钥是正确的，就能保证通信不会被窃听，因为中间人没有私钥，无法解开通过公钥加密的数据。</p>
-
-<hr />
-
-<p>此文章转载自：<a href="http://charsdavy.github.io/2016/06/15/ios-network-encrypt">http://charsdavy.github.io/2016/06/15/ios-network-encrypt</a> <br/>
-感谢原作者让我们又学到了知识。</p>
 ]]></content>
   </entry>
   

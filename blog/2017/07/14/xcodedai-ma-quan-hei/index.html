@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>集成友盟分享中遇到的奇怪的错误 - 啊神的技术博客</title>
+  <title>Xcode代码全黑的另一种解决办法 - 啊神的技术博客</title>
   <meta name="author" content="Ashen">
   
   <meta name="description" content="啊神的技术博客">
   
-  <meta name="keywords" content="cocoapods警告,`$(inherited)`,友盟编译错误,Undefined symbols for architecture arm64">
+  <meta name="keywords" content="Xcode代码全黑">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2017/02/14/qi-guai-de-cuo-wu/">
+  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2017/07/14/xcodedai-ma-quan-hei/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="啊神的技术博客" type="application/atom+xml">
@@ -83,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">集成友盟分享中遇到的奇怪的错误</h1>
+      <h1 class="entry-title">Xcode代码全黑的另一种解决办法</h1>
     
     
       <p class="meta">
@@ -92,7 +92,7 @@
 
 
 
-<time class='entry-date' datetime='2017-02-14T13:35:47+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>1:35 pm</span></time>
+<time class='entry-date' datetime='2017-07-14T16:44:48+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:44 pm</span></time>
         
              
       | <a href="#comments">评论</a>
@@ -103,47 +103,13 @@
   </header>
 
 
-<div class="entry-content"><h3>开发中遇到的一些看似不起眼的警告，往往却是问题的所在！</h3>
+<div class="entry-content"><h4>Xcode代码全黑且没有智能提示，应该算是开发中最烦恼的事之一了吧，一旦遇到这样问题，之前除了Clean项目，删除DerivedData文件夹，然而这样并没有什么用，偶尔重启Xcode或许运气好的话，彩色世界就会回来了。</h4>
 
-<hr />
+<h4>运气为什么好就能回来了，联想到Xcode比较吃内存，在联想到我苦逼的4g内存，估计Xcode代码全黑，可内存有联系呀，瞬间茅塞顿开呀，赶紧打开活动监视器，看到占用内存最多的 SourceKitService，大概百度了下SourceKitService这个进程，也没发现有什么比较严重的东东，就退出SourceKitService这个进程，回到Xcode发现，代码不再是全黑了，又回到彩色世界了，世界又是那么的美好，编程也变得快乐了</h4>
 
-<p>这不，这次我就遇到了这个坑，为了提醒自己不要轻易忽略警告，以此文章记录一下，埋坑的艰辛。</p>
+<h4>总结，Xcode代码全黑的另一种解决办法，就是打开活动监视器，退出SourceKitService进程，就可以了。</h4>
 
-<p>我是在集成友盟分享SDK的时候，使用<code>cocoapods</code>导入的友盟分享组件，在命令行敲下pod install只会，安装也完成了，就是出现以下一些警告，我大概浏览了一下，看不出所以然，就没管, 继续在集成。</p>
-
-<!--more-->
-
-
-<p><i>[!] The <code>ULife [Debug]</code> target overrides the <code>OTHER_LDFLAGS</code> build setting defined in <code>Pods/Target Support Files/Pods-ULife/Pods-ULife.debug.xcconfig'. This can lead to problems with the CocoaPods installation
-    - Use the</code>$(inherited)` flag, or
-    - Remove the build settings from the target.</p>
-
-<p>[!] The <code>ULife [Release]</code> target overrides the <code>OTHER_LDFLAGS</code> build setting defined in <code>Pods/Target Support Files/Pods-ULife/Pods-ULife.release.xcconfig'. This can lead to problems with the CocoaPods installation
-    - Use the</code>$(inherited)` flag, or
-    - Remove the build settings from the target.<br/>
-</i></p>
-
-<p>直到我开始使用友盟的一些类库时，使用也是没有问题的，可当我编译时，却出现了以下错误信息：</p>
-
-<p><i>Undefined symbols for architecture arm64:
-  &ldquo;<em>OBJC_CLASS</em>$_UMSocialManager&rdquo;, referenced from:
-      objc-class-ref in AppDelegate.o
-ld: symbol(s) not found for architecture arm64
-clang: error: linker command failed with exit code 1 (use -v to see invocation) </i></p>
-
-<p>咋一看，还以为是不支持64位呢，可是官方明明写着支持64位的，也就没有去怀疑官方，就开始各种清理缓存，重复编译，各种谷歌，百度，可终究没有可行的办法。去友盟问客服，沟通成本太高，每次掉线，重新连接又是一个新人，也未能解决。</p>
-
-<p>实在没有办法了，我又重新pod update一下，这次发现依然是上面提到的警告信息，这次我没有忽略，而是仔细的看了下，大概知道了，产生此警告的原因是项目 Target 中的一些设置，CocoaPods 也做了默认的设置，如果两个设置结果不一致，就会造成问题。</p>
-
-<p>警告中，提示要想使用cocoapods中的设置，需要在项目中定义<code>PODS_ROOT</code> 和 <code>Other Linker Flags</code>的地方，把他们的值用<code>$(inherited)</code>替换掉。</p>
-
-<p>大致解决办法知道了， 开始在<code>Build Settings</code>中的PODS_ROOT<code>和</code>Other Linker Flags<code>处进行修改，添加一项</code>$(inherited)<code>，Other Linker Flags</code>我这里没有替换掉，而是添加一项，怕我本来的项也是有用的，就没有替换。</p>
-
-<p>最后修改后，我再次编译，竟然通过了，我喜极而泣的写下了这篇文章来记录下这次忽略警告的教训经历。</p>
-
-<hr />
-
-<p>注：在我在网上搜索时，有说，点击项目文件 project.xcodeproj，右键<code>显示包内容</code>，用文本编辑器打开<code>project.pbxproj</code>，删除<code>OTHER_LDFLAGS</code>的地方，保存，回到 Xcode，编译也能通过。这种删除内容的解决办法，我一般不轻易使用的，所以我没有去证实这种做法，若有兴趣，你可以尝试下，不过做好备份哦~~</p>
+<p>注：可能只针对内存比较小的电脑（另外：我的项目是swift项目）</p>
 </div>
 
 
@@ -159,7 +125,7 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation) 
 
 
 
-<time class='entry-date' datetime='2017-02-14T13:35:47+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>1:35 pm</span></time>
+<time class='entry-date' datetime='2017-07-14T16:44:48+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:44 pm</span></time>
       
 
 <span class="categories">
@@ -196,10 +162,8 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation) 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2017/01/23/reading/" title="Previous Post: 读书，从2017开始">&laquo; 读书，从2017开始</a>
+        <a class="basic-alignment left" href="/blog/2017/03/02/dong-hua-shi-xiao/" title="Previous Post: UITableView重用机制导致CABasicAnimation动画失效">&laquo; UITableView重用机制导致CABasicAnimation动画失效</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2017/02/22/autobuild/" title="Next Post: iOS自动打包上传脚本">iOS自动打包上传脚本 &raquo;</a>
       
     </p>
   </footer>
