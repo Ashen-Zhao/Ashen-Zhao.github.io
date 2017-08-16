@@ -14,7 +14,7 @@ categories: i|OS
 1、下载完成后，将autobuild.py以及exportOptions.plist文件放到你的项目跟目录下（即与xx.xcworkspace或者xx.xcworkspace在同一个目录下）  
 2、打开autobuild.py，修改配置信息  
 3、打开命令终端，进入项目根目录  
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;a.如果你是xx.xcworkspace  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;a.如果你是xx.xcodeproj
 &emsp;&emsp;	`./autobuild.py -p youproject.xcodeproj`  
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;b.如果你是xx.xcworkspace  
 &emsp;&emsp; `./autobuild.py -w youproject.xcworkspace`  
