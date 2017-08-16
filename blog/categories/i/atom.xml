@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/i/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2017-08-16T19:40:43+08:00</updated>
+  <updated>2017-08-16T19:42:38+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -77,7 +77,7 @@
 <p>1、下载完成后，将autobuild.py以及exportOptions.plist文件放到你的项目跟目录下（即与xx.xcworkspace或者xx.xcworkspace在同一个目录下）<br/>
 2、打开autobuild.py，修改配置信息<br/>
 3、打开命令终端，进入项目根目录<br/>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;a.如果你是xx.xcodeproj
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;a.如果你是xx.xcodeproj<br/>
 &emsp;&emsp;    <code>./autobuild.py -p youproject.xcodeproj</code><br/>
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;b.如果你是xx.xcworkspace<br/>
 &emsp;&emsp; <code>./autobuild.py -w youproject.xcworkspace</code></p>
