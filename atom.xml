@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2017-08-16T19:42:38+08:00</updated>
+  <updated>2017-12-01T15:49:52+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xcode修改版权Copyright、统一配置类前缀]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2017/12/01/copyright/"/>
+    <updated>2017-12-01T13:51:07+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2017/12/01/copyright</id>
+    <content type="html"><![CDATA[<h4>修改类的Copyright、类前缀</h4>
+
+<p>对于已经在项目中的文件，想要修改版权信息，使用全局替换就可以了，而对于新文件来说，想让Xcode帮你自动填充版权方，也是很方便的，之前都是傻瓜式的替换，现在发现了新大陆，就来这里记录下吧，具体操作流程如下图：<br/>
+<img src="http://ashen-zhao.github.io/images/copyright.png" alt="版权、前缀" /></p>
+
+<p>顺便加点料，对于有些项目，需要为每个类加一个前缀，也是可以按照这个流程来做的，设置上图中的<code>Class prefix</code>就可以了，这样Xcode会在新建的类的时候自动填充这个前缀了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[React-Native初体验]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2017/08/23/react-native/"/>
+    <updated>2017-08-23T17:25:41+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2017/08/23/react-native</id>
+    <content type="html"><![CDATA[<h3>我的学习之React-Native</h3>
+
+<p>练习项目：<a href="https://github.com/ashen-zhao/react-native">https://github.com/ashen-zhao/react-native</a></p>
+
+<h4>目前还在学习阶段，日后有时间有精力了，再来补充这篇文章吧（偷笑中），又来欺骗自己了，啥时候来补充呀，这个还真不知道呀，谁让咱都是性情中人呢。</h4>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Xcode代码全黑的另一种解决办法]]></title>
@@ -1459,178 +1486,6 @@ github 开源代码库以及版本控制系统</p>
 <blockquote><h3>相关文章</h3>
 
 <h4><a href="http://ashen-zhao.github.io/blog/2016/01/12/githubused/">GitHub 的简明教程之入门使用</a></h4></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[UIWebView 与 原生系统的简单跳转交互]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2016/01/11/webview/"/>
-    <updated>2016-01-11T10:15:09+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2016/01/11/webview</id>
-    <content type="html"><![CDATA[<h3>简单介绍UIWebView</h3>
-
-<p> 关于UIWebView这里我就不多介绍了，可以简单理解为一个在iOS 端显示网页的一个控件；</p>
-
-<h3>UIWebView的使用</h3>
-
-<p> 它既然也是view，当然就可以像其他view一样的创建，如下：</p>
-
-<pre><code> UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 560)];
-
- webView.delegate = self;//先在此设置下代理，等下会实现其代理方法</code></pre>
-
-
-<p> <!--more-->
- 当然这是创建一个对象，想要加载一个网页还需要实现<code>loadRequest:</code>这个方法；这时你会发现该方法需要一个<code>NSURLRequest</code>类型的参数；那简单我们就来创建一个又如何；我们使用NSURLRequest的类方法<code>requestWithURL:</code>来创建；咦，又会发现这个类方法需要一个<code>NSURL</code>类型的参数；不管了，那就先创建NSURL对象吧；</p>
-
-<pre><code>
- NSURL *url = [NSURL URLWithString:@"http://www.baidu.com"];
-
-[webView loadRequest:[NSURLRequest requestWithURL:url];</code></pre>
-
-
-<p> 切记后面一定要是一个可访问的网址；
- 最后，因为它也是View，别忘记加到父视图上</p>
-
-<pre><code>[self.view addSubview:webView];</code></pre>
-
-
-<p>既然要实现与原生系统的交互，那就不得不实现它的代理方法</p>
-
-<pre><code>-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-   NSString *urlStr = request.URL.absoluteString; //取出webView交互的url链接；
-        //根据urlStr链接中的参数，去push到系统中的任何页面都可以的
-       /*实现code
-        .....
-       */
-      return YES;
-}</code></pre>
-
-
-<p> <b>附加说明</b>：urlStr是网页中，点击带有响应，传过来的网址，这个网址要看你服务端给的什么内容，针对内容去跳转到对象的页面(如：是一个头像的点击，则跳转到对应的用户信息，这是网址中，服务端就应该封装的有对应的用户的ID);
- 该代理方法返回值是BOOL类型的，所以当你需要用webView来显示的时候，一定要返回YES; 至于跳转到App内其他页面就没有这么讲究了，YES or NO all ok; 建议返回NO, 以免出现web内与应用内两次跳转；
- 如果服务端需要传参数进去（如：token) ，这是你就需要在创建<code>NSURL</code>对象时，将token封装进去</p>
-
-<pre>[NSURL URLWithString:@"http://www.baidu.com?token=pzshgawegwegeugiwef93i24"]</pre>
-
-
-<h6>自己在项目中就是这么实现的，如果有疑问或者有更好地方法，请与留言交流；</h6>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[EasyMarkDown]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2016/01/08/easymarkdown/"/>
-    <updated>2016-01-08T10:52:13+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2016/01/08/easymarkdown</id>
-    <content type="html"><![CDATA[<h2>EasyMarkDown</h2>
-
-<hr />
-
-<h2>基本符号</h2>
-
-<ul>
-<li>*, _ , + 3个符号效果都一样，这3个符号被称为 Markdown符号 (符号使用时，有时一个符号不行，请速切换下一个符号)</li>
-<li>空白行表示另起一个段落</li>
-<li>`是表示inline代码，tab是用来标记 代码段，分别对应html的code，pre标签</li>
-</ul>
-
-
-<hr />
-
-<h2>换行</h2>
-
-<ul>
-<li>单一段落( &lt;p>) 用一个空白行</li>
-<li>连续两个空格 会变成一个 &lt;br></li>
-<li>连续3个符号，然后是空行，表示 hr横线</li>
-</ul>
-
-
-<hr />
-
-<h2>标题</h2>
-
-<ul>
-<li>生成h1&ndash;h6,在文字前面加上 1&ndash;6个# 来实现</li>
-</ul>
-
-
-<hr />
-
-<h2>引用</h2>
-
-<ul>
-<li>在第一行加上 “>”和一个空格，表示代码引用，还可以嵌套</li>
-</ul>
-
-
-<hr />
-
-<!--more-->
-
-
-<h2>列表</h2>
-
-<p>这个是markdown文件的主要表示方式，主题要点化</p>
-
-<ul>
-<li>使用*,+,-加上一个空格来表示</li>
-<li>可以支持嵌套</li>
-<li>有序列表用 数字+英文点+空格来表示</li>
-<li>列表内容很长，不需要手工输入换行符，css控制段落的宽度，会自动的缩放的</li>
-</ul>
-
-
-<hr />
-
-<h2>链接</h2>
-
-<ul>
-<li>直接写 [描述文本](url &ldquo;可选的title&rdquo;)</li>
-<li>引用 先定义 [ref_name]:url，然后在需要写入url的地方， 这样使用[描述文本][ref_name]，通常的ref_name一般用数字表示，这样显得专业</li>
-<li>简写url：用尖括号包裹url
-这样生成的url锚文本就是url本身</li>
-</ul>
-
-
-<hr />
-
-<h2>插入图片</h2>
-
-<ul>
-<li>一行表示: ![alt_text](url &ldquo;可选的title&rdquo;)</li>
-<li>引用表示法: ![alt_text][id],预先定义 [id]:url &ldquo;可选title&rdquo;</li>
-<li>直接使用&lt;img>标签，这样可以指定图片的大小尺寸</li>
-</ul>
-
-
-<hr />
-
-<h2>特殊符号</h2>
-
-<ul>
-<li>用\来转义，表示文本中的markdown符号</li>
-<li>可以在文本种直接使用html标签，但是要注意在使用的时候，前后加上空行</li>
-<li>文本前后各加一个符号，表示斜体</li>
-</ul>
-
-
-<hr />
-
-<h2>文本</h2>
-
-<ul>
-<li>文本对齐方式，使用html标签吧： text-align:center/right/left</li>
-<li>文字加粗是通过 文字左右各两个符号</li>
-<li>文字斜体是通过 文字左右各一个符号</li>
-</ul>
-
-
-<hr />
-
-<p></br>
-注：本文内容大致来自于：<a href="http://lutaf.com/markdown-simple-usage.htm">http://lutaf.com/markdown-simple-usage.htm</a></p>
 ]]></content>
   </entry>
   

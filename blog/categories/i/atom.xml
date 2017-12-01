@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/i/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2017-08-16T19:42:38+08:00</updated>
+  <updated>2017-12-01T15:49:52+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xcode修改版权Copyright、统一配置类前缀]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2017/12/01/copyright/"/>
+    <updated>2017-12-01T13:51:07+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2017/12/01/copyright</id>
+    <content type="html"><![CDATA[<h4>修改类的Copyright、类前缀</h4>
+
+<p>对于已经在项目中的文件，想要修改版权信息，使用全局替换就可以了，而对于新文件来说，想让Xcode帮你自动填充版权方，也是很方便的，之前都是傻瓜式的替换，现在发现了新大陆，就来这里记录下吧，具体操作流程如下图：<br/>
+<img src="/images/copyright.png" alt="版权、前缀" /></p>
+
+<p>顺便加点料，对于有些项目，需要为每个类加一个前缀，也是可以按照这个流程来做的，设置上图中的<code>Class prefix</code>就可以了，这样Xcode会在新建的类的时候自动填充这个前缀了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[React-Native初体验]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2017/08/23/react-native/"/>
+    <updated>2017-08-23T17:25:41+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2017/08/23/react-native</id>
+    <content type="html"><![CDATA[<h3>我的学习之React-Native</h3>
+
+<p>练习项目：<a href="https://github.com/ashen-zhao/react-native">https://github.com/ashen-zhao/react-native</a></p>
+
+<h4>目前还在学习阶段，日后有时间有精力了，再来补充这篇文章吧（偷笑中），又来欺骗自己了，啥时候来补充呀，这个还真不知道呀，谁让咱都是性情中人呢。</h4>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Xcode代码全黑的另一种解决办法]]></title>
@@ -280,117 +307,6 @@ if __name__ == '__main__':
 
 
 <hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[集成友盟分享中遇到的奇怪的错误]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2017/02/14/qi-guai-de-cuo-wu/"/>
-    <updated>2017-02-14T13:35:47+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2017/02/14/qi-guai-de-cuo-wu</id>
-    <content type="html"><![CDATA[<h3>开发中遇到的一些看似不起眼的警告，往往却是问题的所在！</h3>
-
-<hr />
-
-<p>这不，这次我就遇到了这个坑，为了提醒自己不要轻易忽略警告，以此文章记录一下，埋坑的艰辛。</p>
-
-<p>我是在集成友盟分享SDK的时候，使用<code>cocoapods</code>导入的友盟分享组件，在命令行敲下pod install只会，安装也完成了，就是出现以下一些警告，我大概浏览了一下，看不出所以然，就没管, 继续在集成。</p>
-
-<!--more-->
-
-
-<p><i>[!] The <code>ULife [Debug]</code> target overrides the <code>OTHER_LDFLAGS</code> build setting defined in <code>Pods/Target Support Files/Pods-ULife/Pods-ULife.debug.xcconfig'. This can lead to problems with the CocoaPods installation
-    - Use the</code>$(inherited)` flag, or
-    - Remove the build settings from the target.</p>
-
-<p>[!] The <code>ULife [Release]</code> target overrides the <code>OTHER_LDFLAGS</code> build setting defined in <code>Pods/Target Support Files/Pods-ULife/Pods-ULife.release.xcconfig'. This can lead to problems with the CocoaPods installation
-    - Use the</code>$(inherited)` flag, or
-    - Remove the build settings from the target.<br/>
-</i></p>
-
-<p>直到我开始使用友盟的一些类库时，使用也是没有问题的，可当我编译时，却出现了以下错误信息：</p>
-
-<p><i>Undefined symbols for architecture arm64:
-  &ldquo;<em>OBJC_CLASS</em>$_UMSocialManager&rdquo;, referenced from:
-      objc-class-ref in AppDelegate.o
-ld: symbol(s) not found for architecture arm64
-clang: error: linker command failed with exit code 1 (use -v to see invocation) </i></p>
-
-<p>咋一看，还以为是不支持64位呢，可是官方明明写着支持64位的，也就没有去怀疑官方，就开始各种清理缓存，重复编译，各种谷歌，百度，可终究没有可行的办法。去友盟问客服，沟通成本太高，每次掉线，重新连接又是一个新人，也未能解决。</p>
-
-<p>实在没有办法了，我又重新pod update一下，这次发现依然是上面提到的警告信息，这次我没有忽略，而是仔细的看了下，大概知道了，产生此警告的原因是项目 Target 中的一些设置，CocoaPods 也做了默认的设置，如果两个设置结果不一致，就会造成问题。</p>
-
-<p>警告中，提示要想使用cocoapods中的设置，需要在项目中定义<code>PODS_ROOT</code> 和 <code>Other Linker Flags</code>的地方，把他们的值用<code>$(inherited)</code>替换掉。</p>
-
-<p>大致解决办法知道了， 开始在<code>Build Settings</code>中的PODS_ROOT<code>和</code>Other Linker Flags<code>处进行修改，添加一项</code>$(inherited)<code>，Other Linker Flags</code>我这里没有替换掉，而是添加一项，怕我本来的项也是有用的，就没有替换。</p>
-
-<p>最后修改后，我再次编译，竟然通过了，我喜极而泣的写下了这篇文章来记录下这次忽略警告的教训经历。</p>
-
-<hr />
-
-<p>注：在我在网上搜索时，有说，点击项目文件 project.xcodeproj，右键<code>显示包内容</code>，用文本编辑器打开<code>project.pbxproj</code>，删除<code>OTHER_LDFLAGS</code>的地方，保存，回到 Xcode，编译也能通过。这种删除内容的解决办法，我一般不轻易使用的，所以我没有去证实这种做法，若有兴趣，你可以尝试下，不过做好备份哦~~</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[探索Xcode8编译为什么那么慢？]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2016/12/21/xcode8build/"/>
-    <updated>2016-12-21T10:12:58+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2016/12/21/xcode8build</id>
-    <content type="html"><![CDATA[<h3>背景</h3>
-
-<p>随着<code>Xcode8</code>和<code>swift3.0</code>的正式到来，我开始着手将<code>swift2.3</code>的项目转到<code>swift3</code>（至于转换过程，这里不多做介绍，Xcode自带的转换工具，基本可以转换80%左右，剩下的自己慢慢调试即可。）但是，转到swift3只会，在用Xcode8编译，发现编译过程变得非常慢，哪怕打一个空格，都要重新编译很久。于是在网上查找解决办法，查找了半天各种方法全用，发现于事无补。<br/>
-&emsp;&emsp;有什么加一个<code>HEADERMAP_USES_VFS = YES</code>（）<a href="http://www.cnblogs.com/qqsscc/p/6044234.html">这是地址，反正这个对我没用，感兴趣的话自己试试</a></p>
-
-<h5>针对这种情况，我就自己探索，出发点是排查哪些文件，哪些方法导致编译变慢？</h5>
-
-<h3>探索Xcode编译，在哪些地方可以看到编译文件过程</h3>
-
-<hr />
-
-<p>通过多次编译查看，发现在Xcode左边栏，最后一个选项，是每次的编译运行等记录， 每行记录中都会有每次编译的文件编译记录。如下图</p>
-
-<!--more-->
-
-
-<p>
-<img src="/images/build1.png" alt="图1" /></p>
-
-<p>再次查看正在编译的一条记录(正在编译的记录后面有一个转圈圈的”菊花“)，发现有图中1、2两种标识， 一个绿色✅说明，这是编译完成了，另一个是灰色→箭头，说明是正在编译；此时发现灰色一直停留在这里，指向图中的文件，左边的菊花一直转个不停， 编译卡住了。这样一来就找到编译是什么文件导致的那么慢。</p>
-
-<p><img src="/images/build2.png" alt="图2" /></p>
-
-<h3>排查文件中哪些代码导致的编译卡住？</h3>
-
-<hr />
-
-<p>排查的方法，采用比较笨的方法，暴力注释方法：<strong><em>就是注释找到卡住的文件中的所有方法里的代码，不要注释方法，再次编译，此时发现该文件很快通过编译，然后在依次解开部分方法注释，再次编译，直到发现解开某个方法的注释后，编译再次卡住，那就说明那个方法中的代码写的有问题，然后在依次注释，解开注释，排查方法中的某一行代码的问题。</em></strong>经过一番排查，我找到了我代码中卡住的部分代码，如下图红色圈中的代码</p>
-
-<p><img src="/images/build3.png" alt="图3" /></p>
-
-<p><font color=red>在字典中的key对应的value，没有给直接的值，而是给出一个表达式，这样会导致Xcode8的编译速度极其慢，不知道为什么会出现这样的问题，之前的Xcode版本是没有的。</font></p>
-
-<p>找到问题所在，解决问题就简单了，于是修改代码如下图：</p>
-
-<p><img src="/images/build4.png" alt="图4" /></p>
-
-<p>修改之后，再次编译，重新回到了快速编译的时代了，再也不用等上5-10分钟不等了。</p>
-
-<p>  以上过程，是针对我遇到的问题而言的，不知道是否存在普遍性，如若你也遇到，刚好看了我的文章，也解决了问题，那就会心一笑吧，如若你也遇到了，但是没有解决问题，也请你会心一笑吧。<br/>
-     <a href="https://forums.developer.apple.com/thread/62737">这是苹果开发者提到的Xcode8编译超慢的问题，我看了下，也做了对应修改，发现对我并没有什么用， 感兴趣的话进去看看吧</a></p>
-
-<p>有时候自己慢慢去探索出问题的所在，也是很不错的体验。</p>
-
-<hr />
-
-<h3>后知后觉</h3>
-
-<hr />
-
-<p>后来我知道了，也可以通过，查看具体的swift函数编译时间来定位哪个函数卡住了，而不用<code>暴力注释法</code>.<br/>
-首先要到Build Settings 给 Other Swift Flags  添加一项<code>
--Xfrontend -debug-time-function-bodies</code> <br/>
-就可以查看编译通过的文件中的函数编译时间，找到绿色✅的文件的那一行，在最后面有一个图标，点击展开具体内容，向下移动就会看到每个函数执行的具体时间。</p>
 ]]></content>
   </entry>
   

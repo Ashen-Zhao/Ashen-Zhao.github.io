@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>UITableView重用机制导致CABasicAnimation动画失效 - 啊神的技术博客</title>
+  <title>React-Native初体验 - 啊神的技术博客</title>
   <meta name="author" content="Ashen">
   
   <meta name="description" content="啊神的技术博客">
   
-  <meta name="keywords" content="CABasicAnimation ,动画失效, tableview重用导致动画失效，动画失灵，不起作用，摇摆动画">
+  <meta name="keywords" content="RN,react-native,iOS,热更新,混合开发,集成RN">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2017/03/02/dong-hua-shi-xiao/">
+  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2017/08/23/react-native/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="啊神的技术博客" type="application/atom+xml">
@@ -83,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">UITableView重用机制导致CABasicAnimation动画失效</h1>
+      <h1 class="entry-title">React-Native初体验</h1>
     
     
       <p class="meta">
@@ -92,7 +92,7 @@
 
 
 
-<time class='entry-date' datetime='2017-03-02T18:24:49+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2017</span></span> <span class='time'>6:24 pm</span></time>
+<time class='entry-date' datetime='2017-08-23T17:25:41+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2017</span></span> <span class='time'>5:25 pm</span></time>
         
              
       | <a href="#comments">评论</a>
@@ -103,38 +103,11 @@
   </header>
 
 
-<div class="entry-content"><p>开发随记，再给cell上添加一个小动画图片时，遇到一个很蛋疼的问题，动画明明会动，而且退出后台在回来也会动，可就是拉出屏幕外，在回来时，动画失效了，不会动了。以下是动画代码，就是一个简单的摇摆动画</p>
+<div class="entry-content"><h3>我的学习之React-Native</h3>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>let rotationAnim = CABasicAnimation(keyPath: "transform.rotation.z")
-</span><span class='line'>            rotationAnim.toValue = M_PI/5
-</span><span class='line'>            rotationAnim.autoreverses = true
-</span><span class='line'>            rotationAnim.repeatCount = MAXFLOAT
-</span><span class='line'>            rotationAnim.duration = 0.2
-</span><span class='line'>            rotationAnim.isRemovedOnCompletion = false
-</span><span class='line'>            moveImgv.layer.add(rotationAnim, forKey: nil)</span></code></pre></td></tr></table></div></figure>
+<p>练习项目：<a href="https://github.com/ashen-zhao/react-native">https://github.com/ashen-zhao/react-native</a></p>
 
-
-<!--more-->
-
-
-<p>于是就开始看CABasicAnimation的类的属性说明，该设置的都设置了，可还是不行，百度，谷歌，搜狗统统找不到原因，全是CABasicAnimation的简单教程。</p>
-
-<p>无奈至极呀，就开始检查代码，看有没有可以修改的地方，一通乱世只会，在上面代码中的最后一行<br/>
-<code>moveImgv.layer.add(rotationAnim, forKey: nil)</code></p>
-
-<p>我发现forkey是nil，可当我给它一个值的时候，</p>
-
-<p><code>moveImgv.layer.add(rotationAnim, forKey: "moveanimation")</code><br/>
-再次调试，却发现重用后，动画终于可以动了，原来我废了那么久的时间，却是这样的问题，真是想哭，又想笑😁。</p>
-
-<p>就是这样的问题，在网上找了好久，却找不到结果，可能是大家都写了key了吧，在此写下这边文章，希望有遇到像我一样的问题的同学可以找到解决办法。</p>
+<h4>目前还在学习阶段，日后有时间有精力了，再来补充这篇文章吧（偷笑中），又来欺骗自己了，啥时候来补充呀，这个还真不知道呀，谁让咱都是性情中人呢。</h4>
 </div>
 
 
@@ -150,7 +123,7 @@
 
 
 
-<time class='entry-date' datetime='2017-03-02T18:24:49+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2017</span></span> <span class='time'>6:24 pm</span></time>
+<time class='entry-date' datetime='2017-08-23T17:25:41+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2017</span></span> <span class='time'>5:25 pm</span></time>
       
 
 <span class="categories">
@@ -187,10 +160,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2017/02/24/zi-wo-ying-xiao-qi-tang-ke-du-hou-gan/" title="Previous Post: 《自我营销七堂课》读书心得">&laquo; 《自我营销七堂课》读书心得</a>
+        <a class="basic-alignment left" href="/blog/2017/07/14/xcodedai-ma-quan-hei/" title="Previous Post: Xcode代码全黑的另一种解决办法">&laquo; Xcode代码全黑的另一种解决办法</a>
       
       
-        <a class="basic-alignment right" href="/blog/2017/07/14/xcodedai-ma-quan-hei/" title="Next Post: Xcode代码全黑的另一种解决办法">Xcode代码全黑的另一种解决办法 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2017/12/01/copyright/" title="Next Post: Xcode修改版权Copyright、统一配置类前缀">Xcode修改版权Copyright、统一配置类前缀 &raquo;</a>
       
     </p>
   </footer>

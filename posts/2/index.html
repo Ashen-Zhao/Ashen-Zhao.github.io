@@ -86,6 +86,97 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2017/01/23/reading/">读书，从2017开始</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-01-23T11:23:46+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2017</span></span> <span class='time'>11:23 am</span></time>
+        
+             
+      | <a href="/blog/2017/01/23/reading/#comments">评论</a>
+      
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>诱因</h3>
+
+<p>&emsp;&emsp;最近发生了很多事，让我开始反思自己，让我逐渐认识到自己的不足。工作上，同事一个个能言善辩，应答如流，而我却如同木头一般。生活上，朋友们都在笑谈风声，而我却又如同木头一般。每到这个时候，心情就会有点不好，心情不好我就会去看一些大牛的博客，不看技术的，只看大牛的一些生活记录博客，看大牛写的一些博客，对生活，对工作的见解，很是到位，看来他们也是读了无数的书，才能有如此的见解，让我心生敬佩、向往。</p>
+
+<p>&emsp;&emsp;究其原因就是我读书太少，没有那么多墨水，来表达心中所想。很感谢，哪些能力比较强的人，让我认识自己的不足，至少现在开始我还来得及弥补。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2017/01/23/reading/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/21/xcode8build/">探索Xcode8编译为什么那么慢？</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-21T10:12:58+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>10:12 am</span></time>
+        
+             
+      | <a href="/blog/2016/12/21/xcode8build/#comments">评论</a>
+      
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>背景</h3>
+
+<p>随着<code>Xcode8</code>和<code>swift3.0</code>的正式到来，我开始着手将<code>swift2.3</code>的项目转到<code>swift3</code>（至于转换过程，这里不多做介绍，Xcode自带的转换工具，基本可以转换80%左右，剩下的自己慢慢调试即可。）但是，转到swift3只会，在用Xcode8编译，发现编译过程变得非常慢，哪怕打一个空格，都要重新编译很久。于是在网上查找解决办法，查找了半天各种方法全用，发现于事无补。<br/>
+&emsp;&emsp;有什么加一个<code>HEADERMAP_USES_VFS = YES</code>（）<a href="http://www.cnblogs.com/qqsscc/p/6044234.html">这是地址，反正这个对我没用，感兴趣的话自己试试</a></p>
+
+<h5>针对这种情况，我就自己探索，出发点是排查哪些文件，哪些方法导致编译变慢？</h5>
+
+<h3>探索Xcode编译，在哪些地方可以看到编译文件过程</h3>
+
+<hr />
+
+<p>通过多次编译查看，发现在Xcode左边栏，最后一个选项，是每次的编译运行等记录， 每行记录中都会有每次编译的文件编译记录。如下图</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/12/21/xcode8build/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2016/08/05/https/">iOS 中的网络加密</a></h1>
     
     
@@ -350,110 +441,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/20/doubleclick/">简单实现双击tabBarItem刷新页面</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-01-20T17:44:11+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:44 pm</span></time>
-        
-             
-      | <a href="/blog/2016/01/20/doubleclick/#comments">评论</a>
-      
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>如何实现双击tabbarItem刷新页面？</h3>
-
-<p>&emsp;在网上寻找了一圈，众说纷纭，大差不差，而且基本上实现的不是双击才刷新，而是双击刷新一次后，只要再次单击就会刷新，这样很容易造成用户不小心点着，降低用户体验；见于这种局面，我花费了近一个小时，鼓捣出来了，只有双击的时候，才会去刷新页面（其实是伪双击，也就是单击两次，没有做两次单击时间间隔限制），废话不说了，直接上代码：</p>
-
-<pre><code>
-int i = 0;
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
-    i++;
-    UIViewController *tbSelectedController = tabBarController.selectedViewController;
-    if ([tbSelectedController isEqual:viewController]) {
-        if (currentIndex == 1 && tabBarController.selectedIndex == 1 && i % 2 != 0) {
-            UINavigationController *nav = self.viewControllers[1];
-            TestViewController *tVC = nav.viewControllers[0];
-            [tVC doubleClickRefrsh];
-        }
-        currentIndex = tabBarController.selectedIndex;
-        return NO;
-    }
-    i = 1;
-    return YES;
-}
-</code></pre>
-
-
-<p>
-这里是 <code>UITabBarDelegate</code> 的代理方法，实现的是双击第二个tabBarItem，则刷新其对应的第一个视图的节目数据;<br/>
-至于<code>i</code>的存在，是为了记录是否是双击，我是根据<code>i</code>是偶数还是奇数来进行判断的；<br/>
-就酱紫吧，不清楚的只管拿去用就行了，我就不多解释了，只有这几行代码，真没啥解释的了(^o^)/~</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/18/localized03/">iOS 多语言版本的开发（三）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-01-18T16:06:48+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:06 pm</span></time>
-        
-             
-      | <a href="/blog/2016/01/18/localized03/#comments">评论</a>
-      
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>写在前面</h3>
-
-<p>&emsp;<a href="/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a> 中我们实现了如何让用户自己去切换系统语言的功能，我们还写了<a href="https://github.com/Ashen-Zhao/easyLocalized">Demo</a> 以供辅助学习；但是，继以上两篇文章都是建立在项目刚刚启动或启动不久，项目中存在的中文字符串还不是很多，手动改起来也还可以接受; 那么问题来了，如果项目已经竣工或者已经迭代几个版本了，那该如何实现了？手动改起来也不太现实，耗时耗力不讨好的手动，在这里就不用考虑了。 不让考虑，是因为我有更简单快捷高效的方法，让我慢慢与您道来；</p>
-
-<h3>如何辨别项目中的中文字符串?</h3>
-
-<p>&emsp;既然要替换项目中使用到的中文字符串，那么前提就必须要先找到这些个字符串，然后将这些字符串，替换成我们定义的<strong>宏</strong>， 为了替换方便，可将这些字符串自身作为<code>key</code>， 这里不理解的不要紧，下面我还会讲到。 既然是辨别中文字符串，那也就是说在项目文件中进行匹配查找，说到匹配，那就需要正则表达式了，用正则表达式匹配Xcode中的使用的中文字符串，使用<code>(@"[^"]*[\u4E00-\u9FA5]+[^"\n]*?")\s*</code> 即可， 打开你的Xcode 试试看，切记find 后面的选项要选择 <code>Regular Expression</code>, 默认选中的是<code>Text</code>, 如图</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/01/18/localized03/">阅读全文 →</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -484,6 +471,14 @@ int i = 0;
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/12/01/copyright/">Xcode修改版权Copyright、统一配置类前缀</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/08/23/react-native/">React-Native初体验</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2017/07/14/xcodedai-ma-quan-hei/">Xcode代码全黑的另一种解决办法</a>
@@ -537,21 +532,13 @@ int i = 0;
         <a href="/blog/2016/01/20/doubleclick/">简单实现双击tabBarItem刷新页面</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/01/18/localized03/">iOS 多语言版本的开发（三）</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a>
-      </li>
-    
   </ul>
 </section>
 <section>
  <h1>分类</h1>
  <ul id="categories">
   <li class='category'><a href='/blog/categories/github/'>Github (2)</a></li>
-<li class='category'><a href='/blog/categories/i/'>iOS (21)</a></li>
+<li class='category'><a href='/blog/categories/i/'>iOS (23)</a></li>
 <li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
 <li class='category'><a href='/blog/categories/sui-bi/'>随笔 (4)</a></li>
