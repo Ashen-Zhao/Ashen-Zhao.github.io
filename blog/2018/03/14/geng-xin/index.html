@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Markdown - 啊神的技术博客</title>
+  <title>工具篇之自定义检查版本更新提示弹框 - 啊神的技术博客</title>
   <meta name="author" content="Ashen">
   
-  <meta name="description" content="Category: Markdown">
+  <meta name="description" content="啊神的技术博客">
   
-  <meta name="keywords" content="啊神, iOS, 啊神的技术博客, 移动开发, ashen, iOS开发, octopress,赵阿申,阿申,数据安全,UITableView,UIView,UIViewController">
+  <meta name="keywords" content="检查更新、弹框、自定义弹框、更新提示、更新提示弹框">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ashen-zhao.github.io/blog/categories/markdown/">
+  <link rel="canonical" href="http://ashen-zhao.github.io/blog/2018/03/14/geng-xin/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="啊神的技术博客" type="application/atom+xml">
@@ -79,36 +79,144 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Markdown</h1>
+    
+      <h1 class="entry-title">工具篇之自定义检查版本更新提示弹框</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2018-03-14T18:06:58+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>6:06 pm</span></time>
+        
+             
+      | <a href="#comments">评论</a>
+      
+     
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
+
+
+<div class="entry-content"><h3>引言</h3>
+
+<p>对于一些app的更新弹框，使用系统自带的Alert弹框，文字排版总是对不齐，没有美观，像我这样有点强迫症的，看到都别扭，更别说去点击更新了，于是乎，就自己动手做了一个，不管怎么样，看着舒服多了。</p>
+
+<h3>此处不废话，看效果</h3>
+
+<p><img src="/images/checkUpdate.png" alt="" /></p>
+
+<h3>使用</h3>
+
+<p>由于这个工具开发过于简单，我这里就不讲述如何开发实现的了，想要看具体实现的，我已在github上公开源码（<a href="https://github.com/ashen-zhao/ZASUpdateAlert">ZASUpdateAlert</a>），可自行查看去吐槽。</p>
+
+<!--more-->
+
+
+<p>本着学习的态度，写了这个工具，又本着学习的态度，上传到了cocoapods上面，也是人生第一次上传代码到cocoapods，着实搞了一个下午，传了删，删了又传，最终也算是成功了。</p>
+
+<p>鉴于我搞了半天才搞定如何上传自己的库到cocoapods，后续我会写一篇基础教材，到底该如何上传，同时也为自己以后再次使用时，少走坑，快速实现人生理想。</p>
+
+<h4>CocoaPods安装</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pod 'ZASUpdateAlert', '~&gt; 0.1.0'</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>手动安装</h4>
+
+<p>只需将<code>ZASUpdateAlert</code>文件夹拖到项目中。</p>
+
+<h4>使用示例</h4>
+
+<p>如果是使用的是CocoaPods，第一步需要先导入ZASUpdateAlert</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>import ZASUpdateAlert</span></code></pre></td></tr></table></div></figure>
 
 
 
-  
-  <h2>2016</h2>
 
-<article>
-  
-<h1><a href="/blog/2016/01/08/easymarkdown/">EasyMarkDown</a></h1>
-<time datetime="2016-01-08T10:52:13+08:00" pubdate><span class='month'>Jan</span> <span class='day'>08</span> <span class='year'>2016</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/markdown/'>Markdown</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ZASUpdateAlert.show(version: "V1.6", content: "1.全新UI界面\n2.更好的性能体验\n3.投诉系统极速反馈\n4.多个BUG虫的尸体都不复存在", appId: "xxxxxxxx", isMustUpdate: false)</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<h4>示例源代码</h4>
 
+<p><a href="https://github.com/ashen-zhao/ZASUpdateAlert">点击查看ZASUpdateAlert源码去吐槽喽</a></p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Ashen</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2018-03-14T18:06:58+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>6:06 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/i/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+    
+  <h2>分享</h2>  
+      <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+</br></br>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->  
+    
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2017/12/12/santi/" title="Previous Post: 《三体》之读后随记">&laquo; 《三体》之读后随记</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+
+  <section>
+    <h1>评论</h1>
+    <div id="comments" aria-live="polite"><!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2128094"></script>
+<!-- UY END -->
+</div>
+  </section>
 
 </div>
 

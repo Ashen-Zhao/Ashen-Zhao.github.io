@@ -86,6 +86,45 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2017/02/22/autobuild/">iOS自动打包上传脚本</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-22T16:46:25+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2017</span></span> <span class='time'>4:46 pm</span></time>
+        
+             
+      | <a href="/blog/2017/02/22/autobuild/#comments">评论</a>
+      
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>自从将swift2.2升级到swift3.0, 每次使用Xcode8编译都很慢，很是不爽，于是有了研究下xcodebuild命令行打包的想法，起初不知道用shell，还是用python, 在网上大概搜了一下，关于python的比较多点，于是就先学习python的基础语法，然后再去看看大神的一些脚本，就开始专研命令行打包了。总之，过程很艰辛，结果很满意，以下便是我修改后的<a href="https://github.com/ashen-zhao/autobuild">python自动打包脚本</a>，命令行使用，打包完成会询问是否上传蒲公英平台，以及询问是否上传appstore，还有是否保留archive文件。<br/>
+<a href="https://github.com/ashen-zhao/autobuild">自动打包脚本下载地址</a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2017/02/22/autobuild/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2017/02/14/qi-guai-de-cuo-wu/">集成友盟分享中遇到的奇怪的错误</a></h1>
     
     
@@ -385,63 +424,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/26/pay/">iOS之接地气的移动支付</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-01-26T11:15:35+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:15 am</span></time>
-        
-             
-      | <a href="/blog/2016/01/26/pay/#comments">评论</a>
-      
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>iOS 移动支付之种类</h3>
-
-<p>iOS 端的移动支付，大概包括：支付宝支付、微信支付、银联卡支付、paypal支付，现在又多出一个Apple pay支付；</p>
-
-<h3>如何集成这些种类的支付方式</h3>
-
-<p>谈及如何集成这些支付方式，面对各种支付方式的SDK以及Demo写的详细的完美无缺，我还真不如还如何去写，这里我就接地气的写写，写的不好请勿喷哦☺！</p>
-
-<h3>支付宝支付</h3>
-
-<h3>大致有以下步骤：</h3>
-
-<h4>1.向支付宝申请, 与支付宝签约，获得商户PID（partner）和账号ID（seller）和私钥(privateKey)</h4>
-
-<p>注：*这一步，一般公司会搞定的，这里只是让你知道来龙去脉☺<br/>
-&emsp; 没有支付宝账号的同学，可以<a href="https://memberprod.alipay.com/account/reg/index.htm">点击这里注册账号</a>; <br/>
-&emsp; 已经有支付宝账号的同学<a href="https://b.alipay.com/order/productDetail.htm?productId=2015110218010538">点击这里申请移动支付</a><br/>
-申请签约有个门槛比较难，就是不管你是个人还是企业，都需要营业执照，这点有点蛋疼，不过人家也是为了有质量的管理申请者嘛，可以理解，我这里没有营业执照，申请工作就死在了摇篮里，不过大致流程，我基本弄清楚了，<strong>不过作为开发者，这申请工作就不用多关心了，一般公司都会有申请过的</strong>，我这里写出来也就是让我们开发者也大概知道流程，而不是直接就是用，只知去向，不知来龙。  <br/>
-申请签约成功后，就可以查看 PID（partner）和账号ID（seller）和私钥(privateKey) ，<a href="https://b.alipay.com/order/serviceIndex.htm">查看地址点击这里</a> 进行登录，点击下图中的查询PID和Key;<br/>
-<img src="/images/pay01.png" alt="Pay" /></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/01/26/pay/">阅读全文 →</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -472,6 +454,10 @@
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/03/14/geng-xin/">工具篇之自定义检查版本更新提示弹框</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2017/12/12/santi/">《三体》之读后随记</a>
@@ -529,17 +515,13 @@
         <a href="/blog/2016/01/26/pay/">iOS之接地气的移动支付</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/01/22/assheet/">仿照微博、微信弹出ActionSheet样式</a>
-      </li>
-    
   </ul>
 </section>
 <section>
  <h1>分类</h1>
  <ul id="categories">
   <li class='category'><a href='/blog/categories/github/'>Github (2)</a></li>
-<li class='category'><a href='/blog/categories/i/'>iOS (23)</a></li>
+<li class='category'><a href='/blog/categories/i/'>iOS (24)</a></li>
 <li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
 <li class='category'><a href='/blog/categories/sui-bi/'>随笔 (5)</a></li>
@@ -556,7 +538,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-   &copy; 2017 - Ashen -
+   &copy; 2018 - Ashen -
   <span class="credit">
       Hosted by <a href="https://pages.coding.me">Coding Pages</a>
   </span>

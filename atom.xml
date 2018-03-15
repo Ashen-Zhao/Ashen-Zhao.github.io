@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2017-12-13T11:21:11+08:00</updated>
+  <updated>2018-03-15T15:33:44+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[工具篇之自定义检查版本更新提示弹框]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2018/03/14/geng-xin/"/>
+    <updated>2018-03-14T18:06:58+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2018/03/14/geng-xin</id>
+    <content type="html"><![CDATA[<h3>引言</h3>
+
+<p>对于一些app的更新弹框，使用系统自带的Alert弹框，文字排版总是对不齐，没有美观，像我这样有点强迫症的，看到都别扭，更别说去点击更新了，于是乎，就自己动手做了一个，不管怎么样，看着舒服多了。</p>
+
+<h3>此处不废话，看效果</h3>
+
+<p><img src="http://ashen-zhao.github.io/images/checkUpdate.png" alt="" /></p>
+
+<h3>使用</h3>
+
+<p>由于这个工具开发过于简单，我这里就不讲述如何开发实现的了，想要看具体实现的，我已在github上公开源码（<a href="https://github.com/ashen-zhao/ZASUpdateAlert">ZASUpdateAlert</a>），可自行查看去吐槽。</p>
+
+<!--more-->
+
+
+<p>本着学习的态度，写了这个工具，又本着学习的态度，上传到了cocoapods上面，也是人生第一次上传代码到cocoapods，着实搞了一个下午，传了删，删了又传，最终也算是成功了。</p>
+
+<p>鉴于我搞了半天才搞定如何上传自己的库到cocoapods，后续我会写一篇基础教材，到底该如何上传，同时也为自己以后再次使用时，少走坑，快速实现人生理想。</p>
+
+<h4>CocoaPods安装</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pod 'ZASUpdateAlert', '~&gt; 0.1.0'</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>手动安装</h4>
+
+<p>只需将<code>ZASUpdateAlert</code>文件夹拖到项目中。</p>
+
+<h4>使用示例</h4>
+
+<p>如果是使用的是CocoaPods，第一步需要先导入ZASUpdateAlert</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>import ZASUpdateAlert</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ZASUpdateAlert.show(version: "V1.6", content: "1.全新UI界面\n2.更好的性能体验\n3.投诉系统极速反馈\n4.多个BUG虫的尸体都不复存在", appId: "xxxxxxxx", isMustUpdate: false)</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>示例源代码</h4>
+
+<p><a href="https://github.com/ashen-zhao/ZASUpdateAlert">点击查看ZASUpdateAlert源码去吐槽喽</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[《三体》之读后随记]]></title>
@@ -1512,83 +1566,6 @@ if (![[NSUserDefaults standardUserDefaults] objectForKey:appLanguage]) {
 <h4><a href="http://ashen-zhao.github.io/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a></h4>
 
 <h4><a href="http://ashen-zhao.github.io/blog/2016/01/18/localized03/">iOS 多语言版本的开发（三）</a></h4></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[GitHub 的简明教程之入门使用]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2016/01/12/githubused/"/>
-    <updated>2016-01-12T10:22:46+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2016/01/12/githubused</id>
-    <content type="html"><![CDATA[<blockquote><h3>相关文章</h3>
-
-<h4><a href="http://ashen-zhao.github.io/blog/2016/01/11/gitsshkey/">GitHub 的简明教程之配置ssh key</a></h4></blockquote>
-
-<h3>本地创建Git仓库</h3>
-
-<h4>1、git init 初始化仓库</h4>
-
-<p>打开terminal 命令窗口，利用cd 命令，进入你需要初始化的目录，执行git init 命令；<br/>
-如出现以下类似的输出，则成功初始化<br/>
-<code>Initialized empty Git repository in /Users/shou65/Desktop/myfirstgit/.git/</code></p>
-
-<h4>2、git add . 添加到暂存区（保存项目索引，并生产快照）</h4>
-
-<p>这一步一般什么的都不会输出，但是却已经添加好了，不用多想，继续下一步 （ps: git add 后面的点，不能忘）</p>
-
-<!--more-->
-
-
-<h4>3、git commit 提交仓库内容（提交项目索引）</h4>
-
-<p><code>git commit -m 'fitst commit'</code></p>
-
-<p>-m 之后的内容是对本次commit的描述</p>
-
-<h5>4、git log (可忽略)</h5>
-
-<p>查看提交的历史记录</p>
-
-<h3>本地Git仓库推送到Github</h3>
-
-<h4>1、首页github上需要创建个仓库,按下图一步一步走</h4>
-
-<hr />
-
-<p>进入github添加仓库界面
-<img src="http://ashen-zhao.github.io/images/newGit.png" alt="啊神new" /></p>
-
-<hr />
-
-<p>填写仓库相关内容
-<img src="http://ashen-zhao.github.io/images/gitfillcontent.png" alt="啊神addgithub" /></p>
-
-<hr />
-
-<p>仓库创建成功界面，记住图片中的地址
-<img src="http://ashen-zhao.github.io/images/githubURL.png" alt="啊神url" /></p>
-
-<h4>2、添加远程仓库，这时候图片中的地址，就有用了</h4>
-
-<p>执行命令：<code>git remote add origin git@github.com:Ashen-Zhao/firstgithub.git</code></p>
-
-<p>git remote add 远程库的名字 远程库的URL</p>
-
-<h4>3、推送到远程分支，git默认会创建一个master主分支</h4>
-
-<p><code>git push origin master</code></p>
-
-<p>到这里，就完成了本地git仓库提交到github了，有没有小激动，速去github刷新页面，看看你的成果吧</p>
-
-<h3>将github仓库，弄到本地</h3>
-
-<h4>1、使用git clone 仓库地址（克隆一个新的仓库）</h4>
-
-<p><code>git clone git@github.com:Ashen-Zhao/firstgithub.git</code></p>
-
-<h4>2、将本地仓库更新至远程仓库</h4>
-
-<p><code>git pull origin master</code></p>
 ]]></content>
   </entry>
   
