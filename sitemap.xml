@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://ashen-zhao.github.io/blog/2018/07/10/zi-dong-sheng-cheng-swifthun-yao-wen-jian/</loc>
+<lastmod>2018-07-10T14:00:16+08:00</lastmod>
+</url>
+<url>
 <loc>http://ashen-zhao.github.io/blog/2018/03/14/geng-xin/</loc>
 <lastmod>2018-03-14T18:06:58+08:00</lastmod>
 </url>
@@ -152,18 +156,6 @@
 </url>
 <url>
 <loc>http://ashen-zhao.github.io/blog/categories/github/</loc>
-</url>
-<url>
-<loc>http://ashen-zhao.github.io/posts/2/</loc>
-</url>
-<url>
-<loc>http://ashen-zhao.github.io/posts/3/</loc>
-</url>
-<url>
-<loc>http://ashen-zhao.github.io/posts/4/</loc>
-</url>
-<url>
-<loc>http://ashen-zhao.github.io/posts/5/</loc>
 </url>
 <url>
 <loc>http://ashen-zhao.github.io/her/index.html</loc>

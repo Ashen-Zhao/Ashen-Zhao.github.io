@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/i/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2018-07-06T11:25:08+08:00</updated>
+  <updated>2018-07-10T14:26:34+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,137 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[自动生成混淆文件(swift版)]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2018/07/10/zi-dong-sheng-cheng-swifthun-yao-wen-jian/"/>
+    <updated>2018-07-10T14:00:16+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2018/07/10/zi-dong-sheng-cheng-swifthun-yao-wen-jian</id>
+    <content type="html"><![CDATA[<h3>起因</h3>
+
+<p>你们都知道，AppStore审核机制，多款类似的APP，会被4.3拒绝，至于如何规避4.3，这里我只写如何给项目添加混淆代码（又叫垃圾代码），当然只添加垃圾代码，应该是规避不了4.3的，但至少可以迷惑机审，加大通过机审的概率，至于其他方法，不予多说。 我这里使用python脚本，自动生成swift垃圾文件代码，文件名随机，每个文件中含有少量变量，方法等。</p>
+
+<h3>实现原理</h3>
+
+<p>实现原理很简单，就是创建文件，向文件中，添加swift语言的字符串即可。</p>
+
+<h3>实现代码</h3>
+
+<p><a href="https://github.com/ashen-zhao/createSwift">获取代码Demo文件点击此处</a> 以下为实现代码</p>
+
+<!--more-->
+
+
+<pre><code># -*- coding: utf-8 -*-
+
+import random
+
+import os,sys
+
+import string
+
+#创建.swift文件
+
+def createSwift(fileNmae,propertyNumber,methodArray):
+
+    full_path =  sys.path[0] + '/SwiftFiles/' + fileNmae + '.swift'
+
+    file = open(full_path, 'w')
+
+    file.write('//\n//  '+fileNmae+'.swift\n//  Orange\n\n//  Created by Ashen on 18/06/06.\n//  Copyright ©  2018年 BeiLian. All rights reserved.\n//\n\n')
+
+    file.write('import UIKit \n\n' + 'class '+fileNmae+': UIViewController {\n\n')
+
+    propryNameArray = []
+
+    for index in range(1,propertyNumber):
+
+        propryNameArray.append(random.choice(array))
+
+    propryNameArray = list(set(propryNameArray))
+
+    for propertyName in propryNameArray:
+
+        file.write('    public var '+propertyName+':'+random.choice(classArray)+'!\n')
+
+    file.write('\n\n')
+
+    file.write('    override func viewDidLoad() {\n        super.viewDidLoad()\n    }\n\n')
+
+
+    for methodName in methodArray:
+
+        file.write('    public func '+methodName+'TOVC() {\n\n       var realArr = Array&lt;String&gt;()\n')
+
+        number = random.randint(3, 10)
+
+        for i in range(1,number):
+
+            file.write('       realArr.append("'+random.choice(array)+'")\n')
+
+        file.write('\n    }\n\n')
+
+    file.write('}')
+
+    file.close()
+
+    print('Done')
+
+
+def createClassName():
+
+    first = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    second = "abcdefghijklmnopqrstuvwxyz"
+
+    index = 0
+
+    array = []
+
+    # 设置生成多少个类
+    classNumber = 3
+    for i in range(classNumber):
+
+        final=(random.choice(first))
+
+        index = random.randint(3, 5)
+
+        for i in range(index):
+
+            final+=(random.choice(second))
+
+        final += (random.choice(first))
+
+        for i in range(index):
+
+            final+=(random.choice(second))
+
+        array.append(final)
+    return array
+
+#属性类型
+classArray = ['UIColor','UILabel','UITableView','UISlider','UIScrollView','UIView','UIButton']
+
+array = createClassName()
+
+array = list(set(array))
+
+for name in array:
+
+    number = random.randint(3, 10)
+
+    methodArray = []
+
+    for i in range(1,5):
+
+        methodArray.append(random.choice(array))
+
+    methodArray = list(set(methodArray))#数组去重
+
+    createSwift(name+'VController',number,methodArray)
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[工具篇之自定义检查版本更新提示弹框]]></title>
@@ -101,39 +232,6 @@ import ZASUpdateAlert
 <h4>总结，Xcode代码全黑的另一种解决办法，就是打开活动监视器，退出SourceKitService进程，就可以了。</h4>
 
 <p>注：可能只针对内存比较小的电脑（另外：我的项目是swift项目）</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[UITableView重用机制导致CABasicAnimation动画失效]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2017/03/02/dong-hua-shi-xiao/"/>
-    <updated>2017-03-02T18:24:49+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2017/03/02/dong-hua-shi-xiao</id>
-    <content type="html"><![CDATA[<p>开发随记，再给cell上添加一个小动画图片时，遇到一个很蛋疼的问题，动画明明会动，而且退出后台在回来也会动，可就是拉出屏幕外，在回来时，动画失效了，不会动了。以下是动画代码，就是一个简单的摇摆动画</p>
-
-<pre><code>let rotationAnim = CABasicAnimation(keyPath: "transform.rotation.z")
-            rotationAnim.toValue = M_PI/5
-            rotationAnim.autoreverses = true
-            rotationAnim.repeatCount = MAXFLOAT
-            rotationAnim.duration = 0.2
-            rotationAnim.isRemovedOnCompletion = false
-            moveImgv.layer.add(rotationAnim, forKey: nil)
-</code></pre>
-
-<!--more-->
-
-
-<p>于是就开始看CABasicAnimation的类的属性说明，该设置的都设置了，可还是不行，百度，谷歌，搜狗统统找不到原因，全是CABasicAnimation的简单教程。</p>
-
-<p>无奈至极呀，就开始检查代码，看有没有可以修改的地方，一通乱世只会，在上面代码中的最后一行<br/>
-<code>moveImgv.layer.add(rotationAnim, forKey: nil)</code></p>
-
-<p>我发现forkey是nil，可当我给它一个值的时候，</p>
-
-<p><code>moveImgv.layer.add(rotationAnim, forKey: "moveanimation")</code><br/>
-再次调试，却发现重用后，动画终于可以动了，原来我废了那么久的时间，却是这样的问题，真是想哭，又想笑😁。</p>
-
-<p>就是这样的问题，在网上找了好久，却找不到结果，可能是大家都写了key了吧，在此写下这边文章，希望有遇到像我一样的问题的同学可以找到解决办法。</p>
 ]]></content>
   </entry>
   
