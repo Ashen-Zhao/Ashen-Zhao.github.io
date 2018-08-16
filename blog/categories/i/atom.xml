@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/blog/categories/i/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2018-07-10T14:26:34+08:00</updated>
+  <updated>2018-08-16T13:52:00+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[一行代码搞定UITextField的输入格式限制]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2018/08/16/textfield/"/>
+    <updated>2018-08-16T14:00:16+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2018/08/16/textfield</id>
+    <content type="html"><![CDATA[<h3>ZASTextFieldFormat开发背景</h3>
+
+<p>   在开发的过程中，每次写到UITextField，就不由得心里不爽，因为要考虑到各种输入限制，实现代理、通知等一些麻烦繁琐的东西，就心中不爽，所以才写了这个<a href="https://github.com/ashen-zhao/uitextfieldformat">ZASTextFieldFormat</a>简单的轮子，先暂时用着，等后期在慢慢优化完善。</p>
+
+<h3>ZASTextFieldFormat 简介</h3>
+
+<p>一行代码，设置UITextField的输入格式限制，比如手机号、身份证号、银行卡号格式以及输入字符类型个数的限制等；</p>
+
+<h3>接口说明</h3>
+
+<pre><code>
+/**
+ * ZASTextFieldFormatDelegate代理
+ *
+ */
+@property (nonatomic, assign) id&lt;ZASTextFieldFormatDelegate&gt; zasDelegate;
+
+/**
+ * 设置浮点类型,只允许输入两位小数的浮点类型（default=NO）
+ * 
+ */
+@property (nonatomic, assign) Boolean isFloat;
+
+/**
+ * 设置正则匹配模式（如果设置正则模式，则忽略其他格式限制）
+ *
+ */
+@property (nonatomic, copy) NSString * pattern;
+
+/**
+ * 设置UITextFiled格式控制的入口 (注：这个入口必须被调用)
+ * format=nil或者""则不限制格式, charactersInString=nil或者""则不限制字符, maxLimit=0则不限制个数
+ *
+ * 示例: 以手机号为例
+ * @param format              格式，eg: ### #### ####
+ * @param charactersInString  支持输入的字符，eg: 0123456789
+ * @param maxLimit            最大输入限制个数，eg: 11
+ * 结果输入：159 1234 5678
+ */
+ - (void)textFieldWithFormat:(NSString *)format charactersInString:(NSString *)charactersInString maxLimit:(NSInteger)maxLimit;
+</code></pre>
+
+<h3>具体使用</h3>
+
+<p>使原有UITextField继承自ZASTextFieldFormat，然后调用如何接口即可；</p>
+
+<pre><code>[_tfPhone textFieldWithFormat:@"### #### ####" charactersInString:@"0123456789" maxLimit:11];
+</code></pre>
+
+<h3>参考Demo</h3>
+
+<p><a href="https://github.com/ashen-zhao/uitextfieldformat">点击此处获取Demo</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[自动生成混淆文件(swift版)]]></title>
@@ -217,21 +277,6 @@ import ZASUpdateAlert
 <p>练习项目：<a href="https://github.com/ashen-zhao/react-native">https://github.com/ashen-zhao/react-native</a></p>
 
 <h4>目前还在学习阶段，日后有时间有精力了，再来补充这篇文章吧（偷笑中），又来欺骗自己了，啥时候来补充呀，这个还真不知道呀，谁让咱都是性情中人呢。</h4>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Xcode代码全黑的另一种解决办法]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2017/07/14/xcodedai-ma-quan-hei/"/>
-    <updated>2017-07-14T16:44:48+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2017/07/14/xcodedai-ma-quan-hei</id>
-    <content type="html"><![CDATA[<h4>Xcode代码全黑且没有智能提示，应该算是开发中最烦恼的事之一了吧，一旦遇到这样问题，之前除了Clean项目，删除DerivedData文件夹，然而这样并没有什么用，偶尔重启Xcode或许运气好的话，彩色世界就会回来了。</h4>
-
-<h4>运气为什么好就能回来了，联想到Xcode比较吃内存，在联想到我苦逼的4g内存，估计Xcode代码全黑，可内存有联系呀，瞬间茅塞顿开呀，赶紧打开活动监视器，看到占用内存最多的 SourceKitService，大概百度了下SourceKitService这个进程，也没发现有什么比较严重的东东，就退出SourceKitService这个进程，回到Xcode发现，代码不再是全黑了，又回到彩色世界了，世界又是那么的美好，编程也变得快乐了</h4>
-
-<h4>总结，Xcode代码全黑的另一种解决办法，就是打开活动监视器，退出SourceKitService进程，就可以了。</h4>
-
-<p>注：可能只针对内存比较小的电脑（另外：我的项目是swift项目）</p>
 ]]></content>
   </entry>
   

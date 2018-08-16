@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2018-07-10T14:26:34+08:00</updated>
+  <updated>2018-08-16T13:52:00+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[一行代码搞定UITextField的输入格式限制]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2018/08/16/textfield/"/>
+    <updated>2018-08-16T14:00:16+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2018/08/16/textfield</id>
+    <content type="html"><![CDATA[<h3>ZASTextFieldFormat开发背景</h3>
+
+<p>   在开发的过程中，每次写到UITextField，就不由得心里不爽，因为要考虑到各种输入限制，实现代理、通知等一些麻烦繁琐的东西，就心中不爽，所以才写了这个<a href="https://github.com/ashen-zhao/uitextfieldformat">ZASTextFieldFormat</a>简单的轮子，先暂时用着，等后期在慢慢优化完善。</p>
+
+<h3>ZASTextFieldFormat 简介</h3>
+
+<p>一行代码，设置UITextField的输入格式限制，比如手机号、身份证号、银行卡号格式以及输入字符类型个数的限制等；</p>
+
+<h3>接口说明</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>/**
+</span><span class='line'> * ZASTextFieldFormatDelegate代理
+</span><span class='line'> *
+</span><span class='line'> */
+</span><span class='line'>@property (nonatomic, assign) id&lt;ZASTextFieldFormatDelegate&gt; zasDelegate;
+</span><span class='line'>
+</span><span class='line'>/**
+</span><span class='line'> * 设置浮点类型,只允许输入两位小数的浮点类型（default=NO）
+</span><span class='line'> * 
+</span><span class='line'> */
+</span><span class='line'>@property (nonatomic, assign) Boolean isFloat;
+</span><span class='line'>
+</span><span class='line'>/**
+</span><span class='line'> * 设置正则匹配模式（如果设置正则模式，则忽略其他格式限制）
+</span><span class='line'> *
+</span><span class='line'> */
+</span><span class='line'>@property (nonatomic, copy) NSString * pattern;
+</span><span class='line'>
+</span><span class='line'>/**
+</span><span class='line'> * 设置UITextFiled格式控制的入口 (注：这个入口必须被调用)
+</span><span class='line'> * format=nil或者""则不限制格式, charactersInString=nil或者""则不限制字符, maxLimit=0则不限制个数
+</span><span class='line'> *
+</span><span class='line'> * 示例: 以手机号为例
+</span><span class='line'> * @param format              格式，eg: ### #### ####
+</span><span class='line'> * @param charactersInString  支持输入的字符，eg: 0123456789
+</span><span class='line'> * @param maxLimit            最大输入限制个数，eg: 11
+</span><span class='line'> * 结果输入：159 1234 5678
+</span><span class='line'> */
+</span><span class='line'> - (void)textFieldWithFormat:(NSString *)format charactersInString:(NSString *)charactersInString maxLimit:(NSInteger)maxLimit;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>具体使用</h3>
+
+<p>使原有UITextField继承自ZASTextFieldFormat，然后调用如何接口即可；</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[_tfPhone textFieldWithFormat:@"### #### ####" charactersInString:@"0123456789" maxLimit:11];</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>参考Demo</h3>
+
+<p><a href="https://github.com/ashen-zhao/uitextfieldformat">点击此处获取Demo</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[自动生成混淆文件(swift版)]]></title>
@@ -1543,174 +1634,6 @@ int i = 0;
 <h4><a href="http://ashen-zhao.github.io/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a></h4>
 
 <h4><a href="http://ashen-zhao.github.io/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a></h4></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS 多语言版本的开发（二）]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2016/01/15/localized02/"/>
-    <updated>2016-01-15T05:13:56+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2016/01/15/localized02</id>
-    <content type="html"><![CDATA[<h3>题记</h3>
-
-<p>&emsp;&emsp;<a href="http://ashen-zhao.github.io/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a> 中我们完成了让应用跟随系统语言进行切换，而用户自己却不能切换的功能，也基本上算是实现了多语言版本；可是，对于某些应用来说，实现跟随系统语言切换的同时， 也想要实现让用户自己选择应用语言版本的功能；针对这种情况，利用这篇文章来写写如何让用户自己切换应用语言版本；</p>
-
-<h3>语言文件存在的形式</h3>
-
-<p>想要实现用户自己手动切换语言版本，就先要了解语言文件在资源文件中存在的形式;</p>
-
-<p><img src="http://ashen-zhao.github.io/images/localized09.png" alt="啊神多语言" /></p>
-
-<p>如图中，不管是英语（en.lproj）、简体（zh-Hans.lproj）、还是繁体（zh-Hant.lproj）都是以<code>.lproj</code> 的文件夹形式存在, 所以当我们要切换语言的时候，其实也就是做到去取这些<code>.lproj</code> 文件夹中的<code>ASLocalized.strings</code>文件；</p>
-
-<!--more-->
-
-
-<p>
-&emsp;到这里，原理应该懂了，接下来就是动手实现了；</p>
-
-<h3>根据语言获取 ASLocalized.strings</h3>
-
-<p>这时候，需要根据不同的<code>语言.lproj</code> 获取到对应的<code>ASLocalized.strings</code>语言文件, 从而让页面显示对应的语言内容;<br/>
-这里暂且先根据English获取英语的语言文件，English 的.lproj存在的形式是<code>en.lproj</code></p>
-
-<pre><code>
-NSString *path = [[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"];
-NSString *showValue = [[NSBundle bundleWithPath:path] localizedStringForKey:@"showTxt" value:nil table:@"ASLocalized"];
-NSLog(@"result: %@", showValue);
- </code></pre>
-
-
-<p>输出结果：result: this is test text</p>
-
-<p>以上代码，只是以English 为语言文件，是写死的，如果想要让用户自己手动改变，只需要替换掉 <code>[[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"]</code> 中的<code>en</code> 为其他的语言标识就好了； 既然是用户手动切换，那就需要写代码去实现了；</p>
-
-<p>到这里，有一个问题，<strong><em>如何让用户选择后一个语言后，即使程序退出后，下次进入依然保留呢</em></strong>， 既然需要保存数据，就要涉及到本地存储了，对于少量的保存我们可以使用<code>NSUserDefaults</code> 来操作，简单方便快捷；至于其他的存储方式四大基本对象的write方法，归档，sqllite，CoreData 需要的同学，可以自己去脑补，这里我不多介绍了；</p>
-
-<h3>使用NSUserDefaults 记录选择的语言</h3>
-
-<p>这里我简单写了个界面，作为辅助讲解</p>
-
-<p><img src="http://ashen-zhao.github.io/images/localized10.png" alt="多语言" width="300" height="450"></p>
-
-<pre><code>
-- (IBAction)changeLanguage:(UIButton *)sender {
-    
-    switch (sender.tag) {
-        case 101: { //简体
-            [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans" forKey:appLanguage];
-        }
-            break;
-        case 102: { //繁体
-            [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:appLanguage];
-        }
-            break;
-        case 103: { //English
-            [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:appLanguage];
-        }
-            break;
-        default:
-            break;
-    }
-}
-</code></pre>
-
-
-<p></p>
-
-<p>以上方法，是图中三种语言的点击事件，分别将对应的语言标识，记录到<code>NSUserDefaults</code> 对应的 <code>appLanguage</code> key 中</p>
-
-<p>既然重新选择了语言，就需要重新加载控件的内容，因为是Demo🐴，这里直接将给控件赋值写成一个方法，如下：</p>
-
-<pre><code>
-- (void)showLbl {
-    NSString *lanType =[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"]];
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:lanType ofType:@"lproj"];
-    
-    NSString *showValue = [[NSBundle bundleWithPath:path] localizedStringForKey:@"showTxt" value:nil table:@"ASLocalized"];
-    NSLog(@"result: %@", showValue);
-    self.lblShowTxt.text = showValue;
-}
-
-</code></pre>
-
-
-<p></p>
-
-<p>可将此方法在点击事件中调用下，即可；</p>
-
-<p>Demo效果图：</p>
-
-<p><img src="http://ashen-zhao.github.io/images/localized11.gif" alt="啊神多语言" /></p>
-
-<h3>首次进入应用的考虑</h3>
-
-<p>到这里，还没有完，这时我们需要考虑下，用户第一次进来时，该显示什么样的语言，是跟随系统，还是我们给一种默认的语言；</p>
-
-<h4>1、给一种默认语言</h4>
-
-<p>这种处理很简单，只需要在<code>didFinishLaunchingWithOptions</code> 方法中，进行判断本地是否记录了语言标识，如果没有给一种默认即可，代码如下：</p>
-
-<pre>`
-if (![[NSUserDefaults standardUserDefaults] objectForKey:appLanguage]) { 
-     [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans"    forKey:appLanguage];
-}`</pre>
-
-
-<p></p>
-
-<h4>2、跟随系统语言</h4>
-
-<p>这种处理相对来说，比较复杂写，首页需要获取系统的首选语言顺序，然后取第一个首选语言，其次，还要判断你要做的语言版本，首选语言组中存在与否；<br/>
-获取首选语言：<code> NSArray  *languages = [NSLocale preferredLanguages];</code><br/>
-获取第一个首选语言：<code> NSString *language = [languages objectAtIndex:0];</code></p>
-
-<p>处理过程如下：</p>
-
-<pre><code>
-if (![[NSUserDefaults standardUserDefaults] objectForKey:appLanguage]) {
-        NSArray  *languages = [NSLocale preferredLanguages];
-        NSString *language = [languages objectAtIndex:0];
-        if ([language hasPrefix:@"zh-Hans"]) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans" forKey:appLanguage];
-        } else if ([language hasPrefix:@"zh-TW"] || [language hasPrefix:@"zh-HK"] || [language hasPrefix:@"zh-Hant"]) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:appLanguage];
-        } else if ([language hasPrefix:@"en"]) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:appLanguage];
-        }else{
-            [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans" forKey:appLanguage];
-        }
-    }
-</code></pre>
-
-
-<p></p>
-
-<p>注：由于繁体又有台湾繁体和香港繁体之分，所以代码中也做出了相应的处理；</p>
-
-<p>╮(╯▽╰)╭ 到了这里基本上算是完成了多语言版本的工作了，但是，但是，但是，这只是完成了项目起步期，项目中还不存在大量的中文字符串的情况；暂时先不考虑项目已经开发完成的情况，接下来先来优化下，我们刚刚写过的代码；<br/>
-对于 <code>showLbl</code> 方法中的内容，可以定义成宏，以供项目中，任何地方需要多元化时的使用;</p>
-
-<pre><code> 
- #define ASLocalizedString(key)  [NSString stringWithFormat:@"%@", [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"]] ofType:@"lproj"]] localizedStringForKey:(key) value:nil table:@"ASLocalized"]]
-</code> </pre>
-
-
-<p>
-为了方便，我将<code>showLbl</code> 中取key对应的语言内容，封装进了一个带参数的宏中；</p>
-
-<p>使用起来就很Easy了，只需要这样使用即可： <code>ASLocalizedString(@"showTxt")</code></p>
-
-<p>我在github上，上传了本篇<a href="https://github.com/Ashen-Zhao/easyLocalized">Demo</a> 以供辅助参考；</p>
-
-<p><a href="https://github.com/Ashen-Zhao/easyLocalized">查看Demo 点击这里</a></p>
-
-<blockquote><h4>相关文章</h4>
-
-<h4><a href="http://ashen-zhao.github.io/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a></h4>
-
-<h4><a href="http://ashen-zhao.github.io/blog/2016/01/18/localized03/">iOS 多语言版本的开发（三）</a></h4></blockquote>
 ]]></content>
   </entry>
   

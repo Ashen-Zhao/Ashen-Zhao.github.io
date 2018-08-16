@@ -101,6 +101,121 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2018/08/16/textfield/">一行代码搞定UITextField的输入格式限制</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2018-08-16T14:00:16+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>2:00 pm</span></time>
+        
+             
+      | <a href="/blog/2018/08/16/textfield/#comments">评论</a>
+      
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>ZASTextFieldFormat开发背景</h3>
+
+<p>   在开发的过程中，每次写到UITextField，就不由得心里不爽，因为要考虑到各种输入限制，实现代理、通知等一些麻烦繁琐的东西，就心中不爽，所以才写了这个<a href="https://github.com/ashen-zhao/uitextfieldformat">ZASTextFieldFormat</a>简单的轮子，先暂时用着，等后期在慢慢优化完善。</p>
+
+<h3>ZASTextFieldFormat 简介</h3>
+
+<p>一行代码，设置UITextField的输入格式限制，比如手机号、身份证号、银行卡号格式以及输入字符类型个数的限制等；</p>
+
+<h3>接口说明</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>/**
+</span><span class='line'> * ZASTextFieldFormatDelegate代理
+</span><span class='line'> *
+</span><span class='line'> */
+</span><span class='line'>@property (nonatomic, assign) id&lt;ZASTextFieldFormatDelegate&gt; zasDelegate;
+</span><span class='line'>
+</span><span class='line'>/**
+</span><span class='line'> * 设置浮点类型,只允许输入两位小数的浮点类型（default=NO）
+</span><span class='line'> * 
+</span><span class='line'> */
+</span><span class='line'>@property (nonatomic, assign) Boolean isFloat;
+</span><span class='line'>
+</span><span class='line'>/**
+</span><span class='line'> * 设置正则匹配模式（如果设置正则模式，则忽略其他格式限制）
+</span><span class='line'> *
+</span><span class='line'> */
+</span><span class='line'>@property (nonatomic, copy) NSString * pattern;
+</span><span class='line'>
+</span><span class='line'>/**
+</span><span class='line'> * 设置UITextFiled格式控制的入口 (注：这个入口必须被调用)
+</span><span class='line'> * format=nil或者""则不限制格式, charactersInString=nil或者""则不限制字符, maxLimit=0则不限制个数
+</span><span class='line'> *
+</span><span class='line'> * 示例: 以手机号为例
+</span><span class='line'> * @param format              格式，eg: ### #### ####
+</span><span class='line'> * @param charactersInString  支持输入的字符，eg: 0123456789
+</span><span class='line'> * @param maxLimit            最大输入限制个数，eg: 11
+</span><span class='line'> * 结果输入：159 1234 5678
+</span><span class='line'> */
+</span><span class='line'> - (void)textFieldWithFormat:(NSString *)format charactersInString:(NSString *)charactersInString maxLimit:(NSInteger)maxLimit;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>具体使用</h3>
+
+<p>使原有UITextField继承自ZASTextFieldFormat，然后调用如何接口即可；</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[_tfPhone textFieldWithFormat:@"### #### ####" charactersInString:@"0123456789" maxLimit:11];</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>参考Demo</h3>
+
+<p><a href="https://github.com/ashen-zhao/uitextfieldformat">点击此处获取Demo</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2018/07/10/zi-dong-sheng-cheng-swifthun-yao-wen-jian/">自动生成混淆文件(swift版)</a></h1>
     
     
@@ -354,60 +469,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/03/02/dong-hua-shi-xiao/">UITableView重用机制导致CABasicAnimation动画失效</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-03-02T18:24:49+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2017</span></span> <span class='time'>6:24 pm</span></time>
-        
-             
-      | <a href="/blog/2017/03/02/dong-hua-shi-xiao/#comments">评论</a>
-      
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>开发随记，再给cell上添加一个小动画图片时，遇到一个很蛋疼的问题，动画明明会动，而且退出后台在回来也会动，可就是拉出屏幕外，在回来时，动画失效了，不会动了。以下是动画代码，就是一个简单的摇摆动画</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>let rotationAnim = CABasicAnimation(keyPath: "transform.rotation.z")
-</span><span class='line'>            rotationAnim.toValue = M_PI/5
-</span><span class='line'>            rotationAnim.autoreverses = true
-</span><span class='line'>            rotationAnim.repeatCount = MAXFLOAT
-</span><span class='line'>            rotationAnim.duration = 0.2
-</span><span class='line'>            rotationAnim.isRemovedOnCompletion = false
-</span><span class='line'>            moveImgv.layer.add(rotationAnim, forKey: nil)</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2017/03/02/dong-hua-shi-xiao/">阅读全文 →</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -436,6 +497,10 @@
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/08/16/textfield/">一行代码搞定UITextField的输入格式限制</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2018/07/10/zi-dong-sheng-cheng-swifthun-yao-wen-jian/">自动生成混淆文件(swift版)</a>
@@ -493,17 +558,13 @@
         <a href="/blog/2016/07/20/qrcode/">二维码扫描识别</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/04/14/gifimageview/">让UIImageView显示Gif图</a>
-      </li>
-    
   </ul>
 </section>
 <section>
  <h1>分类</h1>
  <ul id="categories">
   <li class='category'><a href='/blog/categories/github/'>Github (2)</a></li>
-<li class='category'><a href='/blog/categories/i/'>iOS (25)</a></li>
+<li class='category'><a href='/blog/categories/i/'>iOS (26)</a></li>
 <li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
 <li class='category'><a href='/blog/categories/sui-bi/'>随笔 (5)</a></li>
