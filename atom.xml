@@ -4,7 +4,7 @@
   <title><![CDATA[啊神的技术博客]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2018-08-16T13:52:00+08:00</updated>
+  <updated>2018-11-28T12:36:55+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -990,11 +990,10 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation) 
 
 <p>通过多次编译查看，发现在Xcode左边栏，最后一个选项，是每次的编译运行等记录， 每行记录中都会有每次编译的文件编译记录。如下图</p>
 
-<!--more-->
+<!--more-->  
 
 
-<p>
-<img src="http://ashen-zhao.github.io/images/build1.png" alt="图1" /></p>
+<p><img src="http://ashen-zhao.github.io/images/build1.png" alt="图1" /></p>
 
 <p>再次查看正在编译的一条记录(正在编译的记录后面有一个转圈圈的”菊花“)，发现有图中1、2两种标识， 一个绿色✅说明，这是编译完成了，另一个是灰色→箭头，说明是正在编译；此时发现灰色一直停留在这里，指向图中的文件，左边的菊花一直转个不停， 编译卡住了。这样一来就找到编译是什么文件导致的那么慢。</p>
 
