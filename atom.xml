@@ -4,7 +4,7 @@
   <title><![CDATA[追风之影]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2019-08-14T17:00:25+08:00</updated>
+  <updated>2019-08-14T22:19:11+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -63,7 +63,7 @@
 
 <h4>2、使用你的越狱手机，启动 Cydia，安装frida插件</h4>
 
-<p>软件源 Sources-> 编辑 Edit（右上角）-> 添加 Add（左上角）-> 输入 <a href="https://build.frida.re%EF%BC%8C%E9%80%9A%E8%BF%87%E5%88%9A%E6%89%8D%E6%B7%BB%E5%8A%A0%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%BA%90%E5%AE%89%E8%A3%85">https://build.frida.re%EF%BC%8C%E9%80%9A%E8%BF%87%E5%88%9A%E6%89%8D%E6%B7%BB%E5%8A%A0%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%BA%90%E5%AE%89%E8%A3%85</a> frida 插件。</p>
+<p>软件源 Sources-> 编辑 Edit（右上角）-> 添加 Add（左上角）-> 输入 <code>https://build.frida.re</code>，通过刚才添加的软件源安装 frida 插件。</p>
 
 <h4>3、通过USB链接手机和电脑</h4>
 
