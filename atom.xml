@@ -4,7 +4,7 @@
   <title><![CDATA[追风之影]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2019-08-09T11:31:40+08:00</updated>
+  <updated>2019-08-14T17:00:25+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,106 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS进阶之逆向工程（越狱、砸壳、反编译）]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2019/08/14/ni-xiang-bian-cheng/"/>
+    <updated>2019-08-14T17:51:57+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2019/08/14/ni-xiang-bian-cheng</id>
+    <content type="html"><![CDATA[<h3>背景</h3>
+
+<p>这篇文章只是个人记录，是如何一步一步从越狱一部手机到反编译一个APP，故不作为教材文章，仅供参考。</p>
+
+<h3>第一步、越狱</h3>
+
+<p>关于越狱看<a href="https://baijiahao.baidu.com/s?id=1626241403987098895&amp;wfr=spider&amp;for=pc">这篇文章</a>足以，这里简单对这篇文章做下记录：<br/>
+1、用苹果手机自带的Safari浏览器打开app.ignition.fun<br/>
+2、进去后点击中间的按钮<br/>
+3、点击Jailbreaks<br/>
+4、点击Jailbreaks进去后拉倒最后点击Pwn20wnd<br/>
+5、点击GET然后点安装<br/>
+6、去设置信任证书，如果无法信息，卸载重新下载<br/>
+7、打开刚才安装的unc0ver APP<br/>
+8、点击「Jailbreak」按钮，越狱过程可能会重启三次，每次重启后再打开unc0ver APP点击Jailbreak按钮。<br/>
+9、出现Cydia后代表越狱成功<br/>
+注：如果越狱过程中，卡住OTA问题上，请到设置->存储管理里删除已经下载好的系统文件，如果删除了还是不行的话，请自行谷歌或者百度, 我因为有部专门测试手机，我选择了直接重置手机。懒得去找其他办法了。</p>
+
+<h3>第二步、砸壳</h3>
+
+<h4>这里选择一键砸壳工具frida-ios-dump</h4>
+
+<p>frida-ios-dump<a href="https://github.com/AloneMonkey/frida-ios-dump">下载地址</a></p>
+
+<!--more-->
+
+
+<h4>1、先安装frida</h4>
+
+<h5>首页安装pip，打开终端，执行以下命令(如果已安装请跳过)</h5>
+
+<p><code>sudo easy_install pip</code></p>
+
+<h5>其次，执行以下命令安装frida</h5>
+
+<p><code>sudo pip install frida-tools</code><br/>
+如果安装报以下错误,<br/>
+<code>Uninstalling a distutils installed project (six) has been deprecated and will be removed in a future version. This is due to the fact that uninstalling a distutils project will only partially uninstall the project.</code><br/>
+执行以下命令，<br/>
+<code>sudo pip install frida –upgrade –ignore-installed six</code><br/>
+然后重新执行,<br/>
+<code>sudo pip install frida-tools</code></p>
+
+<h4>2、使用你的越狱手机，启动 Cydia，安装frida插件</h4>
+
+<p>软件源 Sources-> 编辑 Edit（右上角）-> 添加 Add（左上角）-> 输入 <a href="https://build.frida.re%EF%BC%8C%E9%80%9A%E8%BF%87%E5%88%9A%E6%89%8D%E6%B7%BB%E5%8A%A0%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%BA%90%E5%AE%89%E8%A3%85">https://build.frida.re%EF%BC%8C%E9%80%9A%E8%BF%87%E5%88%9A%E6%89%8D%E6%B7%BB%E5%8A%A0%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%BA%90%E5%AE%89%E8%A3%85</a> frida 插件。</p>
+
+<h4>3、通过USB链接手机和电脑</h4>
+
+<p>具体如何链接ssh这里<a href="https://blog.csdn.net/youshaoduo/article/details/81097802">有篇文章</a>, 我这里做简单记录：<br/>
+1、在手机上打开<code>Cydia</code>，搜索<code>openssh</code>并安装<br/>
+2、在Mac终端执行<code>brew install libimobiledevice</code><br/>
+3、完成第二步后执行<code>iproxy 2222 22</code>,进行端口转换，此时终端界面显示<code>waiting for connection</code><br/>
+4、打开新的终端执行<code>ssh -p 2222 root@127.0.0.1</code>, 这时候可能会出现   <code>The authenticity of host '[127.0.0.1]:2222 ([127.0.0.1]:2222)' can't be established.
+ECDSA key fingerprint is SHA256:+0hOqiykO/N5kh9p+mYk2pb+2MAb5Q1DkFK9tTCZ7TU.
+Are you sure you want to continue connecting (yes/no)?</code>.
+输入yes后按回车，此时会提示你输入手机的root密码，默认密码是：alpine  ，然后之前的那个<code>waiting for connection</code>终端窗口，就显示连接成功了。</p>
+
+<h4>4、执行<code>frida-ps -U</code> 查看手机上安装的app</h4>
+
+<p>新开一个终端,执行<code>frida-ps -U</code> 即可在终端显示已安装app</p>
+
+<h4>5、cd到已经下载的<code>frida-ios-dump</code>目录，执行以下命令安装依赖库  <code>sudo pip install -r requirements.txt --upgrade</code></h4>
+
+<h4>6、开始砸壳</h4>
+
+<p>终端执行以下命令<br/>
+<code>./dump.py app名称</code><br/>
+这里的app名称为在手机桌面上显示的名称，砸壳完成后，会在frida-ios-dump目录里生成一个已砸壳的ipa文件，即可脱壳的app。</p>
+
+<h4>7、判断是否砸壳</h4>
+
+<p>判断是否砸壳，进入app目录- otool -l WeChat  | grep crypt</p>
+
+<h3>安装 MonkeyDev、Reavl、 Hopper</h3>
+
+<h5>安装 <a href="https://github.com/AloneMonkey/MonkeyDev/wiki/%E5%AE%89%E8%A3%85">MonkeyDev</a></h5>
+
+<h5>安装 <a href="https://www.jianshu.com/p/51c539f61ab0">Reveal</a></h5>
+
+<h5>安装 <a href="https://download.csdn.net/download/arr0813/10600870">Hopper Disassemble</a></h5>
+
+<h3>参考文章</h3>
+
+<p><a href="https://baijiahao.baidu.com/s?id=1626241403987098895&amp;wfr=spider&amp;for=pc">https://baijiahao.baidu.com/s?id=1626241403987098895&amp;wfr=spider&amp;for=pc</a><br/>
+<a href="https://blog.csdn.net/youshaoduo/article/details/81133492">https://blog.csdn.net/youshaoduo/article/details/81133492</a><br/>
+<a href="https://blog.csdn.net/youshaoduo/article/details/81097802">https://blog.csdn.net/youshaoduo/article/details/81097802</a><br/>
+<a href="http://mobile.51cto.com/hot-573146.htm">http://mobile.51cto.com/hot-573146.htm</a><br/>
+<a href="https://www.jianshu.com/p/28eb7616fd3a">https://www.jianshu.com/p/28eb7616fd3a</a><br/>
+<a href="https://blog.csdn.net/skylin19840101/article/details/54669815">https://blog.csdn.net/skylin19840101/article/details/54669815</a><br/>
+<a href="http://kuailejim.com/2016/04/25/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%8F%8D%E7%BC%96%E8%AF%91%E5%88%AB%E4%BA%BA%E7%9A%84app/">http://kuailejim.com/2016/04/25/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%8F%8D%E7%BC%96%E8%AF%91%E5%88%AB%E4%BA%BA%E7%9A%84app/</a><br/>
+<a href="http://www.alonemonkey.com/2018/01/30/frida-ios-dump/">http://www.alonemonkey.com/2018/01/30/frida-ios-dump/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[一行代码搞定UITextField的输入格式限制]]></title>
@@ -1565,74 +1665,6 @@ int i = 0;
 这里是 <code>UITabBarDelegate</code> 的代理方法，实现的是双击第二个tabBarItem，则刷新其对应的第一个视图的节目数据;<br/>
 至于<code>i</code>的存在，是为了记录是否是双击，我是根据<code>i</code>是偶数还是奇数来进行判断的；<br/>
 就酱紫吧，不清楚的只管拿去用就行了，我就不多解释了，只有这几行代码，真没啥解释的了(^o^)/~</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS 多语言版本的开发（三）]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2016/01/18/localized03/"/>
-    <updated>2016-01-18T16:06:48+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2016/01/18/localized03</id>
-    <content type="html"><![CDATA[<h3>写在前面</h3>
-
-<p>&emsp;<a href="http://ashen-zhao.github.io/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a> 中我们实现了如何让用户自己去切换系统语言的功能，我们还写了<a href="https://github.com/Ashen-Zhao/easyLocalized">Demo</a> 以供辅助学习；但是，继以上两篇文章都是建立在项目刚刚启动或启动不久，项目中存在的中文字符串还不是很多，手动改起来也还可以接受; 那么问题来了，如果项目已经竣工或者已经迭代几个版本了，那该如何实现了？手动改起来也不太现实，耗时耗力不讨好的手动，在这里就不用考虑了。 不让考虑，是因为我有更简单快捷高效的方法，让我慢慢与您道来；</p>
-
-<h3>如何辨别项目中的中文字符串?</h3>
-
-<p>&emsp;既然要替换项目中使用到的中文字符串，那么前提就必须要先找到这些个字符串，然后将这些字符串，替换成我们定义的<strong>宏</strong>， 为了替换方便，可将这些字符串自身作为<code>key</code>， 这里不理解的不要紧，下面我还会讲到。 既然是辨别中文字符串，那也就是说在项目文件中进行匹配查找，说到匹配，那就需要正则表达式了，用正则表达式匹配Xcode中的使用的中文字符串，使用<code>(@"[^"]*[\u4E00-\u9FA5]+[^"\n]*?")\s*</code> 即可， 打开你的Xcode 试试看，切记find 后面的选项要选择 <code>Regular Expression</code>, 默认选中的是<code>Text</code>, 如图</p>
-
-<!--more-->
-
-
-<p><img src="http://ashen-zhao.github.io/images/localized301.png" alt="啊神多语言" /></p>
-
-<h3>如何取出识别到的中文字符串？</h3>
-
-<p>&emsp;我们已经知道如何识别项目中的字符串了，但是如何取出来使用呢？ 这就需要遍历项目中所有的指定后缀（e.g:  .h、.m等）的文件，然后利用正则表达匹配所有使用到的中文字符串，并写入文件中。为了方便起见，我将此过程写了一个Mac客户端<a href="https://github.com/Ashen-Zhao/ReadChinese">小应用</a>，可直接将选中的项目中所有的中文字符串，导出到指定的路径下；该应用还可以选择对于重复出现的中文字符串进行处理，以及还可以将中文字符串导出为繁体； <a href="https://github.com/Ashen-Zhao/ReadChinese">小应用</a>更值得关注的是它导出的文件，可以直接拿来当做多语言文件中的<code>key=value</code> 使用，非常简单，喜欢的可以去<a href="https://github.com/Ashen-Zhao/ReadChinese">下载看看</a>， 含有源码的哦；小应用运行图如下：</p>
-
-<p><img src="http://ashen-zhao.github.io/images/readChinese.jpg" alt="啊神多语言" /></p>
-
-<h3>如何使用取出的中文字符串？</h3>
-
-<p>&emsp;已经拿到取出的中文字符串文件，这个文件是可以直接拿来用做多语言文件使用的，小应用导出的文件，只可以用于中文以及繁体多语言文件，而对于其他的语言，就需要你拿着导出的文件，找你们公司的翻译人员，进行翻译； 拿繁体版来举个例子，导出来的繁体文件如下（收留我App导出的文件）：</p>
-
-<p><img src="http://ashen-zhao.github.io/images/localized303.png" alt="啊神多语言" /></p>
-
-<p>这个繁体文件，可以直接作为繁体多语言使用，如何想要翻译成英文，可以将此文件拷贝一份，交给翻译人员，让其翻译。翻译的时候，你一定要给翻译人员沟通好，让其只翻译<code>value</code>, 也就是图中<code>=</code> 后面双引号中的内容，格式什么的也不要让他乱改，否则容易出现问题，导致key与value对不上号。 一切沟通妥当后，等翻译把文件给你后，直接将文件中的内容，复制到多语言文件的英语文件中即可；</p>
-
-<h3>如何将项目中的中文字符串进行替换</h3>
-
-<p>&emsp;多语言文件已经配置完成，到了这里，那么问题来了，我们只是取出项目中使用的中文字符串，然后将字符串封装成多语言文件，但是对于项目中使用的中文字符串依然还是中文字符串，我们还并没有进行替换处理。当然，这一步我们是不能够忘了，由于是替换项目中所有的使用中文字符串，我们还是谨慎为好，首先将你的项目进行<strong>备份、备份、备份</strong>，非常重要的事情说三篇，切记一定要备份。备份好后，我们就可以开始替换工作了，没有备份的不要往下看了，赶紧备份去；<br/>
-&emsp;假设你已经备份好了，你就可以开始替换工作了，前面我们说过让中文字符串自身作为<code>key</code> 进行替换，之所以让其自身作为key, 是因为这样可以大大减轻替换的困难度，而且还有利于代码的可读性，基本上算是保持原有代码；既然要替换项目中的使用中文字符串，就要用到Xcode 自带的字符串替换功能，首先还需要使用正则表达式<code>(@"[^"]*[\u4E00-\u9FA5]+[^"\n]*?")\s*</code>，匹配出项目中使用的中文字符串，然后在对其进行替换处理。</p>
-
-<p>&emsp;由于我们在<a href="http://ashen-zhao.github.io/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a>中，对取key对应的语言内容，进行了宏的封装, 这里我们可以将匹配到的使用中文字符直接替换成我们定义的宏的使用</p>
-
-<pre><code>#define ASLocalizedString(key)  [NSString stringWithFormat:@"%@", [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"]] ofType:@"lproj"]] localizedStringForKey:(key) value:nil table:@"ASLocalized"]] </code></pre>
-
-
-<p>
-以上是宏的定义，我们需要将字符串进行替换成宏的使用，如：<br/>
-&emsp;替换前是这样的<code>_lbl.text = @"我是多语言";</code><br/>
-&emsp;替换后<code>_lbl.text = ASLocalizedString(@"我是多语言")</code></p>
-
-<p>替换规则如图：</p>
-
-<p><img src="http://ashen-zhao.github.io/images/localized304.png" alt="啊神多语言" /></p>
-
-<p>这次选中的是<code>Replace</code>, 不是<code>Find</code>。按图中所示，选择完毕后，点击<code>ReplaceAll</code>, 会出来一个弹框，不用管它直接继续，即可，然后你在看项目中使用到的中文字符串是否已经替换掉了，到这里基本上大功告成了；</p>
-
-<h3>遗留问题</h3>
-
-<p>1、正则表达式，不懂得可以先照文章里写就行，然后再去学习下，<a href="http://deerchao.net/tutorials/regex/regex.htm">这里有篇基础文章</a><br/>
-2、ASLocalizedString(key) ， 该宏使用面积广，可以将其定义成公共头文件中，然后用时引用头文件即可，也可将文件封装进pch文件中，这样无需使用头文件接口使用<br/>
-3、替换后，可能会有些地方报错，command + b 编译下，看看报错的地方，进行相应修改即可。报错原因：a. 可能是你定义的常量字符串； b. 可能是定义的宏；  c.  可能是替换后没有换行； 基本上报的错误很明显，进行修改即可；<br/>
-4、在迭代版本中，再次使用中文字符串，就需要使用<code>ASLocalizedString(key)</code>， 来代替了，然后再多语言文件中，进行<code>key=value</code> 配置；</p>
-
-<blockquote><h4>相关文章</h4>
-
-<h4><a href="http://ashen-zhao.github.io/blog/2016/01/14/localized01/">iOS 多语言版本的开发（一）</a></h4>
-
-<h4><a href="http://ashen-zhao.github.io/blog/2016/01/15/localized02/">iOS 多语言版本的开发（二）</a></h4></blockquote>
 ]]></content>
   </entry>
   

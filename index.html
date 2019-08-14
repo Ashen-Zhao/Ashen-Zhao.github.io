@@ -108,6 +108,66 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2019/08/14/ni-xiang-bian-cheng/">iOS进阶之逆向工程（越狱、砸壳、反编译）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2019-08-14T17:51:57+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>5:51 pm</span></time>
+        
+             
+      | <a href="/blog/2019/08/14/ni-xiang-bian-cheng/#comments">评论</a>
+      
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>背景</h3>
+
+<p>这篇文章只是个人记录，是如何一步一步从越狱一部手机到反编译一个APP，故不作为教材文章，仅供参考。</p>
+
+<h3>第一步、越狱</h3>
+
+<p>关于越狱看<a href="https://baijiahao.baidu.com/s?id=1626241403987098895&amp;wfr=spider&amp;for=pc">这篇文章</a>足以，这里简单对这篇文章做下记录：<br/>
+1、用苹果手机自带的Safari浏览器打开app.ignition.fun<br/>
+2、进去后点击中间的按钮<br/>
+3、点击Jailbreaks<br/>
+4、点击Jailbreaks进去后拉倒最后点击Pwn20wnd<br/>
+5、点击GET然后点安装<br/>
+6、去设置信任证书，如果无法信息，卸载重新下载<br/>
+7、打开刚才安装的unc0ver APP<br/>
+8、点击「Jailbreak」按钮，越狱过程可能会重启三次，每次重启后再打开unc0ver APP点击Jailbreak按钮。<br/>
+9、出现Cydia后代表越狱成功<br/>
+注：如果越狱过程中，卡住OTA问题上，请到设置->存储管理里删除已经下载好的系统文件，如果删除了还是不行的话，请自行谷歌或者百度, 我因为有部专门测试手机，我选择了直接重置手机。懒得去找其他办法了。</p>
+
+<h3>第二步、砸壳</h3>
+
+<h4>这里选择一键砸壳工具frida-ios-dump</h4>
+
+<p>frida-ios-dump<a href="https://github.com/AloneMonkey/frida-ios-dump">下载地址</a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2019/08/14/ni-xiang-bian-cheng/">阅读全文 →</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2018/08/16/textfield/">一行代码搞定UITextField的输入格式限制</a></h1>
     
     
@@ -437,45 +497,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/07/14/xcodedai-ma-quan-hei/">Xcode代码全黑的另一种解决办法</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-07-14T16:44:48+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:44 pm</span></time>
-        
-             
-      | <a href="/blog/2017/07/14/xcodedai-ma-quan-hei/#comments">评论</a>
-      
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h4>Xcode代码全黑且没有智能提示，应该算是开发中最烦恼的事之一了吧，一旦遇到这样问题，之前除了Clean项目，删除DerivedData文件夹，然而这样并没有什么用，偶尔重启Xcode或许运气好的话，彩色世界就会回来了。</h4>
-
-<h4>运气为什么好就能回来了，联想到Xcode比较吃内存，在联想到我苦逼的4g内存，估计Xcode代码全黑，可内存有联系呀，瞬间茅塞顿开呀，赶紧打开活动监视器，看到占用内存最多的 SourceKitService，大概百度了下SourceKitService这个进程，也没发现有什么比较严重的东东，就退出SourceKitService这个进程，回到Xcode发现，代码不再是全黑了，又回到彩色世界了，世界又是那么的美好，编程也变得快乐了</h4>
-
-<h4>总结，Xcode代码全黑的另一种解决办法，就是打开活动监视器，退出SourceKitService进程，就可以了。</h4>
-
-<p>注：可能只针对内存比较小的电脑（另外：我的项目是swift项目）</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -504,6 +525,10 @@
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2019/08/14/ni-xiang-bian-cheng/">iOS进阶之逆向工程（越狱、砸壳、反编译）</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2018/08/16/textfield/">一行代码搞定UITextField的输入格式限制</a>
@@ -561,17 +586,13 @@
         <a href="/blog/2016/08/05/https/">iOS 中的网络加密</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/07/20/qrcode/">二维码扫描识别</a>
-      </li>
-    
   </ul>
 </section>
 <section>
  <h1>分类</h1>
  <ul id="categories">
   <li class='category'><a href='/blog/categories/github/'>Github (2)</a></li>
-<li class='category'><a href='/blog/categories/i/'>iOS (26)</a></li>
+<li class='category'><a href='/blog/categories/i/'>iOS (27)</a></li>
 <li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
 <li class='category'><a href='/blog/categories/sui-bi/'>随笔 (5)</a></li>

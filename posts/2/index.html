@@ -108,6 +108,45 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2017/07/14/xcodedai-ma-quan-hei/">Xcode代码全黑的另一种解决办法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-07-14T16:44:48+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:44 pm</span></time>
+        
+             
+      | <a href="/blog/2017/07/14/xcodedai-ma-quan-hei/#comments">评论</a>
+      
+     
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>Xcode代码全黑且没有智能提示，应该算是开发中最烦恼的事之一了吧，一旦遇到这样问题，之前除了Clean项目，删除DerivedData文件夹，然而这样并没有什么用，偶尔重启Xcode或许运气好的话，彩色世界就会回来了。</h4>
+
+<h4>运气为什么好就能回来了，联想到Xcode比较吃内存，在联想到我苦逼的4g内存，估计Xcode代码全黑，可内存有联系呀，瞬间茅塞顿开呀，赶紧打开活动监视器，看到占用内存最多的 SourceKitService，大概百度了下SourceKitService这个进程，也没发现有什么比较严重的东东，就退出SourceKitService这个进程，回到Xcode发现，代码不再是全黑了，又回到彩色世界了，世界又是那么的美好，编程也变得快乐了</h4>
+
+<h4>总结，Xcode代码全黑的另一种解决办法，就是打开活动监视器，退出SourceKitService进程，就可以了。</h4>
+
+<p>注：可能只针对内存比较小的电脑（另外：我的项目是swift项目）</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2017/03/02/dong-hua-shi-xiao/">UITableView重用机制导致CABasicAnimation动画失效</a></h1>
     
     
@@ -369,62 +408,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/05/https/">iOS 中的网络加密</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-05T17:28:40+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:28 pm</span></time>
-        
-             
-      | <a href="/blog/2016/08/05/https/#comments">评论</a>
-      
-     
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>iOS 中的网络加密</h2>
-
-<hr />
-
-<h5>引言：公司的接口一般会两种协议的，一种HTTP，一种HTTPS的，HTTP 只要请求，服务器就会响应，如果我们不对请求和响应做出加密处理，所有信息都是会被检测劫持到的，是很不安全的，客户端加密可以使用本文这套工具类进行处理。但是不论在任何时候，都应该将服务置于HTTPS上，因为它可以避免中间人攻击的问题，还自带了基于非对称密钥的加密通道。</h5>
-
-<h3>HTTPS交互原理</h3>
-
-<p>简答说，HTTPS 就是 HTTP协议加了一层SSL协议的加密处理，SSL 证书就是遵守 SSL协议，由受信任的数字证书颁发机构CA（如GlobalSign，wosign），在验证服务器身份后颁发，这是需要花钱滴，签发后的证书作为公钥一般放在服务器的根目录下，便于客户端请求返回给客户端，私钥在服务器的内部中心保存，用于解密公钥。</p>
-
-<h4>HTTPS 客户端与服务器交互过程：</h4>
-
-<p>1）客户端发送请求，服务器返回公钥给客户端；</p>
-
-<p>2）客户端生成对称加密秘钥，用公钥对其进行加密后，返回给服务器；</p>
-
-<p>3）服务器收到后，利用私钥解开得到对称加密秘钥，保存；</p>
-
-<p>4）之后的交互都使用对称加密后的数据进行交互。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/05/https/">阅读全文 →</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -455,6 +438,10 @@
 </section><section>
   <h1>最近发布</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2019/08/14/ni-xiang-bian-cheng/">iOS进阶之逆向工程（越狱、砸壳、反编译）</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2018/08/16/textfield/">一行代码搞定UITextField的输入格式限制</a>
@@ -512,17 +499,13 @@
         <a href="/blog/2016/08/05/https/">iOS 中的网络加密</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/07/20/qrcode/">二维码扫描识别</a>
-      </li>
-    
   </ul>
 </section>
 <section>
  <h1>分类</h1>
  <ul id="categories">
   <li class='category'><a href='/blog/categories/github/'>Github (2)</a></li>
-<li class='category'><a href='/blog/categories/i/'>iOS (26)</a></li>
+<li class='category'><a href='/blog/categories/i/'>iOS (27)</a></li>
 <li class='category'><a href='/blog/categories/java/'>Java (1)</a></li>
 <li class='category'><a href='/blog/categories/markdown/'>Markdown (1)</a></li>
 <li class='category'><a href='/blog/categories/sui-bi/'>随笔 (5)</a></li>
