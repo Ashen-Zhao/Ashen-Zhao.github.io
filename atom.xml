@@ -4,7 +4,7 @@
   <title><![CDATA[追风之影]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2019-08-14T22:19:11+08:00</updated>
+  <updated>2019-08-15T10:38:55+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -20,7 +20,7 @@
     <id>http://ashen-zhao.github.io/blog/2019/08/14/ni-xiang-bian-cheng</id>
     <content type="html"><![CDATA[<h3>背景</h3>
 
-<p>这篇文章只是个人记录，是如何一步一步从越狱一部手机到反编译一个APP，故不作为教材文章，仅供参考。</p>
+<p>这篇文章只是我个人的一个记录，记录我是如何一步一步的，从越狱一部手机到反编译一个APP，故不作为教程文章，只为自己以后方便复现，文章内容大部分从别人文章中采集整合，如若使用，仅供参考。</p>
 
 <h3>第一步、越狱</h3>
 
@@ -99,6 +99,8 @@ Are you sure you want to continue connecting (yes/no)?</code>.
 <h5>安装 <a href="https://www.jianshu.com/p/51c539f61ab0">Reveal</a></h5>
 
 <h5>安装 <a href="https://download.csdn.net/download/arr0813/10600870">Hopper Disassemble</a></h5>
+
+<p>先把工具安装了，后续可能会继续更新，如何使用。</p>
 
 <h3>参考文章</h3>
 
