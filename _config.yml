@@ -3,12 +3,12 @@
 # ----------------------- #
 
 url: http://ashen-zhao.github.io
-title: 啊神的技术博客
-subtitle: 我的小博客，小智慧
+title: 追风之影
+subtitle: 何以追风，以影追风，风过之处，在此留痕。
 author: Ashen
 simple_search: https://www.google.com/search
-description: 啊神的技术博客
-keywords: 啊神, iOS, 啊神的技术博客, 移动开发, ashen, iOS开发, octopress,赵阿申,阿申,数据安全,UITableView,UIView,UIViewController
+description: 追风之影,啊神的技术博客
+keywords: 追风之影, 啊神, iOS, 啊神的技术博客, 移动开发, ashen, iOS开发, octopress,赵阿申,阿申,数据安全,UITableView,UIView,UIViewController
 
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")

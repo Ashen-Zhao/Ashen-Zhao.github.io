@@ -31,3 +31,4 @@ Pods.xcconfig给删除了然后出现diff: /../Podfile.lock: No such file or dir
 
 $sudo chown 777 path-to-project-folder/*
 
+ 
