@@ -4,7 +4,7 @@
   <title><![CDATA[追风之影]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2020-03-09T18:12:59+08:00</updated>
+  <updated>2020-03-09T20:09:31+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -20,7 +20,7 @@
     <id>http://ashen-zhao.github.io/blog/2019/08/14/ni-xiang-bian-cheng</id>
     <content type="html"><![CDATA[<h3>背景</h3>
 
-<p>这篇文章只是我个人的一个记录，记录我是如何一步一步的，从越狱一部手机到反编译一个APP，故不作为教程文章，只为自己以后方便复现，文章内容大部分从别人文章中采集整合，如若使用，仅供参考。</p>
+<p>这篇文章只是我的一个记录，记录我是如何一步一步的，从越狱一部手机到反编译一个APP，故不作为教程文章，只为自己以后方便复现，文章内容大部分从别人文章中采集整合，如若使用，仅供参考。</p>
 
 <h3>第一步、越狱</h3>
 
