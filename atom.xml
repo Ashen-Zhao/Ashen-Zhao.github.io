@@ -4,7 +4,7 @@
   <title><![CDATA[追风之影]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2020-03-09T21:04:02+08:00</updated>
+  <updated>2020-03-10T11:07:39+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,15 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[www]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2020/03/09/www/"/>
-    <updated>2020-03-09T21:03:43+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2020/03/09/www</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS进阶之逆向工程（越狱、砸壳、反编译）]]></title>
@@ -1640,6 +1631,42 @@ b. 可以建个pch文件加入</p>
 <p></p>
 
 <p>最后，老规矩我还是把<a href="https://github.com/Ashen-Zhao/ASSheet">Demo附上</a>，以供辅助参考，Demo中包含swift版本和OC版本</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[简单实现双击tabBarItem刷新页面]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2016/01/20/doubleclick/"/>
+    <updated>2016-01-20T17:44:11+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2016/01/20/doubleclick</id>
+    <content type="html"><![CDATA[<h3>如何实现双击tabbarItem刷新页面？</h3>
+
+<p>&emsp;在网上寻找了一圈，众说纷纭，大差不差，而且基本上实现的不是双击才刷新，而是双击刷新一次后，只要再次单击就会刷新，这样很容易造成用户不小心点着，降低用户体验；见于这种局面，我花费了近一个小时，鼓捣出来了，只有双击的时候，才会去刷新页面（其实是伪双击，也就是单击两次，没有做两次单击时间间隔限制），废话不说了，直接上代码：</p>
+
+<pre><code>
+int i = 0;
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    i++;
+    UIViewController *tbSelectedController = tabBarController.selectedViewController;
+    if ([tbSelectedController isEqual:viewController]) {
+        if (currentIndex == 1 && tabBarController.selectedIndex == 1 && i % 2 != 0) {
+            UINavigationController *nav = self.viewControllers[1];
+            TestViewController *tVC = nav.viewControllers[0];
+            [tVC doubleClickRefrsh];
+        }
+        currentIndex = tabBarController.selectedIndex;
+        return NO;
+    }
+    i = 1;
+    return YES;
+}
+</code></pre>
+
+
+<p>
+这里是 <code>UITabBarDelegate</code> 的代理方法，实现的是双击第二个tabBarItem，则刷新其对应的第一个视图的节目数据;<br/>
+至于<code>i</code>的存在，是为了记录是否是双击，我是根据<code>i</code>是偶数还是奇数来进行判断的；<br/>
+就酱紫吧，不清楚的只管拿去用就行了，我就不多解释了，只有这几行代码，真没啥解释的了(^o^)/~</p>
 ]]></content>
   </entry>
   
