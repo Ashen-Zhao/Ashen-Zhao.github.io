@@ -4,7 +4,7 @@
   <title><![CDATA[追风之影]]></title>
   <link href="http://ashen-zhao.github.io/atom.xml" rel="self"/>
   <link href="http://ashen-zhao.github.io/"/>
-  <updated>2020-06-24T17:52:01+08:00</updated>
+  <updated>2020-06-24T17:58:23+08:00</updated>
   <id>http://ashen-zhao.github.io/</id>
   <author>
     <name><![CDATA[Ashen]]></name>
@@ -12,6 +12,96 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[在Storyboard中为view添加圆角等扩展属性]]></title>
+    <link href="http://ashen-zhao.github.io/blog/2020/06/24/kuozhan/"/>
+    <updated>2020-06-24T17:51:57+08:00</updated>
+    <id>http://ashen-zhao.github.io/blog/2020/06/24/kuozhan</id>
+    <content type="html"><![CDATA[<h4>为了方便在Storyboard面板中给View设置圆角属性, 实现和原生其他属性一样设置的方式. 现通过<code>IBInspectable</code> 在storyboard中给view添加扩展属性;</h4>
+
+<h4>效果图</h4>
+
+<p><img src="http://ashen-zhao.github.io/images/kuozhanxiaoguotu.png" alt="在Storyboard中为view添加圆角等扩展属性" /></p>
+
+<!--more-->
+
+
+<h4>代码实现</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>extension UIView {
+</span><span class='line'>    @IBInspectable var cornerRadius: CGFloat {
+</span><span class='line'>        get {
+</span><span class='line'>            return layer.cornerRadius
+</span><span class='line'>        }
+</span><span class='line'>        set {
+</span><span class='line'>            layer.cornerRadius = newValue
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>    @IBInspectable var maskToBounds: Bool {
+</span><span class='line'>        get {
+</span><span class='line'>            return layer.masksToBounds
+</span><span class='line'>        }
+</span><span class='line'>        set {
+</span><span class='line'>            layer.masksToBounds = newValue
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>    @IBInspectable var borderColor: UIColor {
+</span><span class='line'>        get {
+</span><span class='line'>            return UIColor.init(cgColor:  layer.borderColor!)
+</span><span class='line'>        }
+</span><span class='line'>        set {
+</span><span class='line'>            layer.borderColor = newValue.cgColor
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>    @IBInspectable var borderWidth: CGFloat {
+</span><span class='line'>        get {
+</span><span class='line'>            return layer.borderWidth
+</span><span class='line'>        }
+</span><span class='line'>        set {
+</span><span class='line'>            layer.borderWidth = newValue
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>   
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS进阶之逆向工程（越狱、砸壳、反编译）]]></title>
@@ -112,93 +202,6 @@ Are you sure you want to continue connecting (yes/no)?</code>.
 <a href="https://blog.csdn.net/skylin19840101/article/details/54669815">https://blog.csdn.net/skylin19840101/article/details/54669815</a><br/>
 <a href="http://kuailejim.com/2016/04/25/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%8F%8D%E7%BC%96%E8%AF%91%E5%88%AB%E4%BA%BA%E7%9A%84app/">http://kuailejim.com/2016/04/25/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%8F%8D%E7%BC%96%E8%AF%91%E5%88%AB%E4%BA%BA%E7%9A%84app/</a><br/>
 <a href="http://www.alonemonkey.com/2018/01/30/frida-ios-dump/">http://www.alonemonkey.com/2018/01/30/frida-ios-dump/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[在Storyboard中为view添加圆角等扩展属性]]></title>
-    <link href="http://ashen-zhao.github.io/blog/2019/08/14/kuozhan/"/>
-    <updated>2019-08-14T17:51:57+08:00</updated>
-    <id>http://ashen-zhao.github.io/blog/2019/08/14/kuozhan</id>
-    <content type="html"><![CDATA[<h4>为了方便在Storyboard面板中给View设置圆角属性, 实现和原生其他属性一样设置的方式. 现通过<code>IBInspectable</code> 在storyboard中给view添加扩展属性;</h4>
-
-<h4>效果图</h4>
-
-<p><img src="http://ashen-zhao.github.io/images/kuozhanxiaoguotu.png" alt="在Storyboard中为view添加圆角等扩展属性" /></p>
-
-<h4>代码实现</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>extension UIView {
-</span><span class='line'>    @IBInspectable var cornerRadius: CGFloat {
-</span><span class='line'>        get {
-</span><span class='line'>            return layer.cornerRadius
-</span><span class='line'>        }
-</span><span class='line'>        set {
-</span><span class='line'>            layer.cornerRadius = newValue
-</span><span class='line'>        }
-</span><span class='line'>    }
-</span><span class='line'>    @IBInspectable var maskToBounds: Bool {
-</span><span class='line'>        get {
-</span><span class='line'>            return layer.masksToBounds
-</span><span class='line'>        }
-</span><span class='line'>        set {
-</span><span class='line'>            layer.masksToBounds = newValue
-</span><span class='line'>        }
-</span><span class='line'>    }
-</span><span class='line'>    @IBInspectable var borderColor: UIColor {
-</span><span class='line'>        get {
-</span><span class='line'>            return UIColor.init(cgColor:  layer.borderColor!)
-</span><span class='line'>        }
-</span><span class='line'>        set {
-</span><span class='line'>            layer.borderColor = newValue.cgColor
-</span><span class='line'>        }
-</span><span class='line'>    }
-</span><span class='line'>    @IBInspectable var borderWidth: CGFloat {
-</span><span class='line'>        get {
-</span><span class='line'>            return layer.borderWidth
-</span><span class='line'>        }
-</span><span class='line'>        set {
-</span><span class='line'>            layer.borderWidth = newValue
-</span><span class='line'>        }
-</span><span class='line'>    }
-</span><span class='line'>   
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
