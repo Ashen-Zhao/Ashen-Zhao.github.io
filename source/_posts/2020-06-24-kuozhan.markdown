@@ -1,0 +1,59 @@
+---
+layout: post
+title: "在Storyboard中为view添加圆角等扩展属性"
+date: 2020-06-24 17:51:57 +0800
+comments: true
+tags: [storyboard,扩展属性,属性,view,corner,圆角]
+keywords: storyboard,扩展属性,属性,view,corner,圆角
+description:  在Storyboard中为view添加扩展属性
+categories: i|OS
+
+---
+
+
+#### 为了方便在Storyboard面板中给View设置圆角属性, 实现和原生其他属性一样设置的方式. 现通过`IBInspectable` 在storyboard中给view添加扩展属性;
+
+
+#### 效果图
+![在Storyboard中为view添加圆角等扩展属性](/images/kuozhanxiaoguotu.png) 
+
+<!--more-->
+#### 代码实现
+
+```
+extension UIView {
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+        }
+    }
+    @IBInspectable var maskToBounds: Bool {
+        get {
+            return layer.masksToBounds
+        }
+        set {
+            layer.masksToBounds = newValue
+        }
+    }
+    @IBInspectable var borderColor: UIColor {
+        get {
+            return UIColor.init(cgColor:  layer.borderColor!)
+        }
+        set {
+            layer.borderColor = newValue.cgColor
+        }
+    }
+    @IBInspectable var borderWidth: CGFloat {
+        get {
+            return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
+        }
+    }
+   
+}
+```
