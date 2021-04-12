@@ -42,6 +42,7 @@ function timeElapse(date){
     var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
 	var days = Math.floor(seconds / (3600 * 24));
     var years = Math.ceil(days / 365);
+	days = years * 365 - days;
 	seconds = seconds % (3600 * 24);
 	var hours = Math.floor(seconds / 3600);
 	if (hours < 10) {
@@ -57,7 +58,7 @@ function timeElapse(date){
 		seconds = "0" + seconds;
 	}
 	var result = "第 <span class=\"digit\">" + years
-    + "</span> 个年头, 第 <span class=\"digit\">" + days
+    + "</span> 个年头, <span class=\"digit\">" + days
     + "</span> 天 <span class=\"digit\">" + hours
     + "</span> 小时 <span class=\"digit\">" + minutes
     + "</span> 分钟 <span class=\"digit\">" + seconds + "</span> 秒";
