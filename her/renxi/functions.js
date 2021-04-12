@@ -37,6 +37,16 @@ $(window).resize(function() {
 	};
 })(jQuery);
 
+function timeMeet(date) {
+	var current = new Date();
+	var meetseconds = (Date.parse(current) - Date.parse(date)) / 1000;
+	var meetdays = Math.floor(meetseconds / (3600 * 24));
+    var meetyears = Math.ceil(meetdays / 365);
+	var result = "相识<span>" + meetyears
+    + "</span> 年";
+	$("#meetyou").html(result);
+}
+
 function timeElapse(date){
 	var current = new Date();
     var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
