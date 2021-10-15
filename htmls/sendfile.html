@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>文件上传</title>
+    <script src="//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+    <script>
+        function upload() {
+            AV.init({
+                appId: "6UgjvIGIGLGMssNepwjVC0bY-gzGzoHsz",
+                appKey: "K2OmheWioBw2yEez5sDJJ2kW",
+                serverURL: "https://please-replace-with-your-customized.domain.com"
+            });
+            const avatarUpload = document.getElementById('avatar-upload');
+            if (avatarUpload.files.length) {
+                const localFile = avatarUpload.files[0];
+                const file = new AV.File('avatar', localFile);
+                file.save().then((file) => {
+                    alert(`文件保存完成。URL：${file.url}`);
+                }, (error) => {
+                    alert(error);
+                });
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <input type="file" id="avatar-upload" />
+        <button onclick="upload()">发送</button>
+    </div>
+</body>
+
+</html>
