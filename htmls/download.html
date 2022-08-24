@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <link href="css/layout.css" rel="stylesheet" type="text/css" />
+    <title>门禁APP《掌上驾考》</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        width:100%;
+        height: 100%;
+        background: #FFFFFF;
+        opacity: 0.8;
+    }
+
+    .bg {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.9);
+        text-align: end;
+        overflow: hidden;
+        padding: 1rem 5px 0 1rem;
+    }
+
+    .bg img {
+        width: 93%;
+        height: auto;
+    }
+
+    .htbg {
+        background: url(images/bg.png);
+        background-repeat: no-repeat;
+        width:100%;
+        height: 100%;
+        background-size: 100% 100%;
+        background-attachment: fixed;
+        position: absolute;
+        /* 500px;
+        height: 700px;
+        background-size: 100% 100%;
+        filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/bg.png',sizingMethod='scale');*/
+    }
+</style>
+
+<body>
+    <!--https://img-blog.csdnimg.cn/20201216150438676.png-->
+    <div class="app">
+        <div class="bg"><img src="images/13.png" alt=""></div>
+    </div>
+    <div class="htbg">
+        <div align="center">
+            <a href="javascript:void(0)" id="downloadButton">
+                点击下载APP
+            </a>
+        </div>
+
+    </div>
+    <!--<div>
+        <img src="images/logo.png" />
+    </div>-->
+    <!--<div class="main">
+        <div class="xiazai_1">
+            APP
+        </div>
+        <a href="javascript:void(0)" id="downloadButton" class="dianjianzhuang">点击安装</a>
+    </div>-->
+    <script>
+        window.onload = function () {
+            var system = isIosOrAndroid()
+            var button = document.getElementById("downloadButton");
+            button.style.visibility = "visible";
+            button.onclick = function () {
+                if (system == 1) {
+                    window.location = "https://zsjk.tripod3.cn/uploads/20210903/6405c9d3c21b3108205609054a908ade.apk";
+                } else {
+                    window.location.href = "https://itunes.apple.com/cn/app/id1543195936"
+                }
+                
+            }
+            var fontSize = $(window).width() / 18.75; //屏幕的宽
+            $("html").css("font-size", fontSize + "px");
+            
+            if (system == 1) {
+                if (IsWeixinOrAlipay() == 13) {
+                    $(".bg").css('display', 'block')
+                } else {
+                    console.log(IsWeixinOrAlipay())
+                }
+            } else {
+                var src = "https://itunes.apple.com/cn/app/id1543195936"
+                window.location.href = src
+            }
+
+        }
+
+        function IsWeixinOrAlipay() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            //判断是不是微信
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return 13;
+            }
+            //判断是不是支付宝
+            if (ua.match(/AlipayClient/i) == 'alipayclient') {
+                return 12;
+            }
+            //哪个都不是
+            return 0;
+        }
+
+        function isIosOrAndroid() {
+            var u = navigator.userAgent
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+            if (isAndroid) {
+                return 1
+            }
+            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+            if (isiOS) {
+                return 2
+            }
+            return 0
+        }
+    </script>
+</body>
+
+</html>
