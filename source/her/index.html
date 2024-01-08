@@ -51,6 +51,7 @@
       </div>
                 </div>
                 <div id="clock-box">
+                    <span id="meetyou"></span>,
                     <span class="STYLE1"></span><font color="#33CC00">亲爱的小莹子，我们的爱情</font>
 <span class="STYLE1">已经进行了……</span>
                   <div id="clock"></div>
@@ -191,10 +192,12 @@
 
         var textAnimate = eval(Jscex.compile("async", function () {
 		    var together = new Date("2012/12/25 22:25:25");
+            var meetyou = new Date("2008/09/01 10:25:24");
 		    $("#code").show().typewriter();
             $("#clock-box").fadeIn(500);
             while (true) {
                 timeElapse(together);
+                timeMeet(meetyou);
                 $await(Jscex.Async.sleep(1000));
             }
         }));

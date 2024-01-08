@@ -37,11 +37,22 @@ $(window).resize(function() {
 	};
 })(jQuery);
 
+function timeMeet(date) {
+	var current = new Date();
+	var meetseconds = (Date.parse(current) - Date.parse(date)) / 1000;
+	var meetdays = Math.floor(meetseconds / (3600 * 24));
+    var meetyears = Math.ceil(meetdays / 365);
+	var result = "相识<span>" + meetyears
+    + "</span> 年";
+	$("#meetyou").html(result);
+}
+
 function timeElapse(date){
 	var current = new Date();
     var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
 	var days = Math.floor(seconds / (3600 * 24));
     var years = Math.ceil(days / 365);
+	days = years * 365 - days;
 	seconds = seconds % (3600 * 24);
 	var hours = Math.floor(seconds / 3600);
 	if (hours < 10) {
@@ -57,7 +68,7 @@ function timeElapse(date){
 		seconds = "0" + seconds;
 	}
 	var result = "第 <span class=\"digit\">" + years
-    + "</span> 个年头, 第 <span class=\"digit\">" + days
+    + "</span> 个年头, <span class=\"digit\">" + days
     + "</span> 天 <span class=\"digit\">" + hours
     + "</span> 小时 <span class=\"digit\">" + minutes
     + "</span> 分钟 <span class=\"digit\">" + seconds + "</span> 秒";
